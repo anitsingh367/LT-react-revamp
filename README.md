@@ -2,7 +2,7 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-The website is published on [living-treasure-react.netlify.app](living-treasure-react.netlify.app)
+The website is published on [living-treasure-react.netlify.app](https://living-treasure-react.netlify.app/)
 ## Available Scripts
 
 In the project directory, you can run:
