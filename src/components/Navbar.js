@@ -1,5 +1,4 @@
 import * as React from 'react';
-import PropTypes from 'prop-types';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
@@ -58,7 +57,7 @@ function DrawerAppBar(props) {
           >
             <MenuIcon />
           </IconButton>
-            <img src="https://living-treasure.netlify.app/images/logo.png" sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}></img>
+            <img src="https://living-treasure.netlify.app/images/logo.png" alt="s" sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}></img>
           <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
             {navItems.map((item) => (
               <Button key={item} sx={{ color: '#fff' }}>
