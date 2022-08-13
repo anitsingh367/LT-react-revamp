@@ -1,8 +1,11 @@
 import React from 'react'
+import DrawerAppBar from '../components/Navbar'
 
 const Home = () => {
   return (
-    <div>Home</div>
+    <div>
+        <DrawerAppBar/>
+    </div>
   )
 }
 
