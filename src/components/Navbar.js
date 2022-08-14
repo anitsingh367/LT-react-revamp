@@ -180,7 +180,6 @@ function DrawerAppBar(props) {
               }}
             />
             <Button variant="h6">Video Section</Button>
-            <Button variant="h6">Contribute</Button>
             <Button variant="outlined">Contribute Now</Button>
           </Box>
         </Toolbar>
