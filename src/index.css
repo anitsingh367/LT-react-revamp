@@ -1,10 +1,10 @@
 /* Global Variables */
-<<<<<<< Updated upstream
-:root{
-  --primary-color:#29af8a;
-  --secondary-color:#435061;
+
+:root {
+  --primary-color: #29af8a;
+  --secondary-color: #435061;
 }
-=======
+
 * {
   margin: 0;
   padding: 0;
@@ -19,4 +19,3 @@
 .swiper-pagination-bullet-active {
   background-color: #000 !important;
 }
->>>>>>> Stashed changes
