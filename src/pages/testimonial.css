@@ -1,4 +1,8 @@
 /* Swiper js Styling */
+.testimonial {
+  background-color: #43506150;
+  margin: 0;
+}
 .swiper-slider {
   padding: 50px;
   display: flex;
@@ -12,7 +16,7 @@
 .swiper-slide {
   text-align: center;
   font-size: 18px;
-  background: #fff;
+  background: transparent;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -67,9 +71,9 @@
   }
   .swiper-button-next,
   .swiper-button-prev {
-    width: 80%;
+    width: 50%;
     bottom: 10px;
-    top: 95%;
+    top: 96%;
   }
   .mySwiper .testimonial-description,
   .testimonial-name,

@@ -1,5 +1,5 @@
 import React from "react";
-import { Pagination, Navigation } from "swiper";
+import { Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
@@ -13,7 +13,7 @@ import "./testimonial.css";
 
 const Testimonial = () => {
   return (
-    <>
+    <div className="testimonial">
       <Box
         sx={{
           display: "flex",
@@ -47,17 +47,30 @@ const Testimonial = () => {
       </Box>
       <div className="swiper-slider">
         <Swiper
-          slidesPerView={3}
-          spaceBetween={30}
-          slidesPerGroup={3}
           loop={true}
           loopFillGroupWithBlank={true}
           pagination={{
             clickable: true,
           }}
           navigation={true}
-          modules={[Pagination, Navigation]}
+          modules={[Navigation]}
           className="mySwiper"
+          breakpoints={{
+            576: {
+              // width: 576,
+              slidesPerView: 2,
+              spaceBetween: 10,
+            },
+            768: {
+              // width: 768,
+              slidesPerView: 1,
+              spaceBetween: 20,
+            },
+            1024: {
+              slidesPerView: 3,
+              spaceBetween: 30,
+            },
+          }}
         >
           {testimonialData.map((item, index) => {
             return (
@@ -66,9 +79,9 @@ const Testimonial = () => {
                   <div className="testimonial-img">
                     <img src={item.imgSrc} alt={item.name} />
                   </div>
-                  <div className="testimonial-description">
+                  <Typography className="testimonial-description" variant="h6">
                     {item.description}
-                  </div>
+                  </Typography>
                   <Divider />
                   <div className="testimonial-name">{item.name}</div>
                   <div className="testimonial-designation">
@@ -80,7 +93,7 @@ const Testimonial = () => {
           })}
         </Swiper>
       </div>
-    </>
+    </div>
   );
 };
 
