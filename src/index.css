@@ -1,5 +1,22 @@
 /* Global Variables */
+<<<<<<< Updated upstream
 :root{
   --primary-color:#29af8a;
   --secondary-color:#435061;
 }
+=======
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+:root {
+  --primary-color: #29af8a;
+  --secondary-color: #435061;
+  --swiper-navigation-size: 36px !important;
+}
+.swiper-pagination-bullet-active {
+  background-color: #000 !important;
+}
+>>>>>>> Stashed changes
