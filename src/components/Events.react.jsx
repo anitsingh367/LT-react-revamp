@@ -1,6 +1,6 @@
 // Import npm packages
+import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import "./css/Events.scss";
 import EventCard from "./EventCard.react";
 
 Events.propTypes = {
@@ -27,52 +27,112 @@ Events.defaultProps = {
       heading: "Heading 1",
       description: "Description 1",
       status: "none",
+      isProject: true,
     },
     {
       image: "https://living-teasure-revamp.netlify.app/assets/poster.jpeg",
       heading: "Heading 2",
       description: "Description 2",
-      status: "live",
+      status: "upcoming",
+      isProject: true,
     },
     {
       image: "https://living-teasure-revamp.netlify.app/assets/poster.jpeg",
       heading: "Heading 3",
       description: "Description 3",
       status: "live",
+      isProject: true,
     },
     {
-      image: "https://living-teasure-revamp.netlify.app/assets/poster.jpeg",
+      image: "",
       heading: "Heading 4",
       description: "Description 4",
       status: "finished",
+      isProject: false,
     },
     {
       image: "https://living-teasure-revamp.netlify.app/assets/poster.jpeg",
       heading: "Heading 5",
-      description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique unde fugit veniam eius, perspiciatis sunt? Corporis qui ducimus quibusdam, aliquam dolore excepturi quae.",
-      status: "live",
+      description:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique unde fugit veniam eius, perspiciatis sunt? Corporis qui ducimus quibusdam, aliquam dolore excepturi quae.",
+      status: "upcoming",
+      isProject: false,
     },
     {
       image: "https://living-teasure-revamp.netlify.app/assets/poster.jpeg",
-      heading: "Heading 6dddddddd ssss",
+      heading: "Heading with extra content",
       description: "Description 6",
       status: "live",
+      isProject: false,
+    },
+    {
+      image: "https://living-teasure-revamp.netlify.app/assets/poster.jpeg",
+      heading: "Heading 6",
+      description: "Description 6",
+      status: "live",
+      isProject: false,
     },
   ],
 };
 
+function getWindowSize() {
+  const { innerWidth, innerHeight } = window;
+  return { innerWidth, innerHeight };
+}
+
 export default function Events(props) {
+  const [windowSize, setWindowSize] = useState(getWindowSize());
+
+  useEffect(() => {
+    function handleWindowResize() {
+      setWindowSize(getWindowSize());
+    }
+
+    window.addEventListener("resize", handleWindowResize);
+
+    return () => {
+      window.removeEventListener("resize", handleWindowResize);
+    };
+  }, []);
+
   return (
-    <div className="events-container">
-    <h1>Events</h1>
-      <div style={{color:"grey"}}>
-        Whatever cardigan tote bag tumblr hexagon brooklyn asymmetrical
-        gentrify, subway tile poke farm-to-table.
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "#fff",
+        marginTop: "40px",
+      }}
+    >
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          fontFamily: "Helvetica",
+          fontstyle: "normal",
+          fontWeight: 700,
+          fontSize: "2em",
+          textAlign: "center",
+          lineHeight: "46px",
+          textTransform: "uppercase",
+        }}
+      >
+        Upcoming events at the living treasure
       </div>
-      <div className="card-container">
+      <div
+        style={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}
+      >
         {props.content?.map((items, index) => {
           return (
-            <div style={{ margin: 50 }} key={index}>
+            <div
+              style={{
+                margin:
+                  windowSize.innerWidth < windowSize.innerHeight ? 15 : 50,
+              }}
+              key={index}
+            >
               <EventCard content={items} />
             </div>
           );
