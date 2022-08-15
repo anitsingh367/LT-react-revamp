@@ -15,6 +15,8 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 
+import Chip from "@mui/material/Chip";
+
 import defaultImage from "../Assets/default-card-image.jpg";
 
 EventCard.propTypes = {
@@ -48,7 +50,7 @@ export default function EventCard(props) {
     props.content.status?.toLowerCase() === "upcoming"
       ? "#388E3C"
       : props.content.status?.toLowerCase() === "live"
-      ? "#ED0000"
+      ? "#ED0000 !important"
       : props.content.status?.toLowerCase() === "finished"
       ? "#999999"
       : "";
@@ -58,20 +60,21 @@ export default function EventCard(props) {
       {props.content && (
         <Card
           sx={{
-            width: "321px",
-            maxHeight: "473px",
-            borderRadius: "8px",
-            boxShadow: "0px 5px 15px rgb(206, 205, 205)",
+            display: "flex",
+            flexDirection: "column",
+            width: "20.063rem",
+            height: "30.5rem",
+            borderRadius: "0.5rem",
+            boxShadow: "0 0.313rem 0.938rem rgb(206, 205, 205)",
           }}
         >
           <CardMedia
             component="img"
-            width="321px"
-            height="264px"
+            style={{ aspectRatio: 1 / 1 }}
             image={props.content?.image ? props.content.image : defaultImage}
             alt="green iguana"
           />
-          <CardContent sx={{ padding: "16px", paddingBottom: 0 }}>
+          <CardContent sx={{ padding: "1rem", paddingBottom: 0 }}>
             <Typography
               gutterBottom
               variant="h6"
@@ -86,49 +89,41 @@ export default function EventCard(props) {
                 {props.content?.heading}
               </div>
               {(props.content.status !== "none" || !props.content.status) && (
-                <Button
-                  size="small"
-                  variant="contained"
+                <Chip
                   sx={{
-                    boxShadow: "none",
-                    padding: "0px 10px",
-                    background: "#F0F0F0",
-                    color: statusColor,
                     fontFamily: "Roboto",
                     fontWeight: 700,
-                    fontSize: "12px",
-                    lineHeight: "20px",
-                    letterSpacing: "0.25px",
-                    borderRadius: "16px",
-                    "&:hover": {
-                      backgroundColor: "#F0F0F0",
-                      cursor: "default",
-                      boxShadow: "none",
-                    },
-                    marginLeft: 2,
+                    lineHeight: "1.25rem",
+                    letterSpacing: "0.016rem",
+                    color: statusColor,
+                    textTransform: "uppercase",
                   }}
-                  disableRipple={true}
-                  startIcon={
-                    props.content.status === "live" && (
-                      <LiveDot style={{ fontSize: "13px" }} />
+                  icon={
+                    props.content?.status === "live" ? (
+                      <LiveDot
+                        sx={{
+                          color: statusColor,
+                          fontSize: "0.813rem",
+                        }}
+                      />
+                    ) : (
+                      <></>
                     )
                   }
-                >
-                  {props.content.status}
-                </Button>
+                  label={props.content.status}
+                />
               )}
             </Typography>
             <Typography
               variant="body2"
-              color="text.secondary"
               className="line-clamp"
               sx={{
                 fontfamily: "Roboto",
                 fontStyle: "normal",
                 fontWeight: 400,
-                fontsize: "14px",
-                lineHeight: "20px",
-                letterspacing: "0.25px",
+                fontsize: "0.875rem",
+                lineHeight: "1.25rem",
+                letterspacing: "0.016rem",
                 color: "rgba(0, 0, 0, 0.6)",
               }}
             >
@@ -136,82 +131,76 @@ export default function EventCard(props) {
             </Typography>
           </CardContent>
           {props.content?.isProject && (
-            <CardActions sx={{ padding: "16px" }}>
-              <Button
-                size="small"
-                variant="contained"
-                sx={{
-                  flex: 1,
-                  borderRadius: "6px",
-                  padding: "8px 0",
-                  backgroundColor: "#29af8a",
-                  "&:hover": {
-                    backgroundColor: "#1d8165",
-                  },
-                  fontWeight: 600,
-                  fontsize: "14px",
-                  lineHeight: "20px",
-                  letterSpacing: "0.25px",
-                  textTransform: "uppercase",
-                  color: "#FFFFFF",
-                }}
-              >
-                Contribute
-              </Button>
-              <Button
-                size="small"
-                variant="contained"
-                sx={{
-                  flex: 1,
-                  borderRadius: "6px",
-                  backgroundColor: "#29af8a",
-                  padding: "8px 0",
-                  "&:hover": {
-                    backgroundColor: "#1d8165",
-                  },
-                  fontWeight: 600,
-                  fontsize: "14px",
-                  lineHeight: "20px",
-                  letterSpacing: "0.25px",
-                  textTransform: "uppercase",
-                  color: "#FFFFFF",
-                }}
-              >
-                View Project
-              </Button>
+            <CardActions
+              sx={{ padding: "1em", height: "100%", alignItems: "flex-end" }}
+            >
+              {["Contribute", "View Project"].map((items, index) => {
+                return (
+                  <Button
+                    key={index}
+                    size="small"
+                    variant="contained"
+                    sx={{
+                      flex: 1,
+                      borderRadius: "0.375rem",
+                      padding: "0.5rem 0",
+                      backgroundColor: "#29af8a",
+                      "&:hover": {
+                        backgroundColor: "#1d8165",
+                      },
+                      fontWeight: 600,
+                      fontsize: "0.875rem",
+                      lineHeight: "1.25rem",
+                      letterSpacing: "0.016rem",
+                      textTransform: "uppercase",
+                      color: "#FFFFFF",
+                    }}
+                  >
+                    {items}
+                  </Button>
+                );
+              })}
             </CardActions>
           )}
-          <CardActions
-            sx={{
-              padding: "0 16px 16px 16px",
-              display: "flex",
-              justifyContent: "space-between",
-            }}
-          >
-            <Button
-              size="small"
-              variant="text"
+          {!props.content?.isProject && (
+            <CardActions
               sx={{
-                borderRadius: "6px",
-                fontWeight: 600,
-                marginLeft: "-3px",
-                marginTop: "10px",
-                fontfamily: "Roboto",
-                color: "#000000DE",
-                fontsize: "14px",
-                lineHeight: "20px",
-                letterSpacing: "0.25px",
-                textTransform: "uppercase",
+                padding: "0 1rem 1rem 1rem",
+                display: "flex",
+                justifyContent: "space-between",
+                height: "100%",
+                alignItems: "flex-end",
               }}
             >
-              View Details
-            </Button>
-            <IconButton aria-label="share">
-              <ShareIcon
-                sx={{ color: "#5f5f5f", fontSize: "18px", cursor: "pointer" }}
-              />
-            </IconButton>
-          </CardActions>
+              <Button
+                size="small"
+                variant="text"
+                sx={{
+                  borderRadius: "0.375rem",
+                  fontWeight: 600,
+                  marginLeft: "-0.188rem",
+
+                  fontfamily: "Roboto",
+                  color: "#000000DE",
+                  fontsize: "0.875rem",
+                  lineHeight: "1.25rem",
+                  letterSpacing: "0.016rem",
+                  textTransform: "uppercase",
+                }}
+              >
+                View Details
+              </Button>
+              <IconButton aria-label="share">
+                <ShareIcon
+                  sx={{
+                    color: "#5f5f5f",
+                    fontSize: "1.125rem",
+                    cursor: "pointer",
+                  }}
+                />
+              </IconButton>
+            </CardActions>
+          )}
         </Card>
       )}
     </div>
