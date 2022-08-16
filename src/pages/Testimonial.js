@@ -8,6 +8,7 @@ import testimonialData from "../data/testimonialData";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { Divider } from "@mui/material";
+import Avatar from "@mui/material/Avatar";
 
 import "./testimonial.css";
 
@@ -21,28 +22,15 @@ const Testimonial = () => {
           alignItems: "center",
           width: "100%",
           flexDirection: "column",
+          marginTop: "2rem",
         }}
       >
         <Typography
-          component="div"
-          sx={{
-            fontWeight: "200",
-            fontSize: { lg: "3.5rem", md: "3rem", sm: "2.5rem", xs: "2rem" },
-          }}
-        >
-          Testimonials
-        </Typography>
-        <Typography
-          component="div"
+          variant="h4"
+          sx={{ textTransform: "uppercase", fontWeight: "bold" }}
           gutterBottom
-          sx={{
-            fontWeight: "200",
-            fontSize: "1.2rem",
-            textAlign: "center",
-          }}
         >
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Deleniti,
-          architecto.
+          WHAT <span style={{ color: "#388E3C" }}> PEOPLE </span> THINK ABOUT US
         </Typography>
       </Box>
       <div className="swiper-slider">
@@ -77,16 +65,25 @@ const Testimonial = () => {
               <div key={index}>
                 <SwiperSlide className="swiperSlide">
                   <div className="testimonial-img">
-                    <img src={item.imgSrc} alt={item.name} />
+                    <Avatar
+                      alt="Remy Sharp"
+                      src={item.imgSrc}
+                      sx={{ width: 100, height: 100 }}
+                    />
                   </div>
-                  <Typography className="testimonial-description" variant="h6">
+                  <Typography
+                    className="testimonial-description"
+                    sx={{ fontWeight: "100" }}
+                  >
                     {item.description}
                   </Typography>
                   <Divider />
-                  <div className="testimonial-name">{item.name}</div>
-                  <div className="testimonial-designation">
+                  <Typography className="testimonial-name">
+                    {item.name}
+                  </Typography>
+                  <Typography className="testimonial-designation">
                     {item.designation}
-                  </div>
+                  </Typography>
                 </SwiperSlide>
               </div>
             );

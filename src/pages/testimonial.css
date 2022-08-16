@@ -1,10 +1,10 @@
 /* Swiper js Styling */
 .testimonial {
-  background-color: #43506150;
+  background-color: #fff;
   margin: 0;
 }
 .swiper-slider {
-  padding: 50px;
+  padding: 0 50px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -16,12 +16,14 @@
 .swiper-slide {
   text-align: center;
   font-size: 18px;
-  background: transparent;
+  background: hsla(163, 62%, 42%, 0.242);
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   margin: 70px 0;
+  border-radius: 10px;
+  padding: 15px;
 }
 .swiper-button-next,
 .swiper-button-prev {
@@ -41,8 +43,8 @@
   width: 100px;
   height: 100px;
   object-fit: cover;
-  border-radius: 50%;
   padding-bottom: 10px;
+  clip-path: circle(40%);
 }
 .mySwiper .testimonial-description {
   font-size: 18px;
@@ -55,7 +57,7 @@
   padding-top: 10px;
 }
 .mySwiper .testimonial-designation {
-  color: rgba(52, 47, 47, 0.703);
+  color: rgb(80, 74, 74);
 }
 /* Breakpoints */
 @media (min-width: 786px) and (max-width: 1024px) {
