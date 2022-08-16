@@ -1,7 +1,7 @@
 // Import npm packages
 import PropTypes from "prop-types";
 
-import "./css/EventCard.scss";
+import "../css/EventCard.scss";
 
 // Import other packages
 import LiveDot from "@mui/icons-material/FiberManualRecord";
@@ -17,7 +17,7 @@ import Typography from "@mui/material/Typography";
 
 import Chip from "@mui/material/Chip";
 
-import defaultImage from "../Assets/default-card-image.jpg";
+import defaultImage from "../../assets/default-card-image.jpg";
 
 EventCard.propTypes = {
   //=======================================
@@ -46,12 +46,13 @@ EventCard.defaultProps = {
 };
 
 export default function EventCard(props) {
+  let status = props.content.status.toLowerCase();
   let statusColor =
-    props.content.status?.toLowerCase() === "upcoming"
+    status === "upcoming"
       ? "#388E3C"
-      : props.content.status?.toLowerCase() === "live"
+      : status === "live"
       ? "#ED0000 !important"
-      : props.content.status?.toLowerCase() === "finished"
+      : status === "finished"
       ? "#999999"
       : "";
 
@@ -59,13 +60,12 @@ export default function EventCard(props) {
     <div>
       {props.content && (
         <Card
+          raised
           sx={{
             display: "flex",
             flexDirection: "column",
             width: "20.063rem",
             height: "30.5rem",
-            borderRadius: "0.5rem",
-            boxShadow: "0 0.313rem 0.938rem rgb(206, 205, 205)",
           }}
         >
           <CardMedia
@@ -74,27 +74,24 @@ export default function EventCard(props) {
             image={props.content?.image ? props.content.image : defaultImage}
             alt="green iguana"
           />
-          <CardContent sx={{ padding: "1rem", paddingBottom: 0 }}>
-            <Typography
-              gutterBottom
-              variant="h6"
-              component="div"
-              sx={{
+          <CardContent sx={{ paddingBottom: "0" }}>
+            <div
+              style={{
                 display: "flex",
                 justifyContent: "space-between",
-                fontFamily: "Roboto",
               }}
             >
-              <div className="truncate card-header">
+              <Typography
+                className="truncate"
+                gutterBottom
+                variant="h5"
+                component="div"
+              >
                 {props.content?.heading}
-              </div>
+              </Typography>
               {(props.content.status !== "none" || !props.content.status) && (
                 <Chip
                   sx={{
-                    fontFamily: "Roboto",
-                    fontWeight: 700,
-                    lineHeight: "1.25rem",
-                    letterSpacing: "0.016rem",
                     color: statusColor,
                     textTransform: "uppercase",
                   }}
@@ -113,48 +110,26 @@ export default function EventCard(props) {
                   label={props.content.status}
                 />
               )}
-            </Typography>
+            </div>
+
             <Typography
               variant="body2"
               className="line-clamp"
-              sx={{
-                fontfamily: "Roboto",
-                fontStyle: "normal",
-                fontWeight: 400,
-                fontsize: "0.875rem",
-                lineHeight: "1.25rem",
-                letterspacing: "0.016rem",
-                color: "rgba(0, 0, 0, 0.6)",
-              }}
+              color="text.secondary"
             >
               {props.content?.description}
             </Typography>
           </CardContent>
           {props.content?.isProject && (
-            <CardActions
-              sx={{ padding: "1em", height: "100%", alignItems: "flex-end" }}
-            >
+            <CardActions sx={{ marginTop: "auto" }}>
               {["Contribute", "View Project"].map((items, index) => {
                 return (
                   <Button
                     key={index}
                     size="small"
                     variant="contained"
-                    sx={{
-                      flex: 1,
-                      borderRadius: "0.375rem",
-                      padding: "0.5rem 0",
-                      backgroundColor: "#29af8a",
-                      "&:hover": {
-                        backgroundColor: "#1d8165",
-                      },
-                      fontWeight: 600,
-                      fontsize: "0.875rem",
-                      lineHeight: "1.25rem",
-                      letterSpacing: "0.016rem",
-                      textTransform: "uppercase",
-                      color: "#FFFFFF",
-                    }}
+                    color="primary"
+                    sx={{ flex: 1, color: "primary.contrastText" }}
                   >
                     {items}
                   </Button>
@@ -165,39 +140,16 @@ export default function EventCard(props) {
           {!props.content?.isProject && (
             <CardActions
               sx={{
-                padding: "0 1rem 1rem 1rem",
                 display: "flex",
                 justifyContent: "space-between",
-                height: "100%",
-                alignItems: "flex-end",
+                marginTop: "auto",
               }}
             >
-              <Button
-                size="small"
-                variant="text"
-                sx={{
-                  borderRadius: "0.375rem",
-                  fontWeight: 600,
-                  marginLeft: "-0.188rem",
-
-                  fontfamily: "Roboto",
-                  color: "#000000DE",
-                  fontsize: "0.875rem",
-                  lineHeight: "1.25rem",
-                  letterSpacing: "0.016rem",
-                  textTransform: "uppercase",
-                }}
-              >
+              <Button sx={{ color: "#000000de" }} size="small">
                 View Details
               </Button>
               <IconButton aria-label="share">
-                <ShareIcon
-                  sx={{
-                    color: "#5f5f5f",
-                    fontSize: "1.125rem",
-                    cursor: "pointer",
-                  }}
-                />
+                <ShareIcon />
               </IconButton>
             </CardActions>
           )}

@@ -1,6 +1,7 @@
 // Import npm packages
+import { Typography } from "@mui/material";
 import PropTypes from "prop-types";
-import EventCard from "./EventCard.react";
+import EventCard from "./Card/EventCard.react";
 
 Events.propTypes = {
   //=======================================
@@ -67,7 +68,7 @@ Events.defaultProps = {
 
 export default function Events(props) {
   return (
-    <div
+    <section
       style={{
         display: "flex",
         flexDirection: "column",
@@ -77,22 +78,14 @@ export default function Events(props) {
         marginTop: "2.5rem",
       }}
     >
-      <div
-        style={{
-          display: "inline",
-          justifyContent: "center",
-          fontFamily: "Helvetica",
-          fontstyle: "normal",
-          fontWeight: 700,
-          fontSize: "2em",
-          textAlign: "center",
-          lineHeight: "46px",
-          textTransform: "uppercase",
-        }}
+      <Typography
+        variant="h4"
+        sx={{ textTransform: "uppercase", fontWeight: "bold" }}
+        gutterBottom
       >
         Upcoming <span style={{ color: "#388E3C" }}> events </span> at the
         living treasure
-      </div>
+      </Typography>
       <div
         style={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}
       >
@@ -100,10 +93,10 @@ export default function Events(props) {
           return (
             <div
               style={{
-                margin: 15,
-                flexBasis: "25%",
                 display: "flex",
                 justifyContent: "center",
+                flexBasis: "25%",
+                margin: 15,
               }}
               key={index}
             >
@@ -112,6 +105,6 @@ export default function Events(props) {
           );
         })}
       </div>
-    </div>
+    </section>
   );
 }
