@@ -1,5 +1,5 @@
 // Import npm packages
-import { Typography } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import PropTypes from "prop-types";
 import EventCard from "./Card/EventCard.react";
 
@@ -80,8 +80,12 @@ export default function Events(props) {
     >
       <Typography
         variant="h4"
-        sx={{ textTransform: "uppercase", fontWeight: "bold" }}
-        gutterBottom
+        sx={{
+          textTransform: "uppercase",
+          fontWeight: "bold",
+          textAlign: "center",
+          padding: "1rem",
+        }}
       >
         Upcoming <span style={{ color: "#388E3C" }}> events </span> at the
         living treasure
@@ -89,7 +93,7 @@ export default function Events(props) {
       <div
         style={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}
       >
-        {props.content?.map((items, index) => {
+        {props.content?.slice(0, 6).map((items, index) => {
           return (
             <div
               style={{
@@ -105,6 +109,9 @@ export default function Events(props) {
           );
         })}
       </div>
+      <Button variant="contained" color="primary" sx={{ margin: "1rem" }}>
+        View All
+      </Button>
     </section>
   );
 }
