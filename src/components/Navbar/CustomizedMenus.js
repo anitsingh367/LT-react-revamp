@@ -17,8 +17,7 @@ const StyledMenu = styled((props) => (
     }}
     {...props}
   />
-))
-(({ theme }) => ({
+))(({ theme }) => ({
   "& .MuiPaper-root": {
     borderRadius: 6,
     marginTop: theme.spacing(1),
@@ -82,6 +81,7 @@ export default function CustomizedMenus(props) {
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}
+        disableScrollLock
       >
         {props.content.options.map((items, index) => {
           return (
