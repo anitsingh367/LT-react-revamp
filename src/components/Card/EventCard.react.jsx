@@ -1,6 +1,7 @@
 // Import npm packages
 import PropTypes from "prop-types";
 
+import ContributeModal from "../Modal/ContributeModal.react";
 import "../css/EventCard.scss";
 
 // Import other packages
@@ -18,6 +19,7 @@ import Typography from "@mui/material/Typography";
 import Chip from "@mui/material/Chip";
 
 import defaultImage from "../../assets/default-card-image.jpg";
+import { useState } from "react";
 
 EventCard.propTypes = {
   //=======================================
@@ -30,6 +32,8 @@ EventCard.propTypes = {
     description: PropTypes.string,
     isProject: PropTypes.bool,
   }),
+  isOpen: PropTypes.bool,
+  onClose: PropTypes.func,
 };
 
 EventCard.defaultProps = {
@@ -43,6 +47,7 @@ EventCard.defaultProps = {
     status: "none",
     isProject: false,
   },
+  isOpen: false,
 };
 
 export default function EventCard(props) {
@@ -56,8 +61,20 @@ export default function EventCard(props) {
       ? "#999999"
       : "";
 
+  const [openContributeModal, setOpenContributeModal] = useState(false);
+
+  const handleContributeButton = (value) => {
+    if (value === "Contribute") {
+      setOpenContributeModal(true);
+    }
+  };
+
   return (
     <div>
+      <ContributeModal
+        isOpen={openContributeModal}
+        onClose={(value) => setOpenContributeModal(value)}
+      />
       {props.content && (
         <Card
           raised
@@ -130,6 +147,9 @@ export default function EventCard(props) {
                     variant="contained"
                     color="primary"
                     sx={{ flex: 1, color: "primary.contrastText" }}
+                    onClick={() => {
+                      handleContributeButton(items);
+                    }}
                   >
                     {items}
                   </Button>
