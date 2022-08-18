@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
@@ -15,6 +16,7 @@ import Collapse from "@mui/material/Collapse";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import Divider from "@mui/material/Divider";
+import ContributeModal from "../Modal/ContributeModal.react";
 
 const drawerWidth = 240;
 
@@ -35,8 +37,18 @@ function DrawerAppBar(props) {
     setOpenProject(!openProject);
   };
 
+  const [openContributeModal, setOpenContributeModal] = useState(false);
+
+  const handleContributeButton = () => {
+    setOpenContributeModal(true);
+  };
+
   const drawer = (
     <div>
+      <ContributeModal
+        isOpen={openContributeModal}
+        onClose={(value) => setOpenContributeModal(value)}
+      />
       <Toolbar sx={{ justifyContent: "center" }}>
         <img src={logo} alt="logo" width="50%" height="50%" />
       </Toolbar>
@@ -84,7 +96,11 @@ function DrawerAppBar(props) {
         <ListItemButton>
           <ListItemText primary="Video Section" />
         </ListItemButton>
-        <Button variant="outlined" sx={{ marginLeft: 2 }}>
+        <Button
+          variant="outlined"
+          sx={{ marginLeft: 2 }}
+          onClick={handleContributeButton}
+        >
           Contribute Now
         </Button>
       </List>
@@ -154,7 +170,7 @@ function DrawerAppBar(props) {
               }}
             />
             <Button variant="h6">Video Section</Button>
-            <Button variant="outlined">Contribute Now</Button>
+            <Button variant="outlined" onClick={handleContributeButton}>Contribute Now</Button>
           </Box>
         </Toolbar>
       </AppBar>

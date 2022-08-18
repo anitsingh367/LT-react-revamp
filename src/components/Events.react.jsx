@@ -61,7 +61,6 @@ Events.defaultProps = {
       heading: "Heading with extra content",
       description: "Description 6",
       status: "live",
-      isProject: true,
     },
   ],
 };
@@ -75,7 +74,7 @@ export default function Events(props) {
         justifyContent: "center",
         alignItems: "center",
         backgroundColor: "#fff",
-        marginTop: "2.5rem",
+        marginTop: "1.5rem",
       }}
     >
       <Typography
@@ -87,20 +86,20 @@ export default function Events(props) {
           padding: "1rem",
         }}
       >
-        Upcoming <span style={{ color: "#388E3C" }}> events </span> at the
-        living treasure
+        <span style={{ color: "#388E3C" }}> events </span> at the living
+        treasure
       </Typography>
       <div
         style={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}
       >
-        {props.content?.slice(0, 6).map((items, index) => {
+        {props.content?.slice(0, 4).map((items, index) => {
           return (
             <div
               style={{
                 display: "flex",
                 justifyContent: "center",
-                flexBasis: "25%",
-                margin: 15,
+                flexBasis: "20%",
+                margin: 25,
               }}
               key={index}
             >
