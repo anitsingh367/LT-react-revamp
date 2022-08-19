@@ -1,12 +1,12 @@
 import React from "react";
-import DrawerAppBar from "../components/Navbar";
-import Footer from "../components/Footer";
+import Events from "../components/Events.react";
+import DrawerAppBar from "../components/Navbar/Navbar";
 
 const Home = () => {
   return (
     <div>
       <DrawerAppBar />
-      <Footer />
+      <Events />
     </div>
   );
 };
