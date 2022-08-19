@@ -1,5 +1,15 @@
 import React from "react";
-import { Grid, Button, Box, Typography } from "@mui/material";
+import {
+  List,
+  ListItem,
+  ListSubheader,
+  Button,
+  Box,
+  Container,
+  Divider,
+  ListItemText,
+  Typography,
+} from "@mui/material";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import YouTubeIcon from "@mui/icons-material/YouTube";
@@ -8,203 +18,170 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 const Footer = () => {
   return (
     <>
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          marginTop: "6rem",
-          padding: "3rem",
-          background: "#435061",
-          color: "#fff",
-          flexWrap: { lg: "nowrap", md: "wrap", sm: "wrap", xs: "wrap" },
-          width: "100%",
-        }}
-      >
-        <Grid item>
-          <Typography
-            borderBottom={1}
-            variant="h5"
-            sx={{
-              textTransform: "uppercase",
-              width: "100%",
-              marginBottom: { md: "2rem", sm: "1.5rem", xs: "1rem" },
-            }}
-            divider
-          >
-            About the living treasure
-          </Typography>
-
-          <Typography
-            sx={{
-              width: { lg: "80%", md: "85%%", sm: "90%" },
-              marginBottom: { md: "2rem", sm: "2rem", xs: "2rem" },
-            }}
-          >
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aperiam
-            laudantium debitis ipsum ut nam nemo officiis dolore optio, quasi
-            rem!
-          </Typography>
-
-          <Button
-            variant="outlined"
-            sx={{
-              marginBottom: { md: "2rem", sm: "2rem", xs: "2rem" },
-            }}
-          >
-            Outlined
-          </Button>
-        </Grid>
-        <Grid
-          container
-          spacing={5}
+      <Box sx={{ width: 1, backgroundColor: "#435061", fontFamily: "Roboto" }}>
+        <Container
           sx={{
             display: "flex",
             justifyContent: "center",
-            alignItems: "center",
-            flexDirection: "column",
+            alignItems: "flex-start",
+            marginTop: "10rem",
+            backgroundColor: "#435061",
+            padding: "2rem",
+            flexDirection: {
+              lg: "row",
+              md: "column",
+              sm: "column",
+              xs: "column",
+            },
           }}
         >
-          <Grid item>
-            <Typography
-              borderBottom={1}
-              variant="h5"
+          <List
+            sx={{
+              width: { lg: "33.33%", md: 1, sm: 1, xs: 1 },
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "flex-start",
+            }}
+          >
+            <ListSubheader
               sx={{
                 textTransform: "uppercase",
-                width: "100%",
-                marginBottom: "10px",
+                background: "transparent",
+                color: "#fff",
+                paddingX: 0,
               }}
-              divider
             >
-              upcoming events
-            </Typography>
-            <Box>
-              <Typography
-                borderBottom={0.5}
-                sx={{
-                  fontSize: "16px",
-                  width: "100%",
-                  marginBottom: { md: "2rem", sm: "2rem", xs: "2rem" },
-                }}
-              >
-                Gurbani SEMINAR - GRATITUDE
-              </Typography>
-            </Box>
-            <Box>
-              <Typography
-                borderBottom={0.5}
-                sx={{
-                  fontSize: "16px",
-                  width: "100%",
-                  marginBottom: { md: "2rem", sm: "2rem", xs: "2rem" },
-                }}
-              >
-                Gurbani SEMINAR - GRATITUDE
-              </Typography>
-            </Box>
-            <Box>
-              <Typography
-                borderBottom={0.5}
-                sx={{
-                  fontSize: "16px",
-                  width: "100%",
-                  marginBottom: { md: "2rem", sm: "2rem", xs: "2rem" },
-                }}
-              >
-                Gurbani SEMINAR - GRATITUDE
-              </Typography>
-            </Box>
-            <Box>
-              <Typography
-                borderBottom={0.5}
-                sx={{
-                  fontSize: "16px",
-                  width: "100%",
-                  marginBottom: { md: "2rem", sm: "2rem", xs: "2rem" },
-                }}
-              >
-                Gurbani SEMINAR - GRATITUDE
-              </Typography>
-            </Box>
-          </Grid>
-        </Grid>
-        <Grid
-          container
-          spacing={5}
+              about the living treasure
+            </ListSubheader>
+            <ListItemText
+              sx={{
+                color: "#ffffff88",
+                textAlign: "left",
+              }}
+            >
+              Promoting the doctrine of "The Universal Truth", which stands for
+              equal value to every human, irrespective of caste, creed, color or
+              gender.
+            </ListItemText>
+            <Button
+              variant="outlined"
+              sx={{
+                textTransform: "capitalise",
+                borderColor: "#fff",
+                color: "#fff",
+                marginTop: "1rem",
+              }}
+            >
+              Know More
+            </Button>
+          </List>
+          <List
+            sx={{
+              textAlign: "left",
+              width: { lg: "33.33%", md: 1, sm: 1, xs: 1 },
+            }}
+          >
+            <ListSubheader
+              sx={{
+                textTransform: "uppercase",
+                background: "transparent",
+                color: "#fff",
+              }}
+            >
+              UPCOMING EVENTS
+            </ListSubheader>
+            <ListItem sx={{ color: "#ffffff88" }}>
+              GURBANI SEMINAR - GRATITUDE
+            </ListItem>
+            <Divider sx={{ backgroundColor: "#ffffff88" }} />
+            <ListItem sx={{ color: "#ffffff88" }}>
+              GURBANI DE CHANAN CH AKHAN - TIK JANA
+            </ListItem>
+            <Divider sx={{ backgroundColor: "#ffffff88" }} />
+            <ListItem sx={{ color: "#ffffff88" }}>
+              GURBANI DE CHANAN CH AKHAN - VEEH VISVAY YAKEEN HONA
+            </ListItem>
+            <Divider sx={{ backgroundColor: "#ffffff88" }} />
+            <ListItem sx={{ color: "#ffffff88" }}>
+              GURBANI DE CHANAN CH AKHAN - RETHARIA DA PARSAD
+            </ListItem>
+          </List>
+          <List
+            sx={{
+              textAlign: "left",
+              width: { lg: "33.33%", md: 1, sm: 1, xs: 1 },
+            }}
+          >
+            <ListSubheader
+              sx={{
+                textTransform: "uppercase",
+                background: "transparent",
+                color: "#fff",
+              }}
+            >
+              CONTACT US
+            </ListSubheader>
+            <ListItem
+              sx={{
+                width: { lg: "80%", md: 1 / 2, sm: 1 / 2, xs: 1 },
+                color: "#ffffff88",
+              }}
+            >
+              THE LIVING TREASURE 109, S.P Mukherji Park, Near Tilak Nagar, New
+              Delhi-110018 (India)
+            </ListItem>
+            <br />
+            <br />
+            <ListItem>
+              <span style={{ color: "#fff" }}>Phone</span>
+              <span style={{ color: "#ffffff88" }}>: +91-11-25981163</span>
+            </ListItem>
+            <ListItem>
+              <span style={{ color: "#fff" }}>Email</span>
+              <span style={{ color: "#ffffff88" }}>
+                :info@thelivingtreasure.com
+              </span>
+            </ListItem>
+          </List>
+        </Container>
+        <Container
           sx={{
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            flexDirection: "column",
+            gap: "0.5rem",
+            color: "#fff",
+            padding: "1.5rem",
           }}
         >
-          <Grid item sx={{ width: "100%" }}>
-            <Box sx={{ width: "100%" }}>
-              <Typography
-                borderBottom={1}
-                variant="h5"
-                sx={{
-                  textTransform: "uppercase",
-                  width: "100%",
-                  marginBottom: "10px",
-                }}
-              >
-                Contact Us
-              </Typography>
-              <Typography
-                sx={{
-                  width: "100%",
-                  marginBottom: { md: "2rem", sm: "2rem", xs: "2rem" },
-                }}
-              >
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Beatae
-                reiciendis
-              </Typography>
-              <Typography
-                sx={{ marginBottom: { md: "2rem", sm: "2rem", xs: "2rem" } }}
-              >
-                Phone: 9384693211
-              </Typography>
-              <Typography
-                sx={{ marginBottom: { md: "2rem", sm: "2rem", xs: "2rem" } }}
-              >
-                Email: abc@gmail.com
-              </Typography>
-            </Box>
-          </Grid>
-        </Grid>
-      </Box>
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          background: "#435061",
-          color: "#fff",
-          gap: "2rem",
-          paddingBottom: "2rem",
-        }}
-      >
-        <YouTubeIcon />
-        <FacebookIcon />
-        <InstagramIcon />
-        <LinkedInIcon />
-      </Box>
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-
-          padding: "1rem",
-          background: "#3A4858CC",
-          color: "#fff",
-          gap: "2rem",
-        }}
-      >
-        <Typography>
-          Copyright 2022. All Rights Reserved by The Living Treasure.
-        </Typography>
+          <InstagramIcon fontSize="large" />
+          <LinkedInIcon fontSize="large" />
+          <YouTubeIcon fontSize="large" />
+          <FacebookIcon fontSize="large" />
+        </Container>
+        <Container
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            gap: "0.5rem",
+            color: "#fff",
+            paddingX: "0 !important",
+          }}
+          maxWidth={false}
+        >
+          <Typography
+            sx={{
+              padding: "1.5rem",
+              background: "#323B45",
+              width: 1,
+              textAlign: "center",
+            }}
+          >
+            Copyright 2022. All Rights Reserved by The Living Treasure.
+          </Typography>
+        </Container>
       </Box>
     </>
   );
