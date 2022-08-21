@@ -10,3 +10,10 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+// For Testimonials
+.line-clamp-testimonail{
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}

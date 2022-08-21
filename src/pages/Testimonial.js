@@ -7,9 +7,9 @@ import "swiper/css/navigation";
 import testimonialData from "../data/testimonialData";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import { Divider } from "@mui/material";
+import { Card, Divider } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
-
+import "../components/css/EventCard.scss";
 import "./testimonial.css";
 
 const Testimonial = () => {
@@ -27,7 +27,11 @@ const Testimonial = () => {
       >
         <Typography
           variant="h4"
-          sx={{ textTransform: "uppercase", fontWeight: "bold" }}
+          sx={{
+            textTransform: "uppercase",
+            fontWeight: "bold",
+            textAlign: "center",
+          }}
           gutterBottom
         >
           WHAT <span style={{ color: "#388E3C" }}> PEOPLE </span> THINK ABOUT US
@@ -62,17 +66,17 @@ const Testimonial = () => {
         >
           {testimonialData.map((item, index) => {
             return (
-              <div key={index}>
+              <Card key={index}>
                 <SwiperSlide className="swiperSlide">
                   <div className="testimonial-img">
                     <Avatar
                       alt="Remy Sharp"
                       src={item.imgSrc}
-                      sx={{ width: 100, height: 100 }}
+                      sx={{ width: 1, height: 1 }}
                     />
                   </div>
                   <Typography
-                    className="testimonial-description"
+                    className="testimonial-description line-clamp-testimonail"
                     sx={{ fontWeight: "100" }}
                   >
                     {item.description}
@@ -85,7 +89,7 @@ const Testimonial = () => {
                     {item.designation}
                   </Typography>
                 </SwiperSlide>
-              </div>
+              </Card>
             );
           })}
         </Swiper>
