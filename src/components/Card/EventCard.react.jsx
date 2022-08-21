@@ -51,7 +51,7 @@ EventCard.defaultProps = {
 };
 
 export default function EventCard(props) {
-  let status = props.content.status.toLowerCase();
+  let status = props.content.status?.toLowerCase();
   let statusColor =
     status === "upcoming"
       ? "#388E3C"
@@ -81,13 +81,14 @@ export default function EventCard(props) {
           sx={{
             display: "flex",
             flexDirection: "column",
-            width: "20.063rem",
-            height: "30.5rem",
+            width: "16rem",
+            height: props.content.isProject ? "25.5rem" : "23rem",
+            margin: { xl: 2.5, lg: 2, md: 2, sm: 1.5, xs: 1 },
           }}
         >
           <CardMedia
             component="img"
-            style={{ aspectRatio: 1 / 1 }}
+            style={{ aspectRatio: 2 / 1.6 }}
             image={props.content?.image ? props.content.image : defaultImage}
             alt="green iguana"
           />
@@ -101,37 +102,38 @@ export default function EventCard(props) {
               <Typography
                 className="truncate"
                 gutterBottom
-                variant="h5"
+                sx={{ fontSize: "1rem", fontWeight: 500 }}
                 component="div"
               >
                 {props.content?.heading}
               </Typography>
-              {(props.content.status !== "none" || !props.content.status) && (
+              {status && (
                 <Chip
+                  size="small"
                   sx={{
                     color: statusColor,
                     textTransform: "uppercase",
                   }}
                   icon={
-                    props.content?.status === "live" ? (
+                    status === "live" ? (
                       <LiveDot
                         sx={{
                           color: statusColor,
-                          fontSize: "0.813rem",
+                          fontSize: "0.7rem !important",
                         }}
                       />
                     ) : (
                       <></>
                     )
                   }
-                  label={props.content.status}
+                  label={status}
                 />
               )}
             </div>
 
             <Typography
-              variant="body2"
-              className="line-clamp"
+              sx={{ fontSize: "0.8rem" }}
+              className={"event-line-clamp"}
               color="text.secondary"
             >
               {props.content?.description}
@@ -157,22 +159,22 @@ export default function EventCard(props) {
               })}
             </CardActions>
           )}
-          {!props.content?.isProject && (
-            <CardActions
-              sx={{
-                display: "flex",
-                justifyContent: "space-between",
-                marginTop: "auto",
-              }}
-            >
-              <Button sx={{ color: "#000000de" }} size="small">
-                View Details
-              </Button>
-              <IconButton aria-label="share">
-                <ShareIcon />
-              </IconButton>
-            </CardActions>
-          )}
+
+          <CardActions
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              marginTop: props.content.isProject ? 0 : "auto",
+              padding: "0.1rem 0.5rem",
+            }}
+          >
+            <Button sx={{ color: "#000000de" }} size="small">
+              View Details
+            </Button>
+            <IconButton aria-label="share">
+              <ShareIcon />
+            </IconButton>
+          </CardActions>
         </Card>
       )}
     </div>
