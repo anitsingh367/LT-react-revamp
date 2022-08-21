@@ -117,7 +117,7 @@ export default function Events(props) {
                 style={{
                   display: "flex",
                   justifyContent: "center",
-                  flexBasis: "23%",
+                  flexBasis: "21%",
                 }}
                 key={index}
               >
