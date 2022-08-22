@@ -1,8 +1,6 @@
 // Import npm packages
 import PropTypes from "prop-types";
 
-import "../css/EventCard.scss";
-
 // Import other packages
 import LiveDot from "@mui/icons-material/FiberManualRecord";
 import ShareIcon from "@mui/icons-material/Share";
@@ -19,7 +17,7 @@ import Chip from "@mui/material/Chip";
 
 import defaultImage from "../../assets/default-card-image.jpg";
 
-EventCard.propTypes = {
+CustomCard.propTypes = {
   //=======================================
   // Component Specific props
   //=======================================
@@ -32,7 +30,7 @@ EventCard.propTypes = {
   }),
 };
 
-EventCard.defaultProps = {
+CustomCard.defaultProps = {
   //=======================================
   // Component Specific props
   //=======================================
@@ -45,7 +43,7 @@ EventCard.defaultProps = {
   },
 };
 
-export default function EventCard(props) {
+export default function CustomCard(props) {
   let status = props.content.status.toLowerCase();
   let statusColor =
     status === "upcoming"
