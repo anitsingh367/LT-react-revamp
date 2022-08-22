@@ -1,0 +1,17 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+body {
+  height: 100%;
+}
+/* Global Variables */
+
+:root {
+  --primary-color: rgb(41, 175, 137);
+  --secondary-color: rgb(67, 80, 97);
+  --primary-color-light: rgba(41, 175, 138, 12%);
+  --secondary-color-light: rgba(67, 80, 97, 12%);
+  --swiper-navigation-size: 36px !important;
+}
