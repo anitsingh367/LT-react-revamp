@@ -1,7 +1,7 @@
 // Import npm packages
 import { Button, Typography } from "@mui/material";
 import PropTypes from "prop-types";
-import EventCard from "./Card/EventCard.react";
+import CustomCard from "../Card/Card.react";
 
 Events.propTypes = {
   //=======================================
@@ -124,7 +124,7 @@ export default function Events(props) {
                 }}
                 key={index}
               >
-                <EventCard content={items} />
+                <CustomCard content={items} />
               </div>
             );
           })}
