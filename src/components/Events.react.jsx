@@ -85,9 +85,7 @@ export default function Events(props) {
       style={{
         display: "flex",
         flexDirection: "column",
-        justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "#fff",
         marginTop: "2rem",
       }}
     >
@@ -96,15 +94,20 @@ export default function Events(props) {
         sx={{
           textTransform: "uppercase",
           fontWeight: "bold",
-          textAlign: "center",
           padding: "1rem",
+          textAlign: "center",
         }}
       >
         <span style={{ color: "#388E3C" }}> events </span> at the living
         treasure
       </Typography>
       <div
-        style={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}
+        style={{
+          display: "flex",
+          flexWrap: "wrap",
+          justifyContent: "center",
+          maxWidth: "75rem",
+        }}
       >
         {props.content
           ?.slice(0, 8)
@@ -117,7 +120,7 @@ export default function Events(props) {
                 style={{
                   display: "flex",
                   justifyContent: "center",
-                  flexBasis: "21%",
+                  flexBasis: `calc(100%/4)`,
                 }}
                 key={index}
               >

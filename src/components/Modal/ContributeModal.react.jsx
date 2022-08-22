@@ -2,6 +2,8 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
+import { emailValidation } from "../../validations/Validations.js";
+
 // Import other packages
 import {
   Button,
@@ -93,9 +95,7 @@ export default function ContributeModal(props) {
   //Handle Email Validation
   const [isEmailValid, setEmailValid] = useState(true);
   const handleEmail = (e) => {
-    const regex = //eslint-disable-next-line
-      /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
-    if (!e.target.value || regex.test(e.target.value) === false) {
+    if (!e.target.value || emailValidation().test(e.target.value) === false) {
       setEmailValid(false);
     } else {
       setEmailValid(true);
@@ -126,14 +126,12 @@ export default function ContributeModal(props) {
             <FormControl
               sx={{
                 display: "flex",
-                flexDirection: "row",
-                justifyContent: "sace-betweenp",
-                alignItems: "flex-start",
               }}
             >
               <RadioGroup
                 required
-                aria-labelledby="demo-radio-buttons-group-label"
+                fullWidth
+                aria-labelledby="radio-buttons-group-label"
                 defaultValue={""}
                 name="radio-buttons-group"
                 sx={{
@@ -265,10 +263,14 @@ export default function ContributeModal(props) {
               <FormControl sx={{ flex: 1, ...inputStyle }}>
                 <Autocomplete
                   freeSolo
+                  onChange={(event, newValue) => {
+                    setFormData({ ...formData, city: newValue });
+                  }}
+                  onInputChange={(event, newInputValue) => {
+                    setFormData({ ...formData, city: newInputValue });
+                  }}
                   disabled={formData.state === "" ? true : false}
                   id="contribute-modal-city"
-                  disableClearable
-                  onChange={handleForm("city")}
                   options={newCityList.map((option) => option.label)}
                   renderInput={(params) => (
                     <TextField
