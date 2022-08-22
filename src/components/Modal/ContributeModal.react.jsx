@@ -261,7 +261,7 @@ export default function ContributeModal(props) {
                   {...params}
                   label={
                     formData.state === ""
-                      ? "Please Select the state first"
+                      ? "Please select the State first"
                       : "City"
                   }
                   InputProps={{
