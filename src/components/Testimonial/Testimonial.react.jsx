@@ -8,7 +8,6 @@ import testimonialData from "../../data/testimonialData";
 import Typography from "@mui/material/Typography";
 import { Card, Container, Divider } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
-import "../Card/Card.scss";
 import "./Testimonial.scss";
 
 const Testimonial = () => {

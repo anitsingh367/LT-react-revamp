@@ -1,8 +1,6 @@
 // Import npm packages
 import PropTypes from "prop-types";
 
-import "./Card.scss";
-
 // Import other packages
 import LiveDot from "@mui/icons-material/FiberManualRecord";
 import ShareIcon from "@mui/icons-material/Share";
