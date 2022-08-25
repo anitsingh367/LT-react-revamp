@@ -167,7 +167,11 @@ export default function CustomCard(props) {
             }}
           >
             <Button sx={{ color: "#000000de" }} size="small">
-              View Details
+              {status === "live"
+                ? "Watch Now"
+                : status === "upcoming"
+                ? "Register"
+                : "View Details"}
             </Button>
             <IconButton aria-label="share">
               <ShareIcon />

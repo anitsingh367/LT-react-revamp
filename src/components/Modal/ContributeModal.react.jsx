@@ -2,7 +2,11 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
-import { emailValidation } from "../../validations/Validations.js";
+import {
+  emailValidation,
+  numberValidation,
+  nameValidation,
+} from "../../validations/Validations.js";
 
 // Import other packages
 import {
@@ -26,8 +30,8 @@ import {
   TextField,
 } from "@mui/material";
 
-import { states as stateList } from "./States.js";
-import { cities as cityList } from "./Cities.js";
+import { states as stateList } from "../../data/States";
+import { cities as cityList } from "../../data/Cities";
 import { toast } from "react-toastify";
 
 ContributeModal.propTypes = {
@@ -46,17 +50,12 @@ ContributeModal.defaultProps = {
 };
 
 //InputField styling
-const inputStyle = {
-  margin: "0.5rem 0",
-  width: 1,
-};
 
 export default function ContributeModal(props) {
   //Handle Modal close
   const [open, setOpen] = useState(false);
   const handleClose = () => {
     props.onClose(false);
-
     setOpen(false);
     resetData();
   };
@@ -73,7 +72,7 @@ export default function ContributeModal(props) {
     email: "",
   };
 
-  //Handl Form Data
+  //Handle Form Data
   const [formData, setFormData] = useState(initialFormState);
   const handleForm = (prop) => (event) => {
     setFormData({ ...formData, [prop]: event.target.value });
@@ -103,6 +102,15 @@ export default function ContributeModal(props) {
       setFormData({ ...formData, email: e.target.value });
     }
   };
+  const [isNameValid, setNameValid] = useState(true);
+  const handleName = (e) => {
+    if (!e.target.value || nameValidation().test(e.target.value) === false) {
+      setNameValid(false);
+    } else {
+      setNameValid(true);
+      setFormData({ ...formData, name: e.target.value });
+    }
+  };
 
   //Update City list after selecting the state
   const newCityList = cityList.filter((items) => {
@@ -114,6 +122,7 @@ export default function ContributeModal(props) {
     setAmount("");
     setFormData(initialFormState);
     setEmailValid(true);
+    setNameValid(true);
   };
 
   useEffect(() => {
@@ -123,7 +132,9 @@ export default function ContributeModal(props) {
   return (
     <Dialog open={open}>
       <DialogTitle>Contribute</DialogTitle>
-      <DialogContent>
+      <DialogContent
+        sx={{ display: "flex", flexDirection: "column", gap: 1.5 }}
+      >
         <FormControl
           sx={{
             display: "flex",
@@ -131,12 +142,12 @@ export default function ContributeModal(props) {
         >
           <RadioGroup
             required
+            row
             aria-labelledby="radio-buttons-group-label"
             defaultValue={""}
             name="radio-buttons-group"
             sx={{
               display: "flex",
-              flexDirection: "row",
               justifyContent: "space-between",
               flex: 1,
             }}
@@ -152,7 +163,7 @@ export default function ContributeModal(props) {
             />
           </RadioGroup>
         </FormControl>
-        <FormControl sx={inputStyle}>
+        <FormControl>
           <InputLabel htmlFor="amount-input-box" required>
             Amount
           </InputLabel>
@@ -164,6 +175,12 @@ export default function ContributeModal(props) {
             startAdornment={<InputAdornment position="start">₹</InputAdornment>}
             label="Amount"
             type="number"
+            inputProps={{ min: "0" }}
+            onKeyPress={(e) => {
+              if (numberValidation().test(e.key) === false) {
+                e.preventDefault();
+              }
+            }}
             disabled={amount === "other" ? false : true}
             placeholder={amount === "" ? "Please select above options" : ""}
           />
@@ -174,13 +191,13 @@ export default function ContributeModal(props) {
           )}
         </FormControl>
         {formData.amount > 5000 && (
-          <FormControl sx={inputStyle}>
+          <FormControl>
             <InputLabel htmlFor="pan-card-details">
               Enter Pan Card No (Required if donation is above ₹ 5000)
             </InputLabel>
             <OutlinedInput
               id="pan-card-details"
-              value={formData.panNumber}
+              value={formData.panNumber?.toUpperCase()}
               onChange={handleForm("panNumber")}
               label="Enter Pan Card No (Required if donation is above ₹ 5000)"
               type="text"
@@ -190,7 +207,7 @@ export default function ContributeModal(props) {
             />
           </FormControl>
         )}
-        <FormControl sx={inputStyle}>
+        <FormControl>
           <InputLabel htmlFor="name-input-box" required>
             Name
           </InputLabel>
@@ -198,15 +215,15 @@ export default function ContributeModal(props) {
             required
             id="name-input-box"
             label="Name"
-            onChange={handleForm("name")}
+            onChange={handleName}
           />
-          {/* {!isName && (
-                <FormHelperText error id="email-error">
-                  Please enter valid name
-                </FormHelperText>
-              )} */}
+          {!isNameValid && (
+            <FormHelperText error id="email-error">
+              Please enter valid name
+            </FormHelperText>
+          )}
         </FormControl>
-        <FormControl sx={inputStyle}>
+        <FormControl>
           <InputLabel htmlFor="address-input-box" required>
             Address
           </InputLabel>
@@ -217,7 +234,7 @@ export default function ContributeModal(props) {
             onChange={handleForm("address")}
           />
         </FormControl>
-        <FormControl sx={inputStyle}>
+        <FormControl>
           <InputLabel id="state-select-label" required>
             State
           </InputLabel>
@@ -242,9 +259,10 @@ export default function ContributeModal(props) {
           sx={{
             display: "flex",
             flexDirection: { lg: "row", md: "row", xs: "column" },
+            gap: 1.5,
           }}
         >
-          <FormControl sx={{ flex: 1, ...inputStyle }}>
+          <FormControl sx={{ flex: 1 }}>
             <Autocomplete
               freeSolo
               onChange={(event, newValue) => {
@@ -275,8 +293,6 @@ export default function ContributeModal(props) {
           <FormControl
             sx={{
               flex: 1,
-              ...inputStyle,
-              marginLeft: { lg: 1, md: 1, xs: 0 },
             }}
           >
             <InputLabel htmlFor="zip-input-box" required>
@@ -286,7 +302,7 @@ export default function ContributeModal(props) {
               required
               id="zip-input-box"
               label="Zip"
-              type="number"
+              type="text"
               onChange={handleForm("zip")}
             />
           </FormControl>
@@ -295,9 +311,10 @@ export default function ContributeModal(props) {
           sx={{
             display: "flex",
             flexDirection: { lg: "row", md: "row", xs: "column" },
+            gap: 1.5,
           }}
         >
-          <FormControl sx={{ flex: 1, ...inputStyle }}>
+          <FormControl sx={{ flex: 1 }}>
             <InputLabel htmlFor="mobile-input-box" required>
               Mobile
             </InputLabel>
@@ -305,15 +322,18 @@ export default function ContributeModal(props) {
               required
               id="mobile-input-box"
               label="Mobile"
-              type="number"
+              type="tel"
               onChange={handleForm("mob")}
+              onKeyPress={(e) => {
+                if (numberValidation().test(e.key) === false) {
+                  e.preventDefault();
+                }
+              }}
             />
           </FormControl>
           <FormControl
             sx={{
               flex: 1,
-              ...inputStyle,
-              marginLeft: { lg: 1, md: 1, xs: 0 },
             }}
           >
             <InputLabel htmlFor="email-input-box" required>
