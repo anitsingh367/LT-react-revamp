@@ -3,12 +3,24 @@ import Home from "./pages/Home";
 
 import "./App.scss";
 
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 function App() {
   return (
     <div className="App">
       <Routes>
         <Route exact path="/" element={<Home />} />
       </Routes>
+      <ToastContainer
+        position="top-right"
+        autoClose={false}
+        newestOnTop
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+      />
     </div>
   );
 }
