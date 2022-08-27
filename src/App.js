@@ -12,9 +12,14 @@ function App() {
       <Routes>
         <Route exact path="/" element={<Home />} />
       </Routes>
-      <ToastContainer    
+      <ToastContainer
         position="top-right"
-        autoClose={3000}
+        autoClose={false}
+        newestOnTop
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
       />
     </div>
   );

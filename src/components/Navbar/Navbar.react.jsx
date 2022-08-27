@@ -48,6 +48,7 @@ function DrawerAppBar(props) {
       <ContributeModal
         isOpen={openContributeModal}
         onClose={(value) => setOpenContributeModal(value)}
+        isNavbar={true}
       />
       <Toolbar sx={{ justifyContent: "center" }}>
         <img src={logo} alt="logo" width="50%" height="50%" />
@@ -170,7 +171,9 @@ function DrawerAppBar(props) {
               }}
             />
             <Button variant="h6">Video Section</Button>
-            <Button variant="outlined" onClick={handleContributeButton}>Contribute Now</Button>
+            <Button variant="outlined" onClick={handleContributeButton}>
+              Contribute Now
+            </Button>
           </Box>
         </Toolbar>
       </AppBar>

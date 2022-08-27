@@ -38,6 +38,8 @@ ContributeModal.propTypes = {
   //=======================================
   // Component Specific props
   //=======================================
+  isNavbar: PropTypes.bool,
+  projectHeading: PropTypes.string,
   isOpen: PropTypes.bool,
   onClose: PropTypes.func,
 };
@@ -46,7 +48,8 @@ ContributeModal.defaultProps = {
   //=======================================
   // Component Specific props
   //=======================================
-  isOpen: false,
+  isNavbar: false,
+  projectHeading: "",
 };
 
 //InputField styling
@@ -87,7 +90,16 @@ export default function ContributeModal(props) {
 
   //Handle Form Submit
   const handleSubmitForm = () => {
-    toast("Thanks for your response");
+    toast.success("Thanks For Your Response", {
+      position: "top-right",
+      autoClose: false,
+      hideProgressBar: true,
+      closeOnClick: false,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+
     handleClose();
     console.log(formData);
   };
@@ -131,7 +143,13 @@ export default function ContributeModal(props) {
 
   return (
     <Dialog open={open}>
-      <DialogTitle>Contribute</DialogTitle>
+      <DialogTitle>
+        {props.isNavbar
+          ? "Contribute For The Cause"
+          : `Contribute To ${
+              props.projectHeading ? props.projectHeading : "Project"
+            }`}
+      </DialogTitle>
       <DialogContent
         sx={{ display: "flex", flexDirection: "column", gap: 1.5 }}
       >

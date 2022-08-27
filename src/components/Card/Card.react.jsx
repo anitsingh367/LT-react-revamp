@@ -72,6 +72,8 @@ export default function CustomCard(props) {
       <ContributeModal
         isOpen={openContributeModal}
         onClose={(value) => setOpenContributeModal(value)}
+        isNavbar={false}
+        projectHeading={props.content?.heading}
       />
       {props.content && (
         <Card
