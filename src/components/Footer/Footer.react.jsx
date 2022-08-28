@@ -18,15 +18,17 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 const Footer = () => {
   return (
     <>
-      <Box sx={{ width: 1, backgroundColor: "#435061", fontFamily: "Roboto" }}>
+      <Box
+        sx={{
+          width: 1,
+          backgroundColor: "secondary.main",
+        }}
+      >
         <Container
           sx={{
             display: "flex",
             justifyContent: "center",
-            alignItems: "flex-start",
-            marginTop: "10rem",
-            backgroundColor: "#435061",
-            padding: "2rem",
+            backgroundColor: "secondary.main",
             flexDirection: {
               lg: "row",
               md: "column",
@@ -42,6 +44,7 @@ const Footer = () => {
               flexDirection: "column",
               justifyContent: "center",
               alignItems: "flex-start",
+              alignSelf: "start",
             }}
           >
             <ListSubheader
@@ -49,15 +52,13 @@ const Footer = () => {
                 textTransform: "uppercase",
                 background: "transparent",
                 color: "#fff",
-                paddingX: 0,
               }}
             >
               about the living treasure
             </ListSubheader>
             <ListItemText
               sx={{
-                color: "#ffffff88",
-                textAlign: "left",
+                color: "secondary.contrastText",
               }}
             >
               Promoting the doctrine of "The Universal Truth", which stands for
@@ -91,26 +92,62 @@ const Footer = () => {
             >
               UPCOMING EVENTS
             </ListSubheader>
-            <ListItem sx={{ color: "#ffffff88" }}>
-              GURBANI SEMINAR - GRATITUDE
+            <ListItem
+              disableGutters
+              disablePadding
+              sx={{ color: "secondary.contrastText" }}
+            >
+              <ListItemText>GURBANI SEMINAR - GRATITUDE</ListItemText>
             </ListItem>
-            <Divider sx={{ backgroundColor: "#ffffff88" }} />
-            <ListItem sx={{ color: "#ffffff88" }}>
-              GURBANI DE CHANAN CH AKHAN - TIK JANA
+            <Divider
+              sx={{
+                backgroundColor: "secondary.contrastText",
+                width: { lg: "90%", md: "100%", sm: "100%", xs: "100%" },
+              }}
+            />
+            <ListItem
+              disableGutters
+              disablePadding
+              sx={{ color: "secondary.contrastText" }}
+            >
+              <ListItemText>GURBANI DE CHANAN CH AKHAN - TIK JANA</ListItemText>
             </ListItem>
-            <Divider sx={{ backgroundColor: "#ffffff88" }} />
-            <ListItem sx={{ color: "#ffffff88" }}>
-              GURBANI DE CHANAN CH AKHAN - VEEH VISVAY YAKEEN HONA
+            <Divider
+              sx={{
+                backgroundColor: "secondary.contrastText",
+                width: { lg: "90%", md: "100%", sm: "100%", xs: "100%" },
+              }}
+            />
+            <ListItem
+              disableGutters
+              disablePadding
+              sx={{ color: "secondary.contrastText" }}
+            >
+              <ListItemText>
+                GURBANI DE CHANAN CH AKHAN - VEEH VISVAY YAKEEN HONA
+              </ListItemText>
             </ListItem>
-            <Divider sx={{ backgroundColor: "#ffffff88" }} />
-            <ListItem sx={{ color: "#ffffff88" }}>
-              GURBANI DE CHANAN CH AKHAN - RETHARIA DA PARSAD
+            <Divider
+              sx={{
+                backgroundColor: "secondary.contrastText",
+                width: { lg: "90%", md: "100%", sm: "100%", xs: "100%" },
+              }}
+            />
+            <ListItem
+              disableGutters
+              disablePadding
+              sx={{ color: "secondary.contrastText" }}
+            >
+              <ListItemText>
+                GURBANI DE CHANAN CH AKHAN - RETHARIA DA PARSAD
+              </ListItemText>
             </ListItem>
           </List>
           <List
             sx={{
-              textAlign: "left",
               width: { lg: "33.33%", md: 1, sm: 1, xs: 1 },
+              display: "flex",
+              flexDirection: "column",
             }}
           >
             <ListSubheader
@@ -124,24 +161,26 @@ const Footer = () => {
             </ListSubheader>
             <ListItem
               sx={{
-                width: { lg: "80%", md: 1 / 2, sm: 1 / 2, xs: 1 },
-                color: "#ffffff88",
+                color: "secondary.contrastText",
               }}
+              disableGutters
+              disablePadding
             >
-              THE LIVING TREASURE 109, S.P Mukherji Park, Near Tilak Nagar, New
-              Delhi-110018 (India)
+              <ListItemText
+                primary="THE LIVING TREASURE 109, S.P Mukherji Park, Near Tilak Nagar,
+                New Delhi-110018 (India)"
+              />
             </ListItem>
-            <br />
-            <br />
-            <ListItem>
-              <span style={{ color: "#fff" }}>Phone</span>
-              <span style={{ color: "#ffffff88" }}>: +91-11-25981163</span>
+            <ListItem disableGutters disablePadding sx={{ marginTop: "auto" }}>
+              <ListItemText sx={{ color: "secondary.contrastText" }}>
+                <span style={{ color: "#fff" }}>Phone</span>: +91-11-25981163
+              </ListItemText>
             </ListItem>
-            <ListItem>
-              <span style={{ color: "#fff" }}>Email</span>
-              <span style={{ color: "#ffffff88" }}>
-                :info@thelivingtreasure.com
-              </span>
+            <ListItem disableGutters disablePadding>
+              <ListItemText sx={{ color: "secondary.contrastText" }}>
+                <span style={{ color: "#fff" }}>Email</span>:
+                info@thelivingtreasure.com
+              </ListItemText>
             </ListItem>
           </List>
         </Container>
@@ -165,18 +204,15 @@ const Footer = () => {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            gap: "0.5rem",
             color: "#fff",
-            paddingX: "0 !important",
+            background: "#323B45",
+            textAlign: "center",
           }}
           maxWidth={false}
         >
           <Typography
             sx={{
               padding: "1.5rem",
-              background: "#323B45",
-              width: 1,
-              textAlign: "center",
             }}
           >
             Copyright 2022. All Rights Reserved by The Living Treasure.
