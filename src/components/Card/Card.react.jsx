@@ -1,8 +1,7 @@
 // Import npm packages
 import PropTypes from "prop-types";
 
-import "../css/EventCard.scss";
-
+import ContributeModal from "../Modal/ContributeModal.react";
 // Import other packages
 import LiveDot from "@mui/icons-material/FiberManualRecord";
 import ShareIcon from "@mui/icons-material/Share";
@@ -18,8 +17,9 @@ import Typography from "@mui/material/Typography";
 import Chip from "@mui/material/Chip";
 
 import defaultImage from "../../assets/default-card-image.jpg";
+import { useState } from "react";
 
-EventCard.propTypes = {
+CustomCard.propTypes = {
   //=======================================
   // Component Specific props
   //=======================================
@@ -30,9 +30,11 @@ EventCard.propTypes = {
     description: PropTypes.string,
     isProject: PropTypes.bool,
   }),
+  isOpen: PropTypes.bool,
+  onClose: PropTypes.func,
 };
 
-EventCard.defaultProps = {
+CustomCard.defaultProps = {
   //=======================================
   // Component Specific props
   //=======================================
@@ -43,10 +45,11 @@ EventCard.defaultProps = {
     status: "none",
     isProject: false,
   },
+  isOpen: false,
 };
 
-export default function EventCard(props) {
-  let status = props.content.status.toLowerCase();
+export default function CustomCard(props) {
+  let status = props.content.status?.toLowerCase();
   let statusColor =
     status === "upcoming"
       ? "#388E3C"
@@ -56,21 +59,36 @@ export default function EventCard(props) {
       ? "#999999"
       : "";
 
+  const [openContributeModal, setOpenContributeModal] = useState(false);
+
+  const handleContributeButton = (value) => {
+    if (value === "Contribute") {
+      setOpenContributeModal(true);
+    }
+  };
+
   return (
     <div>
+      <ContributeModal
+        isOpen={openContributeModal}
+        onClose={(value) => setOpenContributeModal(value)}
+        isNavbar={false}
+        projectHeading={props.content?.heading}
+      />
       {props.content && (
         <Card
           raised
           sx={{
             display: "flex",
             flexDirection: "column",
-            width: "20.063rem",
-            height: "30.5rem",
+            width: "16rem",
+            height: props.content.isProject ? "25.5rem" : "23rem",
+            margin: { xl: 2.5, lg: 2, md: 2, sm: 1.5, xs: 1 },
           }}
         >
           <CardMedia
             component="img"
-            style={{ aspectRatio: 1 / 1 }}
+            style={{ aspectRatio: 2 / 1.6 }}
             image={props.content?.image ? props.content.image : defaultImage}
             alt="green iguana"
           />
@@ -84,37 +102,38 @@ export default function EventCard(props) {
               <Typography
                 className="truncate"
                 gutterBottom
-                variant="h5"
+                sx={{ fontSize: "1rem", fontWeight: 500 }}
                 component="div"
               >
                 {props.content?.heading}
               </Typography>
-              {(props.content.status !== "none" || !props.content.status) && (
+              {status && (
                 <Chip
+                  size="small"
                   sx={{
                     color: statusColor,
                     textTransform: "uppercase",
                   }}
                   icon={
-                    props.content?.status === "live" ? (
+                    status === "live" ? (
                       <LiveDot
                         sx={{
                           color: statusColor,
-                          fontSize: "0.813rem",
+                          fontSize: "0.7rem !important",
                         }}
                       />
                     ) : (
                       <></>
                     )
                   }
-                  label={props.content.status}
+                  label={status}
                 />
               )}
             </div>
 
             <Typography
-              variant="body2"
-              className="line-clamp"
+              sx={{ fontSize: "0.8rem" }}
+              className={"event-line-clamp"}
               color="text.secondary"
             >
               {props.content?.description}
@@ -130,6 +149,9 @@ export default function EventCard(props) {
                     variant="contained"
                     color="primary"
                     sx={{ flex: 1, color: "primary.contrastText" }}
+                    onClick={() => {
+                      handleContributeButton(items);
+                    }}
                   >
                     {items}
                   </Button>
@@ -137,22 +159,26 @@ export default function EventCard(props) {
               })}
             </CardActions>
           )}
-          {!props.content?.isProject && (
-            <CardActions
-              sx={{
-                display: "flex",
-                justifyContent: "space-between",
-                marginTop: "auto",
-              }}
-            >
-              <Button sx={{ color: "#000000de" }} size="small">
-                View Details
-              </Button>
-              <IconButton aria-label="share">
-                <ShareIcon />
-              </IconButton>
-            </CardActions>
-          )}
+
+          <CardActions
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              marginTop: props.content.isProject ? 0 : "auto",
+              padding: "0.1rem 0.5rem",
+            }}
+          >
+            <Button sx={{ color: "#000000de" }} size="small">
+              {status === "live"
+                ? "Watch Now"
+                : status === "upcoming"
+                ? "Register"
+                : "View Details"}
+            </Button>
+            <IconButton aria-label="share">
+              <ShareIcon />
+            </IconButton>
+          </CardActions>
         </Card>
       )}
     </div>
