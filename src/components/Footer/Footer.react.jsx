@@ -67,6 +67,7 @@ const Footer = () => {
             }}
           >
             <ListSubheader
+              disableGutters
               sx={{
                 textTransform: "uppercase",
                 background: "transparent",
@@ -103,6 +104,7 @@ const Footer = () => {
             }}
           >
             <ListSubheader
+              disableGutters
               sx={{
                 textTransform: "uppercase",
                 background: "transparent",
@@ -142,6 +144,7 @@ const Footer = () => {
             }}
           >
             <ListSubheader
+              disableGutters
               sx={{
                 textTransform: "uppercase",
                 background: "transparent",
