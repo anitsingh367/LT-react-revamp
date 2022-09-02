@@ -16,6 +16,25 @@ import YouTubeIcon from "@mui/icons-material/YouTube";
 import FacebookIcon from "@mui/icons-material/Facebook";
 
 const Footer = () => {
+  const upcomingEvents = [
+    {
+      id: 1,
+      title: "GURBANI SEMINAR - GRATITUDE",
+    },
+    {
+      id: 2,
+      title: "GURBANI DE CHANAN CH AKHAN - TIK JANA",
+    },
+    {
+      id: 3,
+      title: "GURBANI DE CHANAN CH AKHAN - VEEH VISVAY YAKEEN HONA",
+    },
+    {
+      id: 4,
+      title: "GURBANI DE CHANAN CH AKHAN - RETHARIA DA PARSAD",
+    },
+  ];
+  let upcomingEventsLength = upcomingEvents.length;
   return (
     <>
       <Box
@@ -92,56 +111,28 @@ const Footer = () => {
             >
               UPCOMING EVENTS
             </ListSubheader>
-            <ListItem
-              disableGutters
-              disablePadding
-              sx={{ color: "secondary.contrastText" }}
-            >
-              <ListItemText>GURBANI SEMINAR - GRATITUDE</ListItemText>
-            </ListItem>
-            <Divider
-              sx={{
-                backgroundColor: "secondary.contrastText",
-                width: { lg: "90%", md: "100%", sm: "100%", xs: "100%" },
-              }}
-            />
-            <ListItem
-              disableGutters
-              disablePadding
-              sx={{ color: "secondary.contrastText" }}
-            >
-              <ListItemText>GURBANI DE CHANAN CH AKHAN - TIK JANA</ListItemText>
-            </ListItem>
-            <Divider
-              sx={{
-                backgroundColor: "secondary.contrastText",
-                width: { lg: "90%", md: "100%", sm: "100%", xs: "100%" },
-              }}
-            />
-            <ListItem
-              disableGutters
-              disablePadding
-              sx={{ color: "secondary.contrastText" }}
-            >
-              <ListItemText>
-                GURBANI DE CHANAN CH AKHAN - VEEH VISVAY YAKEEN HONA
-              </ListItemText>
-            </ListItem>
-            <Divider
-              sx={{
-                backgroundColor: "secondary.contrastText",
-                width: { lg: "90%", md: "100%", sm: "100%", xs: "100%" },
-              }}
-            />
-            <ListItem
-              disableGutters
-              disablePadding
-              sx={{ color: "secondary.contrastText" }}
-            >
-              <ListItemText>
-                GURBANI DE CHANAN CH AKHAN - RETHARIA DA PARSAD
-              </ListItemText>
-            </ListItem>
+            {upcomingEvents.map((item, index) => {
+              return (
+                <div key={index}>
+                  <ListItem
+                    disableGutters
+                    disablePadding
+                    sx={{ color: "secondary.contrastText" }}
+                  >
+                    <ListItemText>{item.title}</ListItemText>
+                  </ListItem>
+                  <Divider
+                    className="line-break"
+                    sx={{
+                      display:
+                        index === upcomingEventsLength - 1 ? "none" : "block",
+                      backgroundColor: "secondary.contrastText",
+                      width: { lg: "90%", md: "100%", sm: "100%", xs: "100%" },
+                    }}
+                  />
+                </div>
+              );
+            })}
           </List>
           <List
             sx={{
