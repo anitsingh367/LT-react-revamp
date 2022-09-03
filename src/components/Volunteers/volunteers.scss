@@ -1,0 +1,14 @@
+.volunteer-parent .swiper-wrapper{
+    // transition-timing-function : linear;
+}
+ .volunteer-parent .swiper-slide {
+    overflow: hidden;
+    background-position: center center;
+    background-size: cover;
+    margin: 0;
+    background: transparent;
+  }
+  .volunteer-parent .swiper-slide img{
+    width: 100px;
+    height: 100px;
+  }
