@@ -1,4 +1,5 @@
 // Import npm packages
+import React from "react";
 import { Button, Typography } from "@mui/material";
 import PropTypes from "prop-types";
 import CustomCard from "../Card/Card.react";
@@ -11,7 +12,7 @@ Events.propTypes = {
     PropTypes.shape({
       image: PropTypes.string,
       heading: PropTypes.string,
-      status: PropTypes.oneOf(["none", "upcoming", "live", "finished"]),
+      status: PropTypes.oneOf(["upcoming", "live", "finished"]),
       description: PropTypes.string,
     })
   ),
@@ -27,6 +28,7 @@ Events.defaultProps = {
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqu39eyj7mkHZ2gnUmKmU9smZN8F3mI7xeC2DFXhTWwOSiL7JaliiMiC8NF3hZK-m1AD8&usqp=CAU",
       heading: "Heading 1",
       description: "Description 1",
+      status: "upcoming",
     },
     {
       image:
@@ -124,7 +126,7 @@ export default function Events(props) {
                 }}
                 key={index}
               >
-                <CustomCard content={items} />
+                <CustomCard content={items} primaryBtnTxt="View Details"/>
               </div>
             );
           })}

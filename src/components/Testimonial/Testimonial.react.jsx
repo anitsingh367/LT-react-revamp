@@ -6,7 +6,7 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import testimonialData from "../../data/testimonialData";
 import Typography from "@mui/material/Typography";
-import { Card, Container, Divider } from "@mui/material";
+import { Container, Divider } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
 import "./Testimonial.scss";
 
@@ -52,34 +52,32 @@ const Testimonial = () => {
         >
           {testimonialData.map((item, index) => {
             return (
-              <Card key={index}>
-                <SwiperSlide>
-                  <Avatar
-                    alt={item.name}
-                    src={item.imgSrc}
-                    sx={{ width: 100, height: 100, marginBottom: 1 }}
-                  />
-                  <Typography
-                    paragraph
-                    variant="body1"
-                    sx={{ fontWeight: "lighter" }}
-                  >
-                    {item.description}
-                  </Typography>
-                  <Divider />
-                  <Typography sx={{ textTransform: "capitalize" }}>
-                    {item.name}
-                  </Typography>
-                  <Typography
-                    sx={{
-                      color: "secondary.main",
-                      textTransform: "uppercase",
-                    }}
-                  >
-                    {item.designation}
-                  </Typography>
-                </SwiperSlide>
-              </Card>
+              <SwiperSlide key={index}>
+                <Avatar
+                  alt={item.name}
+                  src={item.imgSrc}
+                  sx={{ width: 100, height: 100, marginBottom: 1 }}
+                />
+                <Typography
+                  paragraph
+                  variant="body1"
+                  sx={{ fontWeight: "lighter" }}
+                >
+                  {item.description}
+                </Typography>
+                <Divider />
+                <Typography sx={{ textTransform: "capitalize" }}>
+                  {item.name}
+                </Typography>
+                <Typography
+                  sx={{
+                    color: "secondary.main",
+                    textTransform: "uppercase",
+                  }}
+                >
+                  {item.designation}
+                </Typography>
+              </SwiperSlide>
             );
           })}
         </Swiper>
