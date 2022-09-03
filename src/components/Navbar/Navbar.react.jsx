@@ -17,6 +17,7 @@ import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import Divider from "@mui/material/Divider";
 import ContributeModal from "../Modal/ContributeModal.react";
+import { Link } from "react-router-dom";
 
 const drawerWidth = 240;
 
@@ -95,7 +96,12 @@ function DrawerAppBar(props) {
           </List>
         </Collapse>
         <ListItemButton>
-          <ListItemText primary="Video Section" />
+          <Link
+            to="/video"
+            style={{ textDecoration: "none", color: "inherit" }}
+          >
+            <ListItemText primary="Video Section" />
+          </Link>
         </ListItemButton>
         <Button
           variant="outlined"
@@ -170,7 +176,12 @@ function DrawerAppBar(props) {
                 ],
               }}
             />
-            <Button variant="h6">Video Section</Button>
+            <Link
+              to="/video"
+              style={{ textDecoration: "none", color: "inherit" }}
+            >
+              <Button variant="h6">Video Section</Button>
+            </Link>
             <Button variant="outlined" onClick={handleContributeButton}>
               Contribute Now
             </Button>
