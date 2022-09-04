@@ -10,8 +10,8 @@ import Volunteers from "../components/Volunteers/Volunteers.react";
 const Home = () => {
   return (
     <div>
-      <Video />
       <DrawerAppBar />
+      <Video />
       <Events />
       <Projects />
       <Testimonial />
