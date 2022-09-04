@@ -98,7 +98,7 @@ export default function Events(props) {
           textAlign: "center",
         }}
       >
-        <span style={{ color: "#388E3C" }}> events </span> at the living
+        <span style={{ color: "var(--primary-color)" }}> events </span> at the living
         treasure
       </Typography>
       <div
