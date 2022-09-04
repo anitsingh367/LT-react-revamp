@@ -1,5 +1,5 @@
 // Import npm packages
-import { Button, Typography } from "@mui/material";
+import { Typography, Container } from "@mui/material";
 import PropTypes from "prop-types";
 import CustomCard from "../Card/Card.react";
 
@@ -25,22 +25,23 @@ Projects.defaultProps = {
     {
       image:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqu39eyj7mkHZ2gnUmKmU9smZN8F3mI7xeC2DFXhTWwOSiL7JaliiMiC8NF3hZK-m1AD8&usqp=CAU",
-      heading: "Heading 1",
-      description: "Description 1",
+      heading: "Acomplished Projects",
+      description:
+        "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus laudantium, voluptate harum iste sunt optio quo maxime repellat et mollitia.",
     },
     {
       image:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWwB29eRCxE1_92bxreaZ5tsnqgQFgHScAFEA4nn4vpiMfLX-h1j-RhnZfCo9_IcFNx4E&usqp=CAU",
-      heading: "Heading 2",
-      description: "Description 2",
-      status: "upcoming",
+      heading: "Ongoing Projects",
+      description:
+        "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus laudantium, voluptate harum iste sunt optio quo maxime repellat et mollitia.",
     },
     {
       image:
         "https://images.unsplash.com/photo-1550330562-b055aa030d73?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
-      heading: "Heading 3",
-      description: "Description 3",
-      status: "live",
+      heading: "Future Projects",
+      description:
+        "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus laudantium, voluptate harum iste sunt optio quo maxime repellat et mollitia.",
     },
     {
       image: "",
@@ -81,32 +82,33 @@ Projects.defaultProps = {
 
 export default function Projects(props) {
   return (
-    <section
+    <Container
+      maxWidth={false}
       style={{
+        backgroundColor: "var(--secondary-color-light)",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        marginTop: "2rem",
       }}
     >
       <Typography
         variant="h4"
+        align="center"
         sx={{
           textTransform: "uppercase",
           fontWeight: "bold",
-          padding: "1rem",
-          textAlign: "center",
+          padding: "2rem",
         }}
       >
-        <span style={{ color: "#388E3C" }}> Projects </span> at the living
-        treasure
+        <span style={{ color: "var(--primary-color)" }}> Projects </span> at the
+        living treasure
       </Typography>
-      <div
+
+      <Container
         style={{
           display: "flex",
           flexWrap: "wrap",
-          justifyContent: "center",
-          maxWidth: "75rem",
+          justifyContent: "space-evenly",
         }}
       >
         {props.content
@@ -116,24 +118,12 @@ export default function Projects(props) {
           })
           .map((items, index) => {
             return (
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  flexBasis: `calc(100%/4)`,
-                }}
-                key={index}
-              >
+              <div key={index}>
                 <CustomCard content={items} />
               </div>
             );
           })}
-      </div>
-      {props.content && props.content?.length > 0 && (
-        <Button variant="contained" color="primary" sx={{ margin: "1rem" }}>
-          View All
-        </Button>
-      )}
-    </section>
+      </Container>
+    </Container>
   );
 }

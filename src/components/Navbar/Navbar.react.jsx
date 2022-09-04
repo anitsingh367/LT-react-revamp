@@ -114,6 +114,7 @@ function DrawerAppBar(props) {
         position: "sticky",
         top: 0,
         left: 0,
+        zIndex: 1000,
       }}
     >
       <AppBar component="nav" position="relative">

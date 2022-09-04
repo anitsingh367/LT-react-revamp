@@ -14,7 +14,10 @@ const Volunteers = () => {
     <Container
       className="volunteer-parent"
       maxWidth={false}
-      sx={{ textAlign: "center" }}
+      sx={{
+        textAlign: "center",
+        backgroundColor: "var(--secondary-color-light)",
+      }}
     >
       <Typography
         variant="h4"

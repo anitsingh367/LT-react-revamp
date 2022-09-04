@@ -1,5 +1,5 @@
 // Import npm packages
-import { Button, Typography } from "@mui/material";
+import { Button, Typography, Container } from "@mui/material";
 import PropTypes from "prop-types";
 import CustomCard from "../Card/Card.react";
 
@@ -98,15 +98,24 @@ export default function Events(props) {
           textAlign: "center",
         }}
       >
-        <span style={{ color: "var(--primary-color)" }}> events </span> at the living
-        treasure
+        <span style={{ color: "var(--primary-color)" }}> events </span> at the
+        living treasure
       </Typography>
-      <div
-        style={{
+      <Container
+        maxWidth="xl"
+        sx={{
           display: "flex",
           flexWrap: "wrap",
-          justifyContent: "center",
-          maxWidth: "75rem",
+          justifyContent: {
+            lg: "space-between",
+            md: "space-evenly",
+            sm: "space-evenly",
+            xs: "space-evenly",
+          },
+          "&:after": {
+            content: { lg: '""' },
+            flex: { lg: "auto", md: "0", sm: "0", xs: "0" },
+          },
         }}
       >
         {props.content
@@ -116,19 +125,12 @@ export default function Events(props) {
           })
           .map((items, index) => {
             return (
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  flexBasis: `calc(100%/4)`,
-                }}
-                key={index}
-              >
+              <div key={index}>
                 <CustomCard content={items} />
               </div>
             );
           })}
-      </div>
+      </Container>
       {props.content && props.content?.length > 0 && (
         <Button variant="contained" color="primary" sx={{ margin: "1rem" }}>
           View All
