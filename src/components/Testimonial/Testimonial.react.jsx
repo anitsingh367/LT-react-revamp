@@ -15,7 +15,6 @@ const Testimonial = () => {
     <Container
       maxWidth={false}
       sx={{
-        backgroundColor: "var(--secondary-color-light)",
         textAlign: "center",
       }}
     >
