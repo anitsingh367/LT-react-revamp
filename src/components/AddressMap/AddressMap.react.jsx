@@ -4,7 +4,7 @@ export default function AddressMap() {
   return (
     <Box
       sx={{
-        flex: { lg: 2, md: 2, sm: "unset", xs: "unset" },
+        flex: { lg: 3, md: 2, sm: "unset", xs: "unset" },
         height: { lg: "80vh", md: "80vh", sm: "30vh", xs: "30vh" },
       }}
     >

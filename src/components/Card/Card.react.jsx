@@ -47,8 +47,8 @@ CustomCard.defaultProps = {
     description: "",
     status: "none",
     isProject: false,
-    primaryBtnTxt: "",
   },
+  primaryBtnTxt: "",
   isOpen: false,
 };
 

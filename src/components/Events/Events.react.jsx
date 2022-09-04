@@ -128,7 +128,7 @@ export default function Events(props) {
           .map((items, index) => {
             return (
               <div key={index}>
-                <CustomCard content={items} />
+                <CustomCard content={items} primaryBtnTxt="View Details" />
               </div>
             );
           })}

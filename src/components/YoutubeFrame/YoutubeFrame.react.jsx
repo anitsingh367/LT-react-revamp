@@ -5,7 +5,7 @@ const YoutubeFrame = () => {
   return (
     <Box
       sx={{
-        flex: { lg: 2, md: 2, sm: "unset", xs: "unset" },
+        flex: { lg: 3, md: 2, sm: "unset", xs: "unset" },
         height: { lg: "76vh", md: "76vh", sm: "40vh", xs: "30vh" },
       }}
     >

@@ -153,10 +153,11 @@ export default function EventModal(props) {
           </ListItem>
           <Divider />
           <Container
+            maxWidth={false}
             sx={{
               display: "flex",
-              gap: 2,
-              margin: "10px auto",
+              gap: 3,
+              marginTop: 2,
               flexDirection: {
                 xl: "row",
                 lg: "row",
@@ -170,12 +171,17 @@ export default function EventModal(props) {
           >
             {props.status === "upcoming" ? <AddressMap /> : <YoutubeFrame />}
             {(props.status === "live" || props.status === "upcoming") && (
-              <FormGroup style={{ flex: 1, margin: "0 10px", gap: 12 }}>
+              <FormGroup style={{ flex: 1, justifyContent: "space-between" }}>
                 <FormControl>
                   <InputLabel htmlFor="name" required>
                     Name
                   </InputLabel>
-                  <OutlinedInput id="name" label="Name" onChange={handleName} />
+                  <OutlinedInput
+                    id="name"
+                    type="text"
+                    label="Name"
+                    onChange={handleName}
+                  />
                   {!isNameValid && (
                     <FormHelperText error id="name-error">
                       Please enter valid name
@@ -189,6 +195,7 @@ export default function EventModal(props) {
                   <OutlinedInput
                     id="email"
                     label="Email"
+                    type="email"
                     onChange={handleEmail}
                   />
                   {!isEmailValid && (
@@ -220,7 +227,7 @@ export default function EventModal(props) {
                   <OutlinedInput
                     id="number-of-attendies"
                     label="Number of Attendies"
-                    type="tel"
+                    type="number"
                     onChange={handleForm("noOfAttendies")}
                     onKeyPress={(e) => {
                       if (numberValidation().test(e.key) === false) {
@@ -250,7 +257,6 @@ export default function EventModal(props) {
                       display: "flex",
                       flexDirection: "column",
                       justifyContent: "space-between",
-                      flex: 1,
                     }}
                     onChange={handleForm("reference")}
                   >
@@ -281,9 +287,14 @@ export default function EventModal(props) {
                     />
                   </RadioGroup>
                 </FormControl>
-                <FormControlLabel control={<Checkbox defaultChecked />}>
-                  I aggree to the Terms & Conditions
-                </FormControlLabel>
+                <FormControlLabel
+                  control={<Checkbox id="t_and_c" />}
+                  label={
+                    <label htmlFor={"t_and_c"}>
+                      I agree to the <a href="/">Terms & Conditions</a>
+                    </label>
+                  }
+                />
                 <Button
                   variant="contained"
                   onClick={handleSubmitForm}
