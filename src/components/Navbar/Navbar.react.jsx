@@ -111,13 +111,13 @@ function DrawerAppBar(props) {
   return (
     <Box
       sx={{
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
-        padding: 3,
+        position: "sticky",
+        top: 0,
+        left: 0,
+        zIndex: 1000,
       }}
     >
-      <AppBar component="nav">
+      <AppBar component="nav" position="relative">
         <Toolbar
           sx={{
             display: "flex",
@@ -178,24 +178,22 @@ function DrawerAppBar(props) {
         </Toolbar>
       </AppBar>
 
-      <Box component="nav">
-        <Drawer
-          open={mobileOpen}
-          onClose={handleDrawerToggle}
-          ModalProps={{
-            keepMounted: true,
-          }}
-          sx={{
-            display: { xs: "block", sm: "flex", md: "flex", lg: "none" },
-            "& .MuiDrawer-paper": {
-              boxSizing: "border-box",
-              width: drawerWidth,
-            },
-          }}
-        >
-          {drawer}
-        </Drawer>
-      </Box>
+      <Drawer
+        open={mobileOpen}
+        onClose={handleDrawerToggle}
+        ModalProps={{
+          keepMounted: true,
+        }}
+        sx={{
+          display: { xs: "block", sm: "flex", md: "flex", lg: "none" },
+          "& .MuiDrawer-paper": {
+            boxSizing: "border-box",
+            width: drawerWidth,
+          },
+        }}
+      >
+        {drawer}
+      </Drawer>
     </Box>
   );
 }
