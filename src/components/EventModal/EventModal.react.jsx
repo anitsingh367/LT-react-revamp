@@ -143,32 +143,33 @@ export default function EventModal(props) {
             </Typography>
           </Toolbar>
         </AppBar>
-        {(props.status === "upcoming" || props.status === "live") && (
-          <List>
-            <ListItem>
-              <ListItemText
-                primary={props.heading}
-                secondary={props.description}
-              />
-            </ListItem>
-            <Divider />
-            <Container
-              sx={{
-                display: "flex",
-                gap: 2,
-                margin: "10px auto",
-                flexDirection: {
-                  xl: "row",
-                  lg: "row",
-                  md: "row",
-                  sm: "column",
-                  xs: "column",
-                },
 
-                justifyContent: "center",
-              }}
-            >
-              {props.status === "upcoming" ? <AddressMap /> : <YoutubeFrame />}
+        <List>
+          <ListItem>
+            <ListItemText
+              primary={props.heading}
+              secondary={props.description}
+            />
+          </ListItem>
+          <Divider />
+          <Container
+            sx={{
+              display: "flex",
+              gap: 2,
+              margin: "10px auto",
+              flexDirection: {
+                xl: "row",
+                lg: "row",
+                md: "row",
+                sm: "column",
+                xs: "column",
+              },
+
+              justifyContent: "center",
+            }}
+          >
+            {props.status === "upcoming" ? <AddressMap /> : <YoutubeFrame />}
+            {(props.status === "live" || props.status === "upcoming") && (
               <FormGroup style={{ flex: 1, margin: "0 10px", gap: 12 }}>
                 <FormControl>
                   <InputLabel htmlFor="name" required>
@@ -300,9 +301,9 @@ export default function EventModal(props) {
                   Register
                 </Button>
               </FormGroup>
-            </Container>
-          </List>
-        )}
+            )}
+          </Container>
+        </List>
       </Dialog>
     </div>
   );
