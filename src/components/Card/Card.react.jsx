@@ -1,4 +1,5 @@
 // Import npm packages
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 
 import ContributeModal from "../Modal/ContributeModal.react";
@@ -17,7 +18,8 @@ import Typography from "@mui/material/Typography";
 import Chip from "@mui/material/Chip";
 
 import defaultImage from "../../assets/default-card-image.jpg";
-import { useState } from "react";
+
+import EventModal from "../EventModal/EventModal.react";
 
 CustomCard.propTypes = {
   //=======================================
@@ -30,6 +32,7 @@ CustomCard.propTypes = {
     description: PropTypes.string,
     isProject: PropTypes.bool,
   }),
+  primaryBtnTxt: PropTypes.string,
   isOpen: PropTypes.bool,
   onClose: PropTypes.func,
 };
@@ -45,6 +48,7 @@ CustomCard.defaultProps = {
     status: "none",
     isProject: false,
   },
+  primaryBtnTxt: "",
   isOpen: false,
 };
 
@@ -65,6 +69,12 @@ export default function CustomCard(props) {
     if (value === "Contribute") {
       setOpenContributeModal(true);
     }
+  };
+
+  const [openEventModal, setOpenEventModal] = useState(false);
+
+  const handleEventCard = () => {
+    setOpenEventModal(true);
   };
 
   return (
@@ -168,12 +178,12 @@ export default function CustomCard(props) {
               padding: "0.1rem 0.5rem",
             }}
           >
-            <Button sx={{ color: "#000000de" }} size="small">
-              {status === "live"
-                ? "Watch Now"
-                : status === "upcoming"
-                ? "Register"
-                : "View Details"}
+            <Button
+              sx={{ color: "#000000de" }}
+              size="small"
+              onClick={handleEventCard}
+            >
+              {props.primaryBtnTxt}
             </Button>
             <IconButton aria-label="share">
               <ShareIcon />
@@ -181,6 +191,14 @@ export default function CustomCard(props) {
           </CardActions>
         </Card>
       )}
+
+      <EventModal
+        isOpen={openEventModal}
+        onClose={(value) => setOpenEventModal(value)}
+        heading={props.content.heading}
+        status={props.content.status}
+        description={props.content.description}
+      />
     </div>
   );
 }

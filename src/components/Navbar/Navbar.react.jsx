@@ -28,13 +28,9 @@ function DrawerAppBar(props) {
   };
 
   const [openArticle, setOpenArticle] = React.useState(false);
-  const [openProject, setOpenProject] = React.useState(false);
 
   const handleClickArticle = () => {
     setOpenArticle(!openArticle);
-  };
-  const handleClickProject = () => {
-    setOpenProject(!openProject);
   };
 
   const [openContributeModal, setOpenContributeModal] = useState(false);
@@ -77,23 +73,9 @@ function DrawerAppBar(props) {
             </ListItemButton>
           </List>
         </Collapse>
-        <ListItemButton onClick={handleClickProject}>
+        <ListItemButton>
           <ListItemText primary="Projects" />
-          {openProject ? <ExpandLess /> : <ExpandMore />}
         </ListItemButton>
-        <Collapse in={openProject} timeout="auto" unmountOnExit>
-          <List component="div" disablePadding>
-            <ListItemButton sx={{ pl: 4 }}>
-              <ListItemText primary="Accomplished Projects" />
-            </ListItemButton>
-            <ListItemButton sx={{ pl: 4 }}>
-              <ListItemText primary="Ongoing Projects" />
-            </ListItemButton>
-            <ListItemButton sx={{ pl: 4 }}>
-              <ListItemText primary="Future Projects" />
-            </ListItemButton>
-          </List>
-        </Collapse>
         <ListItemButton>
           <ListItemText primary="Video Section" />
         </ListItemButton>
@@ -160,16 +142,7 @@ function DrawerAppBar(props) {
                 options: ["English Articles", "Punjabi Aricles"],
               }}
             />
-            <CustomizedMenus
-              content={{
-                title: "Projects",
-                options: [
-                  "Accomplished Projects",
-                  "Ongoing Projects",
-                  "Future Projects",
-                ],
-              }}
-            />
+            <Button variant="h6">Projects</Button>
             <Button variant="h6">Video Section</Button>
             <Button variant="outlined" onClick={handleContributeButton}>
               Contribute Now
