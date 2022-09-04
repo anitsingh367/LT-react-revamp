@@ -79,13 +79,6 @@ function DrawerAppBar(props) {
         <ListItemButton>
           <ListItemText primary="Video Section" />
         </ListItemButton>
-        <Button
-          variant="outlined"
-          sx={{ marginLeft: 2 }}
-          onClick={handleContributeButton}
-        >
-          Contribute Now
-        </Button>
       </List>
     </div>
   );
@@ -103,7 +96,7 @@ function DrawerAppBar(props) {
         <Toolbar
           sx={{
             display: "flex",
-            justifyContent: { lg: "center", md: "flex-start" },
+            justifyContent: { lg: "center", md: "space-between", sm:"space-between", xs:"space-between" },
             aligncenter: "center",
             backgroundColor: "#fff",
             color: "#000",
@@ -144,10 +137,10 @@ function DrawerAppBar(props) {
             />
             <Button variant="h6">Projects</Button>
             <Button variant="h6">Video Section</Button>
-            <Button variant="outlined" onClick={handleContributeButton}>
-              Contribute Now
-            </Button>
           </Box>
+          <Button variant="outlined" onClick={handleContributeButton}>
+            Contribute Now
+          </Button>
         </Toolbar>
       </AppBar>
 
