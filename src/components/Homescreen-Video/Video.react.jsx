@@ -8,7 +8,7 @@ const Video = () => {
   return (
     <Box
       sx={{
-        height: { lg: "93vh", md: "90vh", sm: "100%", xs: "100%" },
+        height: { lg: "60vh", sm: "100%", xs: "100%" },
       }}
     >
       <video height="100%" width="100%" loop autoPlay muted className="video">
