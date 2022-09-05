@@ -171,7 +171,13 @@ export default function EventModal(props) {
           >
             {props.status === "upcoming" ? <AddressMap /> : <YoutubeFrame />}
             {(props.status === "live" || props.status === "upcoming") && (
-              <FormGroup style={{ flex: 1, justifyContent: "space-between" }}>
+              <FormGroup
+                sx={{
+                  flex: 1,
+                  justifyContent: "space-between",
+                  gap: { md: "1rem", sm: "1rem", xs: "1rem" },
+                }}
+              >
                 <FormControl>
                   <InputLabel htmlFor="name" required>
                     Name
