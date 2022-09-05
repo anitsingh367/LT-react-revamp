@@ -8,6 +8,15 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 const theme = createTheme({
+  components: {
+    MuiFormLabel: {
+      styleOverrides: {
+        asterisk: {
+          color: "red",
+        },
+      },
+    },
+  },
   typography: {
     button: {
       color: "#000000de",
