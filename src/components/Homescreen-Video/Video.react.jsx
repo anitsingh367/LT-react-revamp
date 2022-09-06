@@ -4,11 +4,11 @@ import "./Video.scss";
 
 const Video = () => {
   const src =
-    "https://player.vimeo.com/external/513806634.sd.mp4?s=6004ea15276c0cbb903e54ade6ff6d7aef64dd73&profile_id=164&oauth2_token_id=57447761";
+    "https://raw.githubusercontent.com/anitsingh367/LT-react-revamp/master/src/assets/LT%20website%20top%20Banner%20New.mp4";
   return (
     <Box
       sx={{
-        height: { lg: "60vh", sm: "100%", xs: "100%" },
+        height: { lg: "75vh", sm: "100%", xs: "100%" },
       }}
     >
       <video height="100%" width="100%" loop autoPlay muted className="video">
