@@ -9,9 +9,11 @@ import CardMedia from "@mui/material/CardMedia";
 import CardAction from "@mui/material/CardActions";
 import Button from "@mui/material/Button";
 import YouTubeIcon from "@mui/icons-material/YouTube";
+import InputAdornment from "@mui/material/InputAdornment";
 
 const YoutbeVideo = () => {
   const [fetchVideo, setfetchVideo] = useState();
+  const [Search, setSearch] = useState("");
 
   useEffect(() => {
     const options = {
@@ -28,7 +30,7 @@ const YoutbeVideo = () => {
       );
       const data = await response.json();
       console.log(data);
-      setfetchVideo(data);
+      setfetchVideo(data.items);
     };
     fetchVideo();
   }, []);
@@ -38,79 +40,98 @@ const YoutbeVideo = () => {
       <Container
         sx={{
           display: "flex",
-          justifyContent: "center",
+          justifyContent: "flex-end",
           alignItems: "flex-end",
           marginTop: "5rem",
           gap: "1rem",
         }}
       >
-        <SearchIcon />
-        <TextField id="input-with-sx" placeholder="Search" variant="standard" />
+        <TextField
+          id="input-with-sx"
+          placeholder="Search"
+          variant="standard"
+          onChange={(e) => setSearch(e.target.value)}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="start">
+                <SearchIcon />
+              </InputAdornment>
+            ),
+          }}
+        />
       </Container>
       <Container
         sx={{
           display: "flex",
-          justifyContent: "center",
+          justifyContent: "space-between",
           alignItems: "center",
           flexWrap: "wrap",
           width: "100%",
-          gap: "1rem",
+
           marginTop: "2rem",
         }}
       >
-        {fetchVideo?.items.map((item, index) => {
-          return (
-            <Card
-              raised
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                width: "16rem",
-                height: "23rem",
-                margin: { xl: 2.5, lg: 2, md: 2, sm: 1.5, xs: 1 },
-              }}
-              key={index}
-            >
-              <CardMedia
-                component="img"
-                height="140"
-                image={item.snippet.thumbnails.high.url}
-                alt="green iguana"
-              />
-              <CardContent>
-                <Typography
-                  gutterBottom
-                  variant="h6"
-                  component="div"
-                  sx={{ fontSize: "" }}
-                >
-                  {item.snippet.title}
-                </Typography>
-                <Typography
-                  variant="body2"
-                  color="text.secondary"
-                  className="yt-line-clamp"
-                >
-                  {item.snippet.description}
-                </Typography>
-              </CardContent>
-              <CardAction sx={{ marginTop: "auto", padding: " 1rem" }}>
-                <a
-                  href={`https://www.youtube.com/watch?v=${item.id.videoId}`}
-                  target="__blank__"
-                >
-                  <Button
-                    variant="contained"
-                    startIcon={<YouTubeIcon />}
-                    color="error"
+        {fetchVideo
+          ?.filter((filterItem) => {
+            return Search.toLowerCase() === ""
+              ? filterItem
+              : filterItem.snippet.title
+                  .toLowerCase()
+                  .includes(Search.toLowerCase());
+          })
+          ?.map((item, index) => {
+            return (
+              <Card
+                raised
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  width: "16rem",
+                  height: "23rem",
+                  margin: { xl: 2.5, lg: 2, md: 2, sm: 1.5, xs: 1 },
+                }}
+                key={index}
+              >
+                <CardMedia
+                  component="img"
+                  height="140"
+                  image={item.snippet.thumbnails.high.url}
+                  alt="green iguana"
+                />
+                <CardContent>
+                  <Typography
+                    gutterBottom
+                    variant="h6"
+                    component="div"
+                    sx={{ fontSize: "" }}
                   >
-                    Watch Now
-                  </Button>
-                </a>
-              </CardAction>
-            </Card>
-          );
-        })}
+                    {item.snippet.title}
+                  </Typography>
+                  <Typography
+                    variant="body2"
+                    color="text.secondary"
+                    className="yt-line-clamp"
+                  >
+                    {item.snippet.description}
+                  </Typography>
+                </CardContent>
+                <CardAction sx={{ marginTop: "auto", padding: " 1rem" }}>
+                  <a
+                    href={`https://www.youtube.com/watch?v=${item.id.videoId}`}
+                    target="__blank__"
+                  >
+                    <Button
+                      variant="contained"
+                      startIcon={<YouTubeIcon />}
+                      color="error"
+                    >
+                      Watch Now
+                    </Button>
+                  </a>
+                </CardAction>
+              </Card>
+            );
+          })}
       </Container>
     </>
   );
