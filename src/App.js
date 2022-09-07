@@ -5,10 +5,12 @@ import "./App.scss";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import DrawerAppBar from "./components/Navbar/Navbar.react";
 
 function App() {
   return (
     <div className="App">
+      <DrawerAppBar />
       <Routes>
         <Route exact path="/" element={<Home />} />
       </Routes>
