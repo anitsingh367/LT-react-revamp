@@ -90,6 +90,7 @@ export default function CustomCard(props) {
             sx={{
               display: "flex",
               justifyContent: "space-between",
+              alignItems: "center",
             }}
           >
             <Typography
