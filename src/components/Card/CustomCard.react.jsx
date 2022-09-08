@@ -25,20 +25,20 @@ CustomCard.propTypes = {
     image: PropTypes.string,
     heading: PropTypes.string,
     description: PropTypes.string,
-    chipTemplate: PropTypes.exact({
+    chipTemplate: PropTypes.shape({
       icon: PropTypes.object,
       chipText: PropTypes.string,
       iconColor: PropTypes.string,
       textColor: PropTypes.string,
     }),
     secondaryBtns: PropTypes.arrayOf(
-      PropTypes.exact({
+      PropTypes.shape({
         icon: PropTypes.object,
         btnText: PropTypes.string,
         onClick: PropTypes.func,
       })
     ),
-    primaryBtn: PropTypes.exact({
+    primaryBtn: PropTypes.shape({
       btnIcon: PropTypes.object,
       btnText: PropTypes.string,
       onClick: PropTypes.func,
@@ -75,12 +75,12 @@ export default function CustomCard(props) {
         flexDirection: "column",
         width: "100%",
         height: "100%",
-        margin: { xl: 2.5, lg: 2, md: 2, sm: 1.5, xs: 1 },
       }}
     >
       <CardMedia
         component="img"
         image={props.content?.image ? props.content.image : defaultImage}
+        sx={{ aspectRatio: "2 / 1.6" }}
         alt=""
       />
       <CardContent sx={{ paddingBottom: "0" }}>
@@ -103,11 +103,11 @@ export default function CustomCard(props) {
               }}
               icon={
                 <SvgIcon
-                  component={props.content.chipTemplate.icon}
+                  component={props?.content.chipTemplate.icon}
                   sx={{
-                    color: props.content.chipTemplate.iconColor
-                      ? `${props.content.chipTemplate.iconColor} !important`
-                      : `${props.content.chipTemplate.textColor} !important`,
+                    color: props?.content.chipTemplate.iconColor
+                      ? `${props?.content.chipTemplate.iconColor} !important`
+                      : `${props?.content.chipTemplate.textColor} !important`,
                     fontSize: "0.7rem !important",
                   }}
                 />
@@ -117,13 +117,17 @@ export default function CustomCard(props) {
           )}
         </Box>
 
-        <Typography variant="body2" color="text.secondary">
+        <Typography
+          className="event-line-clamp"
+          variant="body2"
+          color="text.secondary"
+        >
           {props.content?.description}
         </Typography>
       </CardContent>
-      {props.content.secondaryBtns && (
+      {props.content?.secondaryBtns && (
         <CardActions sx={{ marginTop: "auto" }}>
-          {props.content.secondaryBtns.map((buttons, index) => {
+          {props.content?.secondaryBtns?.map((buttons, index) => {
             return (
               <Button
                 key={index}
@@ -132,7 +136,7 @@ export default function CustomCard(props) {
                 color="primary"
                 onClick={buttons.onClick}
                 sx={{ flex: 1, color: "primary.contrastText" }}
-                startIcon={buttons.icon}
+                startIcon={<SvgIcon component={buttons.icon} />}
               >
                 {buttons.btnText}
               </Button>
@@ -141,26 +145,34 @@ export default function CustomCard(props) {
         </CardActions>
       )}
 
-      <CardActions
-        sx={{
-          display: "flex",
-          justifyContent: "space-between",
-          marginTop: props.content.secondaryBtns ? 0 : "auto",
-          padding: "0.1rem 0.5rem",
-        }}
-      >
-        <Button
-          sx={{ color: "secondary.main" }}
-          size="small"
-          onClick={props.content.primaryBtn.onClick}
-          startIcon={props.content.primaryBtn.btnIcon}
+      {props.content?.primaryBtn && (
+        <CardActions
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            marginTop: props.content?.secondaryBtns ? 0 : "auto",
+            padding: "0.1rem 0.5rem",
+          }}
         >
-          {props.content.primaryBtn.btnText}
-        </Button>
-        <IconButton aria-label="share">
-          <SvgIcon component={props.content.actionIcon} />
-        </IconButton>
-      </CardActions>
+          <Button
+            sx={{ color: "secondary.main" }}
+            size="small"
+            onClick={props.content.primaryBtn?.onClick}
+            startIcon={
+              props.content.primaryBtn?.btnIcon && (
+                <SvgIcon component={props.content.primaryBtn.btnIcon} />
+              )
+            }
+          >
+            {props.content?.primaryBtn?.btnText}
+          </Button>
+          {props.content.actionIcon && (
+            <IconButton>
+              <SvgIcon component={props.content?.actionIcon} />
+            </IconButton>
+          )}
+        </CardActions>
+      )}
     </Card>
   );
 }
