@@ -102,15 +102,17 @@ export default function CustomCard(props) {
                 textTransform: "uppercase",
               }}
               icon={
-                <SvgIcon
-                  component={props?.content.chipTemplate.icon}
-                  sx={{
-                    color: props?.content.chipTemplate.iconColor
-                      ? `${props?.content.chipTemplate.iconColor} !important`
-                      : `${props?.content.chipTemplate.textColor} !important`,
-                    fontSize: "0.7rem !important",
-                  }}
-                />
+                props.content.chipTemplate.icon && (
+                  <SvgIcon
+                    component={props.content.chipTemplate.icon}
+                    sx={{
+                      color: props.content.chipTemplate.iconColor
+                        ? `${props.content.chipTemplate.iconColor} !important`
+                        : `${props.content.chipTemplate.textColor} !important`,
+                      fontSize: "0.7rem !important",
+                    }}
+                  />
+                )
               }
               label={props.content.chipTemplate.chipText}
             />
