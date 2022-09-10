@@ -6,6 +6,7 @@ import "./App.scss";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import DrawerAppBar from "./components/Navbar/Navbar.react";
+import ProjectsPage from "./pages/ProjectsPage";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <DrawerAppBar />
       <Routes>
         <Route exact path="/" element={<Home />} />
+        <Route exact path="/Projects" element={<ProjectsPage />} />
       </Routes>
       <ToastContainer
         position="top-right"
