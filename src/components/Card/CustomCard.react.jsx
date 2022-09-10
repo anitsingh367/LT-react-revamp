@@ -22,7 +22,10 @@ CustomCard.propTypes = {
   // Component Specific props
   //=======================================
   content: PropTypes.shape({
-    image: PropTypes.string,
+    image: PropTypes.shape({
+      url: PropTypes.string,
+      aspectRatio: PropTypes.string,
+    }),
     heading: PropTypes.string,
     description: PropTypes.string,
     chipTemplate: PropTypes.shape({
@@ -79,9 +82,11 @@ export default function CustomCard(props) {
     >
       <CardMedia
         component="img"
-        image={props.content?.image ? props.content.image : defaultImage}
-        sx={{ aspectRatio: "2 / 1.6" }}
-        alt=""
+        image={
+          props.content?.image.url ? props.content.image.url : defaultImage
+        }
+        sx={{ aspectRatio: props.content?.image?.aspectRatio }}
+        alt={props.content?.heading}
       />
       <CardContent sx={{ paddingBottom: "0" }}>
         <Box
