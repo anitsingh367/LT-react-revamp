@@ -6,7 +6,6 @@ import {
   Button,
   Box,
   Container,
-  Divider,
   ListItemText,
   Typography,
 } from "@mui/material";
@@ -34,7 +33,6 @@ const Footer = () => {
       title: "GURBANI DE CHANAN CH AKHAN - RETHARIA DA PARSAD",
     },
   ];
-  let upcomingEventsLength = upcomingEvents.length;
   return (
     <>
       <Box
