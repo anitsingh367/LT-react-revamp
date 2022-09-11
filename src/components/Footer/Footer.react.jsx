@@ -48,6 +48,7 @@ const Footer = () => {
             display: "flex",
             justifyContent: "center",
             backgroundColor: "secondary.main",
+            gap: "4rem",
             flexDirection: {
               lg: "row",
               md: "column",
@@ -123,15 +124,6 @@ const Footer = () => {
                   >
                     <ListItemText>{item.title}</ListItemText>
                   </ListItem>
-                  <Divider
-                    className="line-break"
-                    sx={{
-                      display:
-                        index === upcomingEventsLength - 1 ? "none" : "block",
-                      backgroundColor: "secondary.contrastText",
-                      width: { lg: "90%", md: "100%", sm: "100%", xs: "100%" },
-                    }}
-                  />
                 </div>
               );
             })}
