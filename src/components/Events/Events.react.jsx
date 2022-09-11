@@ -83,35 +83,29 @@ Events.defaultProps = {
 };
 
 export default function Events(props) {
-  let statusColor = {
+  const statusColor = {
     live: "#ED0000",
     upcoming: "#388E3C",
     finished: "#999999",
   };
 
-  let newEventList = props.content.map((items) => {
-    let startDate = items.date?.start_date;
-    let endDate = items.date?.end_date;
+  const newEventList = props.content.map((items) => {
+    const startDate = items.date?.start_date;
+    const endDate = items.date?.end_date;
 
-    if (new Date(startDate) <= new Date() && new Date(endDate) >= new Date()) {
+    if (moment().isBetween(startDate, endDate)) {
       items["chipTemplate"] = {
         icon: LiveDot,
         chipText: "Live",
         textColor: statusColor.live,
         iconColor: statusColor.live,
       };
-    } else if (
-      new Date(startDate) > new Date() &&
-      new Date(endDate) > new Date()
-    ) {
+    } else if (moment().isBefore(startDate)) {
       items["chipTemplate"] = {
         chipText: "Upcoming",
         textColor: statusColor.upcoming,
       };
-    } else if (
-      new Date(startDate) < new Date() &&
-      new Date(endDate) < new Date()
-    ) {
+    } else if (moment().isAfter(endDate)) {
       items["chipTemplate"] = {
         chipText: "Finished",
         textColor: statusColor.finished,
@@ -132,7 +126,7 @@ export default function Events(props) {
     setOpenEventModal(true);
     setSelectedEvent({
       heading: selectedData.heading,
-      status: selectedData.chipTemplate.chipText?.toLowerCase(),
+      status: selectedData.status,
       description: selectedData.description,
     });
   };
@@ -193,12 +187,13 @@ export default function Events(props) {
             return items.chipTemplate.chipText !== "Finished";
           })
           .map((items, index) => {
-            let startDate = items.date?.start_date;
-            let endDate = items.date?.end_date;
-            let sD = moment(startDate).format("llll");
-            let eD = moment(endDate).format("h:mm A");
-            let description =
-              items.description + `. Session will be on ${sD}- ${eD}`;
+            const startDate = items.date?.start_date;
+            const endDate = items.date?.end_date;
+            const readableStartDate = moment(startDate).format("llll");
+            const readbleEndDate = moment(endDate).format("h:mm A");
+            const description =
+              items.description +
+              `. Session will be on ${readableStartDate}- ${readbleEndDate}`;
             return (
               <Box
                 sx={{
@@ -216,7 +211,8 @@ export default function Events(props) {
                       btnText: "View Details",
                       onClick: () => {
                         handleEventCard({
-                          ...items,
+                          heading: items.heading,
+                          status: items.chipTemplate.chipText?.toLowerCase(),
                           description: description,
                         });
                       },

@@ -80,7 +80,7 @@ export default function Projects(props) {
   return (
     <Container
       maxWidth={false}
-      style={{
+      sx={{
         backgroundColor: "var(--secondary-color-light)",
         display: "flex",
         flexDirection: "column",
@@ -101,7 +101,7 @@ export default function Projects(props) {
       </Typography>
 
       <Container
-        style={{
+        sx={{
           display: "flex",
           flexWrap: "wrap",
           justifyContent: "space-evenly",
@@ -122,7 +122,14 @@ export default function Projects(props) {
                 }}
                 key={index}
               >
-                <CustomCard content={items} />
+                <CustomCard
+                  content={{
+                    ...items,
+                    primaryBtn: {
+                      btnText: "View Details",
+                    },
+                  }}
+                />
               </Box>
             );
           })}
