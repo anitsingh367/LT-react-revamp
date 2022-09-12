@@ -13,6 +13,7 @@ const Volunteers = () => {
   return (
     <Container
       className="volunteer-parent"
+      disableGutters
       maxWidth={false}
       sx={{
         textAlign: "center",
