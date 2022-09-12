@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import CustomCard from "../Card/CustomCard.react";
 import {
   Typography,
@@ -51,7 +51,7 @@ ProjectsBySection.defaultProps = {
     {
       image:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqu39eyj7mkHZ2gnUmKmU9smZN8F3mI7xeC2DFXhTWwOSiL7JaliiMiC8NF3hZK-m1AD8&usqp=CAU",
-      heading: "Acomplished Projects",
+      heading: "Ongoing Projects",
       description:
         "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus laudantium, voluptate harum iste sunt optio quo maxime repellat et mollitia.",
       category: "Education",
@@ -73,21 +73,20 @@ ProjectsBySection.defaultProps = {
       description:
         "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus laudantium, voluptate harum iste sunt optio quo maxime repellat et mollitia.",
       category: "Medical",
-      type: "ongoing",
+      type: "Future",
     },
     {
       image: "",
-      heading: "Heading 4",
+      heading: "Accomplished 4",
       description:
         "In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content.",
-      status: "finished",
       category: "Medical",
       type: "Accomplished",
     },
     {
       image:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqu39eyj7mkHZ2gnUmKmU9smZN8F3mI7xeC2DFXhTWwOSiL7JaliiMiC8NF3hZK-m1AD8&usqp=CAU",
-      heading: "Heading 1",
+      heading: "Future 1",
       description: "Description 1",
       category: "Medical",
       type: "Future",
@@ -95,60 +94,61 @@ ProjectsBySection.defaultProps = {
     {
       image:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWwB29eRCxE1_92bxreaZ5tsnqgQFgHScAFEA4nn4vpiMfLX-h1j-RhnZfCo9_IcFNx4E&usqp=CAU",
-      heading: "Heading 2",
+      heading: "Future 2",
       description: "Description 2",
-      status: "upcoming",
       category: "Education",
       type: "Future",
     },
     {
       image:
         "https://images.unsplash.com/photo-1550330562-b055aa030d73?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
-      heading: "Heading 3",
+      heading: "Future 3",
       description: "Description 3",
-      status: "live",
       category: "Medical",
       type: "Future",
     },
     {
       image: "",
-      heading: "Heading 4",
+      heading: "Ongoing 4",
       description:
         "In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content.",
-      status: "finished",
       category: "Education",
       type: "Ongoing",
     },
   ],
 };
 export default function ProjectsBySection(props) {
-  const [alignment, setAlignment] = useState("All");
+  const [category, setCategory] = useState("All");
+  const [status, setStatus] = useState("All");
 
-  const handleChangeToggle = (event, newAlignment) => {
-    if (newAlignment !== null) {
-      setAlignment(newAlignment);
+  //Handle Category filter
+  const handleChangeToggle = (event) => {
+    if (event.target.value !== null) {
+      setCategory(event.target.value);
     }
   };
 
-  const [age, setAge] = useState("All");
-
+  //Handle Status filter
   const handleChangeFilter = (event) => {
-    setAge(event.target.value);
+    setStatus(event.target.value);
   };
+
   const [projectFilter, setProjectFilter] = useState(props.content);
-  const filterData = (categoryType) => {
+
+  useEffect(() => {
     const filteredData = props.content.filter((item) => {
-      return categoryType === "All" ? item : item.category === categoryType;
+      console.log(category, status);
+      return category === "All" && status === "All"
+        ? item
+        : category === "All" && status !== "All"
+        ? item.type === status
+        : category !== "All" && status === "All"
+        ? item.category === category
+        : item.category === category && item.type === status;
     });
     setProjectFilter(filteredData);
-  };
-  console.log("projectFilter", projectFilter);
-  const changeCategory = (categoryType) => {
-    const filteredData = projectFilter.filter((item) => {
-      return categoryType === "All" ? item : item.type === categoryType;
-    });
-    setProjectFilter(filteredData);
-  };
+  }, [category, status, props.content]);
+
   return (
     <>
       <Container
@@ -184,21 +184,12 @@ export default function ProjectsBySection(props) {
             size="large"
             color="primary"
             exclusive
-            value={alignment}
+            value={category}
             onChange={handleChangeToggle}
           >
-            <ToggleButton onClick={() => filterData("All")} value="All">
-              All
-            </ToggleButton>
-            <ToggleButton
-              onClick={() => filterData("Education")}
-              value="Education"
-            >
-              Education
-            </ToggleButton>
-            <ToggleButton onClick={() => filterData("Medical")} value="Medical">
-              Medical
-            </ToggleButton>
+            <ToggleButton value="All">All</ToggleButton>
+            <ToggleButton value="Education">Education</ToggleButton>
+            <ToggleButton value="Medical">Medical</ToggleButton>
           </ToggleButtonGroup>
 
           <Box
@@ -211,27 +202,13 @@ export default function ProjectsBySection(props) {
             <Select
               labelId="demo-simple-select-standard-label"
               id="demo-simple-select-standard"
-              value={age}
+              value={status}
               onChange={handleChangeFilter}
             >
-              <MenuItem onClick={() => changeCategory("All")} value="All">
-                All
-              </MenuItem>
-              <MenuItem
-                onClick={() => changeCategory("Ongoing")}
-                value="Ongoing"
-              >
-                Ongoning
-              </MenuItem>
-              <MenuItem
-                onClick={() => changeCategory("Accomplished")}
-                value="Accomplished"
-              >
-                Accomplished
-              </MenuItem>
-              <MenuItem onClick={() => changeCategory("Future")} value="Future">
-                Future
-              </MenuItem>
+              <MenuItem value="All">All</MenuItem>
+              <MenuItem value="Ongoing">Ongoning</MenuItem>
+              <MenuItem value="Accomplished">Accomplished</MenuItem>
+              <MenuItem value="Future">Future</MenuItem>
             </Select>
           </Box>
         </Container>
