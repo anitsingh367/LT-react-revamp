@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import CustomCard from "../Card/Card.react";
+import CustomCard from "../Card/CustomCard.react";
 import {
   Typography,
   Container,
@@ -9,10 +9,9 @@ import {
   Pagination,
 } from "@mui/material";
 import PropTypes from "prop-types";
-import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
+import ShareIcon from "@mui/icons-material/Share";
 ProjectsBySection.propTypes = {
   //=======================================
   // Component Specific props
@@ -21,8 +20,25 @@ ProjectsBySection.propTypes = {
     PropTypes.shape({
       image: PropTypes.string,
       heading: PropTypes.string,
-      status: PropTypes.oneOf(["none", "upcoming", "live", "finished"]),
       description: PropTypes.string,
+      chipTemplate: PropTypes.shape({
+        icon: PropTypes.object,
+        chipText: PropTypes.string,
+        textColor: PropTypes.string,
+      }),
+      secondaryBtns: PropTypes.arrayOf(
+        PropTypes.shape({
+          icon: PropTypes.object,
+          btnText: PropTypes.string,
+          onClick: PropTypes.func,
+        })
+      ),
+      primaryBtn: PropTypes.shape({
+        btnIcon: PropTypes.object,
+        btnText: PropTypes.string,
+        onClick: PropTypes.func,
+      }),
+      actionIcon: PropTypes.object,
     })
   ),
 };
@@ -48,7 +64,7 @@ ProjectsBySection.defaultProps = {
       description:
         "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus laudantium, voluptate harum iste sunt optio quo maxime repellat et mollitia.",
       category: "Education",
-      type: "Accomplised",
+      type: "Ongoing",
     },
     {
       image:
@@ -66,7 +82,7 @@ ProjectsBySection.defaultProps = {
         "In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content.",
       status: "finished",
       category: "Medical",
-      type: "Accomplised",
+      type: "Accomplished",
     },
     {
       image:
@@ -74,7 +90,7 @@ ProjectsBySection.defaultProps = {
       heading: "Heading 1",
       description: "Description 1",
       category: "Medical",
-      type: "future",
+      type: "Future",
     },
     {
       image:
@@ -83,7 +99,7 @@ ProjectsBySection.defaultProps = {
       description: "Description 2",
       status: "upcoming",
       category: "Education",
-      type: "future",
+      type: "Future",
     },
     {
       image:
@@ -92,7 +108,7 @@ ProjectsBySection.defaultProps = {
       description: "Description 3",
       status: "live",
       category: "Medical",
-      type: "future",
+      type: "Future",
     },
     {
       image: "",
@@ -106,13 +122,15 @@ ProjectsBySection.defaultProps = {
   ],
 };
 export default function ProjectsBySection(props) {
-  const [alignment, setAlignment] = React.useState("web");
+  const [alignment, setAlignment] = useState("All");
 
   const handleChangeToggle = (event, newAlignment) => {
-    setAlignment(newAlignment);
+    if (newAlignment !== null) {
+      setAlignment(newAlignment);
+    }
   };
 
-  const [age, setAge] = React.useState("");
+  const [age, setAge] = useState("All");
 
   const handleChangeFilter = (event) => {
     setAge(event.target.value);
@@ -124,8 +142,9 @@ export default function ProjectsBySection(props) {
     });
     setProjectFilter(filteredData);
   };
+  console.log("projectFilter", projectFilter);
   const changeCategory = (categoryType) => {
-    const filteredData = props.content.filter((item) => {
+    const filteredData = projectFilter.filter((item) => {
       return categoryType === "All" ? item : item.type === categoryType;
     });
     setProjectFilter(filteredData);
@@ -168,13 +187,16 @@ export default function ProjectsBySection(props) {
             value={alignment}
             onChange={handleChangeToggle}
           >
-            <ToggleButton onClick={() => filterData("All")} selected>
+            <ToggleButton onClick={() => filterData("All")} value="All">
               All
             </ToggleButton>
-            <ToggleButton onClick={() => filterData("Education")}>
+            <ToggleButton
+              onClick={() => filterData("Education")}
+              value="Education"
+            >
               Education
             </ToggleButton>
-            <ToggleButton onClick={() => filterData("Medical")}>
+            <ToggleButton onClick={() => filterData("Medical")} value="Medical">
               Medical
             </ToggleButton>
           </ToggleButtonGroup>
@@ -192,32 +214,64 @@ export default function ProjectsBySection(props) {
               value={age}
               onChange={handleChangeFilter}
             >
-              <MenuItem onClick={() => changeCategory("All")}>All</MenuItem>
-              <MenuItem onClick={() => changeCategory("Ongoing")}>
+              <MenuItem onClick={() => changeCategory("All")} value="All">
+                All
+              </MenuItem>
+              <MenuItem
+                onClick={() => changeCategory("Ongoing")}
+                value="Ongoing"
+              >
                 Ongoning
               </MenuItem>
-              <MenuItem onClick={() => changeCategory("Accomplised")}>
-                Accomplised
+              <MenuItem
+                onClick={() => changeCategory("Accomplished")}
+                value="Accomplished"
+              >
+                Accomplished
               </MenuItem>
-              <MenuItem onClick={() => changeCategory("future")}>
+              <MenuItem onClick={() => changeCategory("Future")} value="Future">
                 Future
               </MenuItem>
             </Select>
           </Box>
         </Container>
         <Container
-          style={{
+          sx={{
             display: "flex",
             flexWrap: "wrap",
-            justifyContent: "space-between",
+            justifyContent: "space-evenly",
             width: "100%",
           }}
         >
           {projectFilter?.map((items, index) => {
             return (
-              <div key={index}>
-                <CustomCard content={items} primaryBtnTxt="View Projects" />
-              </div>
+              <Box
+                sx={{
+                  height: "auto",
+                  width: "18.5rem",
+                  margin: { xl: 2.5, lg: 2, md: 2, sm: 1.5, xs: 1 },
+                }}
+                key={index}
+              >
+                <CustomCard
+                  content={{
+                    image: items.image,
+                    heading: items.heading,
+                    description: items.description,
+                    chipTemplate: { chipText: items.category },
+                    primaryBtn: {
+                      btnText: "View Details",
+                    },
+                    actionIcon: ShareIcon,
+                    secondaryBtns: [
+                      { btnText: "Contribute" },
+                      {
+                        btnText: "Volunteer",
+                      },
+                    ],
+                  }}
+                />
+              </Box>
             );
           })}
         </Container>
