@@ -55,7 +55,7 @@ ProjectsBySection.defaultProps = {
       description:
         "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus laudantium, voluptate harum iste sunt optio quo maxime repellat et mollitia.",
       category: "Education",
-      type: "Ongoing",
+      status: "Ongoing",
     },
     {
       image:
@@ -64,7 +64,7 @@ ProjectsBySection.defaultProps = {
       description:
         "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus laudantium, voluptate harum iste sunt optio quo maxime repellat et mollitia.",
       category: "Education",
-      type: "Ongoing",
+      status: "Ongoing",
     },
     {
       image:
@@ -73,7 +73,7 @@ ProjectsBySection.defaultProps = {
       description:
         "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus laudantium, voluptate harum iste sunt optio quo maxime repellat et mollitia.",
       category: "Medical",
-      type: "Future",
+      status: "Future",
     },
     {
       image: "",
@@ -81,7 +81,7 @@ ProjectsBySection.defaultProps = {
       description:
         "In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content.",
       category: "Medical",
-      type: "Accomplished",
+      status: "Accomplished",
     },
     {
       image:
@@ -89,7 +89,7 @@ ProjectsBySection.defaultProps = {
       heading: "Future 1",
       description: "Description 1",
       category: "Medical",
-      type: "Future",
+      status: "Future",
     },
     {
       image:
@@ -97,7 +97,7 @@ ProjectsBySection.defaultProps = {
       heading: "Future 2",
       description: "Description 2",
       category: "Education",
-      type: "Future",
+      status: "Future",
     },
     {
       image:
@@ -105,7 +105,7 @@ ProjectsBySection.defaultProps = {
       heading: "Future 3",
       description: "Description 3",
       category: "Medical",
-      type: "Future",
+      status: "Future",
     },
     {
       image: "",
@@ -113,7 +113,7 @@ ProjectsBySection.defaultProps = {
       description:
         "In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content.",
       category: "Education",
-      type: "Ongoing",
+      status: "Ongoing",
     },
   ],
 };
@@ -137,14 +137,15 @@ export default function ProjectsBySection(props) {
 
   useEffect(() => {
     const filteredData = props.content.filter((item) => {
-      console.log(category, status);
+      let itemCategory = item.category;
+      let itemStatus = item.status;
       return category === "All" && status === "All"
         ? item
         : category === "All" && status !== "All"
-        ? item.type === status
+        ? itemStatus === status
         : category !== "All" && status === "All"
-        ? item.category === category
-        : item.category === category && item.type === status;
+        ? itemCategory === category
+        : itemCategory === category && itemStatus === status;
     });
     setProjectFilter(filteredData);
   }, [category, status, props.content]);
