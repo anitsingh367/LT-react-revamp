@@ -1,7 +1,8 @@
 // Import npm packages
 import { Typography, Container } from "@mui/material";
 import PropTypes from "prop-types";
-import CustomCard from "../Card/Card.react";
+import CustomCard from "../Card/CustomCard.react";
+import { Box } from "@mui/system";
 
 Projects.propTypes = {
   //=======================================
@@ -11,7 +12,6 @@ Projects.propTypes = {
     PropTypes.shape({
       image: PropTypes.string,
       heading: PropTypes.string,
-      status: PropTypes.oneOf(["none", "upcoming", "live", "finished"]),
       description: PropTypes.string,
     })
   ),
@@ -48,7 +48,6 @@ Projects.defaultProps = {
       heading: "Heading 4",
       description:
         "In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content.",
-      status: "finished",
     },
     {
       image:
@@ -61,21 +60,18 @@ Projects.defaultProps = {
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWwB29eRCxE1_92bxreaZ5tsnqgQFgHScAFEA4nn4vpiMfLX-h1j-RhnZfCo9_IcFNx4E&usqp=CAU",
       heading: "Heading 2",
       description: "Description 2",
-      status: "upcoming",
     },
     {
       image:
         "https://images.unsplash.com/photo-1550330562-b055aa030d73?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
       heading: "Heading 3",
       description: "Description 3",
-      status: "live",
     },
     {
       image: "",
       heading: "Heading 4",
       description:
         "In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content.",
-      status: "finished",
     },
   ],
 };
@@ -84,7 +80,7 @@ export default function Projects(props) {
   return (
     <Container
       maxWidth={false}
-      style={{
+      sx={{
         backgroundColor: "var(--secondary-color-light)",
         display: "flex",
         flexDirection: "column",
@@ -105,7 +101,7 @@ export default function Projects(props) {
       </Typography>
 
       <Container
-        style={{
+        sx={{
           display: "flex",
           flexWrap: "wrap",
           justifyContent: "space-evenly",
@@ -118,9 +114,23 @@ export default function Projects(props) {
           })
           .map((items, index) => {
             return (
-              <div key={index}>
-                <CustomCard content={items} />
-              </div>
+              <Box
+                sx={{
+                  height: "23rem",
+                  width: "16rem",
+                  margin: { xl: 2.5, lg: 2, md: 2, sm: 1.5, xs: 1 },
+                }}
+                key={index}
+              >
+                <CustomCard
+                  content={{
+                    ...items,
+                    primaryBtn: {
+                      btnText: "View Details",
+                    },
+                  }}
+                />
+              </Box>
             );
           })}
       </Container>

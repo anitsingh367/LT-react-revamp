@@ -236,7 +236,7 @@ export default function ContributeModal(props) {
             onChange={handleName}
           />
           {!isNameValid && (
-            <FormHelperText error id="email-error">
+            <FormHelperText error id="name-error">
               Please enter valid name
             </FormHelperText>
           )}

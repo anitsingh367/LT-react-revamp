@@ -1,7 +1,14 @@
 // Import npm packages
-import { Button, Typography, Container } from "@mui/material";
+import React, { useState } from "react";
+import { Button, Typography, Container, Box } from "@mui/material";
 import PropTypes from "prop-types";
-import CustomCard from "../Card/Card.react";
+import CustomCard from "../Card/CustomCard.react";
+import LiveDot from "@mui/icons-material/FiberManualRecord";
+import ShareIcon from "@mui/icons-material/Share";
+
+import EventModal from "../EventModal/EventModal.react";
+
+import moment from "moment";
 
 Events.propTypes = {
   //=======================================
@@ -11,7 +18,6 @@ Events.propTypes = {
     PropTypes.shape({
       image: PropTypes.string,
       heading: PropTypes.string,
-      status: PropTypes.oneOf(["none", "upcoming", "live", "finished"]),
       description: PropTypes.string,
     })
   ),
@@ -25,61 +31,106 @@ Events.defaultProps = {
     {
       image:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqu39eyj7mkHZ2gnUmKmU9smZN8F3mI7xeC2DFXhTWwOSiL7JaliiMiC8NF3hZK-m1AD8&usqp=CAU",
-      heading: "Heading 1",
-      description: "Description 1",
+      heading: "This must be upcoming",
+      description:
+        "A New India Together fsdhfjsdhf sdkjfsdjkfhsdkj fhsdkjfhsdkjfhsdfkjsdhf ksjdfhsdkjfh sdkjfshdfkjsdfhkjsdhfksdjhfsd kjf fhdjshfksjd fhskdjfhskdjfh sdkjfhsdf kj sdfh",
+      date: {
+        start_date: "2023-09-06 19:00:00",
+        end_date: "2023-09-06 22:00:00",
+      },
     },
     {
       image:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWwB29eRCxE1_92bxreaZ5tsnqgQFgHScAFEA4nn4vpiMfLX-h1j-RhnZfCo9_IcFNx4E&usqp=CAU",
-      heading: "Heading 2",
+      heading: "This must be finished",
       description: "Description 2",
-      status: "upcoming",
+      date: {
+        start_date: "2022-09-05 20:00:00",
+        end_date: "2022-09-05 22:00:00",
+      },
     },
     {
       image:
         "https://images.unsplash.com/photo-1550330562-b055aa030d73?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
-      heading: "Heading 3",
+      heading: "This must be live",
       description: "Description 3",
-      status: "live",
+      date: {
+        start_date: "2022-09-05 19:00:00",
+        end_date: "2022-09-09 03:06:00",
+      },
     },
     {
       image: "",
-      heading: "Heading 4",
+      heading: "This must be upcoming",
       description:
         "In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content.",
-      status: "finished",
-    },
-    {
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqu39eyj7mkHZ2gnUmKmU9smZN8F3mI7xeC2DFXhTWwOSiL7JaliiMiC8NF3hZK-m1AD8&usqp=CAU",
-      heading: "Heading 1",
-      description: "Description 1",
-    },
-    {
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWwB29eRCxE1_92bxreaZ5tsnqgQFgHScAFEA4nn4vpiMfLX-h1j-RhnZfCo9_IcFNx4E&usqp=CAU",
-      heading: "Heading 2",
-      description: "Description 2",
-      status: "upcoming",
-    },
-    {
-      image:
-        "https://images.unsplash.com/photo-1550330562-b055aa030d73?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
-      heading: "Heading 3",
-      description: "Description 3",
-      status: "live",
+      date: {
+        start_date: "2022-09-11 19:00:00",
+        end_date: "2022-09-12 03:06:00",
+      },
     },
     {
       image: "",
-      heading: "Heading 4",
+      heading: "This must be upcoming",
       description:
         "In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content.",
-      status: "finished",
+      date: {
+        start_date: "2022-09-11 19:00:00",
+        end_date: "2022-09-12 03:06:00",
+      },
     },
   ],
 };
 
 export default function Events(props) {
+  const statusColor = {
+    live: "#ED0000",
+    upcoming: "#388E3C",
+    finished: "#999999",
+  };
+
+  const newEventList = props.content.map((items) => {
+    const startDate = items.date?.start_date;
+    const endDate = items.date?.end_date;
+
+    if (moment().isBetween(startDate, endDate)) {
+      items["chipTemplate"] = {
+        icon: LiveDot,
+        chipText: "Live",
+        textColor: statusColor.live,
+        iconColor: statusColor.live,
+      };
+    } else if (moment().isBefore(startDate)) {
+      items["chipTemplate"] = {
+        chipText: "Upcoming",
+        textColor: statusColor.upcoming,
+      };
+    } else if (moment().isAfter(endDate)) {
+      items["chipTemplate"] = {
+        chipText: "Finished",
+        textColor: statusColor.finished,
+      };
+    }
+
+    return items;
+  });
+
+  const [openEventModal, setOpenEventModal] = useState(false);
+  const [selectedEvent, setSelectedEvent] = useState({
+    heading: "",
+    status: "",
+    description: "",
+  });
+
+  const handleEventCard = (selectedData) => {
+    setOpenEventModal(true);
+    setSelectedEvent({
+      heading: selectedData.heading,
+      status: selectedData.status,
+      description: selectedData.description,
+    });
+  };
+
   return (
     <section
       style={{
@@ -89,6 +140,15 @@ export default function Events(props) {
         marginTop: "2rem",
       }}
     >
+      {openEventModal && (
+        <EventModal
+          isOpen={openEventModal}
+          onClose={(value) => setOpenEventModal(value)}
+          heading={selectedEvent.heading}
+          status={selectedEvent.status}
+          description={selectedEvent.description}
+        />
+      )}
       <Typography
         variant="h4"
         sx={{
@@ -118,16 +178,50 @@ export default function Events(props) {
           },
         }}
       >
-        {props.content
+        {newEventList
           ?.slice(0, 8)
+          .sort(
+            (a, b) => new Date(a.date.start_date) - new Date(b.date.start_date)
+          )
           .filter((items) => {
-            return items?.isProject ? items?.isProject === false : items;
+            return items.chipTemplate.chipText !== "Finished";
           })
           .map((items, index) => {
+            const startDate = items.date?.start_date;
+            const endDate = items.date?.end_date;
+            const readableStartDate = moment(startDate).format("llll");
+            const readbleEndDate = moment(endDate).format("h:mm A");
+            const description =
+              items.description +
+              `. Session will be on ${readableStartDate}- ${readbleEndDate}`;
             return (
-              <div key={index}>
-                <CustomCard content={items} />
-              </div>
+              <Box
+                sx={{
+                  height: "auto",
+                  width: "16rem",
+                  margin: { xl: 2.5, lg: 2, md: 2, sm: 1.5, xs: 1 },
+                }}
+                key={index}
+              >
+                <CustomCard
+                  content={{
+                    ...items,
+                    description: description,
+                    primaryBtn: {
+                      btnText: "View Details",
+                      onClick: () => {
+                        handleEventCard({
+                          heading: items.heading,
+                          status: items.chipTemplate.chipText?.toLowerCase(),
+                          description: description,
+                        });
+                      },
+                    },
+
+                    actionIcon: ShareIcon,
+                  }}
+                />
+              </Box>
             );
           })}
       </Container>
