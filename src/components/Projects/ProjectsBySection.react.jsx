@@ -12,6 +12,7 @@ import PropTypes from "prop-types";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import ShareIcon from "@mui/icons-material/Share";
+
 ProjectsBySection.propTypes = {
   //=======================================
   // Component Specific props
@@ -119,7 +120,7 @@ ProjectsBySection.defaultProps = {
 };
 export default function ProjectsBySection(props) {
   const [category, setCategory] = useState("All");
-  const [status, setStatus] = useState("All");
+  const [status, setStatus] = useState(props.status ? props.status : "All");
 
   //Handle Category filter
   const handleChangeToggle = (event) => {

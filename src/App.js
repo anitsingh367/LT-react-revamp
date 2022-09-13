@@ -14,7 +14,7 @@ function App() {
       <DrawerAppBar />
       <Routes>
         <Route exact path="/" element={<Home />} />
-        <Route exact path="/Projects" element={<ProjectsPage />} />
+        <Route exact path="/projects" element={<ProjectsPage/>} />
       </Routes>
       <ToastContainer
         position="top-right"
