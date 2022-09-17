@@ -108,6 +108,7 @@ export default function EventModal(props) {
   //Handle Form Submit
   const handleSubmitForm = () => {
     props.onSubmit(true);
+    handleClose();
     console.log(formData);
   };
 
