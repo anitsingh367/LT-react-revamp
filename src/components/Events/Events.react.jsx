@@ -1,14 +1,27 @@
 // Import npm packages
 import React, { useState } from "react";
-import { Button, Typography, Container, Box } from "@mui/material";
 import PropTypes from "prop-types";
-import CustomCard from "../Card/CustomCard.react";
-import LiveDot from "@mui/icons-material/FiberManualRecord";
-import ShareIcon from "@mui/icons-material/Share";
+import moment from "moment";
 
+// Import other packages
+import {
+  Button,
+  Typography,
+  Container,
+  Box,
+  Grow,
+  Alert,
+  Snackbar,
+} from "@mui/material";
+import {
+  Share as ShareIcon,
+  FiberManualRecord as LiveDot,
+} from "@mui/icons-material";
+
+import CustomCard from "../Card/CustomCard.react";
 import EventModal from "../EventModal/EventModal.react";
 
-import moment from "moment";
+import CustomSnackBar from "../SnackBar/CustomSnackBar.react";
 
 Events.propTypes = {
   //=======================================
@@ -131,6 +144,20 @@ export default function Events(props) {
     });
   };
 
+  const [isToasterOpen, setIsToasterOpen] = useState(false);
+
+  function GrowTransition(props) {
+    return <Grow {...props} />;
+  }
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setIsToasterOpen(false);
+  };
+
+  console.log(isToasterOpen);
   return (
     <section
       style={{
@@ -147,6 +174,23 @@ export default function Events(props) {
           heading={selectedEvent.heading}
           status={selectedEvent.status}
           description={selectedEvent.description}
+          onSubmit={(value) => {
+            setIsToasterOpen(value);
+          }}
+        />
+      )}
+      {isToasterOpen && (
+        <CustomSnackBar
+          autoHideDuration={3000}
+          anchorOrigin={{
+            vertical: "top",
+            horizontal: "center",
+          }}
+          TransitionComponent={GrowTransition}
+          open={isToasterOpen}
+          onClose={handleClose}
+          severity="success"
+          message="Thanks For Your Response"
         />
       )}
       <Typography

@@ -3,8 +3,6 @@ import Home from "./pages/Home";
 
 import "./App.scss";
 
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import DrawerAppBar from "./components/Navbar/Navbar.react";
 
 function App() {
@@ -14,15 +12,6 @@ function App() {
       <Routes>
         <Route exact path="/" element={<Home />} />
       </Routes>
-      <ToastContainer
-        position="top-right"
-        autoClose={false}
-        newestOnTop
-        closeOnClick={false}
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-      />
     </div>
   );
 }

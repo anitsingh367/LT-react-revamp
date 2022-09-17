@@ -45,6 +45,7 @@ function DrawerAppBar(props) {
         isOpen={openContributeModal}
         onClose={(value) => setOpenContributeModal(value)}
         isNavbar={true}
+        onSubmit={() => console.log("This is toaster")}
       />
       <Toolbar sx={{ justifyContent: "center" }}>
         <img src={logo} alt="logo" width="50%" height="50%" />
@@ -96,7 +97,12 @@ function DrawerAppBar(props) {
         <Toolbar
           sx={{
             display: "flex",
-            justifyContent: { lg: "center", md: "space-between", sm:"space-between", xs:"space-between" },
+            justifyContent: {
+              lg: "center",
+              md: "space-between",
+              sm: "space-between",
+              xs: "space-between",
+            },
             aligncenter: "center",
             backgroundColor: "#fff",
             color: "#000",

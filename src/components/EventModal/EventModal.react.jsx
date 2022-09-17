@@ -2,17 +2,6 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
-import CloseIcon from "@mui/icons-material/Close";
-import Slide from "@mui/material/Slide";
-import AddressMap from "../AddressMap/AddressMap.react";
-import {
-  emailValidation,
-  numberValidation,
-  nameValidation,
-} from "../../validations/Validations";
-
-import { toast } from "react-toastify";
-
 import {
   Button,
   Container,
@@ -35,8 +24,18 @@ import {
   FormLabel,
   FormHelperText,
   Checkbox,
+  Slide,
 } from "@mui/material";
+import { Close as CloseIcon } from "@mui/icons-material";
+
+import {
+  emailValidation,
+  numberValidation,
+  nameValidation,
+} from "../../validations/Validations";
+
 import YoutubeFrame from "../YoutubeFrame/YoutubeFrame.react";
+import AddressMap from "../AddressMap/AddressMap.react";
 
 EventModal.propTypes = {
   //=======================================
@@ -47,6 +46,7 @@ EventModal.propTypes = {
   status: PropTypes.oneOf(["upcoming", "live", "finished"]),
   onClick: PropTypes.func,
   isOpen: PropTypes.bool,
+  onSubmit: PropTypes.func,
 };
 
 EventModal.defaultProps = {
@@ -107,16 +107,7 @@ export default function EventModal(props) {
 
   //Handle Form Submit
   const handleSubmitForm = () => {
-    toast.success("Thanks For Your Response", {
-      position: "top-right",
-      autoClose: false,
-      hideProgressBar: true,
-      closeOnClick: false,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    });
-
+    props.onSubmit(true);
     console.log(formData);
   };
 

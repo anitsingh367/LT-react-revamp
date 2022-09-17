@@ -2,12 +2,6 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
-import {
-  emailValidation,
-  numberValidation,
-  nameValidation,
-} from "../../validations/Validations.js";
-
 // Import other packages
 import {
   Button,
@@ -32,7 +26,12 @@ import {
 
 import { states as stateList } from "../../data/States";
 import { cities as cityList } from "../../data/Cities";
-import { toast } from "react-toastify";
+
+import {
+  emailValidation,
+  numberValidation,
+  nameValidation,
+} from "../../validations/Validations.js";
 
 ContributeModal.propTypes = {
   //=======================================
@@ -42,6 +41,7 @@ ContributeModal.propTypes = {
   projectHeading: PropTypes.string,
   isOpen: PropTypes.bool,
   onClose: PropTypes.func,
+  onSubmit: PropTypes.func,
 };
 
 ContributeModal.defaultProps = {
@@ -90,16 +90,7 @@ export default function ContributeModal(props) {
 
   //Handle Form Submit
   const handleSubmitForm = () => {
-    toast.success("Thanks For Your Response", {
-      position: "top-right",
-      autoClose: false,
-      hideProgressBar: true,
-      closeOnClick: false,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    });
-
+    props.onSubmit();
     handleClose();
     console.log(formData);
   };
