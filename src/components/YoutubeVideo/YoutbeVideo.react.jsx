@@ -1,22 +1,37 @@
 import React, { useState, useEffect } from "react";
 import { Container } from "@mui/material";
 import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import SearchIcon from "@mui/icons-material/Search";
-import CardMedia from "@mui/material/CardMedia";
-import CardAction from "@mui/material/CardActions";
-import Button from "@mui/material/Button";
-import YouTubeIcon from "@mui/icons-material/YouTube";
 import InputAdornment from "@mui/material/InputAdornment";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { Box } from "@mui/system";
+import PropTypes from "prop-types";
+import CustomCard from "../Card/CustomCard.react";
 
 const YoutbeVideo = () => {
+  YoutbeVideo.propTypes = {
+    //=======================================
+    // Component Specific props
+    //=======================================
+    content: PropTypes.arrayOf(
+      PropTypes.shape({
+        image: PropTypes.string,
+        heading: PropTypes.string,
+        description: PropTypes.string,
+        primaryBtn: PropTypes.shape({
+          btnIcon: PropTypes.object,
+          btnText: PropTypes.string,
+          onClick: PropTypes.func,
+        }),
+      })
+    ),
+  };
+
   const [fetchVideo, setfetchVideo] = useState();
   const [Search, setSearch] = useState("");
 
@@ -56,9 +71,12 @@ const YoutbeVideo = () => {
             gap: "1rem",
           }}
         >
-          <Typography variant="h8">Filter By:</Typography>
+          <Typography variant="subtitle1">Filter By:</Typography>
+          {/* Language */}
           <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-            <InputLabel id="demo-simple-select-standard-label">Age</InputLabel>
+            <InputLabel id="demo-simple-select-standard-label">
+              Language
+            </InputLabel>
             <Select
               labelId="demo-simple-select-standard-label"
               id="demo-simple-select-standard"
@@ -66,13 +84,16 @@ const YoutbeVideo = () => {
               onChange={handleChange}
               label="Age"
             >
-              <MenuItem value={10}>Ten</MenuItem>
-              <MenuItem value={20}>Twenty</MenuItem>
-              <MenuItem value={30}>Thirty</MenuItem>
+              <MenuItem value={"English"}>English</MenuItem>
+              <MenuItem value={"Hindi"}>Hindi</MenuItem>
+              <MenuItem value={"Punjabi"}>Punjabi</MenuItem>
             </Select>
           </FormControl>
+          {/* Topics */}
           <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-            <InputLabel id="demo-simple-select-standard-label">Age</InputLabel>
+            <InputLabel id="demo-simple-select-standard-label">
+              Topics
+            </InputLabel>
             <Select
               labelId="demo-simple-select-standard-label"
               id="demo-simple-select-standard"
@@ -80,13 +101,16 @@ const YoutbeVideo = () => {
               onChange={handleChange}
               label="Age"
             >
-              <MenuItem value={10}>Ten</MenuItem>
-              <MenuItem value={20}>Twenty</MenuItem>
-              <MenuItem value={30}>Thirty</MenuItem>
+              <MenuItem value={"Depression"}>Depression</MenuItem>
+              <MenuItem value={"Peace"}>Peace</MenuItem>
+              <MenuItem value={"Stress"}>Strees</MenuItem>
             </Select>
           </FormControl>
+          {/* Content Type */}
           <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-            <InputLabel id="demo-simple-select-standard-label">Age</InputLabel>
+            <InputLabel id="demo-simple-select-standard-label">
+              Content Type
+            </InputLabel>
             <Select
               labelId="demo-simple-select-standard-label"
               id="demo-simple-select-standard"
@@ -94,9 +118,8 @@ const YoutbeVideo = () => {
               onChange={handleChange}
               label="Age"
             >
-              <MenuItem value={10}>Ten</MenuItem>
-              <MenuItem value={20}>Twenty</MenuItem>
-              <MenuItem value={30}>Thirty</MenuItem>
+              <MenuItem value={"Video"}>Video</MenuItem>
+              <MenuItem value={"Audio"}>Audio</MenuItem>
             </Select>
           </FormControl>
         </Box>
@@ -108,9 +131,11 @@ const YoutbeVideo = () => {
             gap: "1rem",
           }}
         >
-          <Typography variant="h8">Sort By:</Typography>
+          <Typography variant="subtitle1">Sort By:</Typography>
           <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
-            <InputLabel id="demo-simple-select-standard-label">Age</InputLabel>
+            <InputLabel id="demo-simple-select-standard-label">
+              Newtest
+            </InputLabel>
             <Select
               labelId="demo-simple-select-standard-label"
               id="demo-simple-select-standard"
@@ -118,9 +143,8 @@ const YoutbeVideo = () => {
               onChange={handleChange}
               label="Age"
             >
-              <MenuItem value={10}>Ten</MenuItem>
-              <MenuItem value={20}>Twenty</MenuItem>
-              <MenuItem value={30}>Thirty</MenuItem>
+              <MenuItem value={"Newtest"}>Newtest</MenuItem>
+              <MenuItem value={"Oldest"}>Oldest</MenuItem>
             </Select>
           </FormControl>
           <TextField
@@ -170,43 +194,22 @@ const YoutbeVideo = () => {
                 }}
                 key={index}
               >
-                <CardMedia
-                  component="img"
-                  height="140"
-                  image={item.snippet.thumbnails.high.url}
-                  alt="green iguana"
+                <CustomCard
+                  content={{
+                    ...item,
+                    heading: item.snippet.title,
+                    description: item.snippet.description,
+                    image: item.snippet.thumbnails.high.url,
+                    primaryBtn: {
+                      btnText: "Watch Now",
+                      onClick: () => {
+                        window.open(
+                          `https://www.youtube.com/watch?v=${item.id.videoId}`
+                        );
+                      },
+                    },
+                  }}
                 />
-                <CardContent>
-                  <Typography
-                    gutterBottom
-                    variant="h6"
-                    component="div"
-                    sx={{ fontSize: "" }}
-                  >
-                    {item.snippet.title}
-                  </Typography>
-                  <Typography
-                    variant="body2"
-                    color="text.secondary"
-                    className="yt-line-clamp"
-                  >
-                    {item.snippet.description}
-                  </Typography>
-                </CardContent>
-                <CardAction sx={{ marginTop: "auto", padding: " 1rem" }}>
-                  <a
-                    href={`https://www.youtube.com/watch?v=${item.id.videoId}`}
-                    target="__blank__"
-                  >
-                    <Button
-                      variant="contained"
-                      startIcon={<YouTubeIcon />}
-                      color="error"
-                    >
-                      Watch Now
-                    </Button>
-                  </a>
-                </CardAction>
               </Card>
             );
           })}
