@@ -138,7 +138,7 @@ export default function CustomCard(props) {
                 color="primary"
                 onClick={buttons.onClick}
                 sx={{ flex: 1, color: "primary.contrastText" }}
-                startIcon={<SvgIcon component={buttons.icon} />}
+                startIcon={buttons.icon && <SvgIcon component={buttons.icon} />}
               >
                 {buttons.btnText}
               </Button>
