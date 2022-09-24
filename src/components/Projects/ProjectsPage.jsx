@@ -12,8 +12,9 @@ import PropTypes from "prop-types";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import ShareIcon from "@mui/icons-material/Share";
+import { useLocation } from "react-router-dom";
 
-ProjectsBySection.propTypes = {
+ProjectsPage.propTypes = {
   //=======================================
   // Component Specific props
   //=======================================
@@ -44,7 +45,7 @@ ProjectsBySection.propTypes = {
   ),
 };
 
-ProjectsBySection.defaultProps = {
+ProjectsPage.defaultProps = {
   //=======================================
   // Component Specific props
   //=======================================
@@ -118,9 +119,12 @@ ProjectsBySection.defaultProps = {
     },
   ],
 };
-export default function ProjectsBySection(props) {
+export default function ProjectsPage(props) {
+  const location = useLocation();
   const [category, setCategory] = useState("All");
-  const [status, setStatus] = useState(props.status ? props.status : "All");
+  const [status, setStatus] = useState(
+    location?.state?.status ? location?.state?.status : "All"
+  );
 
   //Handle Category filter
   const handleChangeToggle = (event) => {
@@ -155,13 +159,12 @@ export default function ProjectsBySection(props) {
     <>
       <Container
         maxWidth={false}
-        style={{
+        sx={{
           backgroundColor: "var(--secondary-color-light)",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-        }}
-      >
+        }}>
         <Typography
           variant="h4"
           align="center"
@@ -169,8 +172,7 @@ export default function ProjectsBySection(props) {
             textTransform: "uppercase",
             fontWeight: "bold",
             padding: "2rem",
-          }}
-        >
+          }}>
           <span style={{ color: "var(--primary-color)" }}> Projects </span> at
           the living treasure
         </Typography>
@@ -179,16 +181,14 @@ export default function ProjectsBySection(props) {
             display: "flex",
             justifyContent: "space-between",
             alignContent: "center",
-          }}
-        >
+          }}>
           <ToggleButtonGroup
             aria-label="text button group"
             size="large"
             color="primary"
             exclusive
             value={category}
-            onChange={handleChangeToggle}
-          >
+            onChange={handleChangeToggle}>
             <ToggleButton value="All">All</ToggleButton>
             <ToggleButton value="Education">Education</ToggleButton>
             <ToggleButton value="Medical">Medical</ToggleButton>
@@ -199,14 +199,8 @@ export default function ProjectsBySection(props) {
               display: "flex",
               justifyContent: "center",
               alignitems: "center",
-            }}
-          >
-            <Select
-              labelId="demo-simple-select-standard-label"
-              id="demo-simple-select-standard"
-              value={status}
-              onChange={handleChangeFilter}
-            >
+            }}>
+            <Select value={status} onChange={handleChangeFilter}>
               <MenuItem value="All">All</MenuItem>
               <MenuItem value="Ongoing">Ongoning</MenuItem>
               <MenuItem value="Accomplished">Accomplished</MenuItem>
@@ -220,8 +214,7 @@ export default function ProjectsBySection(props) {
             flexWrap: "wrap",
             justifyContent: "space-evenly",
             width: "100%",
-          }}
-        >
+          }}>
           {projectFilter?.map((items, index) => {
             return (
               <Box
@@ -230,8 +223,7 @@ export default function ProjectsBySection(props) {
                   width: "18.5rem",
                   margin: { xl: 2.5, lg: 2, md: 2, sm: 1.5, xs: 1 },
                 }}
-                key={index}
-              >
+                key={index}>
                 <CustomCard
                   content={{
                     image: items.image,
