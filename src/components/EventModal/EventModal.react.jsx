@@ -25,8 +25,11 @@ import {
   FormHelperText,
   Checkbox,
   Slide,
+  Box,
 } from "@mui/material";
-import { Close as CloseIcon } from "@mui/icons-material";
+import { Close as CloseIcon, VolunteerActivism as Thanks } from "@mui/icons-material";
+
+import CustomSnackBar from "../SnackBar/CustomSnackBar.react";
 
 import {
   emailValidation,
@@ -60,16 +63,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 export default function EventModal(props) {
-  const [open, setOpen] = React.useState(false);
-
-  const handleClose = () => {
-    props.onClose(false);
-    setOpen(false);
-  };
-
-  useEffect(() => {
-    setOpen(props.isOpen);
-  }, [props.isOpen]);
+  const [open, setOpen] = React.useState(props.isOpen);
 
   const initialFormState = {
     name: "",
@@ -78,6 +72,16 @@ export default function EventModal(props) {
     noOfAttendies: "",
     reference: "",
   };
+
+  const handleClose = () => {
+    props.onClose(false);
+    setOpen(false);
+    setFormData(initialFormState);
+  };
+
+  useEffect(() => {
+    setOpen(props.isOpen);
+  }, [props.isOpen]);
 
   //Handle Form Data
   const [formData, setFormData] = useState(initialFormState);
@@ -105,10 +109,11 @@ export default function EventModal(props) {
     }
   };
 
+  const [isToasterOpen, setIsToasterOpen] = useState(false);
+
   //Handle Form Submit
   const handleSubmitForm = () => {
-    props.onSubmit(true);
-    handleClose();
+    setIsToasterOpen(true);
     console.log(formData);
   };
 
@@ -159,157 +164,184 @@ export default function EventModal(props) {
               },
 
               justifyContent: "center",
+              alignItems: "center",
             }}
           >
             {props.status === "upcoming" ? <AddressMap /> : <YoutubeFrame />}
-            {(props.status === "live" || props.status === "upcoming") && (
-              <FormGroup
-                sx={{
-                  flex: 1,
-                  justifyContent: "space-between",
-                  gap: { md: "1rem", sm: "1rem", xs: "1rem" },
-                }}
-              >
-                <FormControl>
-                  <InputLabel htmlFor="name" required>
-                    Name
-                  </InputLabel>
-                  <OutlinedInput
-                    id="name"
-                    type="text"
-                    label="Name"
-                    onChange={handleName}
-                  />
-                  {!isNameValid && (
-                    <FormHelperText error id="name-error">
-                      Please enter valid name
-                    </FormHelperText>
-                  )}
-                </FormControl>
-                <FormControl>
-                  <InputLabel htmlFor="email" required>
-                    Email
-                  </InputLabel>
-                  <OutlinedInput
-                    id="email"
-                    label="Email"
-                    type="email"
-                    onChange={handleEmail}
-                  />
-                  {!isEmailValid && (
-                    <FormHelperText error id="email-error">
-                      Please enter valid email
-                    </FormHelperText>
-                  )}
-                </FormControl>
-                <FormControl>
-                  <InputLabel htmlFor="contact-number" required>
-                    Contact Number
-                  </InputLabel>
-                  <OutlinedInput
-                    id="contact-number"
-                    label="Contact Number"
-                    type="tel"
-                    onChange={handleForm("contact")}
-                    onKeyPress={(e) => {
-                      if (numberValidation().test(e.key) === false) {
-                        e.preventDefault();
-                      }
-                    }}
-                  />
-                </FormControl>
-                <FormControl>
-                  <InputLabel htmlFor="number-of-attendies" required>
-                    Number of Attendies
-                  </InputLabel>
-                  <OutlinedInput
-                    id="number-of-attendies"
-                    label="Number of Attendies"
-                    type="number"
-                    onChange={handleForm("noOfAttendies")}
-                    onKeyPress={(e) => {
-                      if (numberValidation().test(e.key) === false) {
-                        e.preventDefault();
-                      }
-                    }}
-                  />
-                </FormControl>
-                <FormControl
+            {(props.status === "live" || props.status === "upcoming") &&
+              !isToasterOpen && (
+                <FormGroup
                   sx={{
-                    display: "flex",
+                    flex: 1,
+                    justifyContent: "space-between",
+                    gap: { md: "1rem", sm: "1rem", xs: "1rem" },
                   }}
                 >
-                  <FormLabel
-                    id="radio-buttons-group-event-register-label"
-                    required
-                  >
-                    How did you get to know about the event?
-                  </FormLabel>
-                  <RadioGroup
-                    required
-                    row
-                    aria-labelledby="radio-buttons-group-event-register-label"
-                    defaultValue={""}
-                    name="radio-buttons-group-event-register"
+                  <FormControl>
+                    <InputLabel htmlFor="name" required>
+                      Name
+                    </InputLabel>
+                    <OutlinedInput
+                      id="name"
+                      type="text"
+                      label="Name"
+                      onChange={handleName}
+                    />
+                    {!isNameValid && (
+                      <FormHelperText error id="name-error">
+                        Please enter valid name
+                      </FormHelperText>
+                    )}
+                  </FormControl>
+                  <FormControl>
+                    <InputLabel htmlFor="email" required>
+                      Email
+                    </InputLabel>
+                    <OutlinedInput
+                      id="email"
+                      label="Email"
+                      type="email"
+                      onChange={handleEmail}
+                    />
+                    {!isEmailValid && (
+                      <FormHelperText error id="email-error">
+                        Please enter valid email
+                      </FormHelperText>
+                    )}
+                  </FormControl>
+                  <FormControl>
+                    <InputLabel htmlFor="contact-number" required>
+                      Contact Number
+                    </InputLabel>
+                    <OutlinedInput
+                      id="contact-number"
+                      label="Contact Number"
+                      type="tel"
+                      onChange={handleForm("contact")}
+                      onKeyPress={(e) => {
+                        if (numberValidation().test(e.key) === false) {
+                          e.preventDefault();
+                        }
+                      }}
+                    />
+                  </FormControl>
+                  <FormControl>
+                    <InputLabel htmlFor="number-of-attendies" required>
+                      Number of Attendies
+                    </InputLabel>
+                    <OutlinedInput
+                      id="number-of-attendies"
+                      label="Number of Attendies"
+                      type="number"
+                      onChange={handleForm("noOfAttendies")}
+                      onKeyPress={(e) => {
+                        if (numberValidation().test(e.key) === false) {
+                          e.preventDefault();
+                        }
+                      }}
+                    />
+                  </FormControl>
+                  <FormControl
                     sx={{
                       display: "flex",
-                      flexDirection: "column",
-                      justifyContent: "space-between",
                     }}
-                    onChange={handleForm("reference")}
                   >
-                    <FormControlLabel
-                      value="Whatsapp"
-                      control={<Radio />}
-                      label="Whatsapp"
-                    />
-                    <FormControlLabel
-                      value="Facebook"
-                      control={<Radio />}
-                      label="Facebook"
-                    />
-                    <FormControlLabel
-                      value="Youtube"
-                      control={<Radio />}
-                      label="Youtube"
-                    />
-                    <FormControlLabel
-                      value="Website"
-                      control={<Radio />}
-                      label="Website"
-                    />
-                    <FormControlLabel
-                      value="Family"
-                      control={<Radio />}
-                      label="Friends/ Family"
-                    />
-                  </RadioGroup>
-                </FormControl>
-                <FormControlLabel
-                  control={<Checkbox id="t_and_c" />}
-                  label={
-                    <label htmlFor={"t_and_c"}>
-                      I agree to the <a href="/">Terms & Conditions</a>
-                    </label>
-                  }
+                    <FormLabel
+                      id="radio-buttons-group-event-register-label"
+                      required
+                    >
+                      How did you get to know about the event?
+                    </FormLabel>
+                    <RadioGroup
+                      required
+                      row
+                      aria-labelledby="radio-buttons-group-event-register-label"
+                      defaultValue={""}
+                      name="radio-buttons-group-event-register"
+                      sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "space-between",
+                      }}
+                      onChange={handleForm("reference")}
+                    >
+                      <FormControlLabel
+                        value="Whatsapp"
+                        control={<Radio />}
+                        label="Whatsapp"
+                      />
+                      <FormControlLabel
+                        value="Facebook"
+                        control={<Radio />}
+                        label="Facebook"
+                      />
+                      <FormControlLabel
+                        value="Youtube"
+                        control={<Radio />}
+                        label="Youtube"
+                      />
+                      <FormControlLabel
+                        value="Website"
+                        control={<Radio />}
+                        label="Website"
+                      />
+                      <FormControlLabel
+                        value="Family"
+                        control={<Radio />}
+                        label="Friends/ Family"
+                      />
+                    </RadioGroup>
+                  </FormControl>
+                  <FormControlLabel
+                    control={<Checkbox id="t_and_c" />}
+                    label={
+                      <label htmlFor={"t_and_c"}>
+                        I agree to the <a href="/">Terms & Conditions</a>
+                      </label>
+                    }
+                  />
+                  <Button
+                    variant="contained"
+                    onClick={handleSubmitForm}
+                    disabled={
+                      formData.name === "" ||
+                      formData.contact === "" ||
+                      formData.email === "" ||
+                      formData.noOfAttendies === "" ||
+                      formData.reference === "" ||
+                      !isEmailValid
+                        ? true
+                        : false
+                    }
+                  >
+                    Register
+                  </Button>
+                </FormGroup>
+              )}
+            {isToasterOpen && (
+              <Box
+                sx={{
+                  flex: 1,
+                  display: "flex",
+                  justifyContent: "center",
+                }}
+              >
+                <CustomSnackBar
+                  animation="zoom"
+                  iconColor="var(--primary-color)"
+                  textColor="var(--primary-color)"
+                  backgroundColor="var(--primary-color-light)"
+                  icon={Thanks}
+                  message="Thanks !! it means a lot to us"
+                  closeMessage="Okay"
+                  onClose={(value) => {
+                    setOpen(value);
+                    props.onClose(value);
+                    setIsToasterOpen(value);
+                    setFormData(initialFormState);
+                  }}
                 />
-                <Button
-                  variant="contained"
-                  onClick={handleSubmitForm}
-                  disabled={
-                    formData.name === "" ||
-                    formData.contact === "" ||
-                    formData.email === "" ||
-                    formData.noOfAttendies === "" ||
-                    formData.reference === "" ||
-                    !isEmailValid
-                      ? true
-                      : false
-                  }
-                >
-                  Register
-                </Button>
-              </FormGroup>
+              </Box>
             )}
           </Container>
         </List>

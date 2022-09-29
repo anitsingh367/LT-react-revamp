@@ -4,13 +4,7 @@ import PropTypes from "prop-types";
 import moment from "moment";
 
 // Import other packages
-import {
-  Button,
-  Typography,
-  Container,
-  Box,
-  Grow,
-} from "@mui/material";
+import { Button, Typography, Container, Box } from "@mui/material";
 import {
   Share as ShareIcon,
   FiberManualRecord as LiveDot,
@@ -18,8 +12,6 @@ import {
 
 import CustomCard from "../Card/CustomCard.react";
 import EventModal from "../EventModal/EventModal.react";
-
-import CustomSnackBar from "../SnackBar/CustomSnackBar.react";
 
 Events.propTypes = {
   //=======================================
@@ -144,18 +136,6 @@ export default function Events(props) {
 
   const [isToasterOpen, setIsToasterOpen] = useState(false);
 
-  function GrowTransition(props) {
-    return <Grow {...props} />;
-  }
-  const handleClose = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-
-    setIsToasterOpen(false);
-  };
-
-  console.log(isToasterOpen);
   return (
     <section
       style={{
@@ -165,32 +145,16 @@ export default function Events(props) {
         marginTop: "2rem",
       }}
     >
-      {openEventModal && (
-        <EventModal
-          isOpen={openEventModal}
-          onClose={(value) => setOpenEventModal(value)}
-          heading={selectedEvent.heading}
-          status={selectedEvent.status}
-          description={selectedEvent.description}
-          onSubmit={(value) => {
-            setIsToasterOpen(value);
-          }}
-        />
-      )}
-      {isToasterOpen && (
-        <CustomSnackBar
-          autoHideDuration={3000}
-          anchorOrigin={{
-            vertical: "top",
-            horizontal: "center",
-          }}
-          TransitionComponent={GrowTransition}
-          open={isToasterOpen}
-          onClose={handleClose}
-          severity="success"
-          message="Thanks For Your Response"
-        />
-      )}
+      <EventModal
+        isOpen={openEventModal}
+        onClose={(value) => setOpenEventModal(value)}
+        heading={selectedEvent.heading}
+        status={selectedEvent.status}
+        description={selectedEvent.description}
+        onSubmit={(value) => {
+          setIsToasterOpen(value);
+        }}
+      />
       <Typography
         variant="h4"
         sx={{
