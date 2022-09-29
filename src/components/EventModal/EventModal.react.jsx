@@ -27,7 +27,10 @@ import {
   Slide,
   Box,
 } from "@mui/material";
-import { Close as CloseIcon, VolunteerActivism as Thanks } from "@mui/icons-material";
+import {
+  Close as CloseIcon,
+  VolunteerActivism as Thanks,
+} from "@mui/icons-material";
 
 import CustomSnackBar from "../SnackBar/CustomSnackBar.react";
 
@@ -115,6 +118,12 @@ export default function EventModal(props) {
   const handleSubmitForm = () => {
     setIsToasterOpen(true);
     console.log(formData);
+  };
+
+  const [checked, setChecked] = useState(false);
+
+  const handleCheckbox = (event) => {
+    setChecked(event.target.checked);
   };
 
   return (
@@ -293,7 +302,9 @@ export default function EventModal(props) {
                     </RadioGroup>
                   </FormControl>
                   <FormControlLabel
-                    control={<Checkbox id="t_and_c" />}
+                    control={
+                      <Checkbox id="t_and_c" onChange={handleCheckbox} />
+                    }
                     label={
                       <label htmlFor={"t_and_c"}>
                         I agree to the <a href="/">Terms & Conditions</a>
@@ -309,6 +320,7 @@ export default function EventModal(props) {
                       formData.email === "" ||
                       formData.noOfAttendies === "" ||
                       formData.reference === "" ||
+                      !checked ||
                       !isEmailValid
                         ? true
                         : false
