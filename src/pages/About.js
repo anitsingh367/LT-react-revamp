@@ -7,7 +7,12 @@ const About = () => {
     <>
       <Typography
         variant="h4"
-        sx={{ textAlign: "center", padding: "4rem", fontWeight: "800" }}
+        sx={{
+          textAlign: "center",
+          padding: "4rem",
+          fontWeight: "800",
+          fontSize: "2.5rem",
+        }}
       >
         About Us
       </Typography>
@@ -25,8 +30,8 @@ const About = () => {
         <Box
           sx={{
             display: "flex",
-            gap: "2rem",
             justifyContent: "space-evenly",
+            gap: "4rem",
             alignItems: "center",
             flexDirection: {
               lg: "row",
@@ -38,11 +43,10 @@ const About = () => {
         >
           <Box
             sx={{
-              width: 1,
-              textAlign: { md: "center", sm: "center", xs: "center" },
+              width: "60%",
             }}
           >
-            <img src="https://dummyimage.com/720x600" alt="img" width="85%" />
+            <img src="https://dummyimage.com/720x600" alt="img" width="100%" />
           </Box>
           <Box
             sx={{
@@ -51,7 +55,7 @@ const About = () => {
           >
             <Typography
               variant="h4"
-              sx={{ fontWeight: "800", fontSize: { lg: "36", xs: "24px" } }}
+              sx={{ fontWeight: "800", fontSize: { lg: "36px", xs: "24px" } }}
             >
               About The Living Treasure
             </Typography>
@@ -107,7 +111,7 @@ const About = () => {
         <Box
           sx={{
             display: "flex",
-            gap: "2rem",
+            gap: "4rem",
             justifyContent: "space-evenly",
             alignItems: "center",
             flexDirection: {
@@ -120,11 +124,11 @@ const About = () => {
         >
           <Box
             sx={{
-              width: 1,
-              textAlign: { md: "center", sm: "center", xs: "center" },
+              width: "70%",
+              textAlign: { md: "right", sm: "center", xs: "center" },
             }}
           >
-            <img src="https://dummyimage.com/720x600" alt="img" width="85%" />
+            <img src="https://dummyimage.com/720x600" alt="img" width="100%" />
           </Box>
           <Box
             sx={{
@@ -133,7 +137,7 @@ const About = () => {
           >
             <Typography
               variant="h4"
-              sx={{ fontWeight: "800", fontSize: { lg: "36", xs: "24px" } }}
+              sx={{ fontWeight: "800", fontSize: { lg: "36px", xs: "24px" } }}
             >
               About the Logo
             </Typography>
@@ -212,11 +216,10 @@ const About = () => {
         >
           <Box
             sx={{
-              width: 1,
-              textAlign: { md: "center", sm: "center", xs: "center" },
+              width: "60%",
             }}
           >
-            <img src="https://dummyimage.com/720x600" alt="img" width="85%" />
+            <img src="https://dummyimage.com/720x600" alt="img" width="100%" />
           </Box>
           <Box
             sx={{
@@ -225,7 +228,7 @@ const About = () => {
           >
             <Typography
               variant="h4"
-              sx={{ fontWeight: "400", fontSize: { xs: "24px" } }}
+              sx={{ fontWeight: "800", fontSize: { lg: "36px", xs: "24px" } }}
             >
               Our Vision , Mission
             </Typography>
