@@ -13,6 +13,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import ShareIcon from "@mui/icons-material/Share";
 import { useLocation } from "react-router-dom";
+import SampleData from "../../data/SampleData";
 
 ProjectsPage.propTypes = {
   //=======================================
@@ -49,75 +50,7 @@ ProjectsPage.defaultProps = {
   //=======================================
   // Component Specific props
   //=======================================
-  content: [
-    {
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqu39eyj7mkHZ2gnUmKmU9smZN8F3mI7xeC2DFXhTWwOSiL7JaliiMiC8NF3hZK-m1AD8&usqp=CAU",
-      heading: "Ongoing Projects",
-      description:
-        "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus laudantium, voluptate harum iste sunt optio quo maxime repellat et mollitia.",
-      category: "Education",
-      status: "Ongoing",
-    },
-    {
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWwB29eRCxE1_92bxreaZ5tsnqgQFgHScAFEA4nn4vpiMfLX-h1j-RhnZfCo9_IcFNx4E&usqp=CAU",
-      heading: "Ongoing Projects",
-      description:
-        "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus laudantium, voluptate harum iste sunt optio quo maxime repellat et mollitia.",
-      category: "Education",
-      status: "Ongoing",
-    },
-    {
-      image:
-        "https://images.unsplash.com/photo-1550330562-b055aa030d73?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
-      heading: "Future Projects",
-      description:
-        "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus laudantium, voluptate harum iste sunt optio quo maxime repellat et mollitia.",
-      category: "Medical",
-      status: "Future",
-    },
-    {
-      image: "",
-      heading: "Accomplished 4",
-      description:
-        "In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content.",
-      category: "Medical",
-      status: "Accomplished",
-    },
-    {
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqu39eyj7mkHZ2gnUmKmU9smZN8F3mI7xeC2DFXhTWwOSiL7JaliiMiC8NF3hZK-m1AD8&usqp=CAU",
-      heading: "Future 1",
-      description: "Description 1",
-      category: "Medical",
-      status: "Future",
-    },
-    {
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWwB29eRCxE1_92bxreaZ5tsnqgQFgHScAFEA4nn4vpiMfLX-h1j-RhnZfCo9_IcFNx4E&usqp=CAU",
-      heading: "Future 2",
-      description: "Description 2",
-      category: "Education",
-      status: "Future",
-    },
-    {
-      image:
-        "https://images.unsplash.com/photo-1550330562-b055aa030d73?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
-      heading: "Future 3",
-      description: "Description 3",
-      category: "Medical",
-      status: "Future",
-    },
-    {
-      image: "",
-      heading: "Ongoing 4",
-      description:
-        "In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content.",
-      category: "Education",
-      status: "Ongoing",
-    },
-  ],
+  content: SampleData.projectContent,
 };
 export default function ProjectsPage(props) {
   const location = useLocation();
@@ -164,7 +97,8 @@ export default function ProjectsPage(props) {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-        }}>
+        }}
+      >
         <Typography
           variant="h4"
           align="center"
@@ -172,7 +106,8 @@ export default function ProjectsPage(props) {
             textTransform: "uppercase",
             fontWeight: "bold",
             padding: "2rem",
-          }}>
+          }}
+        >
           <span style={{ color: "var(--primary-color)" }}> Projects </span> at
           the living treasure
         </Typography>
@@ -181,14 +116,16 @@ export default function ProjectsPage(props) {
             display: "flex",
             justifyContent: "space-between",
             alignContent: "center",
-          }}>
+          }}
+        >
           <ToggleButtonGroup
             aria-label="text button group"
             size="large"
             color="primary"
             exclusive
             value={category}
-            onChange={handleChangeToggle}>
+            onChange={handleChangeToggle}
+          >
             <ToggleButton value="All">All</ToggleButton>
             <ToggleButton value="Education">Education</ToggleButton>
             <ToggleButton value="Medical">Medical</ToggleButton>
@@ -199,7 +136,8 @@ export default function ProjectsPage(props) {
               display: "flex",
               justifyContent: "center",
               alignitems: "center",
-            }}>
+            }}
+          >
             <Select value={status} onChange={handleChangeFilter}>
               <MenuItem value="All">All</MenuItem>
               <MenuItem value="Ongoing">Ongoning</MenuItem>
@@ -214,7 +152,8 @@ export default function ProjectsPage(props) {
             flexWrap: "wrap",
             justifyContent: "space-evenly",
             width: "100%",
-          }}>
+          }}
+        >
           {projectFilter?.map((items, index) => {
             return (
               <Box
@@ -223,7 +162,8 @@ export default function ProjectsPage(props) {
                   width: "18.5rem",
                   margin: { xl: 2.5, lg: 2, md: 2, sm: 1.5, xs: 1 },
                 }}
-                key={index}>
+                key={index}
+              >
                 <CustomCard
                   content={{
                     image: items.image,
