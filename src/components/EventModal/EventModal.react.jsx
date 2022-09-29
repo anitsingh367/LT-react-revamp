@@ -49,7 +49,7 @@ EventModal.propTypes = {
   //=======================================
   heading: PropTypes.string,
   description: PropTypes.string,
-  status: PropTypes.oneOf(["upcoming", "live", "finished"]),
+  status: PropTypes.oneOf(["upcoming", "live", "finished",""]), //Added empty string for warnings handling
   onClick: PropTypes.func,
   isOpen: PropTypes.bool,
   onSubmit: PropTypes.func,
@@ -66,8 +66,6 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 export default function EventModal(props) {
-  const [open, setOpen] = React.useState(props.isOpen);
-
   const initialFormState = {
     name: "",
     contact: "",
@@ -76,10 +74,18 @@ export default function EventModal(props) {
     reference: "",
   };
 
+  const [open, setOpen] = React.useState(props.isOpen);
+  const [checked, setChecked] = useState(false);
+  const [isToasterOpen, setIsToasterOpen] = useState(false);
+  const [isNameValid, setNameValid] = useState(true);
+  const [isEmailValid, setEmailValid] = useState(true);
+  const [formData, setFormData] = useState(initialFormState);
+
   const handleClose = () => {
     props.onClose(false);
     setOpen(false);
     setFormData(initialFormState);
+    setChecked(false)
   };
 
   useEffect(() => {
@@ -87,13 +93,11 @@ export default function EventModal(props) {
   }, [props.isOpen]);
 
   //Handle Form Data
-  const [formData, setFormData] = useState(initialFormState);
   const handleForm = (prop) => (event) => {
     setFormData({ ...formData, [prop]: event.target.value });
   };
 
   //Handle Email Validation
-  const [isEmailValid, setEmailValid] = useState(true);
   const handleEmail = (e) => {
     if (!e.target.value || emailValidation().test(e.target.value) === false) {
       setEmailValid(false);
@@ -102,7 +106,8 @@ export default function EventModal(props) {
       setFormData({ ...formData, email: e.target.value });
     }
   };
-  const [isNameValid, setNameValid] = useState(true);
+
+   //Handle Name
   const handleName = (e) => {
     if (!e.target.value || nameValidation().test(e.target.value) === false) {
       setNameValid(false);
@@ -112,16 +117,13 @@ export default function EventModal(props) {
     }
   };
 
-  const [isToasterOpen, setIsToasterOpen] = useState(false);
-
   //Handle Form Submit
   const handleSubmitForm = () => {
     setIsToasterOpen(true);
     console.log(formData);
   };
 
-  const [checked, setChecked] = useState(false);
-
+    //Handle Checkbox
   const handleCheckbox = (event) => {
     setChecked(event.target.checked);
   };
@@ -303,7 +305,7 @@ export default function EventModal(props) {
                   </FormControl>
                   <FormControlLabel
                     control={
-                      <Checkbox id="t_and_c" onChange={handleCheckbox} />
+                      <Checkbox id="t_and_c" checked={checked} onChange={handleCheckbox} />
                     }
                     label={
                       <label htmlFor={"t_and_c"}>
