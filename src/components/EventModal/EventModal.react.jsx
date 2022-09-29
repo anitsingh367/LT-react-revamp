@@ -49,7 +49,7 @@ EventModal.propTypes = {
   //=======================================
   heading: PropTypes.string,
   description: PropTypes.string,
-  status: PropTypes.oneOf(["upcoming", "live", "finished",""]), //Added empty string for warnings handling
+  status: PropTypes.oneOf(["upcoming", "live", "finished", ""]), //Added empty string for warnings handling
   onClick: PropTypes.func,
   isOpen: PropTypes.bool,
   onSubmit: PropTypes.func,
@@ -85,7 +85,7 @@ export default function EventModal(props) {
     props.onClose(false);
     setOpen(false);
     setFormData(initialFormState);
-    setChecked(false)
+    setChecked(false);
   };
 
   useEffect(() => {
@@ -107,7 +107,7 @@ export default function EventModal(props) {
     }
   };
 
-   //Handle Name
+  //Handle Name
   const handleName = (e) => {
     if (!e.target.value || nameValidation().test(e.target.value) === false) {
       setNameValid(false);
@@ -123,7 +123,7 @@ export default function EventModal(props) {
     console.log(formData);
   };
 
-    //Handle Checkbox
+  //Handle Checkbox
   const handleCheckbox = (event) => {
     setChecked(event.target.checked);
   };
@@ -184,6 +184,8 @@ export default function EventModal(props) {
                 <FormGroup
                   sx={{
                     flex: 1,
+                    display: "flex",
+                    width: "100%",
                     justifyContent: "space-between",
                     gap: { md: "1rem", sm: "1rem", xs: "1rem" },
                   }}
@@ -305,7 +307,11 @@ export default function EventModal(props) {
                   </FormControl>
                   <FormControlLabel
                     control={
-                      <Checkbox id="t_and_c" checked={checked} onChange={handleCheckbox} />
+                      <Checkbox
+                        id="t_and_c"
+                        checked={checked}
+                        onChange={handleCheckbox}
+                      />
                     }
                     label={
                       <label htmlFor={"t_and_c"}>
@@ -350,6 +356,7 @@ export default function EventModal(props) {
                   closeMessage="Okay"
                   onClose={(value) => {
                     setOpen(value);
+                    setChecked(false);
                     props.onClose(value);
                     setIsToasterOpen(value);
                     setFormData(initialFormState);
