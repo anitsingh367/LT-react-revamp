@@ -134,8 +134,6 @@ export default function Events(props) {
     });
   };
 
-  const [isToasterOpen, setIsToasterOpen] = useState(false);
-
   return (
     <section
       style={{
@@ -152,7 +150,7 @@ export default function Events(props) {
         status={selectedEvent.status}
         description={selectedEvent.description}
         onSubmit={(value) => {
-          setIsToasterOpen(value);
+          setOpenEventModal(value);
         }}
       />
       <Typography
