@@ -18,6 +18,8 @@ import ExpandMore from "@mui/icons-material/ExpandMore";
 import Divider from "@mui/material/Divider";
 import ContributeModal from "../Modal/ContributeModal.react";
 
+import { Link } from "react-router-dom";
+
 const drawerWidth = 240;
 
 function DrawerAppBar(props) {
@@ -52,10 +54,11 @@ function DrawerAppBar(props) {
       </Toolbar>
       <Divider></Divider>
       <List>
-        <ListItemButton>
-          <ListItemText primary="Home" />
-        </ListItemButton>
-
+        <Link to="/" className="link" onClick={handleDrawerToggle}>
+          <ListItemButton>
+            <ListItemText primary="Home" />
+          </ListItemButton>
+        </Link>
         <ListItemButton>
           <ListItemText primary="About" />
         </ListItemButton>
@@ -74,9 +77,11 @@ function DrawerAppBar(props) {
             </ListItemButton>
           </List>
         </Collapse>
-        <ListItemButton>
-          <ListItemText primary="Projects" />
-        </ListItemButton>
+        <Link to="/projects" className="link" onClick={handleDrawerToggle}>
+          <ListItemButton>
+            <ListItemText primary="Projects" />
+          </ListItemButton>
+        </Link>
         <ListItemButton>
           <ListItemText primary="Video Section" />
         </ListItemButton>
@@ -133,7 +138,9 @@ function DrawerAppBar(props) {
               gap: 1,
             }}
           >
-            <Button variant="h6">Home</Button>
+            <Link to="/" className="link">
+              <Button variant="h6">Home</Button>
+            </Link>
             <Button variant="h6">About</Button>
             <CustomizedMenus
               content={{
@@ -141,7 +148,9 @@ function DrawerAppBar(props) {
                 options: ["English Articles", "Punjabi Aricles"],
               }}
             />
-            <Button variant="h6">Projects</Button>
+            <Link to="/projects" className="link">
+              <Button variant="h6">Projects</Button>
+            </Link>
             <Button variant="h6">Video Section</Button>
           </Box>
           <Button variant="outlined" onClick={handleContributeButton}>
