@@ -1,5 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
+import Footer from "./components/Footer/Footer.react";
 
 import "./App.scss";
 
@@ -14,6 +15,7 @@ function App() {
         <Route exact path="/" element={<Home />} />
         <Route exact path="/projects" element={<ProjectsPage />} />
       </Routes>
+      <Footer />
     </div>
   );
 }
