@@ -58,9 +58,11 @@ function DrawerAppBar(props) {
             <ListItemText primary="Home" />
           </ListItemButton>
         </Link>
-        <ListItemButton>
-          <ListItemText primary="About" />
-        </ListItemButton>
+        <Link to="/about" className="link" onClick={handleDrawerToggle}>
+          <ListItemButton>
+            <ListItemText primary="About" />
+          </ListItemButton>
+        </Link>
 
         <ListItemButton onClick={handleClickArticle}>
           <ListItemText primary="Articles" />
@@ -95,8 +97,7 @@ function DrawerAppBar(props) {
         top: 0,
         left: 0,
         zIndex: 1000,
-      }}
-    >
+      }}>
       <AppBar component="nav" position="relative">
         <Toolbar
           sx={{
@@ -110,23 +111,20 @@ function DrawerAppBar(props) {
             aligncenter: "center",
             backgroundColor: "#fff",
             color: "#000",
-          }}
-        >
+          }}>
           <IconButton
             color="inherit"
             aria-label="open drawer"
             edge="start"
             onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { lg: "none" }, color: "#000" }}
-          >
+            sx={{ mr: 2, display: { lg: "none" }, color: "#000" }}>
             <MenuIcon />
           </IconButton>
 
           <Box
             sx={{
               display: { lg: "flex", md: "none", sm: "none", xs: "none" },
-            }}
-          >
+            }}>
             <img src={logo} alt="logo" width="15%" height="15%"></img>
           </Box>
           <Box
@@ -135,12 +133,13 @@ function DrawerAppBar(props) {
               justifyContent: "center",
               alignItems: "center",
               gap: 1,
-            }}
-          >
+            }}>
             <Link to="/" className="link">
               <Button variant="h6">Home</Button>
             </Link>
-            <Button variant="h6">About</Button>
+            <Link to="/about" className="/about">
+              <Button variant="h6">About</Button>
+            </Link>
             <CustomizedMenus
               content={{
                 title: "Articles",
@@ -170,8 +169,7 @@ function DrawerAppBar(props) {
             boxSizing: "border-box",
             width: drawerWidth,
           },
-        }}
-      >
+        }}>
         {drawer}
       </Drawer>
     </Box>
