@@ -15,14 +15,18 @@ import {
   Dialog,
   DialogActions,
   DialogContent,
-  DialogTitle,
   MenuItem,
   Select,
   FormHelperText,
   InputAdornment,
   Autocomplete,
   TextField,
+  Toolbar,
+  Typography,
+  IconButton,
+  AppBar,
 } from "@mui/material";
+import { Close as CloseIcon } from "@mui/icons-material";
 
 import { states as stateList } from "../../data/States";
 import { cities as cityList } from "../../data/Cities";
@@ -134,13 +138,25 @@ export default function ContributeModal(props) {
 
   return (
     <Dialog open={open}>
-      <DialogTitle>
-        {props.isNavbar
-          ? "Contribute For The Cause"
-          : `Contribute To ${
-              props.projectHeading ? props.projectHeading : "Project"
-            }`}
-      </DialogTitle>
+      <AppBar sx={{ position: "relative" }}>
+        <Toolbar>
+          <IconButton
+            edge="start"
+            color="inherit"
+            onClick={handleClose}
+            aria-label="close"
+          >
+            <CloseIcon />
+          </IconButton>
+          <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
+            {props.isNavbar
+              ? "Contribute For The Cause"
+              : `Contribute To ${
+                  props.projectHeading ? props.projectHeading : "Project"
+                }`}
+          </Typography>
+        </Toolbar>
+      </AppBar>
       <DialogContent
         sx={{ display: "flex", flexDirection: "column", gap: 1.5 }}
       >

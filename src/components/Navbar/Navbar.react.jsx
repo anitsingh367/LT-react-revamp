@@ -1,22 +1,27 @@
 import * as React from "react";
 import { useState } from "react";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Drawer from "@mui/material/Drawer";
-import IconButton from "@mui/material/IconButton";
-import List from "@mui/material/List";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemText from "@mui/material/ListItemText";
-import MenuIcon from "@mui/icons-material/Menu";
-import Toolbar from "@mui/material/Toolbar";
-import Button from "@mui/material/Button";
+
+import {
+  AppBar,
+  Box,
+  Drawer,
+  IconButton,
+  List,
+  ListItemButton,
+  ListItemText,
+  Toolbar,
+  Button,
+  Collapse,
+  Divider,
+} from "@mui/material";
+
 import logo from "../../assets/Logo.png";
+import MenuIcon from "@mui/icons-material/Menu";
 import CustomizedMenus from "./CustomizedMenus.react";
-import Collapse from "@mui/material/Collapse";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
-import Divider from "@mui/material/Divider";
 import ContributeModal from "../Modal/ContributeModal.react";
+import VolunteerModal from "../VolunteerModal/VolunteerModal.react";
 
 import { Link } from "react-router-dom";
 
@@ -36,9 +41,13 @@ function DrawerAppBar(props) {
   };
 
   const [openContributeModal, setOpenContributeModal] = useState(false);
+  const [openVolunteerModal, setOpenVolunteerModal] = useState(false);
 
   const handleContributeButton = () => {
     setOpenContributeModal(true);
+  };
+  const handleVolunteerButton = () => {
+    setOpenVolunteerModal(true);
   };
 
   const drawer = (
@@ -46,6 +55,12 @@ function DrawerAppBar(props) {
       <ContributeModal
         isOpen={openContributeModal}
         onClose={(value) => setOpenContributeModal(value)}
+        isNavbar={true}
+        onSubmit={() => console.log("This is toaster")}
+      />
+      <VolunteerModal
+        isOpen={openVolunteerModal}
+        onClose={(value) => setOpenVolunteerModal(value)}
         isNavbar={true}
         onSubmit={() => console.log("This is toaster")}
       />
@@ -87,6 +102,11 @@ function DrawerAppBar(props) {
         <ListItemButton>
           <ListItemText primary="Video Section" />
         </ListItemButton>
+        <ListItemButton>
+          <Button variant="contained" onClick={handleVolunteerButton}>
+            Become Volunteer
+          </Button>
+        </ListItemButton>
       </List>
     </div>
   );
@@ -98,7 +118,8 @@ function DrawerAppBar(props) {
         top: 0,
         left: 0,
         zIndex: 1000,
-      }}>
+      }}
+    >
       <AppBar component="nav" position="relative">
         <Toolbar
           sx={{
@@ -112,20 +133,22 @@ function DrawerAppBar(props) {
             aligncenter: "center",
             backgroundColor: "#fff",
             color: "#000",
-          }}>
+          }}
+        >
           <IconButton
             color="inherit"
             aria-label="open drawer"
             edge="start"
             onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { lg: "none" }, color: "#000" }}>
+            sx={{ mr: 2, display: { lg: "none" }, color: "#000" }}
+          >
             <MenuIcon />
           </IconButton>
-
           <Box
             sx={{
               display: { lg: "flex", md: "none", sm: "none", xs: "none" },
-            }}>
+            }}
+          >
             <img src={logo} alt="logo" width="15%" height="15%"></img>
           </Box>
           <Box
@@ -134,7 +157,8 @@ function DrawerAppBar(props) {
               justifyContent: "center",
               alignItems: "center",
               gap: 1,
-            }}>
+            }}
+          >
             <Link to="/" className="link">
               <Button variant="h6">Home</Button>
             </Link>
@@ -151,8 +175,16 @@ function DrawerAppBar(props) {
               <Button variant="h6">Projects</Button>
             </Link>
             <Button variant="h6">Video Section</Button>
+            <Button variant="contained" onClick={handleVolunteerButton}>
+              Become Volunteer
+            </Button>
           </Box>
-          <Button variant="outlined" onClick={handleContributeButton}>
+
+          <Button
+            variant="outlined"
+            onClick={handleContributeButton}
+            sx={{ margin: "0 0.5rem" }}
+          >
             Contribute Now
           </Button>
         </Toolbar>
@@ -170,7 +202,8 @@ function DrawerAppBar(props) {
             boxSizing: "border-box",
             width: drawerWidth,
           },
-        }}>
+        }}
+      >
         {drawer}
       </Drawer>
     </Box>

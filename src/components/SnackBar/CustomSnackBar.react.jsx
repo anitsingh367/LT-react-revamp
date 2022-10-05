@@ -24,10 +24,8 @@ const CustomSnackBar = (props) => {
         justifyContent: "center",
         alignItems: "center",
         gap: "1rem",
-        // padding: 2,
-        backgroundColor: backgroundColor
-          ? backgroundColor
-          : "var(--primary-color-light)",
+        boxShadow: !backgroundColor && "none",
+        backgroundColor: backgroundColor ? backgroundColor : "none",
       }}
     >
       {icon && (
