@@ -30,13 +30,13 @@ import { Link } from "react-router-dom";
 const drawerWidth = 240;
 
 function DrawerAppBar(props) {
-  const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
 
-  const [openArticle, setOpenArticle] = React.useState(false);
+  const [openArticle, setOpenArticle] = useState(false);
 
   const handleClickArticle = () => {
     setOpenArticle(!openArticle);
