@@ -148,7 +148,11 @@ export default function ContributeModal(props) {
           >
             <CloseIcon />
           </IconButton>
-          <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
+          <Typography
+            sx={{ ml: 2, flex: 1, padding: "0.5rem 0" }}
+            variant="h6"
+            component="div"
+          >
             {props.isNavbar
               ? "Contribute For The Cause"
               : `Contribute To ${

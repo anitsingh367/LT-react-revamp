@@ -120,7 +120,11 @@ export default function VolunteerModal(props) {
             >
               <CloseIcon />
             </IconButton>
-            <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
+            <Typography
+              sx={{ ml: 2, flex: 1, padding: "0.5rem 0" }}
+              variant="h6"
+              component="div"
+            >
               Become a Volunteer
               {props.projectHeading ? " for " + props.projectHeading : ""}
             </Typography>

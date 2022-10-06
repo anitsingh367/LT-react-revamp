@@ -15,6 +15,7 @@ import ShareIcon from "@mui/icons-material/Share";
 import { useLocation } from "react-router-dom";
 import ContributeModal from "../Modal/ContributeModal.react";
 import VolunteerModal from "../VolunteerModal/VolunteerModal.react";
+import useHashRouteToggle from "../../customHooks/useHashRouteToggle";
 
 ProjectsPage.propTypes = {
   //=======================================
@@ -157,14 +158,17 @@ export default function ProjectsPage(props) {
     setProjectFilter(filteredData);
   }, [category, status, props.content]);
 
-  const [openContributeModal, setOpenContributeModal] = useState(false);
+  const [openContributeModal, setOpenContributeModal] =
+    useHashRouteToggle("contribute"); //useHasRouteToggle is used for controlling browser back button
+
   const [projectHeading, setProjectHeading] = useState("");
   const handleContributeModal = (value) => {
     setOpenContributeModal(true);
     setProjectHeading(value);
   };
 
-  const [openVolunteerModal, setOpenVolunteerModal] = useState(false);
+  const [openVolunteerModal, setOpenVolunteerModal] =
+    useHashRouteToggle("volunteer"); //useHasRouteToggle is used for controlling browser back button
 
   const handleVolunteerModal = (value) => {
     setOpenVolunteerModal(true);

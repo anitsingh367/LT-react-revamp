@@ -23,6 +23,8 @@ import ExpandMore from "@mui/icons-material/ExpandMore";
 import ContributeModal from "../Modal/ContributeModal.react";
 import VolunteerModal from "../VolunteerModal/VolunteerModal.react";
 
+import useHashRouteToggle from "../../customHooks/useHashRouteToggle";
+
 import { Link } from "react-router-dom";
 
 const drawerWidth = 240;
@@ -40,8 +42,10 @@ function DrawerAppBar(props) {
     setOpenArticle(!openArticle);
   };
 
-  const [openContributeModal, setOpenContributeModal] = useState(false);
-  const [openVolunteerModal, setOpenVolunteerModal] = useState(false);
+  const [openContributeModal, setOpenContributeModal] =
+    useHashRouteToggle("contribute"); //useHasRouteToggle is used for controlling browser back button
+  const [openVolunteerModal, setOpenVolunteerModal] =
+    useHashRouteToggle("volunteer"); //useHasRouteToggle is used for controlling browser back button
 
   const handleContributeButton = () => {
     setOpenContributeModal(true);
