@@ -164,7 +164,8 @@ export default function ProjectsPage(props) {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-        }}>
+        }}
+      >
         <Typography
           variant="h4"
           align="center"
@@ -172,7 +173,8 @@ export default function ProjectsPage(props) {
             textTransform: "uppercase",
             fontWeight: "bold",
             padding: "2rem",
-          }}>
+          }}
+        >
           <span style={{ color: "var(--primary-color)" }}> Projects </span> at
           the living treasure
         </Typography>
@@ -181,14 +183,27 @@ export default function ProjectsPage(props) {
             display: "flex",
             justifyContent: "space-between",
             alignContent: "center",
-          }}>
+            flexDirection: {
+              lg: "row",
+              md: "row",
+              sm: "column",
+              xs: "column",
+            },
+            gap: { lg: 0, sm: "1rem", xs: "1rem" },
+          }}
+        >
           <ToggleButtonGroup
             aria-label="text button group"
             size="large"
             color="primary"
             exclusive
             value={category}
-            onChange={handleChangeToggle}>
+            onChange={handleChangeToggle}
+            sx={{
+              display: "flex",
+              justifyContent: { sm: "center", xs: "center" },
+            }}
+          >
             <ToggleButton value="All">All</ToggleButton>
             <ToggleButton value="Education">Education</ToggleButton>
             <ToggleButton value="Medical">Medical</ToggleButton>
@@ -199,7 +214,8 @@ export default function ProjectsPage(props) {
               display: "flex",
               justifyContent: "center",
               alignitems: "center",
-            }}>
+            }}
+          >
             <Select value={status} onChange={handleChangeFilter}>
               <MenuItem value="All">All</MenuItem>
               <MenuItem value="Ongoing">Ongoning</MenuItem>
@@ -214,7 +230,8 @@ export default function ProjectsPage(props) {
             flexWrap: "wrap",
             justifyContent: "space-evenly",
             width: "100%",
-          }}>
+          }}
+        >
           {projectFilter?.map((items, index) => {
             return (
               <Box
@@ -223,7 +240,8 @@ export default function ProjectsPage(props) {
                   width: "18.5rem",
                   margin: { xl: 2.5, lg: 2, md: 2, sm: 1.5, xs: 1 },
                 }}
-                key={index}>
+                key={index}
+              >
                 <CustomCard
                   content={{
                     image: items.image,

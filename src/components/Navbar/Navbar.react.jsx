@@ -144,7 +144,7 @@ function DrawerAppBar(props) {
             <Link to="/" className="link">
               <Button variant="h6">Home</Button>
             </Link>
-            <Link to="/about" className="/about">
+            <Link to="/about" className="link">
               <Button variant="h6">About</Button>
             </Link>
             <CustomizedMenus
