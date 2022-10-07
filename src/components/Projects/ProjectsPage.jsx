@@ -13,7 +13,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import ShareIcon from "@mui/icons-material/Share";
 import { useLocation } from "react-router-dom";
-import SampleData from "../../data/SampleData";
+import { ProjectContent } from "../../data/SampleData";
 
 ProjectsPage.propTypes = {
   //=======================================
@@ -50,7 +50,7 @@ ProjectsPage.defaultProps = {
   //=======================================
   // Component Specific props
   //=======================================
-  content: SampleData.projectContent,
+  content: ProjectContent,
 };
 export default function ProjectsPage(props) {
   const location = useLocation();

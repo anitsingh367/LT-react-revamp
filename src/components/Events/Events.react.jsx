@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import CustomCard from "../Card/CustomCard.react";
 import LiveDot from "@mui/icons-material/FiberManualRecord";
 import ShareIcon from "@mui/icons-material/Share";
-import SampleData from "../../data/SampleData";
+import { EventsContent } from "../../data/SampleData";
 import EventModal from "../EventModal/EventModal.react";
 
 import moment from "moment";
@@ -27,7 +27,7 @@ Events.defaultProps = {
   //=======================================
   // Component Specific props
   //=======================================
-  content: SampleData.EventsContent,
+  content: EventsContent,
 };
 
 export default function Events(props) {
