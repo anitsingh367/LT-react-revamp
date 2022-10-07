@@ -3,6 +3,7 @@ import { Typography, Container } from "@mui/material";
 import PropTypes from "prop-types";
 import CustomCard from "../Card/CustomCard.react";
 import { Box } from "@mui/system";
+import { useNavigate } from "react-router-dom";
 
 Projects.propTypes = {
   //=======================================
@@ -25,58 +26,38 @@ Projects.defaultProps = {
     {
       image:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqu39eyj7mkHZ2gnUmKmU9smZN8F3mI7xeC2DFXhTWwOSiL7JaliiMiC8NF3hZK-m1AD8&usqp=CAU",
-      heading: "Acomplished Projects",
+      heading: "Accomplished",
       description:
         "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus laudantium, voluptate harum iste sunt optio quo maxime repellat et mollitia.",
     },
     {
       image:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWwB29eRCxE1_92bxreaZ5tsnqgQFgHScAFEA4nn4vpiMfLX-h1j-RhnZfCo9_IcFNx4E&usqp=CAU",
-      heading: "Ongoing Projects",
+      heading: "Ongoing",
       description:
         "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus laudantium, voluptate harum iste sunt optio quo maxime repellat et mollitia.",
     },
     {
       image:
         "https://images.unsplash.com/photo-1550330562-b055aa030d73?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
-      heading: "Future Projects",
+      heading: "Future",
       description:
         "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus laudantium, voluptate harum iste sunt optio quo maxime repellat et mollitia.",
-    },
-    {
-      image: "",
-      heading: "Heading 4",
-      description:
-        "In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content.",
-    },
-    {
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqu39eyj7mkHZ2gnUmKmU9smZN8F3mI7xeC2DFXhTWwOSiL7JaliiMiC8NF3hZK-m1AD8&usqp=CAU",
-      heading: "Heading 1",
-      description: "Description 1",
-    },
-    {
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWwB29eRCxE1_92bxreaZ5tsnqgQFgHScAFEA4nn4vpiMfLX-h1j-RhnZfCo9_IcFNx4E&usqp=CAU",
-      heading: "Heading 2",
-      description: "Description 2",
-    },
-    {
-      image:
-        "https://images.unsplash.com/photo-1550330562-b055aa030d73?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
-      heading: "Heading 3",
-      description: "Description 3",
-    },
-    {
-      image: "",
-      heading: "Heading 4",
-      description:
-        "In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content.",
     },
   ],
 };
 
 export default function Projects(props) {
+  const navigate = useNavigate();
+
+  const handleProjectCard = (status) => {
+    navigate("/projects", {
+      state: {
+        status: status,
+      },
+    });
+  };
+
   return (
     <Container
       maxWidth={false}
@@ -107,32 +88,30 @@ export default function Projects(props) {
           justifyContent: "space-evenly",
         }}
       >
-        {props.content
-          ?.slice(0, 3)
-          .filter((items) => {
-            return items?.isProject ? items?.isProject === false : items;
-          })
-          .map((items, index) => {
-            return (
-              <Box
-                sx={{
-                  height: "23rem",
-                  width: "16rem",
-                  margin: { xl: 2.5, lg: 2, md: 2, sm: 1.5, xs: 1 },
-                }}
-                key={index}
-              >
-                <CustomCard
-                  content={{
-                    ...items,
-                    primaryBtn: {
-                      btnText: "View Details",
+        {props.content?.map((items, index) => {
+          return (
+            <Box
+              sx={{
+                height: "23rem",
+                width: "16rem",
+                margin: { xl: 2.5, lg: 2, md: 2, sm: 1.5, xs: 1 },
+              }}
+              key={index}
+            >
+              <CustomCard
+                content={{
+                  ...items,
+                  primaryBtn: {
+                    btnText: "View Details",
+                    onClick: () => {
+                      handleProjectCard(items.heading);
                     },
-                  }}
-                />
-              </Box>
-            );
-          })}
+                  },
+                }}
+              />
+            </Box>
+          );
+        })}
       </Container>
     </Container>
   );
