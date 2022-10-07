@@ -62,13 +62,25 @@ const YoutbeVideo = () => {
 
   return (
     <>
-      <Container sx={{ display: "flex", justifyContent: "space-between" }}>
+      <Container
+        sx={{
+          display: "flex",
+          justifyContent: {
+            lg: "space-between",
+            md: "center",
+            sm: "center",
+            xs: "center",
+          },
+          flexWrap: "wrap",
+        }}
+      >
         <Box
           sx={{
             display: "flex",
             justifyContent: "flex-start",
             alignItems: "baseline",
             gap: "1rem",
+            flexWrap: "wrap",
           }}
         >
           <Typography variant="subtitle1">Filter By:</Typography>
@@ -123,12 +135,14 @@ const YoutbeVideo = () => {
             </Select>
           </FormControl>
         </Box>
+
         <Box
           sx={{
             display: "flex",
-            justifyContent: "flex-end",
+
             alignItems: "baseline",
             gap: "1rem",
+            flexWrap: "wrap",
           }}
         >
           <Typography variant="subtitle1">Sort By:</Typography>
@@ -169,7 +183,6 @@ const YoutbeVideo = () => {
           alignItems: "center",
           flexWrap: "wrap",
           width: "100%",
-
           marginTop: "2rem",
         }}
       >

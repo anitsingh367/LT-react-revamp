@@ -19,12 +19,9 @@ function App() {
       <DrawerAppBar />
       <Routes>
         <Route exact path="/" element={<Home />} />
-<<<<<<< HEAD
-        <Route exact path="/video" element={<Video />} />
-=======
-        <Route exact path="/projects" element={<ProjectsPage />} />
         <Route exact path="/about" element={<About />} />
->>>>>>> master
+        <Route exact path="/projects" element={<ProjectsPage />} />
+        <Route exact path="/video" element={<Video />} />
       </Routes>
       <Footer />
       <ToastContainer
