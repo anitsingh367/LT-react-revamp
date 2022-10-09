@@ -134,16 +134,14 @@ export default function EventModal(props) {
         fullScreen
         open={open}
         onClose={handleClose}
-        TransitionComponent={Transition}
-      >
-        <AppBar sx={{ position: "relative" }}>
+        TransitionComponent={Transition}>
+        <AppBar position="sticky">
           <Toolbar>
             <IconButton
               edge="start"
               color="inherit"
               onClick={handleClose}
-              aria-label="close"
-            >
+              aria-label="close">
               <CloseIcon />
             </IconButton>
             <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
@@ -175,21 +173,18 @@ export default function EventModal(props) {
               },
 
               justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
+              // alignItems: "center",
+            }}>
             {props.status === "upcoming" ? <AddressMap /> : <YoutubeFrame />}
             {(props.status === "live" || props.status === "upcoming") &&
               !isToasterOpen && (
                 <FormGroup
                   sx={{
-                    flex: 1,
                     display: "flex",
-                    width: "100%",
+                    flex: 1,
                     justifyContent: "space-between",
                     gap: { md: "1rem", sm: "1rem", xs: "1rem" },
-                  }}
-                >
+                  }}>
                   <FormControl>
                     <InputLabel htmlFor="name" required>
                       Name
@@ -257,12 +252,10 @@ export default function EventModal(props) {
                   <FormControl
                     sx={{
                       display: "flex",
-                    }}
-                  >
+                    }}>
                     <FormLabel
                       id="radio-buttons-group-event-register-label"
-                      required
-                    >
+                      required>
                       How did you get to know about the event?
                     </FormLabel>
                     <RadioGroup
@@ -276,8 +269,7 @@ export default function EventModal(props) {
                         flexDirection: "column",
                         justifyContent: "space-between",
                       }}
-                      onChange={handleForm("reference")}
-                    >
+                      onChange={handleForm("reference")}>
                       <FormControlLabel
                         value="Whatsapp"
                         control={<Radio />}
@@ -332,8 +324,7 @@ export default function EventModal(props) {
                       !isEmailValid
                         ? true
                         : false
-                    }
-                  >
+                    }>
                     Register
                   </Button>
                 </FormGroup>
@@ -344,8 +335,7 @@ export default function EventModal(props) {
                   flex: 1,
                   display: "flex",
                   justifyContent: "center",
-                }}
-              >
+                }}>
                 <CustomSnackBar
                   animation="zoom"
                   iconColor="var(--primary-color)"

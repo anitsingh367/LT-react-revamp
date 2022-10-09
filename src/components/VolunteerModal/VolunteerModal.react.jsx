@@ -106,7 +106,7 @@ export default function VolunteerModal(props) {
   return (
     props.isOpen && (
       <Dialog open={open}>
-        <AppBar sx={{ position: "relative" }}>
+        <AppBar position="sticky">
           <Toolbar>
             <IconButton
               edge="start"
@@ -116,15 +116,13 @@ export default function VolunteerModal(props) {
                 handleClose();
                 setFormData(initialFormState);
               }}
-              aria-label="close"
-            >
+              aria-label="close">
               <CloseIcon />
             </IconButton>
             <Typography
               sx={{ ml: 2, flex: 1, padding: "0.5rem 0" }}
               variant="h6"
-              component="div"
-            >
+              component="div">
               Become a Volunteer
               {props.projectHeading ? " for " + props.projectHeading : ""}
             </Typography>
@@ -144,8 +142,7 @@ export default function VolunteerModal(props) {
                   sm: "20rem",
                   xs: "20rem",
                 },
-              }}
-            >
+              }}>
               <FormControl sx={{ marginTop: "0.5rem" }}>
                 <InputLabel htmlFor="name-input-box" required>
                   Name
@@ -183,8 +180,7 @@ export default function VolunteerModal(props) {
               <FormControl
                 sx={{
                   flex: 1,
-                }}
-              >
+                }}>
                 <InputLabel htmlFor="email-input-box" required>
                   Email
                 </InputLabel>
@@ -204,8 +200,7 @@ export default function VolunteerModal(props) {
               <FormControl
                 sx={{
                   flex: 1,
-                }}
-              >
+                }}>
                 <InputLabel htmlFor="position-input-box" required>
                   How can you help us?
                 </InputLabel>
@@ -227,8 +222,7 @@ export default function VolunteerModal(props) {
                   formData.mob === "" ||
                   formData.email === "" ||
                   formData.position === ""
-                }
-              >
+                }>
                 Submit
               </Button>
             </DialogActions>
@@ -241,8 +235,7 @@ export default function VolunteerModal(props) {
               display: "flex",
               justifyContent: "center",
               minWidth: { lg: "25rem", md: "25rem", sm: "20rem", xs: "20rem" },
-            }}
-          >
+            }}>
             <CustomSnackBar
               animation="zoom"
               iconColor="var(--primary-color)"
