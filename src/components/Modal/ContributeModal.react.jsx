@@ -45,7 +45,6 @@ ContributeModal.propTypes = {
   projectHeading: PropTypes.string,
   isOpen: PropTypes.bool,
   onClose: PropTypes.func,
-  onSubmit: PropTypes.func,
 };
 
 ContributeModal.defaultProps = {
@@ -94,7 +93,6 @@ export default function ContributeModal(props) {
 
   //Handle Form Submit
   const handleSubmitForm = () => {
-    props.onSubmit();
     handleClose();
     console.log(formData);
   };

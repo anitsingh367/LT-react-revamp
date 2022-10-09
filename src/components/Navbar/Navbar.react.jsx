@@ -60,13 +60,11 @@ function DrawerAppBar(props) {
         isOpen={openContributeModal}
         onClose={(value) => setOpenContributeModal(value)}
         isNavbar={true}
-        onSubmit={() => console.log("This is toaster")}
       />
       <VolunteerModal
         isOpen={openVolunteerModal}
         onClose={(value) => setOpenVolunteerModal(value)}
         isNavbar={true}
-        onSubmit={() => console.log("This is toaster")}
       />
       <Toolbar sx={{ justifyContent: "center" }}>
         <img src={logo} alt="logo" width="50%" height="50%" />
