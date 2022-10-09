@@ -35,12 +35,29 @@ const YoutbeVideo = () => {
   const [fetchVideo, setfetchVideo] = useState();
   const [Search, setSearch] = useState("");
 
-  const [age, setAge] = React.useState("");
+  const [language, setLanguage] = useState("");
 
-  const handleChange = (event) => {
-    setAge(event.target.value);
+  const handleChangeLanguage = (event) => {
+    setLanguage(event.target.value);
   };
 
+  const [topic, setTopic] = useState("");
+
+  const handleChangeTopic = (event) => {
+    setTopic(event.target.value);
+  };
+
+  const [contentType, setContentType] = useState("");
+
+  const handleChangeContentType = (event) => {
+    setContentType(event.target.value);
+  };
+
+  const [newtest, setNewtest] = useState("");
+
+  const handleChangeNewtest = (event) => {
+    setNewtest(event.target.value);
+  };
   useEffect(() => {
     const options = {
       method: "GET",
@@ -101,15 +118,10 @@ const YoutbeVideo = () => {
               width: { lg: "120px", sm: "100%", xs: "100%" },
             }}
           >
-            <InputLabel id="demo-simple-select-standard-label">
-              Language
-            </InputLabel>
             <Select
-              labelId="demo-simple-select-standard-label"
-              id="demo-simple-select-standard"
-              value={age}
-              onChange={handleChange}
-              label="Age"
+              value={language}
+              onChange={handleChangeLanguage}
+              defaultValue="Language"
             >
               <MenuItem value={"English"}>English</MenuItem>
               <MenuItem value={"Hindi"}>Hindi</MenuItem>
@@ -125,15 +137,10 @@ const YoutbeVideo = () => {
               width: { lg: "120px", sm: "100%", xs: "100%" },
             }}
           >
-            <InputLabel id="demo-simple-select-standard-label">
-              Topics
-            </InputLabel>
             <Select
-              labelId="demo-simple-select-standard-label"
-              id="demo-simple-select-standard"
-              value={age}
-              onChange={handleChange}
-              label="Age"
+              value={topic}
+              onChange={handleChangeTopic}
+              placeholder="Topics"
             >
               <MenuItem value={"Depression"}>Depression</MenuItem>
               <MenuItem value={"Peace"}>Peace</MenuItem>
@@ -149,15 +156,10 @@ const YoutbeVideo = () => {
               width: { lg: "120px", sm: "100%", xs: "100%" },
             }}
           >
-            <InputLabel id="demo-simple-select-standard-label">
-              Content Type
-            </InputLabel>
             <Select
-              labelId="demo-simple-select-standard-label"
-              id="demo-simple-select-standard"
-              value={age}
-              onChange={handleChange}
-              label="Age"
+              value={contentType}
+              onChange={handleChangeContentType}
+              placeholder="Content Type"
             >
               <MenuItem value={"Video"}>Video</MenuItem>
               <MenuItem value={"Audio"}>Audio</MenuItem>
@@ -184,15 +186,10 @@ const YoutbeVideo = () => {
               width: { lg: "120px", sm: "100%", xs: "100%" },
             }}
           >
-            <InputLabel id="demo-simple-select-standard-label">
-              Newtest
-            </InputLabel>
             <Select
-              labelId="demo-simple-select-standard-label"
-              id="demo-simple-select-standard"
-              value={age}
-              onChange={handleChange}
-              label="Age"
+              placeholder="Newtest"
+              value={newtest}
+              onChange={handleChangeNewtest}
             >
               <MenuItem value={"Newtest"}>Newtest</MenuItem>
               <MenuItem value={"Oldest"}>Oldest</MenuItem>
