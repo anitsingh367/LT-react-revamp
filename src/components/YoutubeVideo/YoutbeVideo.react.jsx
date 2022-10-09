@@ -71,7 +71,14 @@ const YoutbeVideo = () => {
             sm: "center",
             xs: "center",
           },
+          alignItems: "center",
           flexWrap: "wrap",
+          flexDirection: {
+            lg: "row",
+            md: "column-reverse",
+            sm: "column-reverse",
+            xs: "column-reverse",
+          },
         }}
       >
         <Box
@@ -83,9 +90,17 @@ const YoutbeVideo = () => {
             flexWrap: "wrap",
           }}
         >
-          <Typography variant="subtitle1">Filter By:</Typography>
+          <Typography variant="subtitle1" sx={{ mt: "10px" }}>
+            Filter By:
+          </Typography>
           {/* Language */}
-          <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+          <FormControl
+            variant="standard"
+            sx={{
+              minWidth: 120,
+              width: { lg: "120px", sm: "100%", xs: "100%" },
+            }}
+          >
             <InputLabel id="demo-simple-select-standard-label">
               Language
             </InputLabel>
@@ -102,7 +117,14 @@ const YoutbeVideo = () => {
             </Select>
           </FormControl>
           {/* Topics */}
-          <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+          <FormControl
+            variant="standard"
+            sx={{
+              m: 1,
+              minWidth: 120,
+              width: { lg: "120px", sm: "100%", xs: "100%" },
+            }}
+          >
             <InputLabel id="demo-simple-select-standard-label">
               Topics
             </InputLabel>
@@ -119,7 +141,14 @@ const YoutbeVideo = () => {
             </Select>
           </FormControl>
           {/* Content Type */}
-          <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+          <FormControl
+            variant="standard"
+            sx={{
+              m: 1,
+              minWidth: 120,
+              width: { lg: "120px", sm: "100%", xs: "100%" },
+            }}
+          >
             <InputLabel id="demo-simple-select-standard-label">
               Content Type
             </InputLabel>
@@ -139,14 +168,22 @@ const YoutbeVideo = () => {
         <Box
           sx={{
             display: "flex",
-
             alignItems: "baseline",
             gap: "1rem",
             flexWrap: "wrap",
+            mt: { lg: "0px", md: "1rem", sm: "1rem", xs: "1rem" },
           }}
         >
-          <Typography variant="subtitle1">Sort By:</Typography>
-          <FormControl variant="standard" sx={{ m: 1, minWidth: 120 }}>
+          <Typography variant="subtitle1" sx={{ mt: "10px" }}>
+            Sort By:
+          </Typography>
+          <FormControl
+            variant="standard"
+            sx={{
+              minWidth: 120,
+              width: { lg: "120px", sm: "100%", xs: "100%" },
+            }}
+          >
             <InputLabel id="demo-simple-select-standard-label">
               Newtest
             </InputLabel>
@@ -166,6 +203,7 @@ const YoutbeVideo = () => {
             placeholder="Search"
             variant="standard"
             onChange={(e) => setSearch(e.target.value)}
+            sx={{ width: { lg: "120px", sm: "100%", xs: "100%" } }}
             InputProps={{
               endAdornment: (
                 <InputAdornment position="start">
