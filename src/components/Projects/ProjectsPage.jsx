@@ -7,12 +7,15 @@ import {
   ToggleButtonGroup,
   Box,
   Pagination,
+  MenuItem,
+  Select,
 } from "@mui/material";
 import PropTypes from "prop-types";
-import MenuItem from "@mui/material/MenuItem";
-import Select from "@mui/material/Select";
 import ShareIcon from "@mui/icons-material/Share";
 import { useLocation } from "react-router-dom";
+import ContributeModal from "../Modal/ContributeModal.react";
+import VolunteerModal from "../VolunteerModal/VolunteerModal.react";
+import useHashRouteToggle from "../../customHooks/useHashRouteToggle";
 
 ProjectsPage.propTypes = {
   //=======================================
@@ -155,8 +158,37 @@ export default function ProjectsPage(props) {
     setProjectFilter(filteredData);
   }, [category, status, props.content]);
 
+  const [openContributeModal, setOpenContributeModal] =
+    useHashRouteToggle("contribute"); //useHasRouteToggle is used for controlling browser back button
+
+  const [projectHeading, setProjectHeading] = useState("");
+  const handleContributeModal = (value) => {
+    setOpenContributeModal(true);
+    setProjectHeading(value);
+  };
+
+  const [openVolunteerModal, setOpenVolunteerModal] =
+    useHashRouteToggle("volunteer"); //useHasRouteToggle is used for controlling browser back button
+
+  const handleVolunteerModal = (value) => {
+    setOpenVolunteerModal(true);
+    setProjectHeading(value);
+  };
+
   return (
     <>
+      <ContributeModal
+        isOpen={openContributeModal}
+        onClose={(value) => setOpenContributeModal(value)}
+        isNavbar={false}
+        projectHeading={projectHeading}
+      />
+      <VolunteerModal
+        isOpen={openVolunteerModal}
+        onClose={(value) => setOpenVolunteerModal(value)}
+        isNavbar={true}
+        projectHeading={projectHeading}
+      />
       <Container
         maxWidth={false}
         sx={{
@@ -164,7 +196,8 @@ export default function ProjectsPage(props) {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-        }}>
+        }}
+      >
         <Typography
           variant="h4"
           align="center"
@@ -172,7 +205,8 @@ export default function ProjectsPage(props) {
             textTransform: "uppercase",
             fontWeight: "bold",
             padding: "2rem",
-          }}>
+          }}
+        >
           <span style={{ color: "var(--primary-color)" }}> Projects </span> at
           the living treasure
         </Typography>
@@ -181,14 +215,16 @@ export default function ProjectsPage(props) {
             display: "flex",
             justifyContent: "space-between",
             alignContent: "center",
-          }}>
+          }}
+        >
           <ToggleButtonGroup
             aria-label="text button group"
             size="large"
             color="primary"
             exclusive
             value={category}
-            onChange={handleChangeToggle}>
+            onChange={handleChangeToggle}
+          >
             <ToggleButton value="All">All</ToggleButton>
             <ToggleButton value="Education">Education</ToggleButton>
             <ToggleButton value="Medical">Medical</ToggleButton>
@@ -199,7 +235,8 @@ export default function ProjectsPage(props) {
               display: "flex",
               justifyContent: "center",
               alignitems: "center",
-            }}>
+            }}
+          >
             <Select value={status} onChange={handleChangeFilter}>
               <MenuItem value="All">All</MenuItem>
               <MenuItem value="Ongoing">Ongoning</MenuItem>
@@ -214,7 +251,8 @@ export default function ProjectsPage(props) {
             flexWrap: "wrap",
             justifyContent: "space-evenly",
             width: "100%",
-          }}>
+          }}
+        >
           {projectFilter?.map((items, index) => {
             return (
               <Box
@@ -223,7 +261,8 @@ export default function ProjectsPage(props) {
                   width: "18.5rem",
                   margin: { xl: 2.5, lg: 2, md: 2, sm: 1.5, xs: 1 },
                 }}
-                key={index}>
+                key={index}
+              >
                 <CustomCard
                   content={{
                     image: items.image,
@@ -235,9 +274,17 @@ export default function ProjectsPage(props) {
                     },
                     actionIcon: ShareIcon,
                     secondaryBtns: [
-                      { btnText: "Contribute" },
+                      {
+                        btnText: "Contribute",
+                        onClick: () => {
+                          handleContributeModal(items.heading);
+                        },
+                      },
                       {
                         btnText: "Volunteer",
+                        onClick: () => {
+                          handleVolunteerModal(items.heading);
+                        },
                       },
                     ],
                   }}

@@ -1,14 +1,17 @@
 // Import npm packages
 import React, { useState } from "react";
-import { Button, Typography, Container, Box } from "@mui/material";
 import PropTypes from "prop-types";
-import CustomCard from "../Card/CustomCard.react";
-import LiveDot from "@mui/icons-material/FiberManualRecord";
-import ShareIcon from "@mui/icons-material/Share";
-
-import EventModal from "../EventModal/EventModal.react";
-
 import moment from "moment";
+
+// Import other packages
+import { Button, Typography, Container, Box } from "@mui/material";
+import {
+  Share as ShareIcon,
+  FiberManualRecord as LiveDot,
+} from "@mui/icons-material";
+
+import CustomCard from "../Card/CustomCard.react";
+import EventModal from "../EventModal/EventModal.react";
 
 Events.propTypes = {
   //=======================================
@@ -140,15 +143,16 @@ export default function Events(props) {
         marginTop: "2rem",
       }}
     >
-      {openEventModal && (
-        <EventModal
-          isOpen={openEventModal}
-          onClose={(value) => setOpenEventModal(value)}
-          heading={selectedEvent.heading}
-          status={selectedEvent.status}
-          description={selectedEvent.description}
-        />
-      )}
+      <EventModal
+        isOpen={openEventModal}
+        onClose={(value) => setOpenEventModal(value)}
+        heading={selectedEvent.heading}
+        status={selectedEvent.status}
+        description={selectedEvent.description}
+        onSubmit={(value) => {
+          setOpenEventModal(value);
+        }}
+      />
       <Typography
         variant="h4"
         sx={{
