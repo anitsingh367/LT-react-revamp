@@ -11,6 +11,7 @@ import Select from "@mui/material/Select";
 import { Box } from "@mui/system";
 import PropTypes from "prop-types";
 import CustomCard from "../Card/CustomCard.react";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const YoutbeVideo = () => {
   YoutbeVideo.propTypes = {
@@ -41,6 +42,7 @@ const YoutbeVideo = () => {
   const [topic, setTopic] = useState("");
   const [contentType, setContentType] = useState("");
   const [newtest, setNewtest] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleChangeLanguage = (event) => {
     setLanguage(event.target.value);
@@ -62,10 +64,12 @@ const YoutbeVideo = () => {
         "X-RapidAPI-Host": rapidAPIHost,
       },
     };
+    setIsLoading(true);
     const fetchVideo = async () => {
       const response = await fetch(youtubeAPI, options);
       const data = await response.json();
       setfetchVideo(data.items);
+      setIsLoading(false);
     };
     fetchVideo();
   }, [rapidAPIKey, rapidAPIHost, youtubeAPI]);
@@ -204,57 +208,72 @@ const YoutbeVideo = () => {
           />
         </Box>
       </Container>
-      <Container
-        sx={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          flexWrap: "wrap",
-          width: "100%",
-          marginTop: "2rem",
-        }}
-      >
-        {fetchVideo
-          ?.filter((filterItem) => {
-            return Search.toLowerCase() === ""
-              ? filterItem
-              : filterItem.snippet.title
-                  .toLowerCase()
-                  .includes(Search.toLowerCase());
-          })
-          ?.map((item, index) => {
-            return (
-              <Card
-                raised
-                sx={{
-                  display: "flex",
-                  flexDirection: "column",
-                  width: "16rem",
-                  height: "23rem",
-                  margin: { xl: 2.5, lg: 2, md: 2, sm: 1.5, xs: 1 },
-                }}
-                key={index}
-              >
-                <CustomCard
-                  content={{
-                    ...item,
-                    heading: item.snippet.title,
-                    description: item.snippet.description,
-                    image: item.snippet.thumbnails.high.url,
-                    primaryBtn: {
-                      btnText: "Watch Now",
-                      onClick: () => {
-                        window.open(
-                          `https://www.youtube.com/watch?v=${item.id.videoId}`
-                        );
-                      },
-                    },
+      {!isLoading && (
+        <Container
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            flexWrap: "wrap",
+            width: "100%",
+            marginTop: "2rem",
+          }}
+        >
+          {fetchVideo
+            ?.filter((filterItem) => {
+              return Search.toLowerCase() === ""
+                ? filterItem
+                : filterItem.snippet.title
+                    .toLowerCase()
+                    .includes(Search.toLowerCase());
+            })
+            ?.map((item, index) => {
+              return (
+                <Card
+                  raised
+                  sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    width: "16rem",
+                    height: "23rem",
+                    margin: { xl: 2.5, lg: 2, md: 2, sm: 1.5, xs: 1 },
                   }}
-                />
-              </Card>
-            );
-          })}
-      </Container>
+                  key={index}
+                >
+                  <CustomCard
+                    content={{
+                      ...item,
+                      heading: item.snippet.title,
+                      description: item.snippet.description,
+                      image: item.snippet.thumbnails.high.url,
+                      primaryBtn: {
+                        btnText: "Watch Now",
+                        onClick: () => {
+                          window.open(
+                            `https://www.youtube.com/watch?v=${item.id.videoId}`
+                          );
+                        },
+                      },
+                    }}
+                  />
+                </Card>
+              );
+            })}
+        </Container>
+      )}
+      {isLoading && (
+        <Container
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            width: "100%",
+            height: "90vh",
+          }}
+        >
+          <CircularProgress color="inherit" />
+        </Container>
+      )}
     </>
   );
 };
