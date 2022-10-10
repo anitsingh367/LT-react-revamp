@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import moment from "moment";
+import useHashRouteToggle from "../../customHooks/useHashRouteToggle";
 
 // Import other packages
 import { Button, Typography, Container, Box } from "@mui/material";
@@ -117,8 +118,7 @@ export default function Events(props) {
 
     return items;
   });
-
-  const [openEventModal, setOpenEventModal] = useState(false);
+  const [openEventModal, setOpenEventModal] = useHashRouteToggle("event"); //useHasRouteToggle is used for controlling browser back button
   const [selectedEvent, setSelectedEvent] = useState({
     heading: "",
     status: "",
@@ -221,7 +221,6 @@ export default function Events(props) {
                         });
                       },
                     },
-
                     actionIcon: ShareIcon,
                   }}
                 />

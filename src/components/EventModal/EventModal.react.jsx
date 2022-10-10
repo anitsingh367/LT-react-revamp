@@ -99,21 +99,25 @@ export default function EventModal(props) {
 
   //Handle Email Validation
   const handleEmail = (e) => {
-    if (!e.target.value || emailValidation().test(e.target.value) === false) {
+    let email = e.target.value.trim();
+
+    if (!email || emailValidation().test(email) === false) {
       setEmailValid(false);
     } else {
       setEmailValid(true);
-      setFormData({ ...formData, email: e.target.value });
+      setFormData({ ...formData, email: email });
     }
   };
 
   //Handle Name
   const handleName = (e) => {
-    if (!e.target.value || nameValidation().test(e.target.value) === false) {
+    let name = e.target.value.trim();
+
+    if (!name || nameValidation().test(name) === false) {
       setNameValid(false);
     } else {
       setNameValid(true);
-      setFormData({ ...formData, name: e.target.value });
+      setFormData({ ...formData, name: name });
     }
   };
 
