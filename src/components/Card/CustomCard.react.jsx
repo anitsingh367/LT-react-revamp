@@ -2,20 +2,20 @@
 
 import PropTypes from "prop-types";
 
-import IconButton from "@mui/material/IconButton";
-
-import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
-
-import Chip from "@mui/material/Chip";
+import {
+  Card,
+  CardActions,
+  CardContent,
+  CardMedia,
+  Button,
+  Typography,
+  Chip,
+  Box,
+  SvgIcon,
+  IconButton
+} from "@mui/material";
 
 import defaultImage from "../../assets/default-card-image.jpg";
-
-import { Box, SvgIcon } from "@mui/material";
 
 CustomCard.propTypes = {
   //=======================================

@@ -5,7 +5,6 @@ import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import SearchIcon from "@mui/icons-material/Search";
 import InputAdornment from "@mui/material/InputAdornment";
-import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
@@ -34,27 +33,20 @@ const YoutbeVideo = () => {
 
   const [fetchVideo, setfetchVideo] = useState();
   const [Search, setSearch] = useState("");
-
   const [language, setLanguage] = useState("");
+  const [topic, setTopic] = useState("");
+  const [contentType, setContentType] = useState("");
+  const [newtest, setNewtest] = useState("");
 
   const handleChangeLanguage = (event) => {
     setLanguage(event.target.value);
   };
-
-  const [topic, setTopic] = useState("");
-
   const handleChangeTopic = (event) => {
     setTopic(event.target.value);
   };
-
-  const [contentType, setContentType] = useState("");
-
   const handleChangeContentType = (event) => {
     setContentType(event.target.value);
   };
-
-  const [newtest, setNewtest] = useState("");
-
   const handleChangeNewtest = (event) => {
     setNewtest(event.target.value);
   };
@@ -96,8 +88,7 @@ const YoutbeVideo = () => {
             sm: "column-reverse",
             xs: "column-reverse",
           },
-        }}
-      >
+        }}>
         <Box
           sx={{
             display: "flex",
@@ -105,8 +96,7 @@ const YoutbeVideo = () => {
             alignItems: "baseline",
             gap: "1rem",
             flexWrap: "wrap",
-          }}
-        >
+          }}>
           <Typography variant="subtitle1" sx={{ mt: "10px" }}>
             Filter By:
           </Typography>
@@ -116,13 +106,11 @@ const YoutbeVideo = () => {
             sx={{
               minWidth: 120,
               width: { lg: "120px", sm: "100%", xs: "100%" },
-            }}
-          >
+            }}>
             <Select
               value={language}
               onChange={handleChangeLanguage}
-              defaultValue="Language"
-            >
+              defaultValue="Language">
               <MenuItem value={"English"}>English</MenuItem>
               <MenuItem value={"Hindi"}>Hindi</MenuItem>
               <MenuItem value={"Punjabi"}>Punjabi</MenuItem>
@@ -135,13 +123,11 @@ const YoutbeVideo = () => {
               m: 1,
               minWidth: 120,
               width: { lg: "120px", sm: "100%", xs: "100%" },
-            }}
-          >
+            }}>
             <Select
               value={topic}
               onChange={handleChangeTopic}
-              placeholder="Topics"
-            >
+              placeholder="Topics">
               <MenuItem value={"Depression"}>Depression</MenuItem>
               <MenuItem value={"Peace"}>Peace</MenuItem>
               <MenuItem value={"Stress"}>Strees</MenuItem>
@@ -154,13 +140,11 @@ const YoutbeVideo = () => {
               m: 1,
               minWidth: 120,
               width: { lg: "120px", sm: "100%", xs: "100%" },
-            }}
-          >
+            }}>
             <Select
               value={contentType}
               onChange={handleChangeContentType}
-              placeholder="Content Type"
-            >
+              placeholder="Content Type">
               <MenuItem value={"Video"}>Video</MenuItem>
               <MenuItem value={"Audio"}>Audio</MenuItem>
             </Select>
@@ -174,8 +158,7 @@ const YoutbeVideo = () => {
             gap: "1rem",
             flexWrap: "wrap",
             mt: { lg: "0px", md: "1rem", sm: "1rem", xs: "1rem" },
-          }}
-        >
+          }}>
           <Typography variant="subtitle1" sx={{ mt: "10px" }}>
             Sort By:
           </Typography>
@@ -184,13 +167,11 @@ const YoutbeVideo = () => {
             sx={{
               minWidth: 120,
               width: { lg: "120px", sm: "100%", xs: "100%" },
-            }}
-          >
+            }}>
             <Select
               placeholder="Newtest"
               value={newtest}
-              onChange={handleChangeNewtest}
-            >
+              onChange={handleChangeNewtest}>
               <MenuItem value={"Newtest"}>Newtest</MenuItem>
               <MenuItem value={"Oldest"}>Oldest</MenuItem>
             </Select>
@@ -219,8 +200,7 @@ const YoutbeVideo = () => {
           flexWrap: "wrap",
           width: "100%",
           marginTop: "2rem",
-        }}
-      >
+        }}>
         {fetchVideo
           ?.filter((filterItem) => {
             return Search.toLowerCase() === ""
@@ -240,8 +220,7 @@ const YoutbeVideo = () => {
                   height: "23rem",
                   margin: { xl: 2.5, lg: 2, md: 2, sm: 1.5, xs: 1 },
                 }}
-                key={index}
-              >
+                key={index}>
                 <CustomCard
                   content={{
                     ...item,

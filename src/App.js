@@ -4,8 +4,6 @@ import Footer from "./components/Footer/Footer.react";
 
 import "./App.scss";
 
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import Video from "./pages/Video";
 import DrawerAppBar from "./components/Navbar/Navbar.react";
 
@@ -24,15 +22,6 @@ function App() {
         <Route exact path="/video" element={<Video />} />
       </Routes>
       <Footer />
-      <ToastContainer
-        position="top-right"
-        autoClose={false}
-        newestOnTop
-        closeOnClick={false}
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-      />
     </div>
   );
 }

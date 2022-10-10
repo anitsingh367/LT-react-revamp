@@ -2,12 +2,6 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
-import {
-  emailValidation,
-  numberValidation,
-  nameValidation,
-} from "../../validations/Validations.js";
-
 // Import other packages
 import {
   Button,
@@ -21,18 +15,27 @@ import {
   Dialog,
   DialogActions,
   DialogContent,
-  DialogTitle,
   MenuItem,
   Select,
   FormHelperText,
   InputAdornment,
   Autocomplete,
   TextField,
+  Toolbar,
+  Typography,
+  IconButton,
+  AppBar,
 } from "@mui/material";
+import { Close as CloseIcon } from "@mui/icons-material";
 
 import { states as stateList } from "../../data/States";
 import { cities as cityList } from "../../data/Cities";
-import { toast } from "react-toastify";
+
+import {
+  emailValidation,
+  numberValidation,
+  nameValidation,
+} from "../../validations/Validations.js";
 
 ContributeModal.propTypes = {
   //=======================================
@@ -90,16 +93,6 @@ export default function ContributeModal(props) {
 
   //Handle Form Submit
   const handleSubmitForm = () => {
-    toast.success("Thanks For Your Response", {
-      position: "top-right",
-      autoClose: false,
-      hideProgressBar: true,
-      closeOnClick: false,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    });
-
     handleClose();
     console.log(formData);
   };
@@ -143,21 +136,33 @@ export default function ContributeModal(props) {
 
   return (
     <Dialog open={open}>
-      <DialogTitle>
-        {props.isNavbar
-          ? "Contribute For The Cause"
-          : `Contribute To ${
-              props.projectHeading ? props.projectHeading : "Project"
-            }`}
-      </DialogTitle>
+      <AppBar position="sticky">
+        <Toolbar>
+          <IconButton
+            edge="start"
+            color="inherit"
+            onClick={handleClose}
+            aria-label="close">
+            <CloseIcon />
+          </IconButton>
+          <Typography
+            sx={{ ml: 2, flex: 1, padding: "0.5rem 0" }}
+            variant="h6"
+            component="div">
+            {props.isNavbar
+              ? "Contribute For The Cause"
+              : `Contribute To ${
+                  props.projectHeading ? props.projectHeading : "Project"
+                }`}
+          </Typography>
+        </Toolbar>
+      </AppBar>
       <DialogContent
-        sx={{ display: "flex", flexDirection: "column", gap: 1.5 }}
-      >
+        sx={{ display: "flex", flexDirection: "column", gap: 1.5 }}>
         <FormControl
           sx={{
             display: "flex",
-          }}
-        >
+          }}>
           <RadioGroup
             required
             row
@@ -169,8 +174,7 @@ export default function ContributeModal(props) {
               justifyContent: "space-between",
               flex: 1,
             }}
-            onChange={handleAmount}
-          >
+            onChange={handleAmount}>
             <FormControlLabel value="100" control={<Radio />} label="₹100" />
             <FormControlLabel value="500" control={<Radio />} label="₹500" />
             <FormControlLabel value="1000" control={<Radio />} label="₹1000" />
@@ -262,8 +266,7 @@ export default function ContributeModal(props) {
             id="state-select"
             value={formData.state}
             label="State"
-            onChange={handleForm("state")}
-          >
+            onChange={handleForm("state")}>
             {stateList?.map((list, index) => {
               return (
                 <MenuItem key={index} value={list.name}>
@@ -278,8 +281,7 @@ export default function ContributeModal(props) {
             display: "flex",
             flexDirection: { lg: "row", md: "row", xs: "column" },
             gap: 1.5,
-          }}
-        >
+          }}>
           <FormControl sx={{ flex: 1 }}>
             <Autocomplete
               freeSolo
@@ -311,8 +313,7 @@ export default function ContributeModal(props) {
           <FormControl
             sx={{
               flex: 1,
-            }}
-          >
+            }}>
             <InputLabel htmlFor="zip-input-box" required>
               Zip
             </InputLabel>
@@ -330,8 +331,7 @@ export default function ContributeModal(props) {
             display: "flex",
             flexDirection: { lg: "row", md: "row", xs: "column" },
             gap: 1.5,
-          }}
-        >
+          }}>
           <FormControl sx={{ flex: 1 }}>
             <InputLabel htmlFor="mobile-input-box" required>
               Mobile
@@ -352,8 +352,7 @@ export default function ContributeModal(props) {
           <FormControl
             sx={{
               flex: 1,
-            }}
-          >
+            }}>
             <InputLabel htmlFor="email-input-box" required>
               Email
             </InputLabel>
@@ -391,8 +390,7 @@ export default function ContributeModal(props) {
             !isEmailValid
               ? true
               : false
-          }
-        >
+          }>
           Submit
         </Button>
       </DialogActions>

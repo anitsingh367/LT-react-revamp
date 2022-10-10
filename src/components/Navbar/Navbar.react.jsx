@@ -1,44 +1,57 @@
 import * as React from "react";
 import { useState } from "react";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Drawer from "@mui/material/Drawer";
-import IconButton from "@mui/material/IconButton";
-import List from "@mui/material/List";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemText from "@mui/material/ListItemText";
-import MenuIcon from "@mui/icons-material/Menu";
-import Toolbar from "@mui/material/Toolbar";
-import Button from "@mui/material/Button";
+
+import {
+  AppBar,
+  Box,
+  Drawer,
+  IconButton,
+  List,
+  ListItemButton,
+  ListItemText,
+  Toolbar,
+  Button,
+  Collapse,
+  Divider,
+} from "@mui/material";
+
 import logo from "../../assets/Logo.png";
+import MenuIcon from "@mui/icons-material/Menu";
 import CustomizedMenus from "./CustomizedMenus.react";
-import Collapse from "@mui/material/Collapse";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
-import Divider from "@mui/material/Divider";
 import ContributeModal from "../Modal/ContributeModal.react";
+import VolunteerModal from "../VolunteerModal/VolunteerModal.react";
+
+import useHashRouteToggle from "../../customHooks/useHashRouteToggle";
 
 import { Link } from "react-router-dom";
 
 const drawerWidth = 240;
 
 function DrawerAppBar(props) {
-  const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
 
-  const [openArticle, setOpenArticle] = React.useState(false);
+  const [openArticle, setOpenArticle] = useState(false);
 
   const handleClickArticle = () => {
     setOpenArticle(!openArticle);
   };
 
-  const [openContributeModal, setOpenContributeModal] = useState(false);
+  const [openContributeModal, setOpenContributeModal] =
+    useHashRouteToggle("contribute"); //useHasRouteToggle is used for controlling browser back button
+  const [openVolunteerModal, setOpenVolunteerModal] =
+    useHashRouteToggle("volunteer"); //useHasRouteToggle is used for controlling browser back button
 
   const handleContributeButton = () => {
     setOpenContributeModal(true);
+  };
+  const handleVolunteerButton = () => {
+    setOpenVolunteerModal(true);
   };
 
   const drawer = (
@@ -46,6 +59,11 @@ function DrawerAppBar(props) {
       <ContributeModal
         isOpen={openContributeModal}
         onClose={(value) => setOpenContributeModal(value)}
+        isNavbar={true}
+      />
+      <VolunteerModal
+        isOpen={openVolunteerModal}
+        onClose={(value) => setOpenVolunteerModal(value)}
         isNavbar={true}
       />
       <Toolbar sx={{ justifyContent: "center" }}>
@@ -88,6 +106,11 @@ function DrawerAppBar(props) {
             <ListItemText primary="Video Section" />
           </ListItemButton>
         </Link>
+        <ListItemButton>
+          <Button variant="contained" onClick={handleVolunteerButton}>
+            Become Volunteer
+          </Button>
+        </ListItemButton>
       </List>
     </div>
   );
@@ -125,7 +148,6 @@ function DrawerAppBar(props) {
           >
             <MenuIcon />
           </IconButton>
-
           <Box
             sx={{
               display: { lg: "flex", md: "none", sm: "none", xs: "none" },
@@ -159,8 +181,16 @@ function DrawerAppBar(props) {
             <Link to="/video" className="link">
               <Button variant="h6">Video Section</Button>
             </Link>
+            <Button variant="contained" onClick={handleVolunteerButton}>
+              Become Volunteer
+            </Button>
           </Box>
-          <Button variant="outlined" onClick={handleContributeButton}>
+
+          <Button
+            variant="outlined"
+            onClick={handleContributeButton}
+            sx={{ margin: "0 0.5rem" }}
+          >
             Contribute Now
           </Button>
         </Toolbar>

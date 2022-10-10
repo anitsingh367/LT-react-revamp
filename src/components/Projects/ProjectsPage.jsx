@@ -7,12 +7,15 @@ import {
   ToggleButtonGroup,
   Box,
   Pagination,
+  MenuItem,
+  Select,
 } from "@mui/material";
 import PropTypes from "prop-types";
-import MenuItem from "@mui/material/MenuItem";
-import Select from "@mui/material/Select";
 import ShareIcon from "@mui/icons-material/Share";
 import { useLocation } from "react-router-dom";
+import ContributeModal from "../Modal/ContributeModal.react";
+import VolunteerModal from "../VolunteerModal/VolunteerModal.react";
+import useHashRouteToggle from "../../customHooks/useHashRouteToggle";
 
 ProjectsPage.propTypes = {
   //=======================================
@@ -155,8 +158,37 @@ export default function ProjectsPage(props) {
     setProjectFilter(filteredData);
   }, [category, status, props.content]);
 
+  const [openContributeModal, setOpenContributeModal] =
+    useHashRouteToggle("contribute"); //useHasRouteToggle is used for controlling browser back button
+
+  const [projectHeading, setProjectHeading] = useState("");
+  const handleContributeModal = (value) => {
+    setOpenContributeModal(true);
+    setProjectHeading(value);
+  };
+
+  const [openVolunteerModal, setOpenVolunteerModal] =
+    useHashRouteToggle("volunteer"); //useHasRouteToggle is used for controlling browser back button
+
+  const handleVolunteerModal = (value) => {
+    setOpenVolunteerModal(true);
+    setProjectHeading(value);
+  };
+
   return (
     <>
+      <ContributeModal
+        isOpen={openContributeModal}
+        onClose={(value) => setOpenContributeModal(value)}
+        isNavbar={false}
+        projectHeading={projectHeading}
+      />
+      <VolunteerModal
+        isOpen={openVolunteerModal}
+        onClose={(value) => setOpenVolunteerModal(value)}
+        isNavbar={true}
+        projectHeading={projectHeading}
+      />
       <Container
         maxWidth={false}
         sx={{
@@ -253,9 +285,17 @@ export default function ProjectsPage(props) {
                     },
                     actionIcon: ShareIcon,
                     secondaryBtns: [
-                      { btnText: "Contribute" },
+                      {
+                        btnText: "Contribute",
+                        onClick: () => {
+                          handleContributeModal(items.heading);
+                        },
+                      },
                       {
                         btnText: "Volunteer",
+                        onClick: () => {
+                          handleVolunteerModal(items.heading);
+                        },
                       },
                     ],
                   }}
