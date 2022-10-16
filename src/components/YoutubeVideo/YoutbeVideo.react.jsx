@@ -92,24 +92,36 @@ const YoutbeVideo = () => {
       <Container
         sx={{
           display: "flex",
-          justifyContent: {
-            lg: "space-between",
-            md: "center",
-            sm: "center",
-            xs: "center",
-          },
           flexDirection: {
             lg: "row",
             md: "column-reverse",
             sm: "column-reverse",
             xs: "column-reverse",
           },
+          justifyContent: {
+            lg: "space-between",
+            md: "center",
+            sm: "center",
+            xs: "center",
+          },
         }}>
         <Box
           sx={{
             display: "flex",
-            gap: 1.5,
-            alignItems: "flex-end",
+            flexDirection: {
+              lg: "row",
+              md: "column",
+              sm: "column",
+              xs: "column",
+            },
+            gap: {
+              lg: 1,
+              md: 0,
+            },
+            alignItems: {
+              lg: "flex-end",
+              md: "center",
+            },
           }}>
           <Typography variant="overline">Filter By:</Typography>
           {/* Language */}
@@ -139,30 +151,60 @@ const YoutbeVideo = () => {
         <Box
           sx={{
             display: "flex",
-            gap: "1rem",
-            alignItems: "flex-end",
+            flexDirection: {
+              lg: "row",
+              md: "column-reverse",
+              sm: "column-reverse",
+              xs: "column-reverse",
+            },
+            gap: 1,
+            alignItems: {
+              lg: "flex-end",
+              md: "center",
+            },
           }}>
-          <Typography variant="overline">Sort By:</Typography>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: {
+                lg: "row",
+                md: "column",
+                sm: "column",
+                xs: "column",
+              },
+              gap: {
+                lg: 1,
+                md: 0,
+              },
+              alignItems: {
+                lg: "flex-end",
+                md: "center",
+              },
+            }}>
+            <Typography variant="overline">Sort By:</Typography>
+            <FormControl variant="standard" sx={{ minWidth: 120 }}>
+              <InputLabel id="time">Time</InputLabel>
+              <Select value={time} onChange={handleChangeNewtest} id="time">
+                <MenuItem value={"Newest"}>Newest</MenuItem>
+                <MenuItem value={"Oldest"}>Oldest</MenuItem>
+              </Select>
+            </FormControl>
+          </Box>
           <FormControl variant="standard" sx={{ minWidth: 120 }}>
-            <InputLabel id="time">Time</InputLabel>
-            <Select value={time} onChange={handleChangeNewtest} id="time">
-              <MenuItem value={"Newest"}>Newest</MenuItem>
-              <MenuItem value={"Oldest"}>Oldest</MenuItem>
-            </Select>
+            <TextField
+              placeholder="Search"
+              variant="standard"
+              onChange={(e) => setSearch(e.target.value)}
+              sx={{ minWidth: 120 }}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="start">
+                    <SearchIcon />
+                  </InputAdornment>
+                ),
+              }}
+            />
           </FormControl>
-          <TextField
-            placeholder="Search"
-            variant="standard"
-            onChange={(e) => setSearch(e.target.value)}
-            sx={{ width: { lg: 120, sm: "100%", xs: "100%" } }}
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="start">
-                  <SearchIcon />
-                </InputAdornment>
-              ),
-            }}
-          />
         </Box>
       </Container>
       {!isLoading && (
@@ -184,7 +226,6 @@ const YoutbeVideo = () => {
             ?.map((item, index) => {
               return (
                 <Box
-                  raised
                   sx={{
                     height: "auto",
                     width: "18.5rem",
