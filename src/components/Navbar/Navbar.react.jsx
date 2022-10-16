@@ -101,9 +101,11 @@ function DrawerAppBar(props) {
             <ListItemText primary="Projects" />
           </ListItemButton>
         </Link>
-        <ListItemButton>
-          <ListItemText primary="Video Section" />
-        </ListItemButton>
+        <Link to="/video" className="link" onClick={handleDrawerToggle}>
+          <ListItemButton>
+            <ListItemText primary="Video Section" />
+          </ListItemButton>
+        </Link>
         <ListItemButton>
           <Button variant="contained" onClick={handleVolunteerButton}>
             Become Volunteer
@@ -164,7 +166,7 @@ function DrawerAppBar(props) {
             <Link to="/" className="link">
               <Button variant="h6">Home</Button>
             </Link>
-            <Link to="/about" className="/about">
+            <Link to="/about" className="link">
               <Button variant="h6">About</Button>
             </Link>
             <CustomizedMenus
@@ -176,7 +178,9 @@ function DrawerAppBar(props) {
             <Link to="/projects" className="link">
               <Button variant="h6">Projects</Button>
             </Link>
-            <Button variant="h6">Video Section</Button>
+            <Link to="/video" className="link">
+              <Button variant="h6">Video Section</Button>
+            </Link>
             <Button variant="contained" onClick={handleVolunteerButton}>
               Become Volunteer
             </Button>

@@ -215,6 +215,13 @@ export default function ProjectsPage(props) {
             display: "flex",
             justifyContent: "space-between",
             alignContent: "center",
+            flexDirection: {
+              lg: "row",
+              md: "row",
+              sm: "column",
+              xs: "column",
+            },
+            gap: { lg: 0, sm: "1rem", xs: "1rem" },
           }}
         >
           <ToggleButtonGroup
@@ -224,6 +231,10 @@ export default function ProjectsPage(props) {
             exclusive
             value={category}
             onChange={handleChangeToggle}
+            sx={{
+              display: "flex",
+              justifyContent: { sm: "center", xs: "center" },
+            }}
           >
             <ToggleButton value="All">All</ToggleButton>
             <ToggleButton value="Education">Education</ToggleButton>

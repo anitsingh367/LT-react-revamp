@@ -4,6 +4,7 @@ import Footer from "./components/Footer/Footer.react";
 
 import "./App.scss";
 
+import YoutbeVideo from "./components/YoutubeVideo/YoutbeVideo.react";
 import DrawerAppBar from "./components/Navbar/Navbar.react";
 
 import ProjectsPage from "./components/Projects/ProjectsPage";
@@ -16,8 +17,9 @@ function App() {
       <DrawerAppBar />
       <Routes>
         <Route exact path="/" element={<Home />} />
-        <Route exact path="/projects" element={<ProjectsPage />} />
         <Route exact path="/about" element={<About />} />
+        <Route exact path="/projects" element={<ProjectsPage />} />
+        <Route exact path="/video" element={<YoutbeVideo />} />
       </Routes>
       <Footer />
     </div>

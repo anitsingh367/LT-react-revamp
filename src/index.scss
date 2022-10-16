@@ -13,13 +13,13 @@ body {
 /* Global Variables */
 
 :root {
-  --primary-color: rgb(41, 175, 137);
-  --secondary-color: rgb(67, 80, 97);
+  --primary-color: #29af89;
+  --secondary-color: #435061;
   --primary-color-light: rgba(41, 175, 138, 12%);
   --secondary-color-light: rgba(67, 80, 97, 12%);
   --swiper-navigation-size: 36px !important;
 }
-.event-line-clamp {
+.event-line-clamp, .yt-line-clamp {
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
