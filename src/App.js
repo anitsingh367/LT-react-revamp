@@ -8,7 +8,7 @@ import YoutbeVideo from "./components/YoutubeVideo/YoutbeVideo.react";
 import DrawerAppBar from "./components/Navbar/Navbar.react";
 
 import ProjectsPage from "./components/Projects/ProjectsPage";
-
+import ProjectViewPage from "./components/Projects/ProjectViewPage";
 import About from "./pages/About";
 
 function App() {
@@ -18,7 +18,9 @@ function App() {
       <Routes>
         <Route exact path="/" element={<Home />} />
         <Route exact path="/about" element={<About />} />
-        <Route exact path="/projects" element={<ProjectsPage />} />
+        <Route exact path="/projects" element={<ProjectsPage />}>
+          <Route path=":projectId" element={<ProjectViewPage />} />
+        </Route>
         <Route exact path="/video" element={<YoutbeVideo />} />
       </Routes>
       <Footer />
