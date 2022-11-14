@@ -42,6 +42,7 @@ import {
 
 import YoutubeFrame from "../YoutubeFrame/YoutubeFrame.react";
 import AddressMap from "../AddressMap/AddressMap.react";
+import { Link } from "react-router-dom";
 
 EventModal.propTypes = {
   //=======================================
@@ -134,14 +135,16 @@ export default function EventModal(props) {
         fullScreen
         open={open}
         onClose={handleClose}
-        TransitionComponent={Transition}>
+        TransitionComponent={Transition}
+      >
         <AppBar position="sticky">
           <Toolbar>
             <IconButton
               edge="start"
               color="inherit"
               onClick={handleClose}
-              aria-label="close">
+              aria-label="close"
+            >
               <CloseIcon />
             </IconButton>
             <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
@@ -174,7 +177,8 @@ export default function EventModal(props) {
 
               justifyContent: "center",
               // alignItems: "center",
-            }}>
+            }}
+          >
             {props.status === "upcoming" ? <AddressMap /> : <YoutubeFrame />}
             {(props.status === "live" || props.status === "upcoming") &&
               !isToasterOpen && (
@@ -184,7 +188,8 @@ export default function EventModal(props) {
                     flex: 1,
                     justifyContent: "space-between",
                     gap: { md: "1rem", sm: "1rem", xs: "1rem" },
-                  }}>
+                  }}
+                >
                   <FormControl>
                     <InputLabel htmlFor="name" required>
                       Name
@@ -252,10 +257,12 @@ export default function EventModal(props) {
                   <FormControl
                     sx={{
                       display: "flex",
-                    }}>
+                    }}
+                  >
                     <FormLabel
                       id="radio-buttons-group-event-register-label"
-                      required>
+                      required
+                    >
                       How did you get to know about the event?
                     </FormLabel>
                     <RadioGroup
@@ -269,7 +276,8 @@ export default function EventModal(props) {
                         flexDirection: "column",
                         justifyContent: "space-between",
                       }}
-                      onChange={handleForm("reference")}>
+                      onChange={handleForm("reference")}
+                    >
                       <FormControlLabel
                         value="Whatsapp"
                         control={<Radio />}
@@ -297,20 +305,26 @@ export default function EventModal(props) {
                       />
                     </RadioGroup>
                   </FormControl>
-                  <FormControlLabel
-                    control={
-                      <Checkbox
-                        id="t_and_c"
-                        checked={checked}
-                        onChange={handleCheckbox}
-                      />
-                    }
-                    label={
-                      <label htmlFor={"t_and_c"}>
-                        I agree to the <a href="/">Terms & Conditions</a>
-                      </label>
-                    }
-                  />
+                  <Link
+                    to="/terms-and-conditions"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          id="t_and_c"
+                          checked={checked}
+                          onChange={handleCheckbox}
+                        />
+                      }
+                      label={
+                        <label htmlFor={"t_and_c"}>
+                          I agree to the <a href="/">Terms & Conditions</a>
+                        </label>
+                      }
+                    />
+                  </Link>
                   <Button
                     variant="contained"
                     onClick={handleSubmitForm}
@@ -324,7 +338,8 @@ export default function EventModal(props) {
                       !isEmailValid
                         ? true
                         : false
-                    }>
+                    }
+                  >
                     Register
                   </Button>
                 </FormGroup>
@@ -335,7 +350,8 @@ export default function EventModal(props) {
                   flex: 1,
                   display: "flex",
                   justifyContent: "center",
-                }}>
+                }}
+              >
                 <CustomSnackBar
                   animation="zoom"
                   iconColor="var(--primary-color)"

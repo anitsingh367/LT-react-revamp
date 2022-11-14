@@ -13,6 +13,7 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 import FacebookIcon from "@mui/icons-material/Facebook";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   const upcomingEvents = [
@@ -154,6 +155,18 @@ const Footer = () => {
                 primary="THE LIVING TREASURE 109, S.P Mukherji Park, Near Tilak Nagar,
                 New Delhi-110018 (India)"
               />
+            </ListItem>
+            <ListItem disableGutters disablePadding sx={{ marginTop: "auto" }}>
+              <ListItemText sx={{ color: "secondary.contrastText" }}>
+                <Link
+                  to="/terms-and-conditions"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ textDecoration: "none", color: "inherit" }}
+                >
+                  <span style={{ color: "#fff" }}>Terms and Condtions</span>
+                </Link>
+              </ListItemText>
             </ListItem>
             <ListItem disableGutters disablePadding sx={{ marginTop: "auto" }}>
               <ListItemText sx={{ color: "secondary.contrastText" }}>
