@@ -42,6 +42,7 @@ import {
 
 import YoutubeFrame from "../YoutubeFrame/YoutubeFrame.react";
 import AddressMap from "../AddressMap/AddressMap.react";
+import { Link } from "react-router-dom";
 
 EventModal.propTypes = {
   //=======================================
@@ -316,13 +317,13 @@ export default function EventModal(props) {
                     label={
                       <label htmlFor={"t_and_c"}>
                         I agree to the{" "}
-                        <a
-                          href="/terms-and-conditions"
+                        <Link
+                          to="/terms-and-conditions"
                           target="_blank"
                           rel="noopener noreferrer"
                         >
                           Terms & Conditions
-                        </a>
+                        </Link>
                       </label>
                     }
                   />
