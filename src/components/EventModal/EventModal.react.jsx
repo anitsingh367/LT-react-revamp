@@ -305,26 +305,28 @@ export default function EventModal(props) {
                       />
                     </RadioGroup>
                   </FormControl>
-                  <Link
-                    to="/terms-and-conditions"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <FormControlLabel
-                      control={
-                        <Checkbox
-                          id="t_and_c"
-                          checked={checked}
-                          onChange={handleCheckbox}
-                        />
-                      }
-                      label={
-                        <label htmlFor={"t_and_c"}>
-                          I agree to the <a href="/">Terms & Conditions</a>
-                        </label>
-                      }
-                    />
-                  </Link>
+
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        id="t_and_c"
+                        checked={checked}
+                        onChange={handleCheckbox}
+                      />
+                    }
+                    label={
+                      <label htmlFor={"t_and_c"}>
+                        I agree to the{" "}
+                        <a
+                          href="/terms-and-conditions"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          Terms & Conditions
+                        </a>
+                      </label>
+                    }
+                  />
                   <Button
                     variant="contained"
                     onClick={handleSubmitForm}
