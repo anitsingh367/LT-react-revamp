@@ -42,7 +42,6 @@ import {
 
 import YoutubeFrame from "../YoutubeFrame/YoutubeFrame.react";
 import AddressMap from "../AddressMap/AddressMap.react";
-import { Link } from "react-router-dom";
 
 EventModal.propTypes = {
   //=======================================

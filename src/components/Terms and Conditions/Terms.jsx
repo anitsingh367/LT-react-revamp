@@ -8,9 +8,8 @@ const Terms = () => {
         display: "flex",
         justifyContent: "center",
         alignItems: "flex-start",
-
         flexDirection: "column",
-        padding: "2rem",
+        padding: { xl: "2rem", md: "2rem", sm: "1rem" },
       }}
       maxWidth={false}
     >
