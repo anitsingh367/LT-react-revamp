@@ -10,11 +10,7 @@ import DrawerAppBar from "./components/Navbar/Navbar.react";
 import ProjectsPage from "./components/Projects/ProjectsPage";
 
 import About from "./pages/About";
-<<<<<<< Updated upstream
-=======
-import EventPages from "./components/Events/EventPage.react";
 import Terms from "./components/Terms and Conditions/Terms";
->>>>>>> Stashed changes
 
 function App() {
   return (
