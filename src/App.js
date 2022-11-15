@@ -10,6 +10,7 @@ import DrawerAppBar from "./components/Navbar/Navbar.react";
 import ProjectsPage from "./components/Projects/ProjectsPage";
 import ProjectViewPage from "./components/Projects/ProjectViewPage";
 import About from "./pages/About";
+import ImageGallery from "./components/ImageGallery/ImageGallery.react";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path=":projectId" element={<ProjectViewPage />} />
         </Route>
         <Route exact path="/video" element={<YoutbeVideo />} />
+        <Route exact path="/image-gallery" element={<ImageGallery />} />
       </Routes>
       <Footer />
     </div>
