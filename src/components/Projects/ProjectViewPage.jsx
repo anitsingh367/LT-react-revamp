@@ -283,14 +283,16 @@ const ProjectViewPage = () => {
           )}
         </Container>
         <Container>
-          <ImageList cols={3} gap={10}>
+          <ImageList cols={3} gap={10} sx={{ padding: "0.5rem 0" }}>
             {itemData.slice(0, 6).map((item, index) => (
               <ImageListItem
                 key={item.img}
+                className="gallery-image"
                 sx={{
                   cursor: "pointer",
+                  opacity: 0.9,
                   "&:hover": {
-                    opacity: 0.8,
+                    opacity: 1,
                   },
                 }}
                 onClick={() => {
@@ -298,6 +300,7 @@ const ProjectViewPage = () => {
                 }}
               >
                 <img
+                  className={index !== 5 && "gallery-image-child"}
                   src={`${item.img}?w=200&h=200&fit=crop&auto=format`}
                   srcSet={`${item.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
                   alt={item.title}
