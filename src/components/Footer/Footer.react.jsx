@@ -156,18 +156,7 @@ const Footer = () => {
                 New Delhi-110018 (India)"
               />
             </ListItem>
-            <ListItem disableGutters disablePadding sx={{ marginTop: "auto" }}>
-              <ListItemText sx={{ color: "secondary.contrastText" }}>
-                <Link
-                  to="/terms-and-conditions"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{ textDecoration: "none", color: "inherit" }}
-                >
-                  <span style={{ color: "#fff" }}>Terms and Condtions</span>
-                </Link>
-              </ListItemText>
-            </ListItem>
+
             <ListItem disableGutters disablePadding sx={{ marginTop: "auto" }}>
               <ListItemText sx={{ color: "secondary.contrastText" }}>
                 <span style={{ color: "#fff" }}>Phone</span>: +91-11-25981163
@@ -212,7 +201,16 @@ const Footer = () => {
               padding: "1.5rem",
             }}
           >
-            Copyright 2022. All Rights Reserved by The Living Treasure.
+            Copyright 2022.{" "}
+            <Link
+              to="/terms-and-conditions"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ color: "inherit" }}
+            >
+              <span style={{ color: "#fff" }}>Terms and Condtions</span>
+            </Link>{" "}
+            All Rights Reserved by The Living Treasure.
           </Typography>
         </Container>
       </Box>
