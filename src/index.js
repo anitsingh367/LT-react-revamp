@@ -1,12 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ReactDOM from "react-dom/client";
 import "./index.scss";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, useLocation } from "react-router-dom";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+};
 const theme = createTheme({
   components: {
     MuiFormLabel: {
@@ -37,6 +46,7 @@ const theme = createTheme({
 root.render(
   <React.StrictMode>
     <BrowserRouter>
+      <ScrollToTop />
       <ThemeProvider theme={theme}>
         <App />
       </ThemeProvider>

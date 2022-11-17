@@ -12,7 +12,7 @@ import {
   Chip,
   Box,
   SvgIcon,
-  IconButton
+  IconButton,
 } from "@mui/material";
 
 import defaultImage from "../../assets/default-card-image.jpg";
@@ -25,6 +25,7 @@ CustomCard.propTypes = {
     image: PropTypes.string,
     heading: PropTypes.string,
     description: PropTypes.string,
+    hoverEffect: PropTypes.bool,
     chipTemplate: PropTypes.shape({
       icon: PropTypes.object,
       chipText: PropTypes.string,
@@ -51,6 +52,7 @@ CustomCard.defaultProps = {
     image: "",
     heading: "",
     description: "",
+    hoverEffect: false,
     chipTemplate: {
       icon: "",
       chipText: "",
@@ -69,14 +71,16 @@ CustomCard.defaultProps = {
 export default function CustomCard(props) {
   return (
     <Card
-      raised
       sx={{
         display: "flex",
         flexDirection: "column",
         width: "100%",
         height: "100%",
-      }}
-    >
+        boxShadow: 4,
+        "&:hover": {
+          boxShadow: props.content?.hoverEffect ? 1 : 4,
+        },
+      }}>
       <CardMedia
         component="img"
         image={props.content?.image ? props.content.image : defaultImage}
@@ -89,8 +93,7 @@ export default function CustomCard(props) {
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
-          }}
-        >
+          }}>
           <Typography className="truncate" variant="h6" component="div">
             {props.content?.heading}
           </Typography>
@@ -123,7 +126,7 @@ export default function CustomCard(props) {
           className="event-line-clamp"
           variant="body2"
           color="text.secondary"
-        >
+          gutterBottom={!!!props.content.actionIcon}>
           {props.content?.description}
         </Typography>
       </CardContent>
@@ -138,8 +141,9 @@ export default function CustomCard(props) {
                 color="primary"
                 onClick={buttons.onClick}
                 sx={{ flex: 1, color: "primary.contrastText" }}
-                startIcon={buttons.icon && <SvgIcon component={buttons.icon} />}
-              >
+                startIcon={
+                  buttons.icon && <SvgIcon component={buttons.icon} />
+                }>
                 {buttons.btnText}
               </Button>
             );
@@ -154,8 +158,7 @@ export default function CustomCard(props) {
             justifyContent: "space-between",
             marginTop: props.content?.secondaryBtns ? 0 : "auto",
             padding: "0.1rem 0.5rem",
-          }}
-        >
+          }}>
           <Button
             sx={{ color: "secondary.main" }}
             size="small"
@@ -164,8 +167,7 @@ export default function CustomCard(props) {
               props.content.primaryBtn?.btnIcon && (
                 <SvgIcon component={props.content.primaryBtn.btnIcon} />
               )
-            }
-          >
+            }>
             {props.content?.primaryBtn?.btnText}
           </Button>
           {props.content.actionIcon && (
