@@ -12,6 +12,7 @@ import {
 
 import CustomCard from "../Card/CustomCard.react";
 import EventModal from "../EventModal/EventModal.react";
+import useHashRouteToggle from "../../customHooks/useHashRouteToggle";
 
 Events.propTypes = {
   //=======================================
@@ -118,7 +119,7 @@ export default function Events(props) {
     return items;
   });
 
-  const [openEventModal, setOpenEventModal] = useState(false);
+  const [openEventModal, setOpenEventModal] = useHashRouteToggle("event"); //useHasRouteToggle is used for controlling browser back button
   const [selectedEvent, setSelectedEvent] = useState({
     heading: "",
     status: "",
