@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
+import { Navigation } from "swiper";
 import useHashRouteToggle from "../../customHooks/useHashRouteToggle";
 import {
   Avatar,
@@ -89,7 +90,6 @@ const ProjectViewPage = () => {
 
   const navigate = useNavigate();
   const handleImageClick = (value, index) => {
-    console.log(index);
     if (index === 5) {
       navigate("/image-gallery");
     } else {
@@ -221,7 +221,8 @@ const ProjectViewPage = () => {
                 //   className="swiper-container"
               >
                 <Swiper
-                  modules={[Autoplay]}
+                  modules={[Navigation]}
+                  navigation={true}
                   breakpoints={{
                     576: {
                       slidesPerView: 2,
@@ -236,12 +237,7 @@ const ProjectViewPage = () => {
                       spaceBetween: 30,
                     },
                   }}
-                  speed={1500}
-                  loop={true}
-                  autoplay={{
-                    delay: 1,
-                    disableOnInteraction: false,
-                  }}
+                  speed={500}
                 >
                   {data.map((item, index) => {
                     return (
@@ -283,24 +279,24 @@ const ProjectViewPage = () => {
           )}
         </Container>
         <Container>
-          <ImageList cols={3} gap={10} sx={{ padding: "0.5rem 0" }}>
+          <ImageList cols={3} gap={10} sx={{ padding: "0.5rem" }}>
             {itemData.slice(0, 6).map((item, index) => (
               <ImageListItem
                 key={item.img}
-                className="gallery-image"
-                sx={{
-                  cursor: "pointer",
-                  opacity: 0.9,
-                  "&:hover": {
-                    opacity: 1,
-                  },
-                }}
                 onClick={() => {
                   handleImageClick(item.img, index);
                 }}
+                sx={{
+                  cursor: "pointer",
+                  transition: "all 0.2s",
+                  opacity: 0.8,
+                  "&:hover": {
+                    transform: index !== 5 && "scale(1.02)",
+                    opacity: 1,
+                  },
+                }}
               >
                 <img
-                  className={index !== 5 && "gallery-image-child"}
                   src={`${item.img}?w=200&h=200&fit=crop&auto=format`}
                   srcSet={`${item.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
                   alt={item.title}

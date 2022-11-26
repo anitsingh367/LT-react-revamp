@@ -1,7 +1,7 @@
 import { useState } from "react";
 import ImageModal from "./ImageModal.react";
 import { ImageList, ImageListItem } from "@mui/material";
-import "./ImageGallery.scss";
+
 const ImageGallery = () => {
   const itemData = [
     {
@@ -68,19 +68,20 @@ const ImageGallery = () => {
           <ImageListItem
             key={index}
             className="gallery-image"
-            sx={{
-              cursor: "pointer",
-              opacity: 0.8,
-              "&:hover": {
-                opacity: 1,
-              },
-            }}
             onClick={() => {
               handleImageClick(item.img, index);
             }}
+            sx={{
+              cursor: "pointer",
+              transition: "all 0.2s",
+              opacity: 0.8,
+              "&:hover": {
+                transform: "scale(1.02)",
+                opacity: 1,
+              },
+            }}
           >
             <img
-              className="gallery-image-child"
               src={`${item.img}?w=400&h=400&fit=crop&auto=format`}
               srcSet={`${item.img}?w=400&h=400&fit=crop&auto=format&dpr=2 2x`}
               alt={item.title}
