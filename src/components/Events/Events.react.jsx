@@ -13,7 +13,6 @@ import {
 
 import CustomCard from "../Card/CustomCard.react";
 import EventModal from "../EventModal/EventModal.react";
-import useHashRouteToggle from "../../customHooks/useHashRouteToggle";
 import "./Events.scss";
 
 Events.propTypes = {

@@ -14,7 +14,6 @@ import {
   ImageListItemBar,
 } from "@mui/material";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay } from "swiper";
 import data from "../../data/imgDB";
 
 import IconButton from "@mui/material/IconButton";
