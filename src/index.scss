@@ -1,3 +1,9 @@
+$screen-xs: 0px;
+$screen-sm: 600px;
+$screen-md: 900px;
+$screen-lg: 1200px;
+$screen-xl: 1536px;
+
 * {
   padding: 0;
   margin: 0;
@@ -19,7 +25,8 @@ body {
   --secondary-color-light: rgba(67, 80, 97, 12%);
   --swiper-navigation-size: 36px !important;
 }
-.event-line-clamp, .yt-line-clamp {
+.event-line-clamp,
+.yt-line-clamp {
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;

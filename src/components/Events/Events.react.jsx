@@ -13,6 +13,7 @@ import {
 
 import CustomCard from "../Card/CustomCard.react";
 import EventModal from "../EventModal/EventModal.react";
+import "./Events.scss";
 
 Events.propTypes = {
   //=======================================
@@ -50,7 +51,7 @@ Events.defaultProps = {
       description: "Description 2",
       date: {
         start_date: "2022-09-05 20:00:00",
-        end_date: "2022-09-05 22:00:00",
+        end_date: "2023-09-05 22:00:00",
       },
     },
     {
@@ -59,8 +60,8 @@ Events.defaultProps = {
       heading: "This must be live",
       description: "Description 3",
       date: {
-        start_date: "2022-09-05 19:00:00",
-        end_date: "2022-09-09 03:06:00",
+        start_date: "2023-09-06 19:00:00",
+        end_date: "2023-09-06 22:00:00",
       },
     },
     {
@@ -69,8 +70,8 @@ Events.defaultProps = {
       description:
         "In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content.",
       date: {
-        start_date: "2022-09-11 19:00:00",
-        end_date: "2022-09-12 03:06:00",
+        start_date: "2023-09-06 19:00:00",
+        end_date: "2023-09-06 22:00:00",
       },
     },
     {
@@ -79,8 +80,8 @@ Events.defaultProps = {
       description:
         "In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content.",
       date: {
-        start_date: "2022-09-11 19:00:00",
-        end_date: "2022-09-12 03:06:00",
+        start_date: "2022-09-05 20:00:00",
+        end_date: "2023-09-05 22:00:00",
       },
     },
   ],
@@ -141,8 +142,7 @@ export default function Events(props) {
         flexDirection: "column",
         alignItems: "center",
         marginTop: "2rem",
-      }}
-    >
+      }}>
       <EventModal
         isOpen={openEventModal}
         onClose={(value) => setOpenEventModal(value)}
@@ -160,28 +160,19 @@ export default function Events(props) {
           fontWeight: "bold",
           padding: "1rem",
           textAlign: "center",
-        }}
-      >
+        }}>
         <span style={{ color: "var(--primary-color)" }}> events </span> at the
         living treasure
       </Typography>
       <Container
         maxWidth="xl"
         sx={{
-          display: "flex",
-          flexWrap: "wrap",
-          justifyContent: {
-            lg: "space-between",
-            md: "space-evenly",
-            sm: "space-evenly",
-            xs: "space-evenly",
-          },
-          "&:after": {
-            content: { lg: '""' },
-            flex: { lg: "auto", md: "0", sm: "0", xs: "0" },
-          },
-        }}
-      >
+          display: "grid",
+          gridAutoFlow: { lg: "column" },
+          gridTemplateColumns: "repeat(4, 1fr)",
+          justifyItems: "stretch",
+          alignContent: "center",
+        }}>
         {newEventList
           ?.slice(0, 8)
           .sort(
@@ -202,14 +193,15 @@ export default function Events(props) {
               <Box
                 sx={{
                   height: "auto",
-                  width: "16rem",
+                  width: "auto",
                   margin: { xl: 2.5, lg: 2, md: 2, sm: 1.5, xs: 1 },
                 }}
-                key={index}
-              >
+                className="event-card"
+                key={index}>
                 <CustomCard
                   content={{
                     ...items,
+
                     description: description,
                     primaryBtn: {
                       btnText: "View Details",
