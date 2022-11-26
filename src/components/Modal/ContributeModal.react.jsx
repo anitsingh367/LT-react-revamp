@@ -81,14 +81,14 @@ export default function ContributeModal(props) {
   //Handle Form Data
   const [formData, setFormData] = useState(initialFormState);
   const handleForm = (prop) => (event) => {
-    setFormData({ ...formData, [prop]: event.target.value });
+    setFormData({ ...formData, [prop]: event.target.value.trim() });
   };
 
   //Handle Amount Selection
   const [amount, setAmount] = useState("");
   const handleAmount = (event) => {
     setAmount(event.target.value);
-    setFormData({ ...formData, amount: event.target.value });
+    setFormData({ ...formData, amount: event.target.value.trim() });
   };
 
   //Handle Form Submit
@@ -100,20 +100,23 @@ export default function ContributeModal(props) {
   //Handle Email Validation
   const [isEmailValid, setEmailValid] = useState(true);
   const handleEmail = (e) => {
-    if (!e.target.value || emailValidation().test(e.target.value) === false) {
+    let email = e.target.value.trim();
+
+    if (!email || emailValidation().test(email) === false) {
       setEmailValid(false);
     } else {
       setEmailValid(true);
-      setFormData({ ...formData, email: e.target.value });
+      setFormData({ ...formData, email: email });
     }
   };
   const [isNameValid, setNameValid] = useState(true);
   const handleName = (e) => {
-    if (!e.target.value || nameValidation().test(e.target.value) === false) {
+    let name = e.target.value.trim();
+    if (!name || nameValidation().test(name) === false) {
       setNameValid(false);
     } else {
       setNameValid(true);
-      setFormData({ ...formData, name: e.target.value });
+      setFormData({ ...formData, name: name });
     }
   };
 
@@ -142,13 +145,15 @@ export default function ContributeModal(props) {
             edge="start"
             color="inherit"
             onClick={handleClose}
-            aria-label="close">
+            aria-label="close"
+          >
             <CloseIcon />
           </IconButton>
           <Typography
             sx={{ ml: 2, flex: 1, padding: "0.5rem 0" }}
             variant="h6"
-            component="div">
+            component="div"
+          >
             {props.isNavbar
               ? "Contribute For The Cause"
               : `Contribute To ${
@@ -158,11 +163,13 @@ export default function ContributeModal(props) {
         </Toolbar>
       </AppBar>
       <DialogContent
-        sx={{ display: "flex", flexDirection: "column", gap: 1.5 }}>
+        sx={{ display: "flex", flexDirection: "column", gap: 1.5 }}
+      >
         <FormControl
           sx={{
             display: "flex",
-          }}>
+          }}
+        >
           <RadioGroup
             required
             row
@@ -174,7 +181,8 @@ export default function ContributeModal(props) {
               justifyContent: "space-between",
               flex: 1,
             }}
-            onChange={handleAmount}>
+            onChange={handleAmount}
+          >
             <FormControlLabel value="100" control={<Radio />} label="₹100" />
             <FormControlLabel value="500" control={<Radio />} label="₹500" />
             <FormControlLabel value="1000" control={<Radio />} label="₹1000" />
@@ -266,7 +274,8 @@ export default function ContributeModal(props) {
             id="state-select"
             value={formData.state}
             label="State"
-            onChange={handleForm("state")}>
+            onChange={handleForm("state")}
+          >
             {stateList?.map((list, index) => {
               return (
                 <MenuItem key={index} value={list.name}>
@@ -281,7 +290,8 @@ export default function ContributeModal(props) {
             display: "flex",
             flexDirection: { lg: "row", md: "row", xs: "column" },
             gap: 1.5,
-          }}>
+          }}
+        >
           <FormControl sx={{ flex: 1 }}>
             <Autocomplete
               freeSolo
@@ -313,7 +323,8 @@ export default function ContributeModal(props) {
           <FormControl
             sx={{
               flex: 1,
-            }}>
+            }}
+          >
             <InputLabel htmlFor="zip-input-box" required>
               Zip
             </InputLabel>
@@ -331,7 +342,8 @@ export default function ContributeModal(props) {
             display: "flex",
             flexDirection: { lg: "row", md: "row", xs: "column" },
             gap: 1.5,
-          }}>
+          }}
+        >
           <FormControl sx={{ flex: 1 }}>
             <InputLabel htmlFor="mobile-input-box" required>
               Mobile
@@ -352,7 +364,8 @@ export default function ContributeModal(props) {
           <FormControl
             sx={{
               flex: 1,
-            }}>
+            }}
+          >
             <InputLabel htmlFor="email-input-box" required>
               Email
             </InputLabel>
@@ -390,7 +403,8 @@ export default function ContributeModal(props) {
             !isEmailValid
               ? true
               : false
-          }>
+          }
+        >
           Submit
         </Button>
       </DialogActions>
