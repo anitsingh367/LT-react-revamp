@@ -1,5 +1,5 @@
 // Import npm packages
-import { Typography, Container } from "@mui/material";
+import { Typography, Container, ButtonBase } from "@mui/material";
 import PropTypes from "prop-types";
 import CustomCard from "../Card/CustomCard.react";
 import { Box } from "@mui/system";
@@ -66,8 +66,7 @@ export default function Projects(props) {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-      }}
-    >
+      }}>
       <Typography
         variant="h4"
         align="center"
@@ -75,8 +74,7 @@ export default function Projects(props) {
           textTransform: "uppercase",
           fontWeight: "bold",
           padding: "2rem",
-        }}
-      >
+        }}>
         <span style={{ color: "var(--primary-color)" }}> Projects </span> at the
         living treasure
       </Typography>
@@ -86,29 +84,28 @@ export default function Projects(props) {
           display: "flex",
           flexWrap: "wrap",
           justifyContent: "space-evenly",
-        }}
-      >
+        }}>
         {props.content?.map((items, index) => {
           return (
             <Box
+              onClick={() => {
+                handleProjectCard(items.heading);
+              }}
               sx={{
-                height: "23rem",
+                height: "auto",
                 width: "16rem",
                 margin: { xl: 2.5, lg: 2, md: 2, sm: 1.5, xs: 1 },
+                cursor: "pointer",
               }}
-              key={index}
-            >
-              <CustomCard
-                content={{
-                  ...items,
-                  primaryBtn: {
-                    btnText: "View Details",
-                    onClick: () => {
-                      handleProjectCard(items.heading);
-                    },
-                  },
-                }}
-              />
+              key={index}>
+              <ButtonBase sx={{ textAlign: "left" }}>
+                <CustomCard
+                  content={{
+                    ...items,
+                    hoverEffect: true,
+                  }}
+                />
+              </ButtonBase>
             </Box>
           );
         })}

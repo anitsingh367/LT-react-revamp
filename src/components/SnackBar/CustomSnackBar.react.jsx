@@ -1,5 +1,6 @@
 import React from "react";
 import { Card, Typography, Button, SvgIcon } from "@mui/material";
+import "./CustomSnackBar.scss";
 
 const CustomSnackBar = (props) => {
   const {
