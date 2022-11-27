@@ -7,6 +7,7 @@
 .event-card:first-child {
   grid-column: span 2;
   grid-row: span 2;
+  width: auto;
   .MuiTypography-h6 {
     font-size: 2.25rem;
   }
@@ -29,6 +30,7 @@
   }
   .event-card:first-child {
     grid-column: span 4;
+    width: auto;
     .MuiTypography-h6 {
       font-size: 2rem;
     }
@@ -51,6 +53,7 @@
     grid-column: span 4;
   }
   .event-card:first-child {
+    width: auto;
     .MuiTypography-h6 {
       font-size: 1.25rem;
     }
