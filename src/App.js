@@ -10,6 +10,7 @@ import DrawerAppBar from "./components/Navbar/Navbar.react";
 import ProjectsPage from "./components/Projects/ProjectsPage";
 
 import About from "./pages/About";
+import Terms from "./components/Terms and Conditions/Terms";
 import EventPages from "./components/Events/EventsViewPage.react";
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
       <Routes>
         <Route exact path="/" element={<Home />} />
         <Route exact path="/about" element={<About />} />
+        <Route exact path="/terms-and-conditions" element={<Terms />} />
         <Route exact path="/projects" element={<ProjectsPage />} />
         <Route exact path="/video" element={<YoutbeVideo />} />
         <Route exact path="/events" element={<EventPages />} />

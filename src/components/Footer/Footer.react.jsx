@@ -13,6 +13,7 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 import FacebookIcon from "@mui/icons-material/Facebook";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   const upcomingEvents = [
@@ -155,6 +156,7 @@ const Footer = () => {
                 New Delhi-110018 (India)"
               />
             </ListItem>
+
             <ListItem disableGutters disablePadding sx={{ marginTop: "auto" }}>
               <ListItemText sx={{ color: "secondary.contrastText" }}>
                 <span style={{ color: "#fff" }}>Phone</span>: +91-11-25981163
@@ -199,7 +201,16 @@ const Footer = () => {
               padding: "1.5rem",
             }}
           >
-            Copyright 2022. All Rights Reserved by The Living Treasure.
+            Copyright 2022.{" "}
+            <Link
+              to="/terms-and-conditions"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ color: "inherit" }}
+            >
+              <span style={{ color: "#fff" }}>Terms and Condtions</span>
+            </Link>{" "}
+            All Rights Reserved by The Living Treasure.
           </Typography>
         </Container>
       </Box>
