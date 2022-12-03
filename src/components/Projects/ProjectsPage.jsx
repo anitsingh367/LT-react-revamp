@@ -140,6 +140,7 @@ export default function ProjectsPage(props) {
   const [status, setStatus] = useState(
     location?.state?.status ? location?.state?.status : "All"
   );
+  const [projectFilter, setProjectFilter] = useState(props.content);
 
   //Handle Category filter
   const handleChangeToggle = (event) => {
@@ -152,8 +153,6 @@ export default function ProjectsPage(props) {
   const handleChangeFilter = (event) => {
     setStatus(event.target.value);
   };
-
-  const [projectFilter, setProjectFilter] = useState(props.content);
 
   useEffect(() => {
     const filteredData = props.content.filter((item) => {

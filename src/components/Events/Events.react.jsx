@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import moment from "moment";
 import useHashRouteToggle from "../../customHooks/useHashRouteToggle";
-
+import { Link } from "react-router-dom";
 // Import other packages
 import { Button, Typography, Container, Box } from "@mui/material";
 import {
@@ -221,9 +221,11 @@ export default function Events(props) {
           })}
       </Container>
       {props.content && props.content?.length > 0 && (
-        <Button variant="contained" color="primary" sx={{ margin: "1rem" }}>
-          View All
-        </Button>
+        <Link to="/events" className="link">
+          <Button variant="contained" color="primary" sx={{ margin: "1rem" }}>
+            View All
+          </Button>
+        </Link>
       )}
     </section>
   );
