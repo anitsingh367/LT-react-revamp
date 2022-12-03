@@ -10,7 +10,7 @@ import DrawerAppBar from "./components/Navbar/Navbar.react";
 import ProjectsPage from "./components/Projects/ProjectsPage";
 
 import About from "./pages/About";
-import EventPages from "./components/Events/EventPage.react";
+import EventPages from "./components/Events/EventsViewPage.react";
 
 function App() {
   return (

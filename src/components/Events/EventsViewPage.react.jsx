@@ -11,6 +11,8 @@ import {
 import { FiberManualRecord as LiveDot } from "@mui/icons-material";
 import PropTypes from "prop-types";
 import ShareIcon from "@mui/icons-material/Share";
+import EventModal from "../EventModal/EventModal.react";
+import useHashRouteToggle from "./../../customHooks/useHashRouteToggle";
 
 EventPages.propTypes = {
   //=======================================
@@ -111,6 +113,20 @@ export default function EventPages(props) {
   // Handle status
   const [status, setStatus] = useState("All");
   const [eventFilter, setProjectFilter] = useState(props.content);
+  const [openEventModal, setOpenEventModal] = useHashRouteToggle("event");
+  const [selectedEvent, setSelectedEvent] = useState({
+    heading: "",
+    status: "",
+    description: "",
+  });
+  const handleEventCard = (selectedData) => {
+    setOpenEventModal(true);
+    setSelectedEvent({
+      heading: selectedData.heading,
+      status: selectedData.status,
+      description: selectedData.description,
+    });
+  };
 
   useEffect(() => {
     const filteredData = props.content.filter((item) => {
@@ -141,8 +157,17 @@ export default function EventPages(props) {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-      }}
-    >
+      }}>
+      <EventModal
+        isOpen={openEventModal}
+        onClose={(value) => setOpenEventModal(value)}
+        heading={selectedEvent.heading}
+        status={selectedEvent.status}
+        description={selectedEvent.description}
+        onSubmit={(value) => {
+          setOpenEventModal(value);
+        }}
+      />
       <Typography
         variant="h4"
         align="center"
@@ -150,8 +175,7 @@ export default function EventPages(props) {
           textTransform: "uppercase",
           fontWeight: "bold",
           padding: "2rem",
-        }}
-      >
+        }}>
         <span style={{ color: "var(--primary-color)" }}> Events </span> at the
         living treasure
       </Typography>
@@ -167,15 +191,13 @@ export default function EventPages(props) {
             xs: "column",
           },
           gap: { lg: 0, sm: "1rem", xs: "1rem" },
-        }}
-      >
+        }}>
         <Box
           sx={{
             display: "flex",
             justifyContent: "center",
             alignitems: "center",
-          }}
-        >
+          }}>
           <ToggleButtonGroup
             aria-label="text button group"
             size="large"
@@ -186,8 +208,7 @@ export default function EventPages(props) {
             sx={{
               display: "flex",
               justifyContent: { sm: "center", xs: "center" },
-            }}
-          >
+            }}>
             <ToggleButton value="All">All</ToggleButton>
             <ToggleButton value="Live">Live</ToggleButton>
             <ToggleButton value="Upcoming">Upcoming</ToggleButton>
@@ -201,9 +222,9 @@ export default function EventPages(props) {
           flexWrap: "wrap",
           justifyContent: "space-evenly",
           width: "100%",
-        }}
-      >
+        }}>
         {eventFilter?.map((items, index) => {
+          console.log(items);
           return (
             <Box
               sx={{
@@ -211,8 +232,7 @@ export default function EventPages(props) {
                 width: "18.5rem",
                 margin: { xl: 2.5, lg: 2, md: 2, sm: 1.5, xs: 1 },
               }}
-              key={index}
-            >
+              key={index}>
               <CustomCard
                 content={{
                   image: items.image,
@@ -225,6 +245,13 @@ export default function EventPages(props) {
                   },
                   primaryBtn: {
                     btnText: "View Details",
+                    onClick: () => {
+                      handleEventCard({
+                        heading: items.heading,
+                        status: items.status.toLowerCase(),
+                        description: items.description,
+                      });
+                    },
                   },
                   actionIcon: ShareIcon,
                 }}

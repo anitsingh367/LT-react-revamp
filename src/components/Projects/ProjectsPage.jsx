@@ -128,6 +128,7 @@ export default function ProjectsPage(props) {
   const [status, setStatus] = useState(
     location?.state?.status ? location?.state?.status : "All"
   );
+  const [projectFilter, setProjectFilter] = useState(props.content);
 
   //Handle Category filter
   const handleChangeToggle = (event) => {
@@ -140,8 +141,6 @@ export default function ProjectsPage(props) {
   const handleChangeFilter = (event) => {
     setStatus(event.target.value);
   };
-
-  const [projectFilter, setProjectFilter] = useState(props.content);
 
   useEffect(() => {
     const filteredData = props.content.filter((item) => {
@@ -196,8 +195,7 @@ export default function ProjectsPage(props) {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-        }}
-      >
+        }}>
         <Typography
           variant="h4"
           align="center"
@@ -205,8 +203,7 @@ export default function ProjectsPage(props) {
             textTransform: "uppercase",
             fontWeight: "bold",
             padding: "2rem",
-          }}
-        >
+          }}>
           <span style={{ color: "var(--primary-color)" }}> Projects </span> at
           the living treasure
         </Typography>
@@ -222,8 +219,7 @@ export default function ProjectsPage(props) {
               xs: "column",
             },
             gap: { lg: 0, sm: "1rem", xs: "1rem" },
-          }}
-        >
+          }}>
           <ToggleButtonGroup
             aria-label="text button group"
             size="large"
@@ -234,8 +230,7 @@ export default function ProjectsPage(props) {
             sx={{
               display: "flex",
               justifyContent: { sm: "center", xs: "center" },
-            }}
-          >
+            }}>
             <ToggleButton value="All">All</ToggleButton>
             <ToggleButton value="Education">Education</ToggleButton>
             <ToggleButton value="Medical">Medical</ToggleButton>
@@ -246,8 +241,7 @@ export default function ProjectsPage(props) {
               display: "flex",
               justifyContent: "center",
               alignitems: "center",
-            }}
-          >
+            }}>
             <Select value={status} onChange={handleChangeFilter}>
               <MenuItem value="All">All</MenuItem>
               <MenuItem value="Ongoing">Ongoning</MenuItem>
@@ -262,8 +256,7 @@ export default function ProjectsPage(props) {
             flexWrap: "wrap",
             justifyContent: "space-evenly",
             width: "100%",
-          }}
-        >
+          }}>
           {projectFilter?.map((items, index) => {
             return (
               <Box
@@ -272,8 +265,7 @@ export default function ProjectsPage(props) {
                   width: "18.5rem",
                   margin: { xl: 2.5, lg: 2, md: 2, sm: 1.5, xs: 1 },
                 }}
-                key={index}
-              >
+                key={index}>
                 <CustomCard
                   content={{
                     image: items.image,
