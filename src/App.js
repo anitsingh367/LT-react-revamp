@@ -10,6 +10,7 @@ import DrawerAppBar from "./components/Navbar/Navbar.react";
 import ProjectsPage from "./components/Projects/ProjectsPage";
 
 import About from "./pages/About";
+import Terms from "./components/Terms and Conditions/Terms";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
       <Routes>
         <Route exact path="/" element={<Home />} />
         <Route exact path="/about" element={<About />} />
+        <Route exact path="/terms-and-conditions" element={<Terms />} />
         <Route exact path="/projects" element={<ProjectsPage />} />
         <Route exact path="/video" element={<YoutbeVideo />} />
       </Routes>
