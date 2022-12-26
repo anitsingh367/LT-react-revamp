@@ -1,5 +1,5 @@
 // Import npm packages
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import moment from "moment";
 import useHashRouteToggle from "../../customHooks/useHashRouteToggle";
@@ -14,6 +14,8 @@ import {
 import CustomCard from "../Card/CustomCard.react";
 import EventModal from "../EventModal/EventModal.react";
 import "./Events.scss";
+
+import { getEventDetails } from "../../firebase";
 
 Events.propTypes = {
   //=======================================
@@ -94,7 +96,15 @@ export default function Events(props) {
     finished: "#999999",
   };
 
-  const newEventList = props.content.map((items) => {
+  const [eventDetails, setEventDetails] = useState([]);
+
+  useEffect(() => {
+    getEventDetails().then((data) => {
+      setEventDetails(data);
+    });
+  }, []);
+
+  const newEventList = eventDetails.map((items) => {
     const startDate = items.date?.start_date;
     const endDate = items.date?.end_date;
 
@@ -142,7 +152,8 @@ export default function Events(props) {
         flexDirection: "column",
         alignItems: "center",
         marginTop: "2rem",
-      }}>
+      }}
+    >
       <EventModal
         isOpen={openEventModal}
         onClose={(value) => setOpenEventModal(value)}
@@ -160,7 +171,8 @@ export default function Events(props) {
           fontWeight: "bold",
           padding: "1rem",
           textAlign: "center",
-        }}>
+        }}
+      >
         <span style={{ color: "var(--primary-color)" }}> events </span> at the
         living treasure
       </Typography>
@@ -172,9 +184,10 @@ export default function Events(props) {
           gridTemplateColumns: "repeat(4, 1fr)",
           justifyItems: "stretch",
           alignContent: "center",
-        }}>
+        }}
+      >
         {newEventList
-          ?.slice(0, 8)
+          ?.slice(0, 5)
           .sort(
             (a, b) => new Date(a.date.start_date) - new Date(b.date.start_date)
           )
@@ -193,21 +206,23 @@ export default function Events(props) {
               <Box
                 sx={{
                   height: "auto",
-                  width: "auto",
+                  width: { lg: "21rem", md: "auto", sm: "auto" },
                   margin: { xl: 2.5, lg: 2, md: 2, sm: 1.5, xs: 1 },
                 }}
                 className="event-card"
-                key={index}>
+                key={index}
+              >
                 <CustomCard
                   content={{
+                    image: items.imageUrl,
+                    heading: items.title,
                     ...items,
-
                     description: description,
                     primaryBtn: {
                       btnText: "View Details",
                       onClick: () => {
                         handleEventCard({
-                          heading: items.heading,
+                          heading: items.title,
                           status: items.chipTemplate.chipText?.toLowerCase(),
                           description: description,
                         });

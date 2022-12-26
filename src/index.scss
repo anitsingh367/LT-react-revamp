@@ -1,9 +1,12 @@
 $screen-xs: 0px;
 $screen-sm: 600px;
-$screen-md: 900px;
+$screen-md: 1024px;
 $screen-lg: 1200px;
 $screen-xl: 1536px;
 
+html {
+  scroll-behavior: smooth;
+}
 * {
   padding: 0;
   margin: 0;
