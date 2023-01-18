@@ -8,8 +8,11 @@ import YoutbeVideo from "./components/YoutubeVideo/YoutbeVideo.react";
 import DrawerAppBar from "./components/Navbar/Navbar.react";
 
 import ProjectsPage from "./components/Projects/ProjectsPage";
-
+import ProjectViewPage from "./components/Projects/ProjectViewPage";
 import About from "./pages/About";
+import Terms from "./components/Terms and Conditions/Terms";
+import EventPages from "./components/Events/EventsViewPage.react";
+import ImageGallery from "./components/ImageGallery/ImageGallery.react";
 
 function App() {
   return (
@@ -18,8 +21,13 @@ function App() {
       <Routes>
         <Route exact path="/" element={<Home />} />
         <Route exact path="/about" element={<About />} />
-        <Route exact path="/projects" element={<ProjectsPage />} />
+        <Route exact path="/terms-and-conditions" element={<Terms />} />
+        <Route exact path="/projects" element={<ProjectsPage />}>
+          <Route path=":projectId" element={<ProjectViewPage />} />
+        </Route>
         <Route exact path="/video" element={<YoutbeVideo />} />
+        <Route exact path="/events" element={<EventPages />} />
+        <Route exact path="/image-gallery" element={<ImageGallery />} />
       </Routes>
       <Footer />
     </div>
