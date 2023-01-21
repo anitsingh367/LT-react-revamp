@@ -18,6 +18,7 @@ import { useLocation } from "react-router-dom";
 import ContributeModal from "../Modal/ContributeModal.react";
 import VolunteerModal from "../VolunteerModal/VolunteerModal.react";
 import useHashRouteToggle from "../../customHooks/useHashRouteToggle";
+import { getProjectDetails } from "../../firebase";
 
 ProjectsPage.propTypes = {
   //=======================================
@@ -154,8 +155,16 @@ export default function ProjectsPage(props) {
     setStatus(event.target.value);
   };
 
+  const [projectDetails, setProjectDetails] = useState([]);
+
   useEffect(() => {
-    const filteredData = props.content.filter((item) => {
+    getProjectDetails().then((data) => {
+      setProjectDetails(data);
+    });
+  }, []);
+
+  useEffect(() => {
+    const filteredData = projectDetails?.filter((item) => {
       let itemCategory = item.category;
       let itemStatus = item.status;
       return category === "All" && status === "All"
@@ -167,7 +176,7 @@ export default function ProjectsPage(props) {
         : itemCategory === category && itemStatus === status;
     });
     setProjectFilter(filteredData);
-  }, [category, status, props.content]);
+  }, [category, status,projectDetails]);
 
   const [openContributeModal, setOpenContributeModal] =
     useHashRouteToggle("contribute"); //useHasRouteToggle is used for controlling browser back button

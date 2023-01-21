@@ -1,9 +1,11 @@
 // Import npm packages
+import {useEffect,useState} from "react";
 import { Typography, Container, ButtonBase } from "@mui/material";
 import PropTypes from "prop-types";
 import CustomCard from "../Card/CustomCard.react";
 import { Box } from "@mui/system";
 import { useNavigate } from "react-router-dom";
+
 
 Projects.propTypes = {
   //=======================================
@@ -57,6 +59,7 @@ export default function Projects(props) {
       },
     });
   };
+
 
   return (
     <Container

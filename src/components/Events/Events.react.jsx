@@ -36,55 +36,65 @@ Events.defaultProps = {
   //=======================================
   content: [
     {
-      image:
+      imageUrl:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqu39eyj7mkHZ2gnUmKmU9smZN8F3mI7xeC2DFXhTWwOSiL7JaliiMiC8NF3hZK-m1AD8&usqp=CAU",
-      heading: "This must be upcoming",
+      title: "This must be upcoming",
       description:
         "A New India Together fsdhfjsdhf sdkjfsdjkfhsdkj fhsdkjfhsdkjfhsdfkjsdhf ksjdfhsdkjfh sdkjfshdfkjsdfhkjsdhfksdjhfsd kjf fhdjshfksjd fhskdjfhskdjfh sdkjfhsdf kj sdfh",
       date: {
         start_date: "2023-09-06 19:00:00",
         end_date: "2023-09-06 22:00:00",
       },
+      type: "online",
+      mapUrl: "",
     },
     {
-      image:
+      imageUrl:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWwB29eRCxE1_92bxreaZ5tsnqgQFgHScAFEA4nn4vpiMfLX-h1j-RhnZfCo9_IcFNx4E&usqp=CAU",
-      heading: "This must be finished",
+      title: "This must be finished",
       description: "Description 2",
       date: {
         start_date: "2022-09-05 20:00:00",
         end_date: "2023-09-05 22:00:00",
       },
+      type: "ofline",
+      mapUrl: "map link",
     },
     {
-      image:
+      imageUrl:
         "https://images.unsplash.com/photo-1550330562-b055aa030d73?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
-      heading: "This must be live",
+      title: "This must be upcoming",
       description: "Description 3",
       date: {
         start_date: "2023-09-06 19:00:00",
         end_date: "2023-09-06 22:00:00",
       },
+      type: "ofline",
+      mapUrl: "map link",
     },
     {
-      image: "",
-      heading: "This must be upcoming",
+      imageUrl: "",
+      title: "This must be upcoming",
       description:
         "In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content.",
       date: {
         start_date: "2023-09-06 19:00:00",
         end_date: "2023-09-06 22:00:00",
       },
+      type: "online",
+      mapUrl: "",
     },
     {
-      image: "",
-      heading: "This must be upcoming",
+      imageUrl: "",
+      title: "This must be live",
       description:
         "In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content.",
       date: {
         start_date: "2022-09-05 20:00:00",
         end_date: "2023-09-05 22:00:00",
       },
+      type: "online",
+      mapUrl: "",
     },
   ],
 };
@@ -134,6 +144,8 @@ export default function Events(props) {
     heading: "",
     status: "",
     description: "",
+    type:"",
+    mapUrl:""
   });
 
   const handleEventCard = (selectedData) => {
@@ -142,8 +154,12 @@ export default function Events(props) {
       heading: selectedData.heading,
       status: selectedData.status,
       description: selectedData.description,
+      type:selectedData.type,
+      mapUrl:selectedData.mapUrl
     });
   };
+
+  console.log("eventDetails", props.content);
 
   return (
     <section
@@ -160,6 +176,8 @@ export default function Events(props) {
         heading={selectedEvent.heading}
         status={selectedEvent.status}
         description={selectedEvent.description}
+        type={selectedEvent.type}
+        mapUrl={selectedEvent.mapUrl}
         onSubmit={(value) => {
           setOpenEventModal(value);
         }}
@@ -202,6 +220,7 @@ export default function Events(props) {
             const description =
               items.description +
               `. Session will be on ${readableStartDate}- ${readbleEndDate}`;
+            console.log("items", items);
             return (
               <Box
                 sx={{
@@ -217,6 +236,7 @@ export default function Events(props) {
                     image: items.imageUrl,
                     heading: items.title,
                     ...items,
+
                     description: description,
                     primaryBtn: {
                       btnText: "View Details",
@@ -225,6 +245,8 @@ export default function Events(props) {
                           heading: items.title,
                           status: items.chipTemplate.chipText?.toLowerCase(),
                           description: description,
+                          type: items.type,
+                          mapUrl: items.mapUrl,
                         });
                       },
                     },

@@ -34,3 +34,15 @@ export const getEventDetails = async () => {
 
   return arr;
 };
+
+export const getProjectDetails = async () => {
+  let arr = [];
+  const q = query(collection(db, "ProjectDetails"));
+
+  const querySnapshot = await getDocs(q);
+  querySnapshot.forEach((doc) => {
+    arr.push(doc.data());
+  });
+
+  return arr;
+};

@@ -152,7 +152,7 @@ export default function EventModal(props) {
               <CloseIcon />
             </IconButton>
             <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
-              Event Details
+              Event Details ({props.type} event)
             </Typography>
           </Toolbar>
         </AppBar>
@@ -183,7 +183,7 @@ export default function EventModal(props) {
               // alignItems: "center",
             }}
           >
-            {props.status === "upcoming" ? <AddressMap /> : <YoutubeFrame />}
+            {props.type === "ofline" && props.status !== "finished" ? <AddressMap /> : <YoutubeFrame />}
             {(props.status === "live" || props.status === "upcoming") &&
               !isToasterOpen && (
                 <FormGroup
