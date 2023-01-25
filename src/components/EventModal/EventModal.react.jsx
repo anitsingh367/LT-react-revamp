@@ -43,6 +43,7 @@ import {
 import YoutubeFrame from "../YoutubeFrame/YoutubeFrame.react";
 import AddressMap from "../AddressMap/AddressMap.react";
 import { Link } from "react-router-dom";
+import "./EventModal.scss";
 
 EventModal.propTypes = {
   //=======================================
@@ -54,6 +55,8 @@ EventModal.propTypes = {
   onClick: PropTypes.func,
   isOpen: PropTypes.bool,
   onSubmit: PropTypes.func,
+  mapUrl: PropTypes.string,
+  youtubeUrl: PropTypes.string,
 };
 
 EventModal.defaultProps = {
@@ -133,6 +136,14 @@ export default function EventModal(props) {
     setChecked(event.target.checked);
   };
 
+  const inputProps = {
+    min: 0,
+  };
+
+  const youtubeId = props.youtubeUrl?.substring(
+    props.youtubeUrl?.lastIndexOf("/") + 1
+  );
+
   return (
     <div>
       <Dialog
@@ -152,19 +163,58 @@ export default function EventModal(props) {
               <CloseIcon />
             </IconButton>
             <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
-              Event Details ({props.type} event)
+              Event Details
             </Typography>
           </Toolbar>
         </AppBar>
 
         <List>
-          <ListItem>
+          <ListItem
+            sx={{
+              display: "flex",
+              flexDirection: {
+                lg: "row",
+                md: "row",
+                sm: "column",
+                xs: "column",
+              },
+              justifyContent: "flex-start",
+              alignItems: "flex-start",
+            }}
+          >
             <ListItemText
-              primary={props.heading}
+              primary={
+                props.heading + " (" + props.type?.toUpperCase() + " EVENT)"
+              }
               secondary={props.description}
+              sx={{
+                flex: { lg: 3, md: 2, sm: "unset", xs: "unset" },
+              }}
+            />
+            <ListItemText
+              primary={
+                `You can watch this event ` +
+                (props.type === "online" ? "live on " : "on")
+              }
+              sx={{
+                flex: 1,
+              }}
+              secondary={
+                <Link
+                  className="youtubeLink"
+                  to={{
+                    pathname: `https://youtu.be/${youtubeId}`,
+                  }}
+                  target="_blank"
+                >
+                  Youtube
+                </Link>
+              }
             />
           </ListItem>
+
           <Divider />
+
           <Container
             maxWidth={false}
             sx={{
@@ -183,7 +233,11 @@ export default function EventModal(props) {
               // alignItems: "center",
             }}
           >
-            {props.type === "ofline" && props.status !== "finished" ? <AddressMap /> : <YoutubeFrame />}
+            {props.type === "offline" && props.status !== "finished" ? (
+              <AddressMap />
+            ) : (
+              <YoutubeFrame youtubeUrl={youtubeId} />
+            )}
             {(props.status === "live" || props.status === "upcoming") &&
               !isToasterOpen && (
                 <FormGroup
@@ -250,6 +304,7 @@ export default function EventModal(props) {
                       id="number-of-attendies"
                       label="Number of Attendies"
                       type="number"
+                      inputProps={inputProps}
                       onChange={handleForm("noOfAttendies")}
                       onKeyPress={(e) => {
                         if (numberValidation().test(e.key) === false) {
@@ -331,6 +386,7 @@ export default function EventModal(props) {
                       </label>
                     }
                   />
+
                   <Button
                     variant="contained"
                     onClick={handleSubmitForm}

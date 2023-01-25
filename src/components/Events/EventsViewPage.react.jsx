@@ -4,17 +4,18 @@ import {
   Typography,
   Container,
   Box,
-  Pagination,
+  // Pagination,
   ToggleButtonGroup,
   ToggleButton,
 } from "@mui/material";
 import { FiberManualRecord as LiveDot } from "@mui/icons-material";
 import PropTypes from "prop-types";
-import ShareIcon from "@mui/icons-material/Share";
+// import ShareIcon from "@mui/icons-material/Share";
 import EventModal from "../EventModal/EventModal.react";
 import useHashRouteToggle from "./../../customHooks/useHashRouteToggle";
 import { getEventDetails } from "../../firebase";
 import moment from "moment";
+import SkeletonCard from "../SkeletonCard/SkeletonCard";
 
 EventPages.propTypes = {
   //=======================================
@@ -48,6 +49,7 @@ EventPages.propTypes = {
 };
 
 export default function EventPages(props) {
+  const [isLoading, setIsLoading] = useState(true);
   // Status Color
   const statusColor = {
     live: "#ED0000",
@@ -60,6 +62,7 @@ export default function EventPages(props) {
   useEffect(() => {
     getEventDetails().then((data) => {
       setProjectDetails(data);
+      setIsLoading(false);
     });
   }, []);
 
@@ -73,6 +76,7 @@ export default function EventPages(props) {
     description: "",
     type: "",
     mapUrl: "",
+    youtubeUrl: "",
   });
   const handleEventCard = (selectedData) => {
     setOpenEventModal(true);
@@ -82,6 +86,7 @@ export default function EventPages(props) {
       description: selectedData.description,
       type: selectedData.type,
       mapUrl: selectedData.mapUrl,
+      youtubeUrl: selectedData.youtubeUrl,
     });
   };
 
@@ -102,8 +107,8 @@ export default function EventPages(props) {
   };
 
   const newEventList = eventFilter.map((items) => {
-    const startDate = items.date?.start_date;
-    const endDate = items.date?.end_date;
+    const startDate = items.date?.startDate;
+    const endDate = items.date?.endDate;
 
     if (moment().isBetween(startDate, endDate)) {
       items["chipTemplate"] = {
@@ -131,7 +136,8 @@ export default function EventPages(props) {
   });
   const currentDate = new Date();
 
-  console.log("newEventList", newEventList);
+  //Skeleton Loader initial state
+  let skeletonCards = Array(3).fill(0);
 
   return (
     <Container
@@ -154,6 +160,7 @@ export default function EventPages(props) {
         }}
         type={selectedEvent.type}
         mapUrl={selectedEvent.mapUrl}
+        youtubeUrl={selectedEvent.youtubeUrl}
       />
       <Typography
         variant="h4"
@@ -215,65 +222,83 @@ export default function EventPages(props) {
           width: "100%",
         }}
       >
-        {newEventList
-          ?.sort((a, b) => {
-            let aDate = new Date(a.date?.start_date);
-            let bDate = new Date(b.date?.start_date);
-            let aEndDate = new Date(a.date?.end_date);
-            let bEndDate = new Date(b.date?.end_date);
-
-            if (aDate < currentDate && aEndDate > currentDate) {
-              return -1;
-            } else if (bDate < currentDate && bEndDate > currentDate) {
-              return 1;
-            } else if (aDate > currentDate && bDate > currentDate) {
-              return aDate - bDate;
-            } else {
-              return bEndDate - aEndDate;
-            }
+        {isLoading ? (
+          skeletonCards.map((item) => {
+            return <SkeletonCard />;
           })
-          .map((items, index) => {
-            const startDate = items.date?.start_date;
-            const endDate = items.date?.end_date;
-            const readableStartDate = moment(startDate).format("llll");
-            const readbleEndDate = moment(endDate).format("h:mm A");
-            const description =
-              items.description +
-              `. Session will be on ${readableStartDate}- ${readbleEndDate}`;
-            return (
-              <Box
-                sx={{
-                  height: "auto",
-                  width: "18.5rem",
-                  margin: { xl: 2.5, lg: 2, md: 2, sm: 1.5, xs: 1 },
-                }}
-                key={index}
-              >
-                <CustomCard
-                  content={{
-                    image: items.imageUrl,
-                    heading: items.title,
-                    ...items,
+        ) : newEventList.length === 0 ? (
+          <Container
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              height: "200px",
+            }}
+          >
+            <Typography>Oops! No Data found</Typography>
+          </Container>
+        ) : (
+          newEventList
+            ?.sort((a, b) => {
+              let aDate = new Date(a.date?.startDate);
+              let bDate = new Date(b.date?.startDate);
+              let aEndDate = new Date(a.date?.endDate);
+              let bEndDate = new Date(b.date?.endDate);
 
-                    description: description,
-                    primaryBtn: {
-                      btnText: "View Details",
-                      onClick: () => {
-                        handleEventCard({
-                          heading: items.title,
-                          status: items.chipTemplate.chipText?.toLowerCase(),
-                          description: description,
-                          type: items.type,
-                          mapUrl: items.mapUrl,
-                        });
-                      },
-                    },
-                    actionIcon: ShareIcon,
+              if (aDate < currentDate && aEndDate > currentDate) {
+                return -1;
+              } else if (bDate < currentDate && bEndDate > currentDate) {
+                return 1;
+              } else if (aDate > currentDate && bDate > currentDate) {
+                return aDate - bDate;
+              } else {
+                return bEndDate - aEndDate;
+              }
+            })
+            .map((items, index) => {
+              const startDate = items.date?.startDate;
+              const endDate = items.date?.endDate;
+              const readableStartDate = moment(startDate).format("llll");
+              const readbleEndDate = moment(endDate).format("h:mm A");
+
+              const description =
+                items.description +
+                `. Session will be on ${readableStartDate}- ${readbleEndDate}`;
+              return (
+                <Box
+                  sx={{
+                    height: "auto",
+                    width: "18.5rem",
+                    margin: { xl: 2.5, lg: 2, md: 2, sm: 1.5, xs: 1 },
                   }}
-                />
-              </Box>
-            );
-          })}
+                  key={index}
+                >
+                  <CustomCard
+                    content={{
+                      image: items.imageUrl,
+                      heading: items.title,
+                      ...items,
+
+                      description: description,
+                      primaryBtn: {
+                        btnText: "View Details",
+                        onClick: () => {
+                          handleEventCard({
+                            heading: items.title,
+                            status: items.chipTemplate.chipText?.toLowerCase(),
+                            description: description,
+                            type: items.type,
+                            mapUrl: items.mapUrl,
+                            youtubeUrl: items.youtubeUrl,
+                          });
+                        },
+                      },
+                    }}
+                  />
+                </Box>
+              );
+            })
+        )}
       </Container>
       {/* <Pagination count={10} shape="rounded" /> */}
     </Container>

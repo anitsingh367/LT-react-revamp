@@ -1,4 +1,4 @@
-import { Container,Modal, ImageListItem } from "@mui/material";
+import { Container, Modal, ImageListItem } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 
 const style = {

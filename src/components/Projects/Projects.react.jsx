@@ -1,5 +1,4 @@
 // Import npm packages
-import {useEffect,useState} from "react";
 import { Typography, Container, ButtonBase } from "@mui/material";
 import PropTypes from "prop-types";
 import CustomCard from "../Card/CustomCard.react";
