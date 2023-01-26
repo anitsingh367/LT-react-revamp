@@ -107,7 +107,7 @@ function DrawerAppBar(props) {
         </Link>
         <Link to="/video" className="link" onClick={handleDrawerToggle}>
           <ListItemButton>
-            <ListItemText primary="Video Section" />
+            <ListItemText primary="Videos" />
           </ListItemButton>
         </Link>
         <ListItemButton>
@@ -186,7 +186,7 @@ function DrawerAppBar(props) {
               <Button variant="h6">Projects</Button>
             </Link>
             <Link to="/video" className="link">
-              <Button variant="h6">Video Section</Button>
+              <Button variant="h6">Videos</Button>
             </Link>
             <Button variant="contained" onClick={handleVolunteerButton}>
               Become Volunteer
