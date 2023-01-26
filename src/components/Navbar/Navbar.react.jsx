@@ -81,11 +81,15 @@ function DrawerAppBar(props) {
             <ListItemText primary="About" />
           </ListItemButton>
         </Link>
-
-        <ListItemButton onClick={handleClickArticle}>
+        <Link to="/events" className="link" onClick={handleDrawerToggle}>
+          <ListItemButton>
+            <ListItemText primary="Events" />
+          </ListItemButton>
+        </Link>
+        {/* <ListItemButton onClick={handleClickArticle}>
           <ListItemText primary="Articles" />
           {openArticle ? <ExpandLess /> : <ExpandMore />}
-        </ListItemButton>
+        </ListItemButton> */}
         <Collapse in={openArticle} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
             <ListItemButton sx={{ pl: 4 }}>
@@ -169,12 +173,15 @@ function DrawerAppBar(props) {
             <Link to="/about" className="link">
               <Button variant="h6">About</Button>
             </Link>
-            <CustomizedMenus
+            {/* <CustomizedMenus
               content={{
                 title: "Articles",
                 options: ["English Articles", "Punjabi Aricles"],
               }}
-            />
+            /> */}
+            <Link to="/events" className="link">
+              <Button variant="h6">Events</Button>
+            </Link>
             <Link to="/projects" className="link">
               <Button variant="h6">Projects</Button>
             </Link>
