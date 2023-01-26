@@ -13,6 +13,7 @@ import {
   Box,
   SvgIcon,
   IconButton,
+  Container,
 } from "@mui/material";
 
 import defaultImage from "../../assets/default-card-image.jpg";
@@ -68,7 +69,16 @@ CustomCard.defaultProps = {
   },
 };
 
+function extractContent(s) {
+  var span = document.createElement('span');
+  span.innerHTML = s;
+  return span.textContent || span.innerText;
+};
+
 export default function CustomCard(props) {
+
+  let description = extractContent(props.content?.description);
+
   return (
     <Card
       sx={{
@@ -80,7 +90,8 @@ export default function CustomCard(props) {
         "&:hover": {
           boxShadow: props.content?.hoverEffect ? 1 : 4,
         },
-      }}>
+      }}
+    >
       <CardMedia
         component="img"
         image={props.content?.image ? props.content.image : defaultImage}
@@ -92,17 +103,28 @@ export default function CustomCard(props) {
           sx={{
             display: "flex",
             justifyContent: "space-between",
-            alignItems: "center",
-          }}>
-          <Typography className="truncate" variant="h6" component="div">
-            {props.content?.heading}
-          </Typography>
+            alignItems: "flex-start",
+          }}
+        >
+          <Container sx={{ padding: "0 !important" }} className="truncate">
+            <Typography className="truncate" variant="h6" component="div">
+              {props.content?.heading}
+            </Typography>
+            {props.content?.type && (
+              <Typography variant="body2" sx={{ color: "#388E3C" }}>
+                {props.content?.type.charAt(0).toUpperCase() +
+                  props.content?.type.slice(1)}
+              </Typography>
+            )}
+          </Container>
+
           {props.content.chipTemplate && (
             <Chip
               size="small"
               sx={{
                 color: `${props.content.chipTemplate.textColor} !important`,
                 textTransform: "uppercase",
+                marginTop: "0.2rem",
               }}
               icon={
                 props.content.chipTemplate.icon && (
@@ -126,8 +148,9 @@ export default function CustomCard(props) {
           className="event-line-clamp"
           variant="body2"
           color="text.secondary"
-          gutterBottom={!!!props.content.actionIcon}>
-          {props.content?.description}
+          gutterBottom={!!!props.content.actionIcon}
+        >
+          {description}
         </Typography>
       </CardContent>
       {props.content?.secondaryBtns && (
@@ -141,9 +164,8 @@ export default function CustomCard(props) {
                 color="primary"
                 onClick={buttons.onClick}
                 sx={{ flex: 1, color: "primary.contrastText" }}
-                startIcon={
-                  buttons.icon && <SvgIcon component={buttons.icon} />
-                }>
+                startIcon={buttons.icon && <SvgIcon component={buttons.icon} />}
+              >
                 {buttons.btnText}
               </Button>
             );
@@ -158,7 +180,8 @@ export default function CustomCard(props) {
             justifyContent: "space-between",
             marginTop: props.content?.secondaryBtns ? 0 : "auto",
             padding: "0.1rem 0.5rem",
-          }}>
+          }}
+        >
           <Button
             sx={{ color: "secondary.main" }}
             size="small"
@@ -167,7 +190,8 @@ export default function CustomCard(props) {
               props.content.primaryBtn?.btnIcon && (
                 <SvgIcon component={props.content.primaryBtn.btnIcon} />
               )
-            }>
+            }
+          >
             {props.content?.primaryBtn?.btnText}
           </Button>
           {props.content.actionIcon && (

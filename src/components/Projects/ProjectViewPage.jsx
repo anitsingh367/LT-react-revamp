@@ -1,20 +1,20 @@
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
-import { Navigation } from "swiper";
+// import { Navigation } from "swiper";
 import useHashRouteToggle from "../../customHooks/useHashRouteToggle";
 import {
   Avatar,
-  Box,
+  // Box,
   Typography,
   Container,
-  LinearProgress,
-  Button,
+  // LinearProgress,
+  // Button,
   ImageList,
   ImageListItem,
   ImageListItemBar,
 } from "@mui/material";
-import { Swiper, SwiperSlide } from "swiper/react";
-import data from "../../data/imgDB";
+// import { Swiper, SwiperSlide } from "swiper/react";
+// import data from "../../data/imgDB";
 
 import IconButton from "@mui/material/IconButton";
 import AddIcon from "@mui/icons-material/Add";
@@ -40,38 +40,6 @@ const itemData = [
     img: "https://images.unsplash.com/photo-1444418776041-9c7e33cc5a9c",
     title: "Coffee",
   },
-  {
-    img: "https://images.unsplash.com/photo-1533827432537-70133748f5c8",
-    title: "Hats",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1558642452-9d2a7deb7f62",
-    title: "Honey",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1516802273409-68526ee1bdd6",
-    title: "Basketball",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1518756131217-31eb79b20e8f",
-    title: "Fern",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1597645587822-e99fa5d45d25",
-    title: "Mushrooms",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1567306301408-9b74779a11af",
-    title: "Tomato basil",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1471357674240-e1a485acb3e1",
-    title: "Sea star",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1589118949245-7d38baf380d6",
-    title: "Bike",
-  },
 ];
 const ProjectViewPage = () => {
   const location = useLocation();
@@ -80,9 +48,9 @@ const ProjectViewPage = () => {
   const [openContributeModal, setOpenContributeModal] =
     useHashRouteToggle("contribute"); //useHasRouteToggle is used for controlling browser back button
 
-  const handleContributeModal = (value) => {
-    setOpenContributeModal(true);
-  };
+  // const handleContributeModal = (value) => {
+  //   setOpenContributeModal(true);
+  // };
 
   const [selectedImage, setSelectedImage] = useState("");
   const [isImageModalOpen, setImageModalOpen] = useState(false);
@@ -142,7 +110,7 @@ const ProjectViewPage = () => {
             />
           </Container>
         )}
-
+        {/* 
         <Container
           sx={{
             marginTop: "2rem",
@@ -200,9 +168,9 @@ const ProjectViewPage = () => {
           >
             Donate Now
           </Button>
-        </Container>
+        </Container> */}
         <Container sx={{ display: "flex", flexDirection: "column", gap: 5 }}>
-          <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+          {/* <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
             <Typography variant="h5" sx={{ color: "gray", marginTop: "2rem" }}>
               APUN KE PUNTERS
             </Typography>
@@ -265,70 +233,71 @@ const ProjectViewPage = () => {
                 </Swiper>
               </Container>
             </Container>
-          </Box>
+          </Box> */}
 
           {state && (
             <Typography
               variant="body1"
               sx={{ lineHeight: "1.7rem" }}
               color="secondary"
-            >
-              {state.description}
-            </Typography>
+              dangerouslySetInnerHTML={{ __html: state.description }}
+            ></Typography>
           )}
         </Container>
-        <Container>
-          <ImageList cols={3} gap={10} sx={{ padding: "0.5rem" }}>
-            {itemData.slice(0, 6).map((item, index) => (
-              <ImageListItem
-                key={item.img}
-                onClick={() => {
-                  handleImageClick(item.img, index);
-                }}
-                sx={{
-                  cursor: "pointer",
-                  transition: "all 0.2s",
-                  opacity: 0.8,
-                  "&:hover": {
-                    transform: index !== 5 && "scale(1.02)",
-                    opacity: 1,
-                  },
-                }}
-              >
-                <img
-                  src={`${item.img}?w=200&h=200&fit=crop&auto=format`}
-                  srcSet={`${item.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
-                  alt={item.title}
-                  loading="lazy"
-                />
-                {index === 5 && (
-                  <ImageListItemBar
-                    title={"View More"}
-                    sx={{
-                      height: "100%",
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "flex-end",
-                      "&:hover": {
-                        backgroundColor: "rgba(0, 0, 0, 0.5)",
-                      },
-                    }}
-                    actionIcon={
-                      <IconButton
-                        sx={{
-                          color: "rgba(255, 255, 255, 0.54)",
-                        }}
-                        aria-label={`info about ${item.title}`}
-                      >
-                        <AddIcon />
-                      </IconButton>
-                    }
+        {itemData?.length > 0 && (
+          <Container>
+            <ImageList cols={3} gap={10} sx={{ padding: "0.5rem" }}>
+              {itemData.slice(0, 6).map((item, index) => (
+                <ImageListItem
+                  key={item.img}
+                  onClick={() => {
+                    handleImageClick(item.img, index);
+                  }}
+                  sx={{
+                    cursor: "pointer",
+                    transition: "all 0.2s",
+                    opacity: 0.8,
+                    "&:hover": {
+                      transform: index !== 5 && "scale(1.02)",
+                      opacity: 1,
+                    },
+                  }}
+                >
+                  <img
+                    src={`${item.img}?w=200&h=200&fit=crop&auto=format`}
+                    srcSet={`${item.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
+                    alt={item.title}
+                    loading="lazy"
                   />
-                )}
-              </ImageListItem>
-            ))}
-          </ImageList>
-        </Container>
+                  {index === 5 && (
+                    <ImageListItemBar
+                      title={"View More"}
+                      sx={{
+                        height: "100%",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "flex-end",
+                        "&:hover": {
+                          backgroundColor: "rgba(0, 0, 0, 0.5)",
+                        },
+                      }}
+                      actionIcon={
+                        <IconButton
+                          sx={{
+                            color: "rgba(255, 255, 255, 0.54)",
+                          }}
+                          aria-label={`info about ${item.title}`}
+                        >
+                          <AddIcon />
+                        </IconButton>
+                      }
+                    />
+                  )}
+                </ImageListItem>
+              ))}
+            </ImageList>
+          </Container>
+        )}
 
         <ImageModal
           img={selectedImage}

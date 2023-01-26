@@ -1,4 +1,4 @@
-import React from "react";
+import { useState, useEffect } from "react";
 import {
   List,
   ListItem,
@@ -14,26 +14,23 @@ import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import { Link } from "react-router-dom";
+import { getEventDetails } from "../../firebase";
 
 const Footer = () => {
-  const upcomingEvents = [
-    {
-      id: 1,
-      title: "GURBANI SEMINAR - GRATITUDE",
-    },
-    {
-      id: 2,
-      title: "GURBANI DE CHANAN CH AKHAN - TIK JANA",
-    },
-    {
-      id: 3,
-      title: "GURBANI DE CHANAN CH AKHAN - VEEH VISVAY YAKEEN HONA",
-    },
-    {
-      id: 4,
-      title: "GURBANI DE CHANAN CH AKHAN - RETHARIA DA PARSAD",
-    },
-  ];
+  const [eventTitle, setEventTitle] = useState([
+    "GURBANI SEMINAR - GRATITUDE",
+    "GURBANI DE CHANAN CH AKHAN - TIK JANA",
+    "GURBANI DE CHANAN CH AKHAN - VEEH VISVAY YAKEEN HONA",
+    "GURBANI DE CHANAN CH AKHAN - RETHARIA DA PARSAD",
+  ]);
+  
+  useEffect(() => {
+    getEventDetails().then((data) => {
+      let eventTitle = data.map((item) => item.title);
+      setEventTitle(eventTitle);
+    });
+  }, []);
+
   return (
     <>
       <Box
@@ -94,7 +91,12 @@ const Footer = () => {
                 marginTop: "1rem",
               }}
             >
-              Know More
+              <Link
+                to="/about"
+                style={{ textDecoration: "none", color: "#fff" }}
+              >
+                Know More
+              </Link>
             </Button>
           </List>
           <List
@@ -113,7 +115,7 @@ const Footer = () => {
             >
               UPCOMING EVENTS
             </ListSubheader>
-            {upcomingEvents.map((item, index) => {
+            {eventTitle?.map((item, index) => {
               return (
                 <div key={index}>
                   <ListItem
@@ -121,7 +123,7 @@ const Footer = () => {
                     disablePadding
                     sx={{ color: "secondary.contrastText" }}
                   >
-                    <ListItemText>{item.title}</ListItemText>
+                    <ListItemText>{item}</ListItemText>
                   </ListItem>
                 </div>
               );
@@ -147,13 +149,23 @@ const Footer = () => {
             <ListItem
               sx={{
                 color: "secondary.contrastText",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "flex-start",
               }}
               disableGutters
               disablePadding
             >
+              <ListItemText primary="THE LIVING TREASURE 109," />
+              <ListItemText primary="S.P Mukherji Park," />
               <ListItemText
-                primary="THE LIVING TREASURE 109, S.P Mukherji Park, Near Tilak Nagar,
-                New Delhi-110018 (India)"
+                primary="Near Tilak Nagar,"
+              />
+              <ListItemText
+                primary="New Delhi-110018"
+              />
+                 <ListItemText
+                primary="India"
               />
             </ListItem>
 
@@ -202,12 +214,7 @@ const Footer = () => {
             }}
           >
             Copyright 2022.{" "}
-            <Link
-              to="/terms-and-conditions"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{ color: "inherit" }}
-            >
+            <Link to="/terms-and-conditions" style={{ color: "inherit" }}>
               <span style={{ color: "#fff" }}>Terms and Condtions</span>
             </Link>{" "}
             All Rights Reserved by The Living Treasure.

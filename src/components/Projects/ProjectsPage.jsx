@@ -8,7 +8,7 @@ import {
   ToggleButton,
   ToggleButtonGroup,
   Box,
-  Pagination,
+  // Pagination,
   MenuItem,
   Select,
 } from "@mui/material";
@@ -18,6 +18,8 @@ import { useLocation } from "react-router-dom";
 import ContributeModal from "../Modal/ContributeModal.react";
 import VolunteerModal from "../VolunteerModal/VolunteerModal.react";
 import useHashRouteToggle from "../../customHooks/useHashRouteToggle";
+import { getProjectDetails } from "../../firebase";
+import SkeletonCard from "../SkeletonCard/SkeletonCard";
 
 ProjectsPage.propTypes = {
   //=======================================
@@ -54,84 +56,6 @@ ProjectsPage.defaultProps = {
   //=======================================
   // Component Specific props
   //=======================================
-  content: [
-    {
-      projectId: "1",
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqu39eyj7mkHZ2gnUmKmU9smZN8F3mI7xeC2DFXhTWwOSiL7JaliiMiC8NF3hZK-m1AD8&usqp=CAU",
-      heading: "Ongoing Projects",
-      description:
-        "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus laudantium, voluptate harum iste sunt optio quo maxime repellat et mollitia.",
-      category: "Education",
-      status: "Ongoing",
-    },
-    {
-      projectId: "2",
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWwB29eRCxE1_92bxreaZ5tsnqgQFgHScAFEA4nn4vpiMfLX-h1j-RhnZfCo9_IcFNx4E&usqp=CAU",
-      heading: "Ongoing Projects",
-      description:
-        "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus laudantium, voluptate harum iste sunt optio quo maxime repellat et mollitia.",
-      category: "Education",
-      status: "Ongoing",
-    },
-    {
-      projectId: "3",
-      image:
-        "https://images.unsplash.com/photo-1550330562-b055aa030d73?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
-      heading: "Future Projects",
-      description:
-        "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus laudantium, voluptate harum iste sunt optio quo maxime repellat et mollitia.",
-      category: "Medical",
-      status: "Future",
-    },
-    {
-      projectId: "4",
-      image: "",
-      heading: "Accomplished 4",
-      description:
-        "In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content.",
-      category: "Medical",
-      status: "Accomplished",
-    },
-    {
-      projectId: "5",
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqu39eyj7mkHZ2gnUmKmU9smZN8F3mI7xeC2DFXhTWwOSiL7JaliiMiC8NF3hZK-m1AD8&usqp=CAU",
-      heading: "Future 1",
-      description: "Description 1",
-      category: "Medical",
-      status: "Future",
-    },
-    {
-      projectId: "6",
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWwB29eRCxE1_92bxreaZ5tsnqgQFgHScAFEA4nn4vpiMfLX-h1j-RhnZfCo9_IcFNx4E&usqp=CAU",
-      heading: "Future 2",
-      description: "Description 2",
-      category: "Education",
-      status: "Future",
-    },
-    {
-      projectId: "7",
-      image:
-        "https://images.unsplash.com/photo-1550330562-b055aa030d73?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
-      heading: "Future 3",
-      description:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia, molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium optio, eaque rerum! Provident similique accusantium nemo autem. Veritatis obcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam nihil, eveniet aliquid culpa officia aut! Impedit sit sunt quaerat, odit, tenetur error, harum nesciunt ipsum debitis quas aliquid. Reprehenderit, quia. Quo neque error repudiandae fuga? Ipsa laudantium molestias eos apiente officiis modi at sunt excepturi expedita sint? Sed quibusdam recusandae alias error harum maxime adipisci amet laborum. Perspiciatis  minima nesciunt dolorem! Officiis iure rerum voluptates a cumque velit  quibusdam sed amet tempora. Sit laborum ab, eius fugit doloribus tenetur  fugiat, temporibus enim commodi iusto libero magni deleniti quod quam  consequuntur! Commodi minima excepturi repudiandae velit hic maximes!",
-      category: "Medical",
-      status: "Future",
-    },
-    {
-      projectId: "8",
-      image: "",
-      heading: "Ongoing 4",
-      description:
-        "In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content.",
-      category: "Education",
-      status: "Ongoing",
-    },
-  ],
 };
 export default function ProjectsPage(props) {
   const location = useLocation();
@@ -140,7 +64,7 @@ export default function ProjectsPage(props) {
   const [status, setStatus] = useState(
     location?.state?.status ? location?.state?.status : "All"
   );
-  const [projectFilter, setProjectFilter] = useState(props.content);
+  const [projectFilter, setProjectFilter] = useState([]);
 
   //Handle Category filter
   const handleChangeToggle = (event) => {
@@ -154,8 +78,19 @@ export default function ProjectsPage(props) {
     setStatus(event.target.value);
   };
 
+  const [projectDetails, setProjectDetails] = useState([]);
+
+  const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
-    const filteredData = props.content.filter((item) => {
+    getProjectDetails().then((data) => {
+      setProjectDetails(data);
+      setIsLoading(false);
+    });
+  }, []);
+
+  useEffect(() => {
+    const filteredData = projectDetails?.filter((item) => {
       let itemCategory = item.category;
       let itemStatus = item.status;
       return category === "All" && status === "All"
@@ -167,7 +102,7 @@ export default function ProjectsPage(props) {
         : itemCategory === category && itemStatus === status;
     });
     setProjectFilter(filteredData);
-  }, [category, status, props.content]);
+  }, [category, status, projectDetails]);
 
   const [openContributeModal, setOpenContributeModal] =
     useHashRouteToggle("contribute"); //useHasRouteToggle is used for controlling browser back button
@@ -201,6 +136,9 @@ export default function ProjectsPage(props) {
       setViewDetail(true);
     }
   }, [projectId]);
+
+  //Skeleton Loader initial state
+  let skeletonCards = Array(3).fill(0);
 
   return (
     <>
@@ -293,51 +231,68 @@ export default function ProjectsPage(props) {
               width: "100%",
             }}
           >
-            {projectFilter?.map((items, index) => {
-              return (
-                <Box
-                  sx={{
-                    height: "auto",
-                    width: "18.5rem",
-                    margin: { xl: 2.5, lg: 2, md: 2, sm: 1.5, xs: 1 },
-                  }}
-                  key={index}
-                >
-                  <CustomCard
-                    content={{
-                      image: items.image,
-                      heading: items.heading,
-                      description: items.description,
-                      chipTemplate: { chipText: items.category },
-                      primaryBtn: {
-                        btnText: "View Details",
-                        onClick: () => {
-                          setViewDetail(true);
-                          handleDetail(items);
-                        },
-                      },
-                      actionIcon: ShareIcon,
-                      secondaryBtns: [
-                        {
-                          btnText: "Contribute",
-                          onClick: () => {
-                            handleContributeModal(items.heading);
-                          },
-                        },
-                        {
-                          btnText: "Volunteer",
-                          onClick: () => {
-                            handleVolunteerModal(items.heading);
-                          },
-                        },
-                      ],
+            {isLoading ? (
+              skeletonCards.map((item) => {
+                return <SkeletonCard />;
+              })
+            ) : projectFilter.length === 0 ? (
+              <Container
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  height: "200px",
+                }}
+              >
+                <Typography>Oops! No Data found</Typography>
+              </Container>
+            ) : (
+              projectFilter?.map((items, index) => {
+                return (
+                  <Box
+                    sx={{
+                      height: "auto",
+                      width: "18.5rem",
+                      margin: { xl: 2.5, lg: 2, md: 2, sm: 1.5, xs: 1 },
                     }}
-                  />
-                </Box>
-              );
-            })}
+                    key={index}
+                  >
+                    <CustomCard
+                      content={{
+                        image: items.image,
+                        heading: items.heading,
+                        description: items.description,
+                        chipTemplate: { chipText: items.category },
+                        primaryBtn: {
+                          btnText: "View Details",
+                          onClick: () => {
+                            setViewDetail(true);
+                            handleDetail(items);
+                          },
+                        },
+                        actionIcon: ShareIcon,
+                        secondaryBtns: [
+                          {
+                            btnText: "Contribute",
+                            onClick: () => {
+                              handleContributeModal(items.heading);
+                            },
+                          },
+                          {
+                            btnText: "Volunteer",
+                            onClick: () => {
+                              handleVolunteerModal(items.heading);
+                            },
+                          },
+                        ],
+                      }}
+                    />
+                  </Box>
+                );
+              })
+            )}
           </Container>
-          <Pagination count={10} shape="rounded" />
+          {/* <Pagination count={10} shape="rounded" /> */}
         </Container>
       )}
     </>

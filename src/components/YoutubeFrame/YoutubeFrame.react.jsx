@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
 import React from "react";
 
-const YoutubeFrame = () => {
+const YoutubeFrame = (props) => {
   return (
     <Box
       sx={{
@@ -12,7 +12,7 @@ const YoutubeFrame = () => {
       <iframe
         height="100%"
         width="100%"
-        src="https://www.youtube.com/embed/7fEufzRcpXs"
+        src={`https://www.youtube.com/embed/${props.youtubeUrl}`}
         title="YouTube video player"
         frameBorder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

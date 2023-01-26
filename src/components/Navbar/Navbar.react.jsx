@@ -11,15 +11,15 @@ import {
   ListItemText,
   Toolbar,
   Button,
-  Collapse,
+  // Collapse,
   Divider,
 } from "@mui/material";
 
 import logo from "../../assets/Logo.png";
 import MenuIcon from "@mui/icons-material/Menu";
-import CustomizedMenus from "./CustomizedMenus.react";
-import ExpandLess from "@mui/icons-material/ExpandLess";
-import ExpandMore from "@mui/icons-material/ExpandMore";
+// import CustomizedMenus from "./CustomizedMenus.react";
+// import ExpandLess from "@mui/icons-material/ExpandLess";
+// import ExpandMore from "@mui/icons-material/ExpandMore";
 import ContributeModal from "../Modal/ContributeModal.react";
 import VolunteerModal from "../VolunteerModal/VolunteerModal.react";
 
@@ -36,11 +36,11 @@ function DrawerAppBar(props) {
     setMobileOpen(!mobileOpen);
   };
 
-  const [openArticle, setOpenArticle] = useState(false);
+  // const [openArticle, setOpenArticle] = useState(false);
 
-  const handleClickArticle = () => {
-    setOpenArticle(!openArticle);
-  };
+  // const handleClickArticle = () => {
+  //   setOpenArticle(!openArticle);
+  // };
 
   const [openContributeModal, setOpenContributeModal] =
     useHashRouteToggle("contribute"); //useHasRouteToggle is used for controlling browser back button
@@ -81,12 +81,16 @@ function DrawerAppBar(props) {
             <ListItemText primary="About" />
           </ListItemButton>
         </Link>
-
-        <ListItemButton onClick={handleClickArticle}>
+        <Link to="/events" className="link" onClick={handleDrawerToggle}>
+          <ListItemButton>
+            <ListItemText primary="Events" />
+          </ListItemButton>
+        </Link>
+        {/* <ListItemButton onClick={handleClickArticle}>
           <ListItemText primary="Articles" />
           {openArticle ? <ExpandLess /> : <ExpandMore />}
-        </ListItemButton>
-        <Collapse in={openArticle} timeout="auto" unmountOnExit>
+        </ListItemButton> */}
+        {/* <Collapse in={openArticle} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
             <ListItemButton sx={{ pl: 4 }}>
               <ListItemText primary="English Articls" />
@@ -95,7 +99,7 @@ function DrawerAppBar(props) {
               <ListItemText primary="Punjabi Articls" />
             </ListItemButton>
           </List>
-        </Collapse>
+        </Collapse> */}
         <Link to="/projects" className="link" onClick={handleDrawerToggle}>
           <ListItemButton>
             <ListItemText primary="Projects" />
@@ -169,12 +173,15 @@ function DrawerAppBar(props) {
             <Link to="/about" className="link">
               <Button variant="h6">About</Button>
             </Link>
-            <CustomizedMenus
+            {/* <CustomizedMenus
               content={{
                 title: "Articles",
                 options: ["English Articles", "Punjabi Aricles"],
               }}
-            />
+            /> */}
+            <Link to="/events" className="link">
+              <Button variant="h6">Events</Button>
+            </Link>
             <Link to="/projects" className="link">
               <Button variant="h6">Projects</Button>
             </Link>

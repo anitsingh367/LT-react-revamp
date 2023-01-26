@@ -5,6 +5,7 @@ import CustomCard from "../Card/CustomCard.react";
 import { Box } from "@mui/system";
 import { useNavigate } from "react-router-dom";
 
+
 Projects.propTypes = {
   //=======================================
   // Component Specific props
@@ -57,6 +58,7 @@ export default function Projects(props) {
       },
     });
   };
+
 
   return (
     <Container

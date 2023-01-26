@@ -1,5 +1,5 @@
 // Import npm packages
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import moment from "moment";
 import useHashRouteToggle from "../../customHooks/useHashRouteToggle";
@@ -7,13 +7,15 @@ import { Link } from "react-router-dom";
 // Import other packages
 import { Button, Typography, Container, Box } from "@mui/material";
 import {
-  Share as ShareIcon,
+  // Share as ShareIcon,
   FiberManualRecord as LiveDot,
 } from "@mui/icons-material";
 
 import CustomCard from "../Card/CustomCard.react";
 import EventModal from "../EventModal/EventModal.react";
 import "./Events.scss";
+
+import { getEventDetails } from "../../firebase";
 
 Events.propTypes = {
   //=======================================
@@ -32,60 +34,7 @@ Events.defaultProps = {
   //=======================================
   // Component Specific props
   //=======================================
-  content: [
-    {
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqu39eyj7mkHZ2gnUmKmU9smZN8F3mI7xeC2DFXhTWwOSiL7JaliiMiC8NF3hZK-m1AD8&usqp=CAU",
-      heading: "This must be upcoming",
-      description:
-        "A New India Together fsdhfjsdhf sdkjfsdjkfhsdkj fhsdkjfhsdkjfhsdfkjsdhf ksjdfhsdkjfh sdkjfshdfkjsdfhkjsdhfksdjhfsd kjf fhdjshfksjd fhskdjfhskdjfh sdkjfhsdf kj sdfh",
-      date: {
-        start_date: "2023-09-06 19:00:00",
-        end_date: "2023-09-06 22:00:00",
-      },
-    },
-    {
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWwB29eRCxE1_92bxreaZ5tsnqgQFgHScAFEA4nn4vpiMfLX-h1j-RhnZfCo9_IcFNx4E&usqp=CAU",
-      heading: "This must be finished",
-      description: "Description 2",
-      date: {
-        start_date: "2022-09-05 20:00:00",
-        end_date: "2023-09-05 22:00:00",
-      },
-    },
-    {
-      image:
-        "https://images.unsplash.com/photo-1550330562-b055aa030d73?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
-      heading: "This must be live",
-      description: "Description 3",
-      date: {
-        start_date: "2023-09-06 19:00:00",
-        end_date: "2023-09-06 22:00:00",
-      },
-    },
-    {
-      image: "",
-      heading: "This must be upcoming",
-      description:
-        "In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content.",
-      date: {
-        start_date: "2023-09-06 19:00:00",
-        end_date: "2023-09-06 22:00:00",
-      },
-    },
-    {
-      image: "",
-      heading: "This must be upcoming",
-      description:
-        "In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content.",
-      date: {
-        start_date: "2022-09-05 20:00:00",
-        end_date: "2023-09-05 22:00:00",
-      },
-    },
-  ],
-};
+}
 
 export default function Events(props) {
   const statusColor = {
@@ -94,9 +43,17 @@ export default function Events(props) {
     finished: "#999999",
   };
 
-  const newEventList = props.content.map((items) => {
-    const startDate = items.date?.start_date;
-    const endDate = items.date?.end_date;
+  const [eventDetails, setEventDetails] = useState([]);
+
+  useEffect(() => {
+    getEventDetails().then((data) => {
+      setEventDetails(data);
+    });
+  }, []);
+
+  const newEventList = eventDetails.map((items) => {
+    const startDate = items.date?.startDate;
+    const endDate = items.date?.endDate;
 
     if (moment().isBetween(startDate, endDate)) {
       items["chipTemplate"] = {
@@ -124,6 +81,9 @@ export default function Events(props) {
     heading: "",
     status: "",
     description: "",
+    type: "",
+    mapUrl: "",
+    youtubeUrl: "",
   });
 
   const handleEventCard = (selectedData) => {
@@ -132,6 +92,9 @@ export default function Events(props) {
       heading: selectedData.heading,
       status: selectedData.status,
       description: selectedData.description,
+      type: selectedData.type,
+      mapUrl: selectedData.mapUrl,
+      youtubeUrl: selectedData.youtubeUrl,
     });
   };
 
@@ -142,13 +105,17 @@ export default function Events(props) {
         flexDirection: "column",
         alignItems: "center",
         marginTop: "2rem",
-      }}>
+      }}
+    >
       <EventModal
         isOpen={openEventModal}
         onClose={(value) => setOpenEventModal(value)}
         heading={selectedEvent.heading}
         status={selectedEvent.status}
         description={selectedEvent.description}
+        type={selectedEvent.type}
+        mapUrl={selectedEvent.mapUrl}
+        youtubeUrl={selectedEvent.youtubeUrl}
         onSubmit={(value) => {
           setOpenEventModal(value);
         }}
@@ -160,7 +127,8 @@ export default function Events(props) {
           fontWeight: "bold",
           padding: "1rem",
           textAlign: "center",
-        }}>
+        }}
+      >
         <span style={{ color: "var(--primary-color)" }}> events </span> at the
         living treasure
       </Typography>
@@ -172,18 +140,19 @@ export default function Events(props) {
           gridTemplateColumns: "repeat(4, 1fr)",
           justifyItems: "stretch",
           alignContent: "center",
-        }}>
+        }}
+      >
         {newEventList
-          ?.slice(0, 8)
+          ?.slice(0, 5)
           .sort(
-            (a, b) => new Date(a.date.start_date) - new Date(b.date.start_date)
+            (a, b) => new Date(a.date.startDate) - new Date(b.date.endDate)
           )
           .filter((items) => {
             return items.chipTemplate.chipText !== "Finished";
           })
           .map((items, index) => {
-            const startDate = items.date?.start_date;
-            const endDate = items.date?.end_date;
+            const startDate = items.date?.startDate;
+            const endDate = items.date?.endDate;
             const readableStartDate = moment(startDate).format("llll");
             const readbleEndDate = moment(endDate).format("h:mm A");
             const description =
@@ -193,34 +162,40 @@ export default function Events(props) {
               <Box
                 sx={{
                   height: "auto",
-                  width: "auto",
+                  width: { lg: "21rem", md: "auto", sm: "auto" },
                   margin: { xl: 2.5, lg: 2, md: 2, sm: 1.5, xs: 1 },
                 }}
                 className="event-card"
-                key={index}>
+                key={index}
+              >
                 <CustomCard
                   content={{
+                    image: items.imageUrl,
+                    heading: items.title,
                     ...items,
-
                     description: description,
+                    type: items.type,
                     primaryBtn: {
                       btnText: "View Details",
                       onClick: () => {
                         handleEventCard({
-                          heading: items.heading,
+                          heading: items.title,
                           status: items.chipTemplate.chipText?.toLowerCase(),
                           description: description,
+                          type: items.type,
+                          mapUrl: items.mapUrl,
+                          youtubeUrl: items.youtubeUrl,
                         });
                       },
                     },
-                    actionIcon: ShareIcon,
                   }}
                 />
               </Box>
             );
           })}
       </Container>
-      {props.content && props.content?.length > 0 && (
+      
+      {newEventList && newEventList?.length > 0 && (
         <Link to="/events" className="link">
           <Button variant="contained" color="primary" sx={{ margin: "1rem" }}>
             View All
