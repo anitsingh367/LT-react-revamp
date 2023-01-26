@@ -46,3 +46,15 @@ export const getProjectDetails = async () => {
 
   return arr;
 };
+
+export const getHomePageVideo = async () => {
+  let arr = [];
+  const q = query(collection(db, "HomePage"));
+
+  const querySnapshot = await getDocs(q);
+  querySnapshot.forEach((doc) => {
+    arr.push(doc.data());
+  });
+
+  return arr;
+};

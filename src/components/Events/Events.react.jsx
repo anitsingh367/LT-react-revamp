@@ -34,7 +34,7 @@ Events.defaultProps = {
   //=======================================
   // Component Specific props
   //=======================================
-}
+};
 
 export default function Events(props) {
   const statusColor = {
@@ -50,32 +50,50 @@ export default function Events(props) {
       setEventDetails(data);
     });
   }, []);
+  const currentDate = new Date();
+  const newEventList = eventDetails
+    ?.sort((a, b) => {
+      let aDate = new Date(a.date?.startDate);
+      let bDate = new Date(b.date?.startDate);
+      let aEndDate = new Date(a.date?.endDate);
+      let bEndDate = new Date(b.date?.endDate);
 
-  const newEventList = eventDetails.map((items) => {
-    const startDate = items.date?.startDate;
-    const endDate = items.date?.endDate;
+      if (aDate < currentDate && aEndDate > currentDate) {
+        return -1;
+      } else if (bDate < currentDate && bEndDate > currentDate) {
+        return 1;
+      } else if (aDate > currentDate && bDate > currentDate) {
+        return aDate - bDate;
+      } else {
+        return bEndDate - aEndDate;
+      }
+    })
+    .map((items) => {
+      const startDate = items.date?.startDate;
+      const endDate = items.date?.endDate;
 
-    if (moment().isBetween(startDate, endDate)) {
-      items["chipTemplate"] = {
-        icon: LiveDot,
-        chipText: "Live",
-        textColor: statusColor.live,
-        iconColor: statusColor.live,
-      };
-    } else if (moment().isBefore(startDate)) {
-      items["chipTemplate"] = {
-        chipText: "Upcoming",
-        textColor: statusColor.upcoming,
-      };
-    } else if (moment().isAfter(endDate)) {
-      items["chipTemplate"] = {
-        chipText: "Finished",
-        textColor: statusColor.finished,
-      };
-    }
+      if (moment().isBetween(startDate, endDate)) {
+        items["chipTemplate"] = {
+          icon: LiveDot,
+          chipText: "Live",
+          textColor: statusColor.live,
+          iconColor: statusColor.live,
+        };
+      } else if (moment().isBefore(startDate)) {
+        items["chipTemplate"] = {
+          chipText: "Upcoming",
+          textColor: statusColor.upcoming,
+        };
+      } else if (moment().isAfter(endDate)) {
+        items["chipTemplate"] = {
+          chipText: "Finished",
+          textColor: statusColor.finished,
+        };
+      }
 
-    return items;
-  });
+      return items;
+    });
+
   const [openEventModal, setOpenEventModal] = useHashRouteToggle("event"); //useHasRouteToggle is used for controlling browser back button
   const [selectedEvent, setSelectedEvent] = useState({
     heading: "",
@@ -144,9 +162,6 @@ export default function Events(props) {
       >
         {newEventList
           ?.slice(0, 5)
-          .sort(
-            (a, b) => new Date(a.date.startDate) - new Date(b.date.endDate)
-          )
           .filter((items) => {
             return items.chipTemplate.chipText !== "Finished";
           })
@@ -194,7 +209,7 @@ export default function Events(props) {
             );
           })}
       </Container>
-      
+
       {newEventList && newEventList?.length > 0 && (
         <Link to="/events" className="link">
           <Button variant="contained" color="primary" sx={{ margin: "1rem" }}>
