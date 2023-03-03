@@ -182,15 +182,19 @@ export default function EventModal(props) {
               alignItems: "flex-start",
             }}
           >
-            <ListItemText
-              primary={
-                props.heading + " (" + props.type?.toUpperCase() + " EVENT)"
-              }
-              secondary={props.description}
+            <Container
               sx={{
                 flex: { lg: 3, md: 2, sm: "unset", xs: "unset" },
+                padding: '0 !important',
+                paddingLeft: '0.5rem !important'
               }}
-            />
+            >
+              <Typography >
+                {props.heading + " (" + props.type?.toUpperCase() + " EVENT)"}
+              </Typography>
+              <Typography dangerouslySetInnerHTML={{__html:props.description}}/>
+            </Container>
+
             <ListItemText
               primary={
                 `You can watch this event ` +
