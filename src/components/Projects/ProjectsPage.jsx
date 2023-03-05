@@ -13,7 +13,7 @@ import {
   Select,
 } from "@mui/material";
 import PropTypes from "prop-types";
-import ShareIcon from "@mui/icons-material/Share";
+
 import { useLocation } from "react-router-dom";
 import ContributeModal from "../ContributeModal/ContributeModal.react";
 import VolunteerModal from "../VolunteerModal/VolunteerModal.react";
@@ -232,8 +232,8 @@ export default function ProjectsPage(props) {
             }}
           >
             {isLoading ? (
-              skeletonCards.map((item) => {
-                return <SkeletonCard />;
+              skeletonCards.map((item, index) => {
+                return <SkeletonCard key={index} />;
               })
             ) : projectFilter.length === 0 ? (
               <Container
@@ -270,7 +270,7 @@ export default function ProjectsPage(props) {
                             handleDetail(items);
                           },
                         },
-                        actionIcon: ShareIcon,
+
                         secondaryBtns: [
                           {
                             btnText: "Contribute",

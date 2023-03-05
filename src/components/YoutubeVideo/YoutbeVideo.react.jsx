@@ -12,6 +12,9 @@ import PropTypes from "prop-types";
 import CustomCard from "../Card/CustomCard.react";
 import CircularProgress from "@mui/material/CircularProgress";
 
+import SkeletonCard from "../SkeletonCard/SkeletonCard";
+let skeletonCards = Array(3).fill(0);
+
 const YoutbeVideo = () => {
   YoutbeVideo.propTypes = {
     //=======================================
@@ -63,6 +66,7 @@ const YoutbeVideo = () => {
       const response = await fetch(youtubeAPI, options);
       const data = await response.json();
       setfetchVideo(data.items);
+      console.log(data);
       setIsLoading(false);
     };
     fetchVideo();
@@ -222,44 +226,60 @@ const YoutbeVideo = () => {
             width: "100%",
           }}
         >
-          {fetchVideo
-            ?.filter((filterItem) => {
-              return search.toLowerCase() === ""
-                ? filterItem
-                : filterItem.snippet.title
-                    .toLowerCase()
-                    .includes(search.toLowerCase());
+          {isLoading ? (
+            skeletonCards.map((item) => {
+              return <SkeletonCard />;
             })
-            ?.map((item, index) => {
-              return (
-                <Box
-                  sx={{
-                    height: "auto",
-                    width: "18.5rem",
-                    margin: { xl: 2.5, lg: 2, md: 2, sm: 1.5, xs: 1 },
-                  }}
-                  key={index}
-                >
-                  <CustomCard
-                    content={{
-                      ...item,
-                      heading: item.snippet.title,
-                      description: item.snippet.description,
-                      image: item.snippet.thumbnails.high.url,
-                      primaryBtn: {
-                        btnText: "Watch Now",
-                        onClick: () => {
-                          window.open(
-                            `https://www.youtube.com/watch?v=${item.id.videoId}`
-                          );
-                        },
-                      },
+          ) : fetchVideo?.length === 0 ? (
+            <Container
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <Typography>Oops! No Data found</Typography>
+            </Container>
+          ) : (
+            fetchVideo
+
+              ?.filter((filterItem) => {
+                return search.toLowerCase() === ""
+                  ? filterItem
+                  : filterItem.snippet.title
+                      .toLowerCase()
+                      .includes(search.toLowerCase());
+              })
+              ?.map((item, index) => {
+                return (
+                  <Box
+                    sx={{
+                      height: "auto",
+                      width: "18.5rem",
+                      margin: { xl: 2.5, lg: 2, md: 2, sm: 1.5, xs: 1 },
                     }}
-                  />
-                </Box>
-              );
-            })}
-          {/* <Pagination count={10} shape="rounded" /> */}
+                    key={index}
+                  >
+                    <CustomCard
+                      content={{
+                        ...item,
+                        heading: item.snippet.title,
+                        description: item.snippet.description,
+                        image: item.snippet.thumbnails.high.url,
+                        primaryBtn: {
+                          btnText: "Watch Now",
+                          onClick: () => {
+                            window.open(
+                              `https://www.youtube.com/watch?v=${item.id.videoId}`
+                            );
+                          },
+                        },
+                      }}
+                    />
+                  </Box>
+                );
+              })
+          )}
         </Container>
       )}
       {isLoading && (

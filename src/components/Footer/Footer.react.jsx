@@ -23,7 +23,7 @@ const Footer = () => {
     "GURBANI DE CHANAN CH AKHAN - VEEH VISVAY YAKEEN HONA",
     "GURBANI DE CHANAN CH AKHAN - RETHARIA DA PARSAD",
   ]);
-  
+
   useEffect(() => {
     getEventDetails().then((data) => {
       let eventTitle = data.map((item) => item.title);
@@ -115,7 +115,7 @@ const Footer = () => {
             >
               UPCOMING EVENTS
             </ListSubheader>
-            {eventTitle?.map((item, index) => {
+            {eventTitle.slice(0, 5)?.map((item, index) => {
               return (
                 <div key={index}>
                   <ListItem
@@ -158,15 +158,9 @@ const Footer = () => {
             >
               <ListItemText primary="THE LIVING TREASURE 109," />
               <ListItemText primary="S.P Mukherji Park," />
-              <ListItemText
-                primary="Near Tilak Nagar,"
-              />
-              <ListItemText
-                primary="New Delhi-110018"
-              />
-                 <ListItemText
-                primary="India"
-              />
+              <ListItemText primary="Near Tilak Nagar," />
+              <ListItemText primary="New Delhi-110018" />
+              <ListItemText primary="India" />
             </ListItem>
 
             <ListItem disableGutters disablePadding sx={{ marginTop: "auto" }}>
@@ -192,10 +186,31 @@ const Footer = () => {
             padding: "1.5rem",
           }}
         >
-          <InstagramIcon fontSize="large" />
+          <a
+            href="https://www.instagram.com/veerbhupindersingh_usa/"
+            target="_blank"
+            rel="noreferrer"
+            className="link"
+          >
+            <InstagramIcon fontSize="large" />
+          </a>
           <LinkedInIcon fontSize="large" />
-          <YouTubeIcon fontSize="large" />
-          <FacebookIcon fontSize="large" />
+          <a
+            href="https://www.youtube.com/@TheLivingTreasure"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="link"
+          >
+            <YouTubeIcon fontSize="large" />
+          </a>
+          <a
+            href="https://www.facebook.com/VeerBhupinderSingh/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="link"
+          >
+            <FacebookIcon fontSize="large" />
+          </a>
         </Container>
         <Container
           sx={{
@@ -215,7 +230,7 @@ const Footer = () => {
           >
             Copyright 2022.{" "}
             <Link to="/terms-and-conditions" style={{ color: "inherit" }}>
-              <span style={{ color: "#fff" }}>Terms and Condtions</span>
+              <span style={{ color: "#fff" }}>Terms and Conditions</span>
             </Link>{" "}
             All Rights Reserved by The Living Treasure.
           </Typography>

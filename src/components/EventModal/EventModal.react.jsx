@@ -200,15 +200,14 @@ export default function EventModal(props) {
                 flex: 1,
               }}
               secondary={
-                <Link
+                <a
                   className="youtubeLink"
-                  to={{
-                    pathname: `https://youtu.be/${youtubeId}`,
-                  }}
+                  href={`https://youtu.be/${youtubeId}`}
                   target="_blank"
+                  rel="noreferrer"
                 >
                   Youtube
-                </Link>
+                </a>
               }
             />
           </ListItem>

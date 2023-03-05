@@ -13,6 +13,7 @@ import {
 
 import CustomCard from "../Card/CustomCard.react";
 import EventModal from "../EventModal/EventModal.react";
+import SkeletonCard from "../SkeletonCard/SkeletonCard";
 import "./Events.scss";
 
 import { getEventDetails } from "../../firebase";
@@ -44,10 +45,11 @@ export default function Events(props) {
   };
 
   const [eventDetails, setEventDetails] = useState([]);
-
+  const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     getEventDetails().then((data) => {
       setEventDetails(data);
+      setIsLoading(false);
     });
   }, []);
   const currentDate = new Date();
@@ -115,14 +117,16 @@ export default function Events(props) {
       youtubeUrl: selectedData.youtubeUrl,
     });
   };
-
+  //Skeleton Loader initial state
+  let skeletonCards = Array(5).fill(0);
   return (
     <Box
       component="section"
       display="flex"
       flexDirection="column"
       alignItems="center"
-      py={2}>
+      py={2}
+    >
       <EventModal
         isOpen={openEventModal}
         onClose={(value) => setOpenEventModal(value)}
@@ -143,7 +147,8 @@ export default function Events(props) {
         sx={{
           textTransform: "uppercase",
           fontWeight: "bold",
-        }}>
+        }}
+      >
         <Box component="span" color="primary.main">
           events
         </Box>{" "}
@@ -156,53 +161,74 @@ export default function Events(props) {
           gap: 2,
           gridAutoFlow: { lg: "column" },
           gridTemplateColumns: "repeat(4, 1fr)",
-          justifyItems: { lg: "end" },
-          alignContent: { lg: "stretch" },
-        }}>
-        {newEventList
-          ?.slice(0, 5)
-          .filter((items) => {
-            return items.chipTemplate.chipText !== "Finished";
+          justifyItems: "stretch",
+          alignContent: "center",
+        }}
+      >
+        {isLoading ? (
+          skeletonCards.map((item) => {
+            return <SkeletonCard />;
           })
-          .map((items, index) => {
-            const startDate = items.date?.startDate;
-            const endDate = items.date?.endDate;
-            const readableStartDate = moment(startDate).format("llll");
-            const readbleEndDate = moment(endDate).format("h:mm A");
-            const description =
-              items.description +
-              `. Session will be on ${readableStartDate}- ${readbleEndDate}`;
-            return (
-              <Box
-                height="auto"
-                width={{ lg: "21rem", md: "auto", sm: "auto" }}
-                className="event-card"
-                key={index}>
-                <CustomCard
-                  content={{
-                    image: items.imageUrl,
-                    heading: items.title,
-                    ...items,
-                    description: description,
-                    type: items.type,
-                    primaryBtn: {
-                      btnText: "View Details",
-                      onClick: () => {
-                        handleEventCard({
-                          heading: items.title,
-                          status: items.chipTemplate.chipText?.toLowerCase(),
-                          description: description,
-                          type: items.type,
-                          mapUrl: items.mapUrl,
-                          youtubeUrl: items.youtubeUrl,
-                        });
-                      },
-                    },
+        ) : newEventList.length === 0 ? (
+          <Container
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Typography>Oops! No Data found</Typography>
+          </Container>
+        ) : (
+          newEventList
+            ?.slice(0, 5)
+            .filter((items) => {
+              return items.chipTemplate.chipText !== "Finished";
+            })
+            .map((items, index) => {
+              const startDate = items.date?.startDate;
+              const endDate = items.date?.endDate;
+              const readableStartDate = moment(startDate).format("llll");
+              const readbleEndDate = moment(endDate).format("h:mm A");
+              const description =
+                items.description +
+                `. Session will be on ${readableStartDate}- ${readbleEndDate}`;
+              return (
+                <Box
+                  sx={{
+                    height: "auto",
+                    width: { lg: "21rem", md: "auto", sm: "auto" },
+                    margin: { xl: 2.5, lg: 2, md: 2, sm: 1.5, xs: 1 },
                   }}
-                />
-              </Box>
-            );
-          })}
+                  className="event-card"
+                  key={index}
+                >
+                  <CustomCard
+                    content={{
+                      image: items.imageUrl,
+                      heading: items.title,
+                      ...items,
+                      description: description,
+                      type: items.type,
+                      primaryBtn: {
+                        btnText: "View Details",
+                        onClick: () => {
+                          handleEventCard({
+                            heading: items.title,
+                            status: items.chipTemplate.chipText?.toLowerCase(),
+                            description: description,
+                            type: items.type,
+                            mapUrl: items.mapUrl,
+                            youtubeUrl: items.youtubeUrl,
+                          });
+                        },
+                      },
+                    }}
+                  />
+                </Box>
+              );
+            })
+        )}
       </Container>
 
       {newEventList && newEventList?.length > 0 && (
