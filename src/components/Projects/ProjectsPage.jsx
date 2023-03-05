@@ -15,7 +15,7 @@ import {
 import PropTypes from "prop-types";
 import ShareIcon from "@mui/icons-material/Share";
 import { useLocation } from "react-router-dom";
-import ContributeModal from "../Modal/ContributeModal.react";
+import ContributeModal from "../ContributeModal/ContributeModal.react";
 import VolunteerModal from "../VolunteerModal/VolunteerModal.react";
 import useHashRouteToggle from "../../customHooks/useHashRouteToggle";
 import { getProjectDetails } from "../../firebase";

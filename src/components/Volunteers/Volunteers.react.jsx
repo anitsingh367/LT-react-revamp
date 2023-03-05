@@ -2,7 +2,7 @@ import React from "react";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper";
-import { Container, Typography, Avatar } from "@mui/material";
+import { Container, Typography, Avatar, Box } from "@mui/material";
 
 // Import Swiper styles
 import "swiper/css";
@@ -11,27 +11,26 @@ import data from "../../data/imgDB";
 
 const Volunteers = () => {
   return (
-    <Container
+    <Box
+      component="section"
       className="volunteer-parent"
-      disableGutters
-      maxWidth={false}
-      sx={{
-        textAlign: "center",
-        backgroundColor: "var(--secondary-color-light)",
-      }}
-    >
+      textAlign="center"
+      bgcolor="secondary.light"
+      py={2}>
       <Typography
         variant="h4"
         sx={{
           textTransform: "uppercase",
           fontWeight: "bold",
-          paddingTop: "2rem",
         }}
-        gutterBottom
-      >
-        OUR <span style={{ color: "var(--primary-color)" }}> Volunteers </span>
+        mb={2}>
+        OUR{" "}
+        <Box component="span" color="primary.main">
+          {" "}
+          Volunteers
+        </Box>
       </Typography>
-      <Container disableGutters maxWidth="xl" className="swiper-container">
+      <Container maxWidth="xl" className="swiper-container">
         <Swiper
           modules={[Autoplay]}
           breakpoints={{
@@ -53,8 +52,7 @@ const Volunteers = () => {
           autoplay={{
             delay: 1,
             disableOnInteraction: false,
-          }}
-        >
+          }}>
           {data.map((item, index) => {
             return (
               <SwiperSlide
@@ -62,8 +60,7 @@ const Volunteers = () => {
                 sx={{
                   display: "flex",
                   flexDirection: "column",
-                }}
-              >
+                }}>
                 <Avatar
                   src={item.urls.thumb}
                   sx={{ width: 100, height: 100, marginBottom: 1 }}
@@ -73,8 +70,7 @@ const Volunteers = () => {
                 </Typography>
                 <Typography
                   variant="caption"
-                  sx={{ textTransform: "uppercase" }}
-                >
+                  sx={{ textTransform: "uppercase" }}>
                   {item.user.username}
                 </Typography>
               </SwiperSlide>
@@ -82,7 +78,7 @@ const Volunteers = () => {
           })}
         </Swiper>
       </Container>
-    </Container>
+    </Box>
   );
 };
 

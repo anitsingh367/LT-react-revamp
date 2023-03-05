@@ -25,6 +25,7 @@ import {
   Typography,
   IconButton,
   AppBar,
+  DialogContentText,
 } from "@mui/material";
 import { Close as CloseIcon } from "@mui/icons-material";
 
@@ -145,15 +146,13 @@ export default function ContributeModal(props) {
             edge="start"
             color="inherit"
             onClick={handleClose}
-            aria-label="close"
-          >
+            aria-label="close">
             <CloseIcon />
           </IconButton>
           <Typography
             sx={{ ml: 2, flex: 1, padding: "0.5rem 0" }}
             variant="h6"
-            component="div"
-          >
+            component="div">
             {props.isNavbar
               ? "Contribute For The Cause"
               : `Contribute To ${
@@ -163,13 +162,20 @@ export default function ContributeModal(props) {
         </Toolbar>
       </AppBar>
       <DialogContent
-        sx={{ display: "flex", flexDirection: "column", gap: 1.5 }}
-      >
+        sx={{ display: "flex", flexDirection: "column", gap: 1.5 }}>
+        <DialogContentText>
+          We Need your support FOR tv broadcast, webcast, books, magazines, Self
+          Elevating Workshops / seminars, workshops & Seminars in schools &
+          colleges ,Medical camp & dispensary, education support & to run many
+          other projects for humanity & noble cause Your Monthly Contribution
+          help us to serve the needy and less privileged brethren of our
+          society. It enables us to provide them with the basic services without
+          any discrimination of religion, caste and creed.
+        </DialogContentText>
         <FormControl
           sx={{
             display: "flex",
-          }}
-        >
+          }}>
           <RadioGroup
             required
             row
@@ -181,8 +187,7 @@ export default function ContributeModal(props) {
               justifyContent: "space-between",
               flex: 1,
             }}
-            onChange={handleAmount}
-          >
+            onChange={handleAmount}>
             <FormControlLabel value="100" control={<Radio />} label="₹100" />
             <FormControlLabel value="500" control={<Radio />} label="₹500" />
             <FormControlLabel value="1000" control={<Radio />} label="₹1000" />
@@ -274,8 +279,7 @@ export default function ContributeModal(props) {
             id="state-select"
             value={formData.state}
             label="State"
-            onChange={handleForm("state")}
-          >
+            onChange={handleForm("state")}>
             {stateList?.map((list, index) => {
               return (
                 <MenuItem key={index} value={list.name}>
@@ -290,8 +294,7 @@ export default function ContributeModal(props) {
             display: "flex",
             flexDirection: { lg: "row", md: "row", xs: "column" },
             gap: 1.5,
-          }}
-        >
+          }}>
           <FormControl sx={{ flex: 1 }}>
             <Autocomplete
               freeSolo
@@ -323,8 +326,7 @@ export default function ContributeModal(props) {
           <FormControl
             sx={{
               flex: 1,
-            }}
-          >
+            }}>
             <InputLabel htmlFor="zip-input-box" required>
               Zip
             </InputLabel>
@@ -342,8 +344,7 @@ export default function ContributeModal(props) {
             display: "flex",
             flexDirection: { lg: "row", md: "row", xs: "column" },
             gap: 1.5,
-          }}
-        >
+          }}>
           <FormControl sx={{ flex: 1 }}>
             <InputLabel htmlFor="mobile-input-box" required>
               Mobile
@@ -364,8 +365,7 @@ export default function ContributeModal(props) {
           <FormControl
             sx={{
               flex: 1,
-            }}
-          >
+            }}>
             <InputLabel htmlFor="email-input-box" required>
               Email
             </InputLabel>
@@ -403,8 +403,7 @@ export default function ContributeModal(props) {
             !isEmailValid
               ? true
               : false
-          }
-        >
+          }>
           Submit
         </Button>
       </DialogActions>

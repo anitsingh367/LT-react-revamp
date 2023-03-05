@@ -20,7 +20,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 // import CustomizedMenus from "./CustomizedMenus.react";
 // import ExpandLess from "@mui/icons-material/ExpandLess";
 // import ExpandMore from "@mui/icons-material/ExpandMore";
-import ContributeModal from "../Modal/ContributeModal.react";
+import ContributeModal from "../ContributeModal/ContributeModal.react";
 import VolunteerModal from "../VolunteerModal/VolunteerModal.react";
 
 import useHashRouteToggle from "../../customHooks/useHashRouteToggle";
