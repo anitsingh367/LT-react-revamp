@@ -125,8 +125,7 @@ export default function Events(props) {
       display="flex"
       flexDirection="column"
       alignItems="center"
-      py={2}
-    >
+      py={2}>
       <EventModal
         isOpen={openEventModal}
         onClose={(value) => setOpenEventModal(value)}
@@ -147,8 +146,7 @@ export default function Events(props) {
         sx={{
           textTransform: "uppercase",
           fontWeight: "bold",
-        }}
-      >
+        }}>
         <Box component="span" color="primary.main">
           events
         </Box>{" "}
@@ -161,24 +159,15 @@ export default function Events(props) {
           gap: 2,
           gridAutoFlow: { lg: "column" },
           gridTemplateColumns: "repeat(4, 1fr)",
-          justifyItems: "stretch",
-          alignContent: "center",
-        }}
-      >
+          justifyItems: { lg: "end" },
+          alignContent: { lg: "stretch" },
+        }}>
         {isLoading ? (
           skeletonCards.map((item) => {
             return <SkeletonCard />;
           })
         ) : newEventList.length === 0 ? (
-          <Container
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <Typography>Oops! No Data found</Typography>
-          </Container>
+          <Typography>Oops! No Data found</Typography>
         ) : (
           newEventList
             ?.slice(0, 5)
@@ -198,11 +187,9 @@ export default function Events(props) {
                   sx={{
                     height: "auto",
                     width: { lg: "21rem", md: "auto", sm: "auto" },
-                    margin: { xl: 2.5, lg: 2, md: 2, sm: 1.5, xs: 1 },
                   }}
                   className="event-card"
-                  key={index}
-                >
+                  key={index}>
                   <CustomCard
                     content={{
                       image: items.imageUrl,

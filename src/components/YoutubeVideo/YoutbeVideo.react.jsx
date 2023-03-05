@@ -80,8 +80,7 @@ const YoutbeVideo = () => {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-      }}
-    >
+      }}>
       <Typography
         variant="h4"
         align="center"
@@ -89,8 +88,7 @@ const YoutbeVideo = () => {
           textTransform: "uppercase",
           fontWeight: "bold",
           padding: "2rem",
-        }}
-      >
+        }}>
         <span style={{ color: "var(--primary-color)" }}> Videos </span> at the
         living treasure
       </Typography>
@@ -110,8 +108,7 @@ const YoutbeVideo = () => {
             sm: "center",
             xs: "center",
           },
-        }}
-      >
+        }}>
         <Box
           sx={{
             display: "flex",
@@ -129,8 +126,7 @@ const YoutbeVideo = () => {
               lg: "flex-end",
               md: "center",
             },
-          }}
-        >
+          }}>
           {/* <Typography variant="overline">Filter By:</Typography>
           <FormControl variant="standard" sx={{ minWidth: 120 }}>
             <InputLabel id="language">Language</InputLabel>
@@ -170,8 +166,7 @@ const YoutbeVideo = () => {
               lg: "flex-end",
               md: "center",
             },
-          }}
-        >
+          }}>
           <Box
             sx={{
               display: "flex",
@@ -189,8 +184,7 @@ const YoutbeVideo = () => {
                 lg: "flex-end",
                 md: "center",
               },
-            }}
-          >
+            }}>
             {/* <Typography variant="overline">Sort By:</Typography>
             <FormControl variant="standard" sx={{ minWidth: 120 }}>
               <InputLabel id="time">Time</InputLabel>
@@ -224,22 +218,13 @@ const YoutbeVideo = () => {
             flexWrap: "wrap",
             justifyContent: "center",
             width: "100%",
-          }}
-        >
+          }}>
           {isLoading ? (
             skeletonCards.map((item) => {
               return <SkeletonCard />;
             })
           ) : fetchVideo?.length === 0 ? (
-            <Container
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <Typography>Oops! No Data found</Typography>
-            </Container>
+            <Typography align="center">Oops! No Data found</Typography>
           ) : (
             fetchVideo
 
@@ -258,8 +243,7 @@ const YoutbeVideo = () => {
                       width: "18.5rem",
                       margin: { xl: 2.5, lg: 2, md: 2, sm: 1.5, xs: 1 },
                     }}
-                    key={index}
-                  >
+                    key={index}>
                     <CustomCard
                       content={{
                         ...item,
@@ -290,8 +274,7 @@ const YoutbeVideo = () => {
             alignItems: "center",
             width: "100%",
             height: "90vh",
-          }}
-        >
+          }}>
           <CircularProgress color="inherit" />
         </Container>
       )}
