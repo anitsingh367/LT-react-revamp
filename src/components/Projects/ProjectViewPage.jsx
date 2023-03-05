@@ -19,7 +19,7 @@ import {
 import IconButton from "@mui/material/IconButton";
 import AddIcon from "@mui/icons-material/Add";
 
-import ContributeModal from "../Modal/ContributeModal.react";
+import ContributeModal from "../ContributeModal/ContributeModal.react";
 import { useNavigate } from "react-router-dom";
 import ImageModal from "../ImageGallery/ImageModal.react";
 

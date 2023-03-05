@@ -5,7 +5,6 @@ import CustomCard from "../Card/CustomCard.react";
 import { Box } from "@mui/system";
 import { useNavigate } from "react-router-dom";
 
-
 Projects.propTypes = {
   //=======================================
   // Component Specific props
@@ -59,33 +58,35 @@ export default function Projects(props) {
     });
   };
 
-
   return (
-    <Container
-      maxWidth={false}
-      sx={{
-        backgroundColor: "var(--secondary-color-light)",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-      }}>
+    <Box
+      component="section"
+      bgcolor="secondary.light"
+      display="flex"
+      flexDirection="column"
+      alignItems="center"
+      py={2}>
       <Typography
         variant="h4"
         align="center"
+        mb={2}
         sx={{
           textTransform: "uppercase",
           fontWeight: "bold",
-          padding: "2rem",
         }}>
-        <span style={{ color: "var(--primary-color)" }}> Projects </span> at the
-        living treasure
+        <Box component="span" color="primary.main">
+          Projects
+        </Box>{" "}
+        at the living treasure
       </Typography>
-
       <Container
+        maxWidth="xl"
         sx={{
           display: "flex",
           flexWrap: "wrap",
+          alignItems: "center",
           justifyContent: "space-evenly",
+          gap: 2,
         }}>
         {props.content?.map((items, index) => {
           return (
@@ -93,10 +94,9 @@ export default function Projects(props) {
               onClick={() => {
                 handleProjectCard(items.heading);
               }}
+              height="auto"
+              width="16rem"
               sx={{
-                height: "auto",
-                width: "16rem",
-                margin: { xl: 2.5, lg: 2, md: 2, sm: 1.5, xs: 1 },
                 cursor: "pointer",
               }}
               key={index}>
@@ -112,6 +112,6 @@ export default function Projects(props) {
           );
         })}
       </Container>
-    </Container>
+    </Box>
   );
 }

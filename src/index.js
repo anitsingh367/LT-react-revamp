@@ -32,13 +32,13 @@ const theme = createTheme({
     },
   },
   palette: {
-    type: "light",
     primary: {
       main: "#29af8a",
       contrastText: "#fff",
     },
     secondary: {
       main: "#435061",
+      light: "rgba(67, 80, 97, 12%)",
       contrastText: "#ffffff88",
     },
   },

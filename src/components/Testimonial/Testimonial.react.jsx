@@ -6,28 +6,29 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import testimonialData from "../../data/testimonialData";
 import Typography from "@mui/material/Typography";
-import { Container, Divider } from "@mui/material";
+import { Container, Divider, Box } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
 import "./Testimonial.scss";
 
 const Testimonial = () => {
   return (
-    <Container
-      maxWidth={false}
-      sx={{
-        textAlign: "center",
-      }}
-    >
+    <Box
+      component="section"
+      display="flex"
+      flexDirection="column"
+      alignItems="center"
+      py={2}>
       <Typography
         variant="h4"
+        align="center"
         sx={{
           textTransform: "uppercase",
           fontWeight: "bold",
-          paddingTop: "2rem",
-        }}
-        gutterBottom
-      >
-        WHAT <span style={{ color: "var(--primary-color)" }}> PEOPLE </span>
+        }}>
+        WHAT{" "}
+        <Box component="span" color="primary.main">
+          PEOPLE{" "}
+        </Box>
         THINK ABOUT US
       </Typography>
       <Container maxWidth="xl">
@@ -47,8 +48,7 @@ const Testimonial = () => {
               slidesPerView: 3,
               spaceBetween: 30,
             },
-          }}
-        >
+          }}>
           {testimonialData.map((item, index) => {
             return (
               <SwiperSlide key={index}>
@@ -60,8 +60,7 @@ const Testimonial = () => {
                 <Typography
                   paragraph
                   variant="body1"
-                  sx={{ fontWeight: "lighter" }}
-                >
+                  sx={{ fontWeight: "lighter" }}>
                   {item.description}
                 </Typography>
                 <Divider />
@@ -72,8 +71,7 @@ const Testimonial = () => {
                   sx={{
                     color: "secondary.main",
                     textTransform: "uppercase",
-                  }}
-                >
+                  }}>
                   {item.designation}
                 </Typography>
               </SwiperSlide>
@@ -81,7 +79,7 @@ const Testimonial = () => {
           })}
         </Swiper>
       </Container>
-    </Container>
+    </Box>
   );
 };
 

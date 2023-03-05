@@ -117,14 +117,12 @@ export default function Events(props) {
   };
 
   return (
-    <section
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        marginTop: "2rem",
-      }}
-    >
+    <Box
+      component="section"
+      display="flex"
+      flexDirection="column"
+      alignItems="center"
+      py={2}>
       <EventModal
         isOpen={openEventModal}
         onClose={(value) => setOpenEventModal(value)}
@@ -140,26 +138,27 @@ export default function Events(props) {
       />
       <Typography
         variant="h4"
+        align="center"
+        mb={2}
         sx={{
           textTransform: "uppercase",
           fontWeight: "bold",
-          padding: "1rem",
-          textAlign: "center",
-        }}
-      >
-        <span style={{ color: "var(--primary-color)" }}> events </span> at the
-        living treasure
+        }}>
+        <Box component="span" color="primary.main">
+          events
+        </Box>{" "}
+        at the living treasure
       </Typography>
       <Container
         maxWidth="xl"
         sx={{
           display: "grid",
+          gap: 2,
           gridAutoFlow: { lg: "column" },
           gridTemplateColumns: "repeat(4, 1fr)",
-          justifyItems: "stretch",
-          alignContent: "center",
-        }}
-      >
+          justifyItems: { lg: "end" },
+          alignContent: { lg: "stretch" },
+        }}>
         {newEventList
           ?.slice(0, 5)
           .filter((items) => {
@@ -175,14 +174,10 @@ export default function Events(props) {
               `. Session will be on ${readableStartDate}- ${readbleEndDate}`;
             return (
               <Box
-                sx={{
-                  height: "auto",
-                  width: { lg: "21rem", md: "auto", sm: "auto" },
-                  margin: { xl: 2.5, lg: 2, md: 2, sm: 1.5, xs: 1 },
-                }}
+                height="auto"
+                width={{ lg: "21rem", md: "auto", sm: "auto" }}
                 className="event-card"
-                key={index}
-              >
+                key={index}>
                 <CustomCard
                   content={{
                     image: items.imageUrl,
@@ -212,11 +207,11 @@ export default function Events(props) {
 
       {newEventList && newEventList?.length > 0 && (
         <Link to="/events" className="link">
-          <Button variant="contained" color="primary" sx={{ margin: "1rem" }}>
+          <Button variant="contained" color="primary" sx={{ mt: 2 }}>
             View All
           </Button>
         </Link>
       )}
-    </section>
+    </Box>
   );
 }
