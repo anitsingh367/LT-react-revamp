@@ -3,7 +3,6 @@ import { useLocation } from "react-router-dom";
 // import { Navigation } from "swiper";
 import useHashRouteToggle from "../../customHooks/useHashRouteToggle";
 import {
-  Avatar,
   // Box,
   Typography,
   Container,
@@ -99,14 +98,10 @@ const ProjectViewPage = () => {
               {state.heading.toUpperCase()}
             </Typography>
 
-            <Avatar
-              alt="project-image"
+            <img
+              alt="project_image"
               src={state.image}
-              variant="square"
-              sx={{
-                width: 1,
-                height: { lg: "60vh", md: "60vh", sm: "40vh", xs: "30vh" },
-              }}
+              className="projectBanner"
             />
           </Container>
         )}

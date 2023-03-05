@@ -12,6 +12,9 @@ import PropTypes from "prop-types";
 import CustomCard from "../Card/CustomCard.react";
 import CircularProgress from "@mui/material/CircularProgress";
 
+import SkeletonCard from "../SkeletonCard/SkeletonCard";
+let skeletonCards = Array(3).fill(0);
+
 const YoutbeVideo = () => {
   YoutbeVideo.propTypes = {
     //=======================================
@@ -63,6 +66,7 @@ const YoutbeVideo = () => {
       const response = await fetch(youtubeAPI, options);
       const data = await response.json();
       setfetchVideo(data.items);
+      console.log(data);
       setIsLoading(false);
     };
     fetchVideo();
@@ -76,8 +80,7 @@ const YoutbeVideo = () => {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-      }}
-    >
+      }}>
       <Typography
         variant="h4"
         align="center"
@@ -85,8 +88,7 @@ const YoutbeVideo = () => {
           textTransform: "uppercase",
           fontWeight: "bold",
           padding: "2rem",
-        }}
-      >
+        }}>
         <span style={{ color: "var(--primary-color)" }}> Videos </span> at the
         living treasure
       </Typography>
@@ -106,8 +108,7 @@ const YoutbeVideo = () => {
             sm: "center",
             xs: "center",
           },
-        }}
-      >
+        }}>
         <Box
           sx={{
             display: "flex",
@@ -125,8 +126,7 @@ const YoutbeVideo = () => {
               lg: "flex-end",
               md: "center",
             },
-          }}
-        >
+          }}>
           {/* <Typography variant="overline">Filter By:</Typography>
           <FormControl variant="standard" sx={{ minWidth: 120 }}>
             <InputLabel id="language">Language</InputLabel>
@@ -166,8 +166,7 @@ const YoutbeVideo = () => {
               lg: "flex-end",
               md: "center",
             },
-          }}
-        >
+          }}>
           <Box
             sx={{
               display: "flex",
@@ -185,8 +184,7 @@ const YoutbeVideo = () => {
                 lg: "flex-end",
                 md: "center",
               },
-            }}
-          >
+            }}>
             {/* <Typography variant="overline">Sort By:</Typography>
             <FormControl variant="standard" sx={{ minWidth: 120 }}>
               <InputLabel id="time">Time</InputLabel>
@@ -220,46 +218,52 @@ const YoutbeVideo = () => {
             flexWrap: "wrap",
             justifyContent: "center",
             width: "100%",
-          }}
-        >
-          {fetchVideo
-            ?.filter((filterItem) => {
-              return search.toLowerCase() === ""
-                ? filterItem
-                : filterItem.snippet.title
-                    .toLowerCase()
-                    .includes(search.toLowerCase());
+          }}>
+          {isLoading ? (
+            skeletonCards.map((item) => {
+              return <SkeletonCard />;
             })
-            ?.map((item, index) => {
-              return (
-                <Box
-                  sx={{
-                    height: "auto",
-                    width: "18.5rem",
-                    margin: { xl: 2.5, lg: 2, md: 2, sm: 1.5, xs: 1 },
-                  }}
-                  key={index}
-                >
-                  <CustomCard
-                    content={{
-                      ...item,
-                      heading: item.snippet.title,
-                      description: item.snippet.description,
-                      image: item.snippet.thumbnails.high.url,
-                      primaryBtn: {
-                        btnText: "Watch Now",
-                        onClick: () => {
-                          window.open(
-                            `https://www.youtube.com/watch?v=${item.id.videoId}`
-                          );
-                        },
-                      },
+          ) : fetchVideo?.length === 0 ? (
+            <Typography align="center">Oops! No Data found</Typography>
+          ) : (
+            fetchVideo
+
+              ?.filter((filterItem) => {
+                return search.toLowerCase() === ""
+                  ? filterItem
+                  : filterItem.snippet.title
+                      .toLowerCase()
+                      .includes(search.toLowerCase());
+              })
+              ?.map((item, index) => {
+                return (
+                  <Box
+                    sx={{
+                      height: "auto",
+                      width: "18.5rem",
+                      margin: { xl: 2.5, lg: 2, md: 2, sm: 1.5, xs: 1 },
                     }}
-                  />
-                </Box>
-              );
-            })}
-          {/* <Pagination count={10} shape="rounded" /> */}
+                    key={index}>
+                    <CustomCard
+                      content={{
+                        ...item,
+                        heading: item.snippet.title,
+                        description: item.snippet.description,
+                        image: item.snippet.thumbnails.high.url,
+                        primaryBtn: {
+                          btnText: "Watch Now",
+                          onClick: () => {
+                            window.open(
+                              `https://www.youtube.com/watch?v=${item.id.videoId}`
+                            );
+                          },
+                        },
+                      }}
+                    />
+                  </Box>
+                );
+              })
+          )}
         </Container>
       )}
       {isLoading && (
@@ -270,8 +274,7 @@ const YoutbeVideo = () => {
             alignItems: "center",
             width: "100%",
             height: "90vh",
-          }}
-        >
+          }}>
           <CircularProgress color="inherit" />
         </Container>
       )}
