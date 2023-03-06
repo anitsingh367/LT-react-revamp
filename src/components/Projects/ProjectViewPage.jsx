@@ -21,6 +21,8 @@ import AddIcon from "@mui/icons-material/Add";
 import ContributeModal from "../ContributeModal/ContributeModal.react";
 import { useNavigate } from "react-router-dom";
 import ImageModal from "../ImageGallery/ImageModal.react";
+import "./projectviewpage.scss";
+import { Box } from "@mui/system";
 
 const itemData = [
   {
@@ -85,12 +87,12 @@ const ProjectViewPage = () => {
         }}
       >
         {state && (
-          <Container maxWidth={false} disableGutters>
+          <Box>
             <Typography
               variant="h5"
               sx={{
                 fontWeight: "bold",
-                marginTop: "3rem",
+                marginTop: "1rem",
                 marginBottom: "0.5rem",
                 textAlign: "center",
               }}
@@ -98,12 +100,16 @@ const ProjectViewPage = () => {
               {state.heading.toUpperCase()}
             </Typography>
 
-            <img
-              alt="project_image"
-              src={state.image}
-              className="projectBanner"
-            />
-          </Container>
+            <Box bgColor="secondary.light" width="100%">
+              <Box height="80vh" width="70vw" margin="0 auto">
+                <img
+                  alt="project_image"
+                  src={state.image}
+                  className="projectBanner"
+                />
+              </Box>
+            </Box>
+          </Box>
         )}
         {/* 
         <Container

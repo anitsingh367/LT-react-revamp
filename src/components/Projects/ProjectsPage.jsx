@@ -13,6 +13,7 @@ import {
   Select,
 } from "@mui/material";
 import PropTypes from "prop-types";
+import "./project.scss";
 
 import { useLocation } from "react-router-dom";
 import ContributeModal from "../ContributeModal/ContributeModal.react";
@@ -206,6 +207,7 @@ export default function ProjectsPage(props) {
               <ToggleButton value="All">All</ToggleButton>
               <ToggleButton value="Education">Education</ToggleButton>
               <ToggleButton value="Medical">Medical</ToggleButton>
+              <ToggleButton value="Charity">Charity</ToggleButton>
             </ToggleButtonGroup>
 
             <Box
@@ -256,6 +258,7 @@ export default function ProjectsPage(props) {
                       margin: { xl: 2.5, lg: 2, md: 2, sm: 1.5, xs: 1 },
                     }}
                     key={index}
+                    className="cardImg"
                   >
                     <CustomCard
                       content={{
