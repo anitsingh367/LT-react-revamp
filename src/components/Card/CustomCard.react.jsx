@@ -70,13 +70,12 @@ CustomCard.defaultProps = {
 };
 
 function extractContent(s) {
-  var span = document.createElement('span');
+  var span = document.createElement("span");
   span.innerHTML = s;
   return span.textContent || span.innerText;
-};
+}
 
 export default function CustomCard(props) {
-
   let description = extractContent(props.content?.description);
 
   return (
@@ -95,7 +94,6 @@ export default function CustomCard(props) {
       <CardMedia
         component="img"
         image={props.content?.image ? props.content.image : defaultImage}
-        sx={{ aspectRatio: "2 / 1.6" }}
         alt=""
       />
       <CardContent sx={{ paddingBottom: "0" }}>

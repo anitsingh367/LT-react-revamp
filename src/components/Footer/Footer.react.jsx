@@ -37,7 +37,8 @@ const Footer = () => {
         sx={{
           width: 1,
           backgroundColor: "secondary.main",
-        }}>
+        }}
+      >
         <Container
           sx={{
             display: "flex",
@@ -50,7 +51,8 @@ const Footer = () => {
               sm: "column",
               xs: "column",
             },
-          }}>
+          }}
+        >
           <List
             sx={{
               width: { lg: "33.33%", md: 1, sm: 1, xs: 1 },
@@ -59,20 +61,23 @@ const Footer = () => {
               justifyContent: "center",
               alignItems: "flex-start",
               alignSelf: "start",
-            }}>
+            }}
+          >
             <ListSubheader
               disableGutters
               sx={{
                 textTransform: "uppercase",
                 background: "transparent",
                 color: "#fff",
-              }}>
+              }}
+            >
               about the living treasure
             </ListSubheader>
             <ListItemText
               sx={{
                 color: "secondary.contrastText",
-              }}>
+              }}
+            >
               Promoting the doctrine of "The Universal Truth", which stands for
               equal value to every human, irrespective of caste, creed, color or
               gender.
@@ -84,10 +89,12 @@ const Footer = () => {
                 borderColor: "#fff",
                 color: "#fff",
                 marginTop: "1rem",
-              }}>
+              }}
+            >
               <Link
                 to="/about"
-                style={{ textDecoration: "none", color: "#fff" }}>
+                style={{ textDecoration: "none", color: "#fff" }}
+              >
                 Know More
               </Link>
             </Button>
@@ -96,24 +103,27 @@ const Footer = () => {
             sx={{
               textAlign: "left",
               width: { lg: "33.33%", md: 1, sm: 1, xs: 1 },
-            }}>
+            }}
+          >
             <ListSubheader
               disableGutters
               sx={{
                 textTransform: "uppercase",
                 background: "transparent",
                 color: "#fff",
-              }}>
+              }}
+            >
               UPCOMING EVENTS
             </ListSubheader>
-            {eventTitle.slice(0, 5)?.map((item, index) => {
+            {eventTitle.slice(0, 5)?.map((items, index) => {
               return (
                 <div key={index}>
                   <ListItem
                     disableGutters
                     disablePadding
-                    sx={{ color: "secondary.contrastText" }}>
-                    <ListItemText>{item}</ListItemText>
+                    sx={{ color: "secondary.contrastText" }}
+                  >
+                    <ListItemText>{items}</ListItemText>
                   </ListItem>
                 </div>
               );
@@ -124,14 +134,16 @@ const Footer = () => {
               width: { lg: "33.33%", md: 1, sm: 1, xs: 1 },
               display: "flex",
               flexDirection: "column",
-            }}>
+            }}
+          >
             <ListSubheader
               disableGutters
               sx={{
                 textTransform: "uppercase",
                 background: "transparent",
                 color: "#fff",
-              }}>
+              }}
+            >
               CONTACT US
             </ListSubheader>
             <ListItem
@@ -142,7 +154,8 @@ const Footer = () => {
                 alignItems: "flex-start",
               }}
               disableGutters
-              disablePadding>
+              disablePadding
+            >
               <ListItemText primary="THE LIVING TREASURE 109," />
               <ListItemText primary="S.P Mukherji Park," />
               <ListItemText primary="Near Tilak Nagar," />
@@ -171,12 +184,14 @@ const Footer = () => {
             gap: "0.5rem",
             color: "#fff",
             padding: "1.5rem",
-          }}>
+          }}
+        >
           <a
             href="https://www.instagram.com/veerbhupindersingh_usa/"
             target="_blank"
             rel="noreferrer"
-            className="link">
+            className="link"
+          >
             <InstagramIcon fontSize="large" />
           </a>
           <LinkedInIcon fontSize="large" />
@@ -184,14 +199,16 @@ const Footer = () => {
             href="https://www.youtube.com/@TheLivingTreasure"
             target="_blank"
             rel="noopener noreferrer"
-            className="link">
+            className="link"
+          >
             <YouTubeIcon fontSize="large" />
           </a>
           <a
             href="https://www.facebook.com/VeerBhupinderSingh/"
             target="_blank"
             rel="noopener noreferrer"
-            className="link">
+            className="link"
+          >
             <FacebookIcon fontSize="large" />
           </a>
         </Container>
@@ -204,11 +221,13 @@ const Footer = () => {
             background: "#323B45",
             textAlign: "center",
           }}
-          maxWidth={false}>
+          maxWidth={false}
+        >
           <Typography
             sx={{
               padding: "1.5rem",
-            }}>
+            }}
+          >
             Copyright 2022.{" "}
             <Link to="/terms-and-conditions" style={{ color: "inherit" }}>
               <Box component="span">Terms and Conditions</Box>
