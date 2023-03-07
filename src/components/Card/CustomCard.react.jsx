@@ -26,6 +26,7 @@ CustomCard.propTypes = {
     image: PropTypes.string,
     heading: PropTypes.string,
     description: PropTypes.string,
+
     hoverEffect: PropTypes.bool,
     chipTemplate: PropTypes.shape({
       icon: PropTypes.object,
@@ -53,6 +54,7 @@ CustomCard.defaultProps = {
     image: "",
     heading: "",
     description: "",
+    status: "",
     hoverEffect: false,
     chipTemplate: {
       icon: "",

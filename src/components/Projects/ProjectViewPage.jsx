@@ -23,28 +23,12 @@ import { useNavigate } from "react-router-dom";
 import ImageModal from "../ImageGallery/ImageModal.react";
 import "./projectviewpage.scss";
 import { Box } from "@mui/system";
-
-const itemData = [
-  {
-    img: "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e",
-    title: "Breakfast",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1551782450-a2132b4ba21d",
-    title: "Burger",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1522770179533-24471fcdba45",
-    title: "Camera",
-  },
-  {
-    img: "https://images.unsplash.com/photo-1444418776041-9c7e33cc5a9c",
-    title: "Coffee",
-  },
-];
+import YoutubeFrame from "../YoutubeFrame/YoutubeFrame.react";
 const ProjectViewPage = () => {
   const location = useLocation();
   const state = location.state;
+
+  const itemData = state.images;
 
   const [openContributeModal, setOpenContributeModal] =
     useHashRouteToggle("contribute"); //useHasRouteToggle is used for controlling browser back button
@@ -100,15 +84,21 @@ const ProjectViewPage = () => {
               {state.heading.toUpperCase()}
             </Typography>
 
-            <Box bgColor="secondary.light" width="100%">
-              <Box height="80vh" width="70vw" margin="0 auto">
-                <img
-                  alt="project_image"
-                  src={state.image}
-                  className="projectBanner"
-                />
+            {state.headerImg === null ? null : (
+              <Box bgColor="secondary.light" width="100%" className="headerImg">
+                <Box height="80vh" width="70vw" margin="0 auto">
+                  <img
+                    alt="project_image"
+                    src={state.headerImg}
+                    className="projectBanner"
+                  />
+                </Box>
               </Box>
-            </Box>
+            )}
+
+            {state.youtubeURL === null ? null : (
+              <YoutubeFrame youtubeUrl={state.youtubeURL} />
+            )}
           </Box>
         )}
         {/* 
@@ -236,7 +226,7 @@ const ProjectViewPage = () => {
             </Container>
           </Box> */}
 
-          {state && (
+          {state.description === "" ? null : (
             <Typography
               variant="body1"
               sx={{ lineHeight: "1.7rem" }}
@@ -250,7 +240,7 @@ const ProjectViewPage = () => {
             <ImageList cols={3} gap={10} sx={{ padding: "0.5rem" }}>
               {itemData.slice(0, 6).map((item, index) => (
                 <ImageListItem
-                  key={item.img}
+                  key={index}
                   onClick={() => {
                     handleImageClick(item.img, index);
                   }}
@@ -265,8 +255,8 @@ const ProjectViewPage = () => {
                   }}
                 >
                   <img
-                    src={`${item.img}?w=200&h=200&fit=crop&auto=format`}
-                    srcSet={`${item.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
+                    src={`${item}?w=200&h=200&fit=crop&auto=format`}
+                    srcSet={`${item}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
                     alt={item.title}
                     loading="lazy"
                   />

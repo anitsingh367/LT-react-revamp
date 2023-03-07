@@ -44,6 +44,8 @@ import YoutubeFrame from "../YoutubeFrame/YoutubeFrame.react";
 import AddressMap from "../AddressMap/AddressMap.react";
 import { Link } from "react-router-dom";
 import "./EventModal.scss";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import { db } from "../../firebase";
 
 EventModal.propTypes = {
   //=======================================
@@ -84,11 +86,19 @@ export default function EventModal(props) {
   const [isNameValid, setNameValid] = useState(true);
   const [isEmailValid, setEmailValid] = useState(true);
   const [formData, setFormData] = useState(initialFormState);
-
+  // form submission
+  const eventeData = async (data) => {
+    const dataRef = collection(db, "EventModalForm");
+    await addDoc(dataRef, {
+      created: serverTimestamp(),
+      formData: formData,
+    });
+  };
   const handleClose = () => {
     props.onClose(false);
     setOpen(false);
     setFormData(initialFormState);
+
     setChecked(false);
   };
 
@@ -128,6 +138,10 @@ export default function EventModal(props) {
   //Handle Form Submit
   const handleSubmitForm = () => {
     setIsToasterOpen(true);
+    console.log(props.heading);
+    formData.event = props.heading;
+    formData.event = props.heading ? props.heading : "";
+    eventeData();
     console.log(formData);
   };
 

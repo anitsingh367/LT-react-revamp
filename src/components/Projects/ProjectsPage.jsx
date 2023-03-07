@@ -264,7 +264,8 @@ export default function ProjectsPage(props) {
                       content={{
                         image: items.image,
                         heading: items.heading,
-                        description: items.description,
+                        description:
+                          items.description === null ? null : items.description,
                         chipTemplate: { chipText: items.category },
                         primaryBtn: {
                           btnText: "View Details",
@@ -274,20 +275,23 @@ export default function ProjectsPage(props) {
                           },
                         },
 
-                        secondaryBtns: [
-                          {
-                            btnText: "Contribute",
-                            onClick: () => {
-                              handleContributeModal(items.heading);
-                            },
-                          },
-                          {
-                            btnText: "Volunteer",
-                            onClick: () => {
-                              handleVolunteerModal(items.heading);
-                            },
-                          },
-                        ],
+                        secondaryBtns:
+                          items.status === "Accomplished"
+                            ? null
+                            : [
+                                {
+                                  btnText: "Contribute",
+                                  onClick: () => {
+                                    handleContributeModal(items.heading);
+                                  },
+                                },
+                                {
+                                  btnText: "Volunteer",
+                                  onClick: () => {
+                                    handleVolunteerModal(items.heading);
+                                  },
+                                },
+                              ],
                       }}
                     />
                   </Box>

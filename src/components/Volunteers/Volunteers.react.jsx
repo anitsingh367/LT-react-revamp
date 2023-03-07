@@ -7,7 +7,7 @@ import { Container, Typography, Avatar, Box } from "@mui/material";
 // Import Swiper styles
 import "swiper/css";
 import "./volunteers.scss";
-import data from "../../data/imgDB";
+import volunteerData from "../../data/imgDB";
 
 const Volunteers = () => {
   return (
@@ -16,14 +16,16 @@ const Volunteers = () => {
       className="volunteer-parent"
       textAlign="center"
       bgcolor="secondary.light"
-      py={2}>
+      py={2}
+    >
       <Typography
         variant="h4"
         sx={{
           textTransform: "uppercase",
           fontWeight: "bold",
         }}
-        mb={2}>
+        mb={2}
+      >
         OUR{" "}
         <Box component="span" color="primary.main">
           {" "}
@@ -52,26 +54,23 @@ const Volunteers = () => {
           autoplay={{
             delay: 1,
             disableOnInteraction: false,
-          }}>
-          {data.map((item, index) => {
+          }}
+        >
+          {volunteerData.map((item, index) => {
             return (
               <SwiperSlide
                 key={index}
                 sx={{
                   display: "flex",
                   flexDirection: "column",
-                }}>
+                }}
+              >
                 <Avatar
-                  src={item.urls.thumb}
+                  src={item.imgURL}
                   sx={{ width: 100, height: 100, marginBottom: 1 }}
                 />
                 <Typography variant="body2" gutterBottom>
-                  {item.user.name}
-                </Typography>
-                <Typography
-                  variant="caption"
-                  sx={{ textTransform: "uppercase" }}>
-                  {item.user.username}
+                  {item.name}
                 </Typography>
               </SwiperSlide>
             );

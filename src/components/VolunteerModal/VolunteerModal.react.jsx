@@ -8,6 +8,9 @@ import {
   nameValidation,
 } from "../../validations/Validations.js";
 
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import { db } from "../../firebase";
+
 // Import other packages
 import {
   Button,
@@ -57,6 +60,15 @@ export default function VolunteerModal(props) {
     position: "",
   };
 
+  // form submission
+  const volunteereData = async (data) => {
+    const dataRef = collection(db, "volunteerDetails");
+    await addDoc(dataRef, {
+      created: serverTimestamp(),
+      formData: formData,
+    });
+  };
+
   //Handle Form Data
   const [formData, setFormData] = useState(initialFormState);
   const handleForm = (prop) => (event) => {
@@ -87,10 +99,9 @@ export default function VolunteerModal(props) {
 
   //Handle Form Submit
   const handleSubmitForm = () => {
-    formData.project = props.projectHeading
-      ? props.projectHeading
-      : "Not Project Specific";
+    formData.project = props.projectHeading ? props.projectHeading : "";
     setIsToasterOpen(true);
+    volunteereData();
     console.log(formData);
   };
 
@@ -119,13 +130,15 @@ export default function VolunteerModal(props) {
                 handleClose();
                 setFormData(initialFormState);
               }}
-              aria-label="close">
+              aria-label="close"
+            >
               <CloseIcon />
             </IconButton>
             <Typography
               sx={{ ml: 2, flex: 1, padding: "0.5rem 0" }}
               variant="h6"
-              component="div">
+              component="div"
+            >
               Become a Volunteer
               {props.projectHeading ? " for " + props.projectHeading : ""}
             </Typography>
@@ -145,7 +158,8 @@ export default function VolunteerModal(props) {
                   sm: "20rem",
                   xs: "20rem",
                 },
-              }}>
+              }}
+            >
               <DialogContentText>
                 Volunteers are the backbone of our Living Treasure NGO. Without
                 their dedication and commitment, we would not be able to carry
@@ -205,7 +219,8 @@ export default function VolunteerModal(props) {
               <FormControl
                 sx={{
                   flex: 1,
-                }}>
+                }}
+              >
                 <InputLabel htmlFor="email-input-box" required>
                   Email
                 </InputLabel>
@@ -225,7 +240,8 @@ export default function VolunteerModal(props) {
               <FormControl
                 sx={{
                   flex: 1,
-                }}>
+                }}
+              >
                 <InputLabel htmlFor="position-input-box" required>
                   How can you help us?
                 </InputLabel>
@@ -247,7 +263,8 @@ export default function VolunteerModal(props) {
                   formData.mob === "" ||
                   formData.email === "" ||
                   formData.position === ""
-                }>
+                }
+              >
                 Submit
               </Button>
             </DialogActions>
@@ -260,7 +277,8 @@ export default function VolunteerModal(props) {
               display: "flex",
               justifyContent: "center",
               minWidth: { lg: "25rem", md: "25rem", sm: "20rem", xs: "20rem" },
-            }}>
+            }}
+          >
             <CustomSnackBar
               animation="zoom"
               iconColor="var(--primary-color)"
