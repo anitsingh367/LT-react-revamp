@@ -259,222 +259,222 @@ const volunteerData = [
   },
 ];
 
-const volunteerDataLocal = [
-  {
-    id: 1,
-    imgURL: "../assets/Volunteers/AMANDEEP SINGH.jpg",
-    name: "AMANDEEP SINGH",
-  },
-  {
-    id: 2,
-    imgURL: "../assets/Volunteers/AMANPREET SINGH.jpg",
-    name: "AMANPREET SINGH",
-  },
-  {
-    id: 3,
-    imgURL: "../assets/Volunteers/AMRIK SINGH.jpg",
-    name: "AMRIK SINGH",
-  },
-  {
-    id: 4,
-    imgURL: "../assets/Volunteers/DALVINDER SINGH.jpg",
-    name: "DALVINDER SINGH",
-  },
-  {
-    id: 5,
-    imgURL: "../assets/Volunteers/DARSHLEEN KAUR.jpg",
-    name: "DARSHLEEN KAUR",
-  },
-  {
-    id: 6,
-    imgURL: "../assets/Volunteers/DEEDAR SINGH.jpg",
-    name: "DEEDAR SINGH",
-  },
-  {
-    id: 7,
-    imgURL: "../assets/Volunteers/EKAS KAUR.jpg",
-    name: "EKAS KAUR",
-  },
-  {
-    id: 8,
-    imgURL: "../assets/Volunteers/HARDEEP SINGH.jpg",
-    name: "HARDEEP SINGH",
-  },
-  {
-    id: 9,
-    imgURL: "../assets/Volunteers/HARPREET SINGH.jpg",
-    name: "HARPEET SINGH",
-  },
-  {
-    id: 10,
-    imgURL: "../assets/Volunteers/HARVINDER SINGH.jpg",
-    name: "HARVINDER SINGH",
-  },
-  {
-    id: 11,
-    imgURL: "../assets/Volunteers/HASHMEET KAUR.jpg",
-    name: "HASHMEET KAUR",
-  },
-  {
-    id: 12,
-    imgURL: "../assets/Volunteers/JAGDISH KAUR.jpg",
-    name: "JAGDISH KAUR",
-  },
-  {
-    id: 13,
-    imgURL: "../assets/Volunteers/JASBIR KAUR.jpg",
-    name: "JASBIR KAUR",
-  },
-  {
-    id: 14,
-    imgURL: "../assets/Volunteers/JASNOOR KAUR.jpg",
-    name: "JASNOOR KAUR",
-  },
-  {
-    id: 15,
-    imgURL: "../assets/Volunteers/JASPAL SINGH.jpg",
-    name: "JASPAL SINGH",
-  },
-  {
-    id: 16,
-    imgURL: "../assets/Volunteers/JATINDER SINGH.jpg",
-    name: "JATINDER SINGH",
-  },
-  {
-    id: 17,
-    imgURL: "../assets/Volunteers/JUJHAR SINGH.jpg",
-    name: "JUJHAR SINGH",
-  },
-  {
-    id: 18,
-    imgURL: "../assets/Volunteers/KAVITA CHUGH.jpg",
-    name: "KAVITA CHUGH",
-  },
-  {
-    id: 19,
-    imgURL: "../assets/Volunteers/KIRPAL SINGH.jpg",
-    name: "KIRPAL SINGH",
-  },
-  {
-    id: 20,
-    imgURL: "../assets/Volunteers/MANANPREET SINGH.jpg",
-    name: "MANANPREET SINGH",
-  },
-  {
-    id: 21,
-    imgURL: "../assets/Volunteers/MANANPREET SINGH.jpg",
-    name: "MANJEET SINGH",
-  },
-  {
-    id: 22,
-    imgURL: "../assets/Volunteers/MANJIT SINGH.jpg",
-    name: "MANJIT SINGH",
-  },
-  {
-    id: 23,
-    imgURL: "../assets/Volunteers/MANMEET KAUR.jpg",
-    name: "MANMEET KAUR",
-  },
-  {
-    id: 24,
-    imgURL: "../assets/Volunteers/MANMOHAN SINGH.jpg",
-    name: "MANMOHAN SINGH",
-  },
-  {
-    id: 25,
-    imgURL: "../assets/Volunteers/MANPREET SINGH.jpg",
-    name: "MANPREET SINGH",
-  },
-  {
-    id: 26,
-    imgURL: "../assets/Volunteers/MITTARPAL SINGH.jpg",
-    name: "MITTARPAL SINGH",
-  },
-  {
-    id: 27,
-    imgURL: "../assets/Volunteers/NADDAR KAUR.jpg",
-    name: "NADDAR KAUR",
-  },
-  {
-    id: 28,
-    imgURL: "../assets/Volunteers/NARINDER PAL SINGH.jpg",
-    name: "NARINDER PAL SINGH",
-  },
-  {
-    id: 29,
-    imgURL: "../assets/Volunteers/NAVNEET KAUR.jpg",
-    name: "NAVNEET KAUR",
-  },
-  {
-    id: 30,
-    imgURL: "../assets/Volunteers/PARVINDER SINGH.jpg",
-    name: "PARVINDER SINGH",
-  },
-  {
-    id: 31,
-    imgURL: "../assets/Volunteers/POOJA SABHARWAL.jpg",
-    name: "POOJA SABHARWAL",
-  },
-  {
-    id: 32,
-    imgURL: "../assets/Volunteers/RAMANPREET KAUR.jpg",
-    name: "RAMANPREET KAUR",
-  },
-  {
-    id: 33,
-    imgURL: "../assets/Volunteers/RUHANI KAUR.jpg",
-    name: "RUHANI KAUR",
-  },
-  {
-    id: 34,
-    imgURL: "../assets/Volunteers/RUPINDER PAL SINGH.jpg",
-    name: "RUPINDER PAL SINGH",
-  },
-  {
-    id: 35,
-    imgURL: "../assets/Volunteers/SAGAR VIRMANI.jpg",
-    name: "SAGAR VIRMANI",
-  },
-  {
-    id: 36,
-    imgURL: "../assets/Volunteers/SAHIB SINGH.jpg",
-    name: "SAHIB SINGH",
-  },
-  {
-    id: 37,
-    imgURL: "../assets/Volunteers/SATINDER PAL KAUR.jpg",
-    name: "SATINDER PAL KAUR",
-  },
-  {
-    id: 38,
-    imgURL: "../assets/Volunteers/SHALINI JOSHI.jpg",
-    name: "SHALINI JOSHI",
-  },
-  {
-    id: 39,
-    imgURL: "../assets/Volunteers/SIFAT KAUR.jpg",
-    name: "SIFAT KAUR",
-  },
-  {
-    id: 40,
-    imgURL: "../assets/Volunteers/SUMINDER KAUR.jpg",
-    name: "SUMINDER KAUR",
-  },
-  {
-    id: 41,
-    imgURL: "../assets/Volunteers/TARANJEET SINGH.jpg",
-    name: "TARANJEET SINGH",
-  },
-  {
-    id: 42,
-    imgURL: "../assets/Volunteers/UPKAR SINGH.jpg",
-    name: "UPKAR SINGH",
-  },
-  {
-    id: 43,
-    imgURL: "../../assets/Volunteers/VINAY PAL SINGH.jpg",
-    name: "VINAY PAL SINGH",
-  },
-];
+// const volunteerDataLocal = [
+//   {
+//     id: 1,
+//     imgURL: "../assets/Volunteers/AMANDEEP SINGH.jpg",
+//     name: "AMANDEEP SINGH",
+//   },
+//   {
+//     id: 2,
+//     imgURL: "../assets/Volunteers/AMANPREET SINGH.jpg",
+//     name: "AMANPREET SINGH",
+//   },
+//   {
+//     id: 3,
+//     imgURL: "../assets/Volunteers/AMRIK SINGH.jpg",
+//     name: "AMRIK SINGH",
+//   },
+//   {
+//     id: 4,
+//     imgURL: "../assets/Volunteers/DALVINDER SINGH.jpg",
+//     name: "DALVINDER SINGH",
+//   },
+//   {
+//     id: 5,
+//     imgURL: "../assets/Volunteers/DARSHLEEN KAUR.jpg",
+//     name: "DARSHLEEN KAUR",
+//   },
+//   {
+//     id: 6,
+//     imgURL: "../assets/Volunteers/DEEDAR SINGH.jpg",
+//     name: "DEEDAR SINGH",
+//   },
+//   {
+//     id: 7,
+//     imgURL: "../assets/Volunteers/EKAS KAUR.jpg",
+//     name: "EKAS KAUR",
+//   },
+//   {
+//     id: 8,
+//     imgURL: "../assets/Volunteers/HARDEEP SINGH.jpg",
+//     name: "HARDEEP SINGH",
+//   },
+//   {
+//     id: 9,
+//     imgURL: "../assets/Volunteers/HARPREET SINGH.jpg",
+//     name: "HARPEET SINGH",
+//   },
+//   {
+//     id: 10,
+//     imgURL: "../assets/Volunteers/HARVINDER SINGH.jpg",
+//     name: "HARVINDER SINGH",
+//   },
+//   {
+//     id: 11,
+//     imgURL: "../assets/Volunteers/HASHMEET KAUR.jpg",
+//     name: "HASHMEET KAUR",
+//   },
+//   {
+//     id: 12,
+//     imgURL: "../assets/Volunteers/JAGDISH KAUR.jpg",
+//     name: "JAGDISH KAUR",
+//   },
+//   {
+//     id: 13,
+//     imgURL: "../assets/Volunteers/JASBIR KAUR.jpg",
+//     name: "JASBIR KAUR",
+//   },
+//   {
+//     id: 14,
+//     imgURL: "../assets/Volunteers/JASNOOR KAUR.jpg",
+//     name: "JASNOOR KAUR",
+//   },
+//   {
+//     id: 15,
+//     imgURL: "../assets/Volunteers/JASPAL SINGH.jpg",
+//     name: "JASPAL SINGH",
+//   },
+//   {
+//     id: 16,
+//     imgURL: "../assets/Volunteers/JATINDER SINGH.jpg",
+//     name: "JATINDER SINGH",
+//   },
+//   {
+//     id: 17,
+//     imgURL: "../assets/Volunteers/JUJHAR SINGH.jpg",
+//     name: "JUJHAR SINGH",
+//   },
+//   {
+//     id: 18,
+//     imgURL: "../assets/Volunteers/KAVITA CHUGH.jpg",
+//     name: "KAVITA CHUGH",
+//   },
+//   {
+//     id: 19,
+//     imgURL: "../assets/Volunteers/KIRPAL SINGH.jpg",
+//     name: "KIRPAL SINGH",
+//   },
+//   {
+//     id: 20,
+//     imgURL: "../assets/Volunteers/MANANPREET SINGH.jpg",
+//     name: "MANANPREET SINGH",
+//   },
+//   {
+//     id: 21,
+//     imgURL: "../assets/Volunteers/MANANPREET SINGH.jpg",
+//     name: "MANJEET SINGH",
+//   },
+//   {
+//     id: 22,
+//     imgURL: "../assets/Volunteers/MANJIT SINGH.jpg",
+//     name: "MANJIT SINGH",
+//   },
+//   {
+//     id: 23,
+//     imgURL: "../assets/Volunteers/MANMEET KAUR.jpg",
+//     name: "MANMEET KAUR",
+//   },
+//   {
+//     id: 24,
+//     imgURL: "../assets/Volunteers/MANMOHAN SINGH.jpg",
+//     name: "MANMOHAN SINGH",
+//   },
+//   {
+//     id: 25,
+//     imgURL: "../assets/Volunteers/MANPREET SINGH.jpg",
+//     name: "MANPREET SINGH",
+//   },
+//   {
+//     id: 26,
+//     imgURL: "../assets/Volunteers/MITTARPAL SINGH.jpg",
+//     name: "MITTARPAL SINGH",
+//   },
+//   {
+//     id: 27,
+//     imgURL: "../assets/Volunteers/NADDAR KAUR.jpg",
+//     name: "NADDAR KAUR",
+//   },
+//   {
+//     id: 28,
+//     imgURL: "../assets/Volunteers/NARINDER PAL SINGH.jpg",
+//     name: "NARINDER PAL SINGH",
+//   },
+//   {
+//     id: 29,
+//     imgURL: "../assets/Volunteers/NAVNEET KAUR.jpg",
+//     name: "NAVNEET KAUR",
+//   },
+//   {
+//     id: 30,
+//     imgURL: "../assets/Volunteers/PARVINDER SINGH.jpg",
+//     name: "PARVINDER SINGH",
+//   },
+//   {
+//     id: 31,
+//     imgURL: "../assets/Volunteers/POOJA SABHARWAL.jpg",
+//     name: "POOJA SABHARWAL",
+//   },
+//   {
+//     id: 32,
+//     imgURL: "../assets/Volunteers/RAMANPREET KAUR.jpg",
+//     name: "RAMANPREET KAUR",
+//   },
+//   {
+//     id: 33,
+//     imgURL: "../assets/Volunteers/RUHANI KAUR.jpg",
+//     name: "RUHANI KAUR",
+//   },
+//   {
+//     id: 34,
+//     imgURL: "../assets/Volunteers/RUPINDER PAL SINGH.jpg",
+//     name: "RUPINDER PAL SINGH",
+//   },
+//   {
+//     id: 35,
+//     imgURL: "../assets/Volunteers/SAGAR VIRMANI.jpg",
+//     name: "SAGAR VIRMANI",
+//   },
+//   {
+//     id: 36,
+//     imgURL: "../assets/Volunteers/SAHIB SINGH.jpg",
+//     name: "SAHIB SINGH",
+//   },
+//   {
+//     id: 37,
+//     imgURL: "../assets/Volunteers/SATINDER PAL KAUR.jpg",
+//     name: "SATINDER PAL KAUR",
+//   },
+//   {
+//     id: 38,
+//     imgURL: "../assets/Volunteers/SHALINI JOSHI.jpg",
+//     name: "SHALINI JOSHI",
+//   },
+//   {
+//     id: 39,
+//     imgURL: "../assets/Volunteers/SIFAT KAUR.jpg",
+//     name: "SIFAT KAUR",
+//   },
+//   {
+//     id: 40,
+//     imgURL: "../assets/Volunteers/SUMINDER KAUR.jpg",
+//     name: "SUMINDER KAUR",
+//   },
+//   {
+//     id: 41,
+//     imgURL: "../assets/Volunteers/TARANJEET SINGH.jpg",
+//     name: "TARANJEET SINGH",
+//   },
+//   {
+//     id: 42,
+//     imgURL: "../assets/Volunteers/UPKAR SINGH.jpg",
+//     name: "UPKAR SINGH",
+//   },
+//   {
+//     id: 43,
+//     imgURL: "../../assets/Volunteers/VINAY PAL SINGH.jpg",
+//     name: "VINAY PAL SINGH",
+//   },
+// ];
 
 export default volunteerData;
