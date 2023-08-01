@@ -1,3 +1,4 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/d220c454-71f0-4586-b935-eb532cbb9bac/deploy-status)](https://app.netlify.com/sites/living-treasure-react/deploys)
 # Getting Started with Create React App
 
 The website is published on [living-treasure-react.netlify.app](https://living-treasure-react.netlify.app/)
