@@ -25,24 +25,24 @@ Projects.defaultProps = {
   content: [
     {
       image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSqu39eyj7mkHZ2gnUmKmU9smZN8F3mI7xeC2DFXhTWwOSiL7JaliiMiC8NF3hZK-m1AD8&usqp=CAU",
+        "https://images.pexels.com/photos/6646918/pexels-photo-6646918.jpeg?auto=compress&cs=tinysrgb&w=600",
       heading: "Accomplished",
       description:
-        "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus laudantium, voluptate harum iste sunt optio quo maxime repellat et mollitia.",
+        "Our NGO has achieved remarkable accomplishments in both education and medicine, contributing significantly to the advancement of these sectors.",
     },
     {
       image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWwB29eRCxE1_92bxreaZ5tsnqgQFgHScAFEA4nn4vpiMfLX-h1j-RhnZfCo9_IcFNx4E&usqp=CAU",
+        "https://images.unsplash.com/photo-1632215861513-130b66fe97f4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MzN8fGVkdWNhdGlvbiUyMGltcG9ydGFudHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60",
       heading: "Ongoing",
       description:
-        "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus laudantium, voluptate harum iste sunt optio quo maxime repellat et mollitia.",
+        "In the realm of education and medicine, our ongoing NGO projects are making substantial contributions and fostering positive developments in both sectors.",
     },
     {
       image:
-        "https://images.unsplash.com/photo-1550330562-b055aa030d73?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+        "https://images.unsplash.com/photo-1491841550275-ad7854e35ca6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjF8fGVkdWNhdGlvbiUyMGltcG9ydGFudHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60",
       heading: "Future",
       description:
-        "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus laudantium, voluptate harum iste sunt optio quo maxime repellat et mollitia.",
+        "Our NGO envisions pioneering advancements in education and medicine, poised to shape the future of these critical sectors with innovation and impact.",
     },
   ],
 };
@@ -65,7 +65,8 @@ export default function Projects(props) {
       display="flex"
       flexDirection="column"
       alignItems="center"
-      py={2}>
+      py={2}
+    >
       <Typography
         variant="h4"
         align="center"
@@ -73,7 +74,8 @@ export default function Projects(props) {
         sx={{
           textTransform: "uppercase",
           fontWeight: "bold",
-        }}>
+        }}
+      >
         <Box component="span" color="primary.main">
           Projects
         </Box>{" "}
@@ -87,7 +89,8 @@ export default function Projects(props) {
           alignItems: "center",
           justifyContent: "space-evenly",
           gap: 2,
-        }}>
+        }}
+      >
         {props.content?.map((items, index) => {
           return (
             <Box
@@ -99,7 +102,8 @@ export default function Projects(props) {
               sx={{
                 cursor: "pointer",
               }}
-              key={index}>
+              key={index}
+            >
               <ButtonBase sx={{ textAlign: "left" }}>
                 <CustomCard
                   content={{

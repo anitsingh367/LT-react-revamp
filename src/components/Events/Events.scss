@@ -1,13 +1,5 @@
 @import "../../index.scss";
-.event-card {
-  img {
-    // aspect-ratio: 16/7 !important;
-  }
-}
 .event-card:first-child {
-  grid-column: span 2;
-  grid-row: span 2;
-  width: auto;
   .MuiTypography-h6 {
     font-size: 2.25rem;
   }
@@ -25,12 +17,7 @@
   }
 }
 @media (max-width:#{$screen-md}) {
-  .event-card {
-    grid-column: span 2;
-  }
   .event-card:first-child {
-    grid-column: span 4;
-    width: auto;
     .MuiTypography-h6 {
       font-size: 2rem;
     }
@@ -49,11 +36,7 @@
   }
 }
 @media (max-width:#{$screen-sm}) {
-  .event-card {
-    grid-column: span 4;
-  }
   .event-card:first-child {
-    width: auto;
     .MuiTypography-h6 {
       font-size: 1.25rem;
     }
