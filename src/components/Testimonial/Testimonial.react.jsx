@@ -17,14 +17,16 @@ const Testimonial = () => {
       display="flex"
       flexDirection="column"
       alignItems="center"
-      py={2}>
+      py={2}
+    >
       <Typography
         variant="h4"
         align="center"
         sx={{
           textTransform: "uppercase",
           fontWeight: "bold",
-        }}>
+        }}
+      >
         WHAT{" "}
         <Box component="span" color="primary.main">
           PEOPLE{" "}
@@ -48,19 +50,17 @@ const Testimonial = () => {
               slidesPerView: 3,
               spaceBetween: 30,
             },
-          }}>
+          }}
+        >
           {testimonialData.map((item, index) => {
             return (
               <SwiperSlide key={index}>
-                <Avatar
-                  alt={item.name}
-                  src={item.imgSrc}
-                  sx={{ width: 100, height: 100, marginBottom: 1 }}
-                />
+                <Avatar>{item.name.slice(0, 1)}</Avatar>
                 <Typography
                   paragraph
                   variant="body1"
-                  sx={{ fontWeight: "lighter" }}>
+                  sx={{ fontWeight: "lighter" }}
+                >
                   {item.description}
                 </Typography>
                 <Divider />
@@ -71,7 +71,8 @@ const Testimonial = () => {
                   sx={{
                     color: "secondary.main",
                     textTransform: "uppercase",
-                  }}>
+                  }}
+                >
                   {item.designation}
                 </Typography>
               </SwiperSlide>

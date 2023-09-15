@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Container } from "@mui/material";
 import Typography from "@mui/material/Typography";
-import TextField from "@mui/material/TextField";
-import SearchIcon from "@mui/icons-material/Search";
-import InputAdornment from "@mui/material/InputAdornment";
+// import TextField from "@mui/material/TextField";
+// import SearchIcon from "@mui/icons-material/Search";
+// import InputAdornment from "@mui/material/InputAdornment";
 // import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
+// import FormControl from "@mui/material/FormControl";
 // import Select from "@mui/material/Select";
 import { Box } from "@mui/system";
 import PropTypes from "prop-types";
@@ -38,7 +38,7 @@ const YoutbeVideo = () => {
   const rapidAPIHost = process.env.REACT_APP_X_RAPID_API_HOST;
   const youtubeAPI = process.env.REACT_APP_YOUTUBE_API;
   const [fetchVideo, setfetchVideo] = useState(null);
-  const [search, setSearch] = useState("");
+  // const [search, setSearch] = useState("");
   // const [language, setLanguage] = useState("");
   // const [topic, setTopic] = useState("");
   // const [time, setTime] = useState("");
@@ -80,7 +80,8 @@ const YoutbeVideo = () => {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-      }}>
+      }}
+    >
       <Typography
         variant="h4"
         align="center"
@@ -88,7 +89,8 @@ const YoutbeVideo = () => {
           textTransform: "uppercase",
           fontWeight: "bold",
           padding: "2rem",
-        }}>
+        }}
+      >
         <span style={{ color: "var(--primary-color)" }}> Videos </span> at the
         living treasure
       </Typography>
@@ -108,7 +110,8 @@ const YoutbeVideo = () => {
             sm: "center",
             xs: "center",
           },
-        }}>
+        }}
+      >
         <Box
           sx={{
             display: "flex",
@@ -126,7 +129,8 @@ const YoutbeVideo = () => {
               lg: "flex-end",
               md: "center",
             },
-          }}>
+          }}
+        >
           {/* <Typography variant="overline">Filter By:</Typography>
           <FormControl variant="standard" sx={{ minWidth: 120 }}>
             <InputLabel id="language">Language</InputLabel>
@@ -166,7 +170,8 @@ const YoutbeVideo = () => {
               lg: "flex-end",
               md: "center",
             },
-          }}>
+          }}
+        >
           <Box
             sx={{
               display: "flex",
@@ -184,7 +189,8 @@ const YoutbeVideo = () => {
                 lg: "flex-end",
                 md: "center",
               },
-            }}>
+            }}
+          >
             {/* <Typography variant="overline">Sort By:</Typography>
             <FormControl variant="standard" sx={{ minWidth: 120 }}>
               <InputLabel id="time">Time</InputLabel>
@@ -194,7 +200,7 @@ const YoutbeVideo = () => {
               </Select>
             </FormControl> */}
           </Box>
-          <FormControl variant="standard" sx={{ minWidth: 120 }}>
+          {/* <FormControl variant="standard" sx={{ minWidth: 120 }}>
             <TextField
               placeholder="Search"
               variant="standard"
@@ -208,7 +214,7 @@ const YoutbeVideo = () => {
                 ),
               }}
             />
-          </FormControl>
+          </FormControl> */}
         </Box>
       </Container>
       {!isLoading && (
@@ -218,7 +224,8 @@ const YoutbeVideo = () => {
             flexWrap: "wrap",
             justifyContent: "center",
             width: "100%",
-          }}>
+          }}
+        >
           {isLoading ? (
             skeletonCards.map((item) => {
               return <SkeletonCard />;
@@ -227,14 +234,13 @@ const YoutbeVideo = () => {
             <Typography align="center">Oops! No Data found</Typography>
           ) : (
             fetchVideo
-
-              ?.filter((filterItem) => {
-                return search.toLowerCase() === ""
-                  ? filterItem
-                  : filterItem.snippet.title
-                      .toLowerCase()
-                      .includes(search.toLowerCase());
-              })
+              // ?.filter((filterItem) => {
+              //   return search.toLowerCase() === ""
+              //     ? filterItem
+              //     : filterItem.snippet.title
+              //         .toLowerCase()
+              //         .includes(search.toLowerCase());
+              // })
               ?.map((item, index) => {
                 return (
                   <Box
@@ -243,7 +249,8 @@ const YoutbeVideo = () => {
                       width: "18.5rem",
                       margin: { xl: 2.5, lg: 2, md: 2, sm: 1.5, xs: 1 },
                     }}
-                    key={index}>
+                    key={index}
+                  >
                     <CustomCard
                       content={{
                         ...item,
@@ -274,7 +281,8 @@ const YoutbeVideo = () => {
             alignItems: "center",
             width: "100%",
             height: "90vh",
-          }}>
+          }}
+        >
           <CircularProgress color="inherit" />
         </Container>
       )}

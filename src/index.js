@@ -7,6 +7,7 @@ import { BrowserRouter, useLocation } from "react-router-dom";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
+
 const ScrollToTop = () => {
   const { pathname } = useLocation();
 
@@ -47,6 +48,7 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <ScrollToTop />
+
       <ThemeProvider theme={theme}>
         <App />
       </ThemeProvider>
