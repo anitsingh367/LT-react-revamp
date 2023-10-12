@@ -176,7 +176,7 @@ function DrawerAppBar(props) {
             {/* <CustomizedMenus
               content={{
                 title: "Articles",
-                options: ["English Articles", "Punjabi Aricles"],
+                options: ["English Articles", "Punjabi Aricles"], 
               }}
             /> */}
             <Link to="/events" className="link">
