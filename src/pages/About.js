@@ -9,6 +9,7 @@ import {
 import logo from "../assets/Logo.png";
 import vision from "../assets/vision.png";
 import React from "react";
+import profilePhoto from "../assets/veerji-profile-photo.png";
 
 const About = () => {
   return (
@@ -58,11 +59,7 @@ const About = () => {
                 },
               }}
             >
-              <img
-                src="https://dummyimage.com/720x600"
-                alt="img"
-                width="100%"
-              />
+              <img src={profilePhoto} alt="img" width="100%" />
             </Box>
             <Box
               sx={{
