@@ -1,4 +1,8 @@
 .cardImg img{
-    aspect-ratio: 2 / 1.6 !important;
+    aspect-ratio: 4 / 3 !important;
+    min-width: 320px !important;
+    @media screen and (max-width:420px){
+        min-width: 0 !important;
+    }
 }
 

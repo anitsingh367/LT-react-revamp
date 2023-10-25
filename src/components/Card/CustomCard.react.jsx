@@ -26,6 +26,7 @@ CustomCard.propTypes = {
     image: PropTypes.string,
     heading: PropTypes.string,
     description: PropTypes.string,
+    orientation: PropTypes.string,
 
     hoverEffect: PropTypes.bool,
     chipTemplate: PropTypes.shape({
@@ -55,6 +56,7 @@ CustomCard.defaultProps = {
     heading: "",
     description: "",
     status: "",
+    orientation: "",
     hoverEffect: false,
     chipTemplate: {
       icon: "",
@@ -84,7 +86,11 @@ export default function CustomCard(props) {
     <Card
       sx={{
         display: "flex",
-        flexDirection: "column",
+        flexDirection: {
+          lg: props.content?.orientation === "list" ? "row" : "column",
+          sm: props.content?.orientation === "list" ? "row" : "column",
+          xs: "column",
+        },
         width: "100%",
         height: "100%",
         boxShadow: 4,
@@ -97,6 +103,13 @@ export default function CustomCard(props) {
         component="img"
         image={props.content?.image ? props.content.image : defaultImage}
         alt=""
+        sx={{
+          width: {
+            lg: props.content?.orientation === "list" ? 0 : 1,
+            sm: props.content?.orientation === "list" ? 0 : 1,
+            xs: 1,
+          },
+        }}
       />
       <CardContent sx={{ paddingBottom: "0" }}>
         <Box
@@ -104,10 +117,22 @@ export default function CustomCard(props) {
             display: "flex",
             justifyContent: "space-between",
             alignItems: "flex-start",
+            flexDirection: "column",
+            gap: props.content?.orientation === "list" ? "2rem" : "0",
           }}
         >
-          <Container sx={{ padding: "0 !important" }} className="truncate">
-            <Typography className="truncate" variant="h6" component="div">
+          <Container
+            sx={{
+              padding: "0 !important",
+            }}
+            className="truncate"
+          >
+            <Typography
+              className="truncate"
+              variant="h6"
+              component="div"
+              whiteSpace="wrap"
+            >
               {props.content?.heading}
             </Typography>
             {props.content?.type && (
@@ -142,65 +167,66 @@ export default function CustomCard(props) {
               label={props.content.chipTemplate.chipText}
             />
           )}
-        </Box>
-
-        <Typography
-          className="event-line-clamp"
-          variant="body2"
-          color="text.secondary"
-          gutterBottom={!!!props.content.actionIcon}
-        >
-          {description}
-        </Typography>
-      </CardContent>
-      {props.content?.secondaryBtns && (
-        <CardActions sx={{ marginTop: "auto" }}>
-          {props.content?.secondaryBtns?.map((buttons, index) => {
-            return (
-              <Button
-                key={index}
-                size="small"
-                variant="contained"
-                color="primary"
-                onClick={buttons.onClick}
-                sx={{ flex: 1, color: "primary.contrastText" }}
-                startIcon={buttons.icon && <SvgIcon component={buttons.icon} />}
-              >
-                {buttons.btnText}
-              </Button>
-            );
-          })}
-        </CardActions>
-      )}
-
-      {props.content?.primaryBtn && (
-        <CardActions
-          sx={{
-            display: "flex",
-            justifyContent: "space-between",
-            marginTop: props.content?.secondaryBtns ? 0 : "auto",
-            padding: "0.1rem 0.5rem",
-          }}
-        >
-          <Button
-            sx={{ color: "secondary.main" }}
-            size="small"
-            onClick={props.content.primaryBtn?.onClick}
-            startIcon={
-              props.content.primaryBtn?.btnIcon && (
-                <SvgIcon component={props.content.primaryBtn.btnIcon} />
-              )
-            }
+          <Typography
+            className="event-line-clamp"
+            variant="body2"
+            color="text.secondary"
+            gutterBottom={!!!props.content.actionIcon}
           >
-            {props.content?.primaryBtn?.btnText}
-          </Button>
-          {props.content.actionIcon && (
-            <IconButton>
-              <SvgIcon component={props.content?.actionIcon} />
-            </IconButton>
-          )}
-        </CardActions>
-      )}
+            {description}
+          </Typography>
+        </Box>
+        {props.content?.secondaryBtns && (
+          <CardActions sx={{ marginTop: "auto" }}>
+            {props.content?.secondaryBtns?.map((buttons, index) => {
+              return (
+                <Button
+                  key={index}
+                  size="small"
+                  variant="contained"
+                  color="primary"
+                  onClick={buttons.onClick}
+                  sx={{ flex: 1, color: "primary.contrastText" }}
+                  startIcon={
+                    buttons.icon && <SvgIcon component={buttons.icon} />
+                  }
+                >
+                  {buttons.btnText}
+                </Button>
+              );
+            })}
+          </CardActions>
+        )}
+
+        {props.content?.primaryBtn && (
+          <CardActions
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              marginTop: props.content?.secondaryBtns ? 0 : "auto",
+              padding: "0.1rem 0.5rem",
+            }}
+          >
+            <Button
+              sx={{ color: "secondary.main" }}
+              size="small"
+              onClick={props.content.primaryBtn?.onClick}
+              startIcon={
+                props.content.primaryBtn?.btnIcon && (
+                  <SvgIcon component={props.content.primaryBtn.btnIcon} />
+                )
+              }
+            >
+              {props.content?.primaryBtn?.btnText}
+            </Button>
+            {props.content.actionIcon && (
+              <IconButton>
+                <SvgIcon component={props.content?.actionIcon} />
+              </IconButton>
+            )}
+          </CardActions>
+        )}
+      </CardContent>
     </Card>
   );
 }

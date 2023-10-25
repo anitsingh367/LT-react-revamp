@@ -31,6 +31,7 @@ ProjectsPage.propTypes = {
       image: PropTypes.string,
       heading: PropTypes.string,
       description: PropTypes.string,
+      orientation: PropTypes.string,
       chipTemplate: PropTypes.shape({
         icon: PropTypes.object,
         chipText: PropTypes.string,
@@ -231,6 +232,7 @@ export default function ProjectsPage(props) {
               flexWrap: "wrap",
               justifyContent: "space-evenly",
               width: "100%",
+              flexDirection: "column",
             }}
           >
             {isLoading ? (
@@ -254,7 +256,7 @@ export default function ProjectsPage(props) {
                   <Box
                     sx={{
                       height: "auto",
-                      width: "18.5rem",
+                      width: "100%",
                       margin: { xl: 2.5, lg: 2, md: 2, sm: 1.5, xs: 1 },
                     }}
                     key={index}
@@ -264,6 +266,7 @@ export default function ProjectsPage(props) {
                       content={{
                         image: items.image,
                         heading: items.heading,
+                        orientation: "list",
                         description:
                           items.description === null ? null : items.description,
                         chipTemplate: { chipText: items.category },
