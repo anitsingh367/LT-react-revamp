@@ -16,7 +16,7 @@ import useHashRouteToggle from "./../../customHooks/useHashRouteToggle";
 import { getEventDetails } from "../../firebase";
 import moment from "moment";
 import SkeletonCard from "../SkeletonCard/SkeletonCard";
-
+import "./Events.scss";
 EventPages.propTypes = {
   //=======================================
   // Component Specific props
@@ -26,6 +26,7 @@ EventPages.propTypes = {
       image: PropTypes.string,
       heading: PropTypes.string,
       description: PropTypes.string,
+      orientation: PropTypes.string,
       chipTemplate: PropTypes.shape({
         icon: PropTypes.object,
         chipText: PropTypes.string,
@@ -220,6 +221,7 @@ export default function EventPages(props) {
           flexWrap: "wrap",
           justifyContent: "space-evenly",
           width: "100%",
+          flexDirection: "column",
         }}
       >
         {isLoading ? (
@@ -268,17 +270,18 @@ export default function EventPages(props) {
                 <Box
                   sx={{
                     height: "auto",
-                    width: "18.5rem",
+                    width: "100%",
                     margin: { xl: 2.5, lg: 2, md: 2, sm: 1.5, xs: 1 },
                   }}
                   key={index}
+                  className="cardImg"
                 >
                   <CustomCard
                     content={{
+                      orientation: "list",
                       image: items.imageUrl,
                       heading: items.title,
                       ...items,
-
                       description: description,
                       primaryBtn: {
                         btnText: "View Details",

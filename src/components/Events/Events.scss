@@ -16,6 +16,13 @@
     font-size: 2rem;
   }
 }
+.cardImg img{
+  aspect-ratio: 4 / 3 !important;
+  min-width: 320px !important;
+  @media screen and (max-width:420px){
+      min-width: 0 !important;
+  }
+}
 @media (max-width:#{$screen-md}) {
   .event-card:first-child {
     .MuiTypography-h6 {
