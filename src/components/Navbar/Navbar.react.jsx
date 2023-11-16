@@ -13,7 +13,9 @@ import {
   Button,
   // Collapse,
   Divider,
+  Container,
 } from "@mui/material";
+import useScrollTrigger from "@mui/material/useScrollTrigger";
 
 import logo from "../../assets/Logo.png";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -26,6 +28,7 @@ import VolunteerModal from "../VolunteerModal/VolunteerModal.react";
 import useHashRouteToggle from "../../customHooks/useHashRouteToggle";
 
 import { Link } from "react-router-dom";
+import navLinks from "../../data/navLinks";
 
 const drawerWidth = 240;
 
@@ -35,13 +38,6 @@ function DrawerAppBar(props) {
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
-
-  // const [openArticle, setOpenArticle] = useState(false);
-
-  // const handleClickArticle = () => {
-  //   setOpenArticle(!openArticle);
-  // };
-
   const [openContributeModal, setOpenContributeModal] =
     useHashRouteToggle("contribute"); //useHasRouteToggle is used for controlling browser back button
   const [openVolunteerModal, setOpenVolunteerModal] =
@@ -54,155 +50,64 @@ function DrawerAppBar(props) {
     setOpenVolunteerModal(true);
   };
 
-  const drawer = (
-    <div>
-      <ContributeModal
-        isOpen={openContributeModal}
-        onClose={(value) => setOpenContributeModal(value)}
-        isNavbar={true}
-      />
-      <VolunteerModal
-        isOpen={openVolunteerModal}
-        onClose={(value) => setOpenVolunteerModal(value)}
-        isNavbar={true}
-      />
-      <Toolbar sx={{ justifyContent: "center" }}>
-        <img src={logo} alt="logo" width="50%" height="50%" />
-      </Toolbar>
-      <Divider></Divider>
-      <List>
-        <Link to="/" className="link" onClick={handleDrawerToggle}>
-          <ListItemButton>
-            <ListItemText primary="Home" />
-          </ListItemButton>
-        </Link>
-        <Link to="/about" className="link" onClick={handleDrawerToggle}>
-          <ListItemButton>
-            <ListItemText primary="About" />
-          </ListItemButton>
-        </Link>
-        <Link to="/events" className="link" onClick={handleDrawerToggle}>
-          <ListItemButton>
-            <ListItemText primary="Events" />
-          </ListItemButton>
-        </Link>
-        {/* <ListItemButton onClick={handleClickArticle}>
-          <ListItemText primary="Articles" />
-          {openArticle ? <ExpandLess /> : <ExpandMore />}
-        </ListItemButton> */}
-        {/* <Collapse in={openArticle} timeout="auto" unmountOnExit>
-          <List component="div" disablePadding>
-            <ListItemButton sx={{ pl: 4 }}>
-              <ListItemText primary="English Articls" />
-            </ListItemButton>
-            <ListItemButton sx={{ pl: 4 }}>
-              <ListItemText primary="Punjabi Articls" />
-            </ListItemButton>
-          </List>
-        </Collapse> */}
-        <Link to="/projects" className="link" onClick={handleDrawerToggle}>
-          <ListItemButton>
-            <ListItemText primary="Projects" />
-          </ListItemButton>
-        </Link>
-        <Link to="/video" className="link" onClick={handleDrawerToggle}>
-          <ListItemButton>
-            <ListItemText primary="Videos" />
-          </ListItemButton>
-        </Link>
-        <ListItemButton>
-          <Button variant="contained" onClick={handleVolunteerButton}>
-            Become Volunteer
-          </Button>
-        </ListItemButton>
-      </List>
-    </div>
-  );
+  const trigger = useScrollTrigger({
+    disableHysteresis: true,
+    threshold: 100,
+  });
 
   return (
-    <Box
-      sx={{
-        position: "sticky",
-        top: 0,
-        left: 0,
-        zIndex: 1000,
-      }}
-    >
-      <AppBar component="nav" position="relative">
-        <Toolbar
-          sx={{
-            display: "flex",
-            justifyContent: {
-              lg: "center",
-              md: "space-between",
-              sm: "space-between",
-              xs: "space-between",
-            },
-            aligncenter: "center",
-            backgroundColor: "#fff",
-            color: "#000",
-          }}
-        >
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="start"
-            onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { lg: "none" }, color: "#000" }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Box
-            sx={{
-              display: { lg: "flex", md: "none", sm: "none", xs: "none" },
-            }}
-          >
-            <img src={logo} alt="logo" width="15%" height="15%"></img>
-          </Box>
-          <Box
-            sx={{
-              display: { lg: "flex", xs: "none", md: "none", sm: "none" },
-              justifyContent: "center",
-              alignItems: "center",
-              gap: 1,
-            }}
-          >
-            <Link to="/" className="link">
-              <Button variant="h6">Home</Button>
-            </Link>
-            <Link to="/about" className="link">
-              <Button variant="h6">About</Button>
-            </Link>
-            {/* <CustomizedMenus
-              content={{
-                title: "Articles",
-                options: ["English Articles", "Punjabi Aricles"],
-              }}
-            /> */}
-            <Link to="/events" className="link">
-              <Button variant="h6">Events</Button>
-            </Link>
-            <Link to="/projects" className="link">
-              <Button variant="h6">Projects</Button>
-            </Link>
-            <Link to="/video" className="link">
-              <Button variant="h6">Videos</Button>
-            </Link>
-            <Button variant="contained" onClick={handleVolunteerButton}>
-              Become Volunteer
-            </Button>
-          </Box>
-
-          <Button
-            variant="outlined"
-            onClick={handleContributeButton}
-            sx={{ margin: "0 0.5rem" }}
-          >
-            Contribute Now
-          </Button>
-        </Toolbar>
+    <>
+      <AppBar
+        component="nav"
+        sx={{
+          transition: "all 0.5s ease-in-out",
+          bgcolor: { xs: "white", md: trigger ? "white" : "transparent" },
+        }}
+        elevation={trigger ? 4 : 0}>
+        <Container maxWidth="xl">
+          <Toolbar disableGutters sx={{ justifyContent: "space-between" }}>
+            <Box
+              display={{ xs: "none", md: "flex", lg: "flex" }}
+              mr={1}
+              width="5%">
+              <img
+                src={logo}
+                alt="logo"
+                width={"100%"}
+                style={{ aspectRatio: "1/1" }}></img>
+            </Box>
+            <IconButton
+              onClick={handleDrawerToggle}
+              sx={{ display: { xs: "flex", md: "none", lg: "none" } }}
+              mr={1}>
+              <MenuIcon />
+            </IconButton>
+            <Box display="flex" gap={1}>
+              <Box display={{ xs: "none", md: "flex", lg: "flex" }} gap={1}>
+                {navLinks.map((link) => (
+                  <Link to={link.path} className="link">
+                    <Button variant="text" color={"secondary"}>
+                      {link.name}
+                    </Button>
+                  </Link>
+                ))}
+              </Box>
+              <Button
+                sx={{ display: { xs: "none", md: "flex", lg: "flex" } }}
+                variant="contained"
+                onClick={handleVolunteerButton}>
+                Become Volunteer
+              </Button>
+              <Button
+                variant="outlined"
+                color="secondary"
+                onClick={handleContributeButton}>
+                Contribute Now
+              </Button>
+            </Box>
+          </Toolbar>
+        </Container>
       </AppBar>
-
       <Drawer
         open={mobileOpen}
         onClose={handleDrawerToggle}
@@ -215,11 +120,44 @@ function DrawerAppBar(props) {
             boxSizing: "border-box",
             width: drawerWidth,
           },
-        }}
-      >
-        {drawer}
+        }}>
+        <ContributeModal
+          isOpen={openContributeModal}
+          onClose={(value) => setOpenContributeModal(value)}
+          isNavbar={true}
+        />
+        <VolunteerModal
+          isOpen={openVolunteerModal}
+          onClose={(value) => setOpenVolunteerModal(value)}
+          isNavbar={true}
+        />
+        <Toolbar sx={{ justifyContent: "center" }}>
+          <Box width="50%">
+            <img
+              src={logo}
+              alt="logo"
+              width="100%"
+              style={{ aspectRatio: "1/1" }}
+            />
+          </Box>
+        </Toolbar>
+        <Divider></Divider>
+        <List>
+          {navLinks.map((link) => (
+            <Link to={link.path} className="link" onClick={handleDrawerToggle}>
+              <ListItemButton>
+                <ListItemText primary={link.name} />
+              </ListItemButton>
+            </Link>
+          ))}
+          <ListItemButton>
+            <Button variant="contained" onClick={handleVolunteerButton}>
+              Become Volunteer
+            </Button>
+          </ListItemButton>
+        </List>
       </Drawer>
-    </Box>
+    </>
   );
 }
 
