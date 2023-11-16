@@ -13,13 +13,11 @@ const Video = () => {
 
   return (
     <Box
-      height={{ lg: "80vh", sm: "100%", xs: "100%" }}
-      bgcolor="secondary.light"
+      pt={{ xs: "56px", md: "0px" }}
+      height={{ lg: "100vh", sm: "100%", xs: "100%" }}
       display="flex"
       justifyContent="center"
-      alignItems="center"
-      px={{ lg: 12, xs: 0, sm: 0 }}
-    >
+      alignItems="center">
       {video && (
         <video width="100%" height="100%" loop autoPlay muted className="video">
           <source src={video} type="video/mp4" />
