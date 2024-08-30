@@ -247,7 +247,7 @@ export default function EventModal(props) {
             }}
           >
             {props.type === "offline" && props.status !== "finished" ? (
-              <AddressMap />
+              <AddressMap mapUrl={props?.mapUrl} />
             ) : (
               <YoutubeFrame youtubeUrl={youtubeId} />
             )}
